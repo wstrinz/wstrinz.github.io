@@ -1,0 +1,14 @@
+<html>
+  <head>
+    <script src="/robosolver/elm.js"></script>
+  </head>
+
+  <body>
+    <h1>Just an innocent little elm app</h1>
+    <div id="elm-container"></div>
+    <script type="text/javascript">
+      var div = document.getElementById('elm-container');
+      var client = Elm.embed(Elm.RobosolverClient, div);
+    </script>
+  </body>
+</html>
