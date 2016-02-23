@@ -234,7 +234,7 @@ template: communications
 
    ![Jeeves](https://dtsft.files.wordpress.com/2012/07/tumblr_m6bj50v0kg1rz3gq7o1_500.jpg)
 
-   (the one on the right... philistine ;) )
+   (the one on the right...)
 
 ---
 ## Communications
@@ -297,10 +297,37 @@ Since we're all human, some tips
 
 ### Emoji
 
+![relax](http://www.emoji-cheat-sheet.com/graphics/emojis/relaxed.png)
+
+![joy cat](http://www.emoji-cheat-sheet.com/graphics/emojis/joy_cat.png)
+
+![+1](http://www.emoji-cheat-sheet.com/graphics/emojis/plus1.png)
+
+![tada](http://www.emoji-cheat-sheet.com/graphics/emojis/tada.png)
+
+---
+
+### Emoji
+
+In a low-bandwidth medium like text emoji matter. Seriously
+
 :joy_cat: :crocodile: :moneybag: :monkey_face: :exclamation:
 
 
 ---
+
+### Emoji
+
+Learned this verbatim from
+
+Ian cordasco
+
+![ian cordasco](https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSvfsR-vq4hcoY3zrO5qMhrmht26_-Jo2kibhvh2gyIB96xvOxJDZnZ-lM)
+
+Who works on / maintains a bunch of popular open source repos and somehow hasn't completely burned out on it yet.
+
+---
+
 ### Use your midwestern superpowers to your advantage
 - To quote _Wizard People, Dear Reader_'s version of Harry Potter
 > Subtlety and patience can be a great way of looking pretty cool.
