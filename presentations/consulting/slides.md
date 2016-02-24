@@ -238,7 +238,6 @@ template: communications
 
 ---
 ## Communications
-Talking
 
 ---
 ## Communications
@@ -247,20 +246,27 @@ Talking
 
 ---
 ## Emotions
-- people are human, and its like... weird.
+People are human, and its like... weird.
 
 ---
 
 ## Emotions
-- people are human, and its like... weird.
-- But the client will be pleased if they feel like you understood them and provided meaningful feedback.
+People are human, and its like... weird.
+
+But the client will be pleased if
+- they feel like you understood them
+- and provided meaningful input
 
 ---
 
 ## Emotions
-- people are human, and its like... weird.
-- But the client will be pleased if they feel like you understood them and provided meaningful feedback.
-- A good way to do this is to be right about everything all the time and explain yourself with the perfect mix of humility and erudition.
+People are human, and its like... weird.
+
+But the client will be pleased if
+- they feel like you understood them
+- and provided meaningful input
+
+**A good way** to do this is to be right about everything all the time and explain yourself with the perfect mix of humility and erudition.
 
 ---
 
@@ -271,7 +277,7 @@ Talking
 layout: true
 # So, How Do?
 ## Emotions
-Since we're all human, some tips
+Since we're all human, some more moderate approaches
 
 ---
 
@@ -283,11 +289,6 @@ Since we're all human, some tips
 - **But**...
 
 ---
-
-### Contextualize beliefs and statements
-- Take time to bracket claims with "from what I can tell based on the current test suite, X is fine", or "my best guess based on (last time this happened) is the X was caused by Y"
-- vs "X is fine" or "Y caused X"
-- **But**...
 
 ### Model the client
 - Use the empathy chip in your brain; if I were in this person's situaton, what would I want? how would I feel.
@@ -313,7 +314,6 @@ In a low-bandwidth medium like text emoji matter. Seriously
 
 :joy_cat: :crocodile: :moneybag: :monkey_face: :exclamation:
 
-
 ---
 
 ### Emoji
@@ -332,4 +332,6 @@ Who works on / maintains a bunch of popular open source repos and somehow hasn't
 - To quote _Wizard People, Dear Reader_'s version of Harry Potter
 > Subtlety and patience can be a great way of looking pretty cool.
 
-- Not saying to lie about your abilities or be overly self effacing; but many people notice and value being direct and forthright
+- Not saying to lie about your abilities or be overly self effacing
+- but many people notice and value being direct and forthright
+- More to think and say about this, lets talk about it
