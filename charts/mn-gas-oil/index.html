@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>MN Gas & Oil Snapshot</title>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; margin: 0; background:#f6f8fb; color:#16202a; }
+  .wrap { width: 1200px; margin: 0 auto; padding: 24px; }
+  h1 { margin: 0 0 6px; font-size: 34px; }
+  .sub { color:#5b6570; margin-bottom: 18px; }
+  .panel { background:white; border-radius:16px; padding:18px 18px 10px; box-shadow: 0 2px 12px rgba(0,0,0,.06); margin-bottom: 18px; }
+  .title { font-weight:700; font-size:22px; margin-bottom:6px; }
+  .note { color:#5b6570; font-size:14px; }
+  svg { width:100%; height:auto; display:block; }
+  .foot { color:#5b6570; font-size:13px; margin-top: 8px; }
+  .legend { font-size:14px; fill:#39424c; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Gas & Oil Snapshot for Minnesota</h1>
+  <div class="sub">Mar 11, 2026 • quick decision view for “when do I buy gas?”</div>
+
+  <div class="panel">
+    <div class="title">Minnesota gas: recent jump + rough next 2-week range</div>
+    <div class="note">Scenario band, not prophecy. Pump prices usually lag crude by a few days to ~2 weeks.</div>
+    <svg viewBox="0 0 1120 360" aria-label="Minnesota gas chart">
+      <defs>
+        <marker id="dotBlue" markerWidth="8" markerHeight="8" refX="4" refY="4"><circle cx="4" cy="4" r="4" fill="#1f77b4"/></marker>
+        <marker id="dotOrange" markerWidth="8" markerHeight="8" refX="4" refY="4"><circle cx="4" cy="4" r="4" fill="#ff7f0e"/></marker>
+      </defs>
+      <rect x="0" y="0" width="1120" height="360" fill="white"/>
+      <!-- plot area -->
+      <g transform="translate(70,20)">
+        <!-- y grid -->
+        <g stroke="#d8dee6" stroke-width="1">
+          <line x1="0" y1="260" x2="980" y2="260"/>
+          <line x1="0" y1="195" x2="980" y2="195"/>
+          <line x1="0" y1="130" x2="980" y2="130"/>
+          <line x1="0" y1="65" x2="980" y2="65"/>
+          <line x1="0" y1="0" x2="980" y2="0"/>
+        </g>
+        <g fill="#5b6570" font-size="13">
+          <text x="-48" y="264">$2.70</text>
+          <text x="-48" y="199">$2.94</text>
+          <text x="-48" y="134">$3.18</text>
+          <text x="-48" y="69">$3.41</text>
+          <text x="-48" y="4">$3.65</text>
+        </g>
+        <!-- forecast band -->
+        <polygon points="760,96 930,69 930,165 760,138" fill="#ff7f0e" opacity="0.18"/>
+        <!-- line -->
+        <polyline points="30,151 500,191 650,165 760,111" fill="none" stroke="#1f77b4" stroke-width="4"/>
+        <polyline points="760,111 845,97 930,97" fill="none" stroke="#ff7f0e" stroke-width="4" stroke-dasharray="10 8"/>
+        <!-- points -->
+        <circle cx="30" cy="151" r="5" fill="#1f77b4"/>
+        <circle cx="500" cy="191" r="5" fill="#1f77b4"/>
+        <circle cx="650" cy="165" r="5" fill="#1f77b4"/>
+        <circle cx="760" cy="111" r="5" fill="#1f77b4"/>
+        <circle cx="845" cy="97" r="5" fill="#ff7f0e"/>
+        <circle cx="930" cy="97" r="5" fill="#ff7f0e"/>
+        <!-- labels -->
+        <g font-size="14" fill="#16202a" font-weight="600">
+          <text x="10" y="138">Mar 2025</text><text x="4" y="155" font-weight="500">$3.00</text>
+          <text x="472" y="178">Jan avg</text><text x="470" y="195" font-weight="500">$2.86</text>
+          <text x="624" y="152">week ago</text><text x="625" y="169" font-weight="500">$2.95</text>
+          <text x="740" y="98">now</text><text x="732" y="115" font-weight="500">$3.25</text>
+          <text x="820" y="82" fill="#b85c00">1 wk</text><text x="794" y="99" fill="#b85c00" font-weight="500">$3.15–3.45</text>
+          <text x="905" y="82" fill="#b85c00">2 wk</text><text x="880" y="99" fill="#b85c00" font-weight="500">$3.05–3.55</text>
+        </g>
+        <g fill="#5b6570" font-size="13">
+          <text x="0" y="292">Mar 2025</text>
+          <text x="470" y="292">Jan 2026</text>
+          <text x="620" y="292">Mar 4</text>
+          <text x="740" y="292">Mar 11</text>
+          <text x="826" y="292">Mar 18</text>
+          <text x="910" y="292">Mar 25</text>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="panel">
+    <div class="title">WTI crude oil: sharp war spike, still elevated</div>
+    <div class="note">This is the upstream pressure feeding the gas move.</div>
+    <svg viewBox="0 0 1120 390" aria-label="WTI chart">
+      <rect x="0" y="0" width="1120" height="390" fill="white"/>
+      <g transform="translate(70,20)">
+        <rect x="0" y="48" width="980" height="96" fill="#e74c3c" opacity="0.08"/>
+        <g stroke="#d8dee6" stroke-width="1">
+          <line x1="0" y1="288" x2="980" y2="288"/>
+          <line x1="0" y1="240" x2="980" y2="240"/>
+          <line x1="0" y1="192" x2="980" y2="192"/>
+          <line x1="0" y1="144" x2="980" y2="144"/>
+          <line x1="0" y1="96" x2="980" y2="96"/>
+          <line x1="0" y1="48" x2="980" y2="48"/>
+          <line x1="0" y1="0" x2="980" y2="0"/>
+        </g>
+        <g fill="#5b6570" font-size="13">
+          <text x="-42" y="292">$60</text>
+          <text x="-42" y="244">$65</text>
+          <text x="-42" y="196">$70</text>
+          <text x="-42" y="148">$75</text>
+          <text x="-42" y="100">$80</text>
+          <text x="-42" y="52">$85</text>
+          <text x="-42" y="4">$90+</text>
+        </g>
+        <polyline points="30,237 105,239 180,221 255,217 330,180 405,157 480,154 555,81 630,9 705,0 780,63 855,52 930,63" fill="none" stroke="#2ca02c" stroke-width="4"/>
+        <g fill="#2ca02c">
+          <circle cx="30" cy="237" r="4"/><circle cx="105" cy="239" r="4"/><circle cx="180" cy="221" r="4"/>
+          <circle cx="255" cy="217" r="4"/><circle cx="330" cy="180" r="4"/><circle cx="405" cy="157" r="4"/>
+          <circle cx="480" cy="154" r="4"/><circle cx="555" cy="81" r="4"/><circle cx="630" cy="9" r="4"/>
+          <circle cx="705" cy="0" r="4"/><circle cx="780" cy="63" r="4"/><circle cx="855" cy="52" r="4"/><circle cx="930" cy="63" r="4"/>
+        </g>
+        <g font-size="13" fill="#16202a" font-weight="600">
+          <text x="616" y="26">war spike</text>
+          <text x="940" y="66">now $84.39</text>
+        </g>
+        <g fill="#5b6570" font-size="13">
+          <text x="10" y="320">Feb 25</text><text x="155" y="320">Feb 27</text><text x="305" y="320">Mar 2</text>
+          <text x="455" y="320">Mar 4</text><text x="605" y="320">Mar 6</text><text x="755" y="320">Mar 9</text><text x="905" y="320">Mar 11</text>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="foot">
+    Sources used for this quick chart: AAA/EIA/FRED-style data points surfaced through web search in this chat context; WTI daily prices from late Feb–Mar 11. Directional only, not trading advice.
+  </div>
+</div>
+</body>
+</html>
