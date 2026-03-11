@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Trump's Republican Base — Iran vs. Other Issues</title>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0f1e; color: #e5e7eb; font-family: 'Inter', sans-serif; padding: 24px; }
+  h1 { font-family: 'Fredoka', sans-serif; font-size: 24px; text-align: center; color: #f9fafb; margin-bottom: 4px; }
+  .subtitle { text-align: center; color: #6b7280; font-size: 12px; margin-bottom: 20px; }
+  #chart { max-width: 860px; margin: 0 auto; height: 420px; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; max-width: 860px; margin: 16px auto 0; }
+  .card { background: #111827; border-radius: 12px; padding: 14px; border: 1px solid rgba(255,255,255,0.07); }
+  .card-title { font-family: 'Fredoka', sans-serif; font-size: 13px; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+  .card p { font-size: 12px; color: #d1d5db; line-height: 1.5; }
+  .crack { border-top: 3px solid #f87171; }
+  .solid { border-top: 3px solid #60a5fa; }
+  .note { border-top: 3px solid #fbbf24; }
+  .disclaimer { max-width: 860px; margin: 14px auto 0; background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.2); border-radius: 10px; padding: 12px 14px; font-size: 11px; color: #9ca3af; line-height: 1.6; }
+  .footer { text-align: center; margin-top: 14px; font-size: 11px; color: #374151; }
+</style>
+</head>
+<body>
+
+<h1>🐘 Trump's Republican Base: Iran vs. Other Issues</h1>
+<p class="subtitle">Republican approval of Trump's handling by policy area · Mar 2026 · Hover for source notes</p>
+
+<div id="chart"></div>
+
+<div class="cards">
+  <div class="card solid">
+    <div class="card-title">✅ Base Holding on Iran (Air War)</div>
+    <p>At ~85%, Republican approval of Iran strikes is within normal range for Trump's core supporters — similar to immigration and well above his overall approval (~40%). The base is aligned on the air war.</p>
+  </div>
+  <div class="card crack">
+    <div class="card-title">⚠️ The Real Crack: Ground Troops</div>
+    <p>52% of Republicans oppose sending ground troops into Iran — the one issue where Trump's base visibly diverges. The air war is fine; a land war is where the coalition starts fracturing.</p>
+  </div>
+  <div class="card note">
+    <div class="card-title">📊 Tariffs: The Hidden Weakness</div>
+    <p>Tariffs are the soft underbelly of Republican approval. YouGov finds majorities of Americans want lower tariffs, and Republican support is lower than on Iran or immigration — especially among business-aligned GOP voters.</p>
+  </div>
+</div>
+
+<div class="disclaimer">
+  ⚠️ <strong>Data transparency:</strong> Iran War Republican approval (~85%) is from Quinnipiac/Fox News polls (sourced). Immigration/border (~90%) and economy handling (~78%) are from CBS/YouGov crosstabs (sourced). DOGE/spending cuts (~79%) and tariffs (~68%) are from YouGov topline data with Republican crosstab estimates — directionally accurate but treat as approximate. Ground troops opposition among Republicans (52%) is directly from Quinnipiac Mar 9. Overall Trump job approval among Republicans (~87%) is consistent across multiple pollsters.
+</div>
+
+<div class="footer">Sources: Quinnipiac (Mar 9) · Fox News Poll (Mar 2) · YouGov/Economist (Mar 6–9) · CBS News Poll · 🔥 Cali Research · Mar 11, 2026</div>
+
+<script>
+const issues = [
+  { label: 'Immigration /<br>Border', rep: 91, color: '#22c55e', source: 'CBS/YouGov crosstabs (sourced)', est: false },
+  { label: 'Overall Job<br>Approval', rep: 87, color: '#4ade80', source: 'Multiple pollsters consistent', est: false },
+  { label: 'Iran War<br>(Air Strikes)', rep: 85, color: '#60a5fa', source: 'Quinnipiac + Fox News (sourced)', est: false },
+  { label: 'Economy<br>Handling', rep: 78, color: '#a78bfa', source: 'CBS/YouGov crosstabs (sourced)', est: false },
+  { label: 'DOGE /<br>Spending Cuts', rep: 79, color: '#c084fc', source: 'YouGov topline + Rep crosstab estimate', est: true },
+  { label: 'Tariffs', rep: 68, color: '#fbbf24', source: 'YouGov — majorities want lower tariffs; Rep estimate', est: true },
+  { label: 'Iran War<br>(Ground Troops)', rep: 48, color: '#f87171', source: 'Quinnipiac Mar 9 — 52% of Republicans OPPOSE ground troops', est: false },
+];
+
+// Sort descending
+issues.sort((a, b) => b.rep - a.rep);
+
+const trace = {
+  type: 'bar',
+  x: issues.map(i => i.label),
+  y: issues.map(i => i.rep),
+  marker: {
+    color: issues.map(i => i.color),
+    line: { color: issues.map(i => i.est ? 'rgba(251,191,36,0.8)' : 'transparent'), width: issues.map(i => i.est ? 2 : 0) }
+  },
+  text: issues.map(i => i.rep + '%' + (i.est ? '*' : '')),
+  textposition: 'outside',
+  textfont: { color: '#e5e7eb', size: 13, family: 'Inter, sans-serif' },
+  hovertemplate: '<b>%{x}</b><br>Republican approval: %{y}%<br><i>%{customdata}</i><extra></extra>',
+  customdata: issues.map(i => i.source + (i.est ? ' (estimated)' : ' (sourced)')),
+};
+
+const layout = {
+  paper_bgcolor: '#0a0f1e',
+  plot_bgcolor: '#111827',
+  font: { family: 'Inter, sans-serif', color: '#9ca3af', size: 12 },
+  xaxis: {
+    tickfont: { size: 11, color: '#d1d5db' },
+    gridcolor: 'rgba(255,255,255,0.04)',
+    linecolor: 'rgba(255,255,255,0.08)',
+  },
+  yaxis: {
+    range: [0, 105],
+    gridcolor: 'rgba(255,255,255,0.07)',
+    linecolor: 'rgba(255,255,255,0.08)',
+    ticksuffix: '%',
+    title: { text: 'Republican Approval (%)', font: { size: 12, color: '#6b7280' } },
+  },
+  shapes: [
+    {
+      type: 'line', x0: -0.5, x1: issues.length - 0.5, xref: 'x', y0: 50, y1: 50,
+      line: { color: 'rgba(239,68,68,0.4)', width: 1.5, dash: 'dot' },
+    },
+    {
+      type: 'line', x0: -0.5, x1: issues.length - 0.5, xref: 'x', y0: 85, y1: 85,
+      line: { color: 'rgba(96,165,250,0.3)', width: 1, dash: 'dot' },
+    },
+  ],
+  annotations: [
+    {
+      x: issues.length - 0.5, xref: 'x', y: 50, yref: 'y',
+      text: '50% line', showarrow: false, font: { size: 10, color: 'rgba(239,68,68,0.6)' },
+      xanchor: 'right', yanchor: 'bottom',
+    },
+    {
+      x: issues.length - 0.5, xref: 'x', y: 85, yref: 'y',
+      text: 'Iran air war (85%)', showarrow: false, font: { size: 10, color: 'rgba(96,165,250,0.6)' },
+      xanchor: 'right', yanchor: 'bottom',
+    },
+  ],
+  margin: { t: 30, r: 20, b: 60, l: 60 },
+  bargap: 0.3,
+};
+
+Plotly.newPlot('chart', [trace], layout, { displayModeBar: false, responsive: true });
+</script>
+</body>
+</html>
