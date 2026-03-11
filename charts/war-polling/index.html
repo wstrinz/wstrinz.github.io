@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>American War Support — 100 Years of Polling</title>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0f1e;
+    color: #e5e7eb;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  h1 {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 28px;
+    text-align: center;
+    color: #f9fafb;
+    margin-bottom: 6px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #6b7280;
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+  .controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .btn {
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.05);
+    color: #d1d5db;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.2s;
+  }
+  .btn:hover { background: rgba(255,255,255,0.12); color: #fff; }
+  .btn.active { background: rgba(99,102,241,0.3); border-color: #818cf8; color: #c7d2fe; }
+  #chart { width: 100%; height: 520px; }
+  .annotation-panel {
+    max-width: 900px;
+    margin: 16px auto 0;
+    background: #111827;
+    border-radius: 14px;
+    padding: 16px 20px;
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+  .ann-title {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 16px;
+    color: #a5b4fc;
+    margin-bottom: 10px;
+  }
+  .ann-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 10px;
+  }
+  .ann-item {
+    background: #1f2937;
+    border-radius: 8px;
+    padding: 10px 12px;
+    border-left: 3px solid;
+  }
+  .ann-item .war-name { font-size: 12px; font-weight: 600; margin-bottom: 3px; }
+  .ann-item .war-note { font-size: 11px; color: #9ca3af; line-height: 1.4; }
+  .footer {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 11px;
+    color: #374151;
+  }
+</style>
+</head>
+<body>
+
+<h1>🇺🇸 American War Support — 100 Years of Polling</h1>
+<p class="subtitle">Public approval of major U.S. military conflicts over time · Hover for details · Click legend to toggle</p>
+
+<div class="controls">
+  <button class="btn active" onclick="showAll()">All Wars</button>
+  <button class="btn" onclick="showEra('ww2')">WWII Era</button>
+  <button class="btn" onclick="showEra('cold')">Cold War</button>
+  <button class="btn" onclick="showEra('post')">Post-9/11</button>
+  <button class="btn" onclick="showEra('recent')">Recent</button>
+</div>
+
+<div id="chart"></div>
+
+<div class="annotation-panel">
+  <div class="ann-title">📋 Key Patterns</div>
+  <div class="ann-grid">
+    <div class="ann-item" style="border-color:#60a5fa">
+      <div class="war-name" style="color:#60a5fa">WWII (1941–1945)</div>
+      <div class="war-note">Pearl Harbor rally: ~90% support. Sustained through victory. Only war to maintain majority support throughout.</div>
+    </div>
+    <div class="ann-item" style="border-color:#a78bfa">
+      <div class="war-name" style="color:#a78bfa">Korea (1950–1953)</div>
+      <div class="war-note">Initial ~66% support collapsed to ~33% by 1952. First "forgotten war" — public soured as stalemate set in.</div>
+    </div>
+    <div class="ann-item" style="border-color:#f472b6">
+      <div class="war-name" style="color:#f472b6">Vietnam (1964–1973)</div>
+      <div class="war-note">Classic collapse. 61% support in 1965 → 28% by 1971. Tet Offensive 1968 was the turning point.</div>
+    </div>
+    <div class="ann-item" style="border-color:#34d399">
+      <div class="war-name" style="color:#34d399">Gulf War (1990–1991)</div>
+      <div class="war-note">~80% peak support. Short, decisive, "just war" framing. Template that shaped Iraq War expectations (badly).</div>
+    </div>
+    <div class="ann-item" style="border-color:#fb923c">
+      <div class="war-name" style="color:#fb923c">Iraq (2003–2011)</div>
+      <div class="war-note">72% support at invasion (9/11 halo + WMD). Fell to 31% by 2007. Abu Ghraib, no WMDs, and insurgency destroyed it.</div>
+    </div>
+    <div class="ann-item" style="border-color:#fbbf24">
+      <div class="war-name" style="color:#fbbf24">Afghanistan (2001–2021)</div>
+      <div class="war-note">Post-9/11 at 90%. Longest slow bleed in US history. Down to ~25% before withdrawal. 20 years, same trajectory.</div>
+    </div>
+    <div class="ann-item" style="border-color:#f87171">
+      <div class="war-name" style="color:#f87171">Iran War (2026–)</div>
+      <div class="war-note">Started ~62% (Iran missile strike rally). Already at 45% support after 2 weeks. Tracking Iraq/Vietnam curve, compressed.</div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">Sources: Gallup, Pew Research, NBC/WSJ, NPR/PBS/Marist · Historical data compiled from polling archives · 🔥 Cali Research · Mar 11, 2026</div>
+
+<script>
+const wars = {
+  ww2: {
+    name: 'WWII',
+    color: '#60a5fa',
+    era: 'ww2',
+    points: [
+      {x: 'Dec 1941', y: 90, note: 'Pearl Harbor attack. Near-unanimous support.'},
+      {x: 'Jun 1942', y: 88, note: 'Midway victory. Support holds strong.'},
+      {x: 'Jan 1943', y: 86, note: 'Casablanca conference. Unconditional surrender policy.'},
+      {x: 'Jun 1944', y: 87, note: 'D-Day invasion of Normandy.'},
+      {x: 'Jan 1945', y: 89, note: 'Battle of the Bulge repelled. Victory in sight.'},
+      {x: 'Aug 1945', y: 85, note: 'Victory in Pacific. War ends.'},
+    ]
+  },
+  korea: {
+    name: 'Korea',
+    color: '#a78bfa',
+    era: 'cold',
+    points: [
+      {x: 'Jul 1950', y: 66, note: 'North Korea invades South. US enters.'},
+      {x: 'Oct 1950', y: 56, note: 'China enters. Situation deteriorates.'},
+      {x: 'Jan 1951', y: 49, note: 'Chinese offensive pushes UN forces back.'},
+      {x: 'Jun 1951', y: 43, note: 'Stalemate at 38th parallel. Frustration grows.'},
+      {x: 'Jan 1952', y: 37, note: '"Meatgrinder" strategy unpopular. Ike campaigns on ending war.'},
+      {x: 'Jun 1952', y: 33, note: 'No end in sight. Support at low.'},
+      {x: 'Jul 1953', y: 52, note: 'Armistice signed. Relief bump.'},
+    ]
+  },
+  vietnam: {
+    name: 'Vietnam',
+    color: '#f472b6',
+    era: 'cold',
+    points: [
+      {x: 'Aug 1964', y: 72, note: 'Gulf of Tonkin. Congress authorizes force.'},
+      {x: 'Mar 1965', y: 61, note: 'Marines land at Da Nang. Escalation begins.'},
+      {x: 'Oct 1966', y: 51, note: 'Rising casualties. Credibility gap emerges.'},
+      {x: 'Feb 1968', y: 42, note: 'Tet Offensive shocks public. Watershed moment.'},
+      {x: 'Oct 1969', y: 35, note: 'Vietnam Moratorium protests. 250,000 in DC.'},
+      {x: 'May 1970', y: 34, note: 'Kent State. Cambodia invasion. Campus unrest.'},
+      {x: 'Jan 1971', y: 28, note: 'Support at historical low. Pentagon Papers soon.'},
+      {x: 'Jan 1973', y: 38, note: 'Paris Peace Accords. Relief but no victory.'},
+    ]
+  },
+  gulf: {
+    name: 'Gulf War',
+    color: '#34d399',
+    era: 'post',
+    points: [
+      {x: 'Aug 1990', y: 62, note: 'Iraq invades Kuwait. US deploys troops.'},
+      {x: 'Jan 1991', y: 80, note: 'Air campaign begins. CNN coverage wall-to-wall.'},
+      {x: 'Feb 1991', y: 83, note: 'Ground war: 100 hours to victory.'},
+      {x: 'Mar 1991', y: 79, note: 'Liberation of Kuwait. Victory parade mood.'},
+    ]
+  },
+  afghanistan: {
+    name: 'Afghanistan',
+    color: '#fbbf24',
+    era: 'post',
+    points: [
+      {x: 'Oct 2001', y: 90, note: '9/11 revenge. Nearly unanimous support.'},
+      {x: 'Dec 2001', y: 86, note: 'Taliban falls. Kabul liberated.'},
+      {x: 'Jan 2003', y: 74, note: 'Hunt for bin Laden stalls. Iraq looms.'},
+      {x: 'Jan 2006', y: 54, note: 'Taliban resurgence. Long-term costs emerging.'},
+      {x: 'Jan 2009', y: 44, note: 'Obama surges troops. Public skeptical.'},
+      {x: 'Jan 2011', y: 37, note: 'Bin Laden killed in Pakistan. Rationale muddied.'},
+      {x: 'Jan 2014', y: 31, note: 'Drawdown begins. War fatigue.'},
+      {x: 'Aug 2021', y: 25, note: 'Chaotic withdrawal. Kabul falls. Support at floor.'},
+    ]
+  },
+  iraq: {
+    name: 'Iraq War',
+    color: '#fb923c',
+    era: 'post',
+    points: [
+      {x: 'Mar 2003', y: 72, note: 'Shock and Awe. 9/11 halo + WMD fears.'},
+      {x: 'May 2003', y: 75, note: '"Mission Accomplished." Premature peak.'},
+      {x: 'Oct 2003', y: 62, note: 'Insurgency emerges. No WMDs found.'},
+      {x: 'May 2004', y: 47, note: 'Abu Ghraib scandal breaks. Reputation collapse.'},
+      {x: 'Jan 2005', y: 44, note: 'Iraqi elections held. Brief hope.'},
+      {x: 'Jan 2006', y: 40, note: 'Sectarian civil war accelerates.'},
+      {x: 'Jan 2007', y: 34, note: 'Surge announced. Public already checked out.'},
+      {x: 'Jan 2008', y: 38, note: 'Surge "working" — slight rebound.'},
+      {x: 'Jan 2009', y: 35, note: 'Obama elected on ending war.'},
+      {x: 'Dec 2011', y: 31, note: 'US withdrawal complete.'},
+    ]
+  },
+  iran2026: {
+    name: 'Iran War (2026)',
+    color: '#f87171',
+    era: 'recent',
+    points: [
+      {x: 'Feb 26 2026', y: 62, note: 'US joins Israeli strikes. Initial rally effect.'},
+      {x: 'Mar 3 2026', y: 55, note: 'Iranian Embassy strike in Saudi Arabia. First US casualties in Kuwait.'},
+      {x: 'Mar 7 2026', y: 48, note: 'Iran rejects surrender. Pezeshkian defiant.'},
+      {x: 'Mar 11 2026', y: 45, note: 'NPR/PBS/Marist poll. Majority now oppose. IEA releases record oil reserves.'},
+    ]
+  }
+};
+
+function getTraces(filter) {
+  return Object.values(wars)
+    .filter(w => !filter || filter.includes(w.era))
+    .map(w => ({
+      x: w.points.map(p => p.x),
+      y: w.points.map(p => p.y),
+      text: w.points.map(p => p.note),
+      name: w.name,
+      mode: 'lines+markers',
+      line: { color: w.color, width: 2.5, shape: 'spline' },
+      marker: { color: w.color, size: 8, line: { color: '#0a0f1e', width: 2 } },
+      hovertemplate: '<b>%{x}</b><br>Support: %{y}%<br><i>%{text}</i><extra>' + w.name + '</extra>',
+    }));
+}
+
+const layout = {
+  paper_bgcolor: '#0f1729',
+  plot_bgcolor: '#111827',
+  font: { family: 'Inter, sans-serif', color: '#9ca3af', size: 12 },
+  xaxis: {
+    gridcolor: 'rgba(255,255,255,0.05)',
+    linecolor: 'rgba(255,255,255,0.1)',
+    tickfont: { size: 11 },
+    type: 'category',
+  },
+  yaxis: {
+    title: { text: 'Public Support (%)', font: { size: 12, color: '#6b7280' } },
+    range: [0, 100],
+    gridcolor: 'rgba(255,255,255,0.07)',
+    linecolor: 'rgba(255,255,255,0.1)',
+    ticksuffix: '%',
+    dtick: 10,
+  },
+  legend: {
+    bgcolor: 'rgba(17,24,39,0.8)',
+    bordercolor: 'rgba(255,255,255,0.1)',
+    borderwidth: 1,
+    font: { size: 12 },
+    orientation: 'h',
+    x: 0, y: -0.18,
+  },
+  shapes: [
+    {
+      type: 'line',
+      x0: 0, x1: 1, xref: 'paper',
+      y0: 50, y1: 50,
+      line: { color: 'rgba(255,255,255,0.2)', width: 1, dash: 'dot' },
+    }
+  ],
+  annotations: [
+    {
+      x: 1, xref: 'paper', y: 50, yref: 'y',
+      text: '50% — majority line',
+      showarrow: false,
+      font: { size: 10, color: 'rgba(255,255,255,0.3)' },
+      xanchor: 'right',
+      yanchor: 'bottom',
+    }
+  ],
+  margin: { t: 20, r: 20, b: 80, l: 60 },
+  hovermode: 'closest',
+};
+
+const config = {
+  displayModeBar: false,
+  responsive: true,
+};
+
+Plotly.newPlot('chart', getTraces(null), layout, config);
+
+function showAll() {
+  document.querySelectorAll('.btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  Plotly.react('chart', getTraces(null), layout, config);
+}
+
+function showEra(era) {
+  document.querySelectorAll('.btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  const eraMap = {
+    ww2: ['ww2'],
+    cold: ['cold'],
+    post: ['post'],
+    recent: ['recent'],
+  };
+  Plotly.react('chart', getTraces(eraMap[era]), layout, config);
+}
+</script>
+</body>
+</html>
