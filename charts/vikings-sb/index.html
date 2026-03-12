@@ -6,174 +6,227 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: #0d0f1a; color: #e5e7eb; font-family: 'Inter', sans-serif; padding: 24px; }
-  .wrap { max-width: 900px; margin: 0 auto; }
-  h1 { font-family: 'Fredoka', sans-serif; font-size: 28px; text-align: center; color: #f9fafb; margin-bottom: 3px; }
-  .sub { text-align: center; font-size: 12px; color: #6b7280; margin-bottom: 20px; }
+  body { background: #0d0f14; color: #e5e7eb; font-family: 'Inter', sans-serif; padding: 20px; }
+  .max { max-width: 900px; margin: 0 auto; }
 
-  /* Breaking news banner */
-  .breaking { background: linear-gradient(135deg, #4f1d1d, #1d1d4f); border: 1px solid #7c3aed; border-radius: 10px; padding: 12px 16px; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
-  .br-badge { background: #ef4444; color: white; font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px; flex-shrink: 0; }
-  .br-text { font-size: 13px; color: #e9d5ff; }
+  /* Header */
+  .header { text-align: center; padding: 20px; background: linear-gradient(135deg, #4b0082, #1a1033, #7c3aed); border-radius: 16px; margin-bottom: 18px; border: 1px solid rgba(124,58,237,0.4); }
+  .header h1 { font-family: 'Fredoka', sans-serif; font-size: 30px; color: #f5c518; text-shadow: 0 0 20px rgba(245,197,24,0.5); margin-bottom: 4px; }
+  .header .sub { font-size: 13px; color: #c4b5fd; }
+  .breaking { display: inline-block; background: #f5c518; color: #1a1033; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 4px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
 
-  /* The path forward */
-  .path { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; margin-bottom: 16px; align-items: stretch; }
-  .path-step { background: #111827; border-radius: 10px; padding: 14px 12px; text-align: center; position: relative; }
-  .ps-num { font-family: 'Fredoka', sans-serif; font-size: 28px; font-weight: 700; }
-  .ps-title { font-size: 13px; font-weight: 700; color: #f9fafb; margin: 4px 0; }
-  .ps-body { font-size: 11px; color: #9ca3af; line-height: 1.5; }
-  .arrow { display: flex; align-items: center; justify-content: center; font-size: 20px; color: #374151; }
+  /* Two col */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  .card { background: #111827; border-radius: 14px; padding: 16px; border: 1px solid rgba(255,255,255,0.07); }
+  .card-title { font-family: 'Fredoka', sans-serif; font-size: 13px; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 12px; }
 
-  /* QB situation */
-  .qb-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
-  .qb-card { background: #111827; border-radius: 12px; padding: 14px; border: 2px solid; }
-  .qb-name { font-family: 'Fredoka', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 6px; }
-  .qb-role { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
-  .qb-stat { font-size: 12px; color: #d1d5db; padding: 3px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
-  .qb-stat:last-child { border-bottom: none; }
+  /* Kyler card */
+  .kyler { background: linear-gradient(135deg, #1e1033, #111827); border: 1px solid rgba(245,197,24,0.25); border-radius: 14px; padding: 16px; margin-bottom: 14px; }
+  .kyler-flex { display: flex; gap: 16px; align-items: flex-start; }
+  .kyler-num { font-family: 'Fredoka', sans-serif; font-size: 64px; color: #f5c518; line-height: 1; opacity: 0.3; margin-right: 4px; }
+  .kyler-body { flex: 1; }
+  .kyler-name { font-family: 'Fredoka', sans-serif; font-size: 22px; color: #f5c518; margin-bottom: 4px; }
+  .kyler-role { font-size: 12px; color: #c4b5fd; margin-bottom: 10px; }
+  .kyler-stats { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 10px; }
+  .ks { background: rgba(245,197,24,0.1); border-radius: 8px; padding: 6px 10px; text-align: center; }
+  .ks-val { font-family: 'Fredoka', sans-serif; font-size: 18px; font-weight: 700; color: #f5c518; }
+  .ks-label { font-size: 10px; color: #9ca3af; }
+  .kyler-desc { font-size: 12px; color: #d1d5db; line-height: 1.6; }
 
-  /* Pillars */
-  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
-  .pillar { background: #111827; border-radius: 12px; padding: 14px; border-top: 3px solid; }
-  .p-icon { font-size: 24px; margin-bottom: 6px; }
-  .p-title { font-size: 13px; font-weight: 700; color: #f9fafb; margin-bottom: 6px; }
-  .p-body { font-size: 11px; color: #9ca3af; line-height: 1.5; }
+  /* Road to SB */
+  .roadmap { display: flex; gap: 0; flex-direction: column; }
+  .rm-row { display: flex; gap: 0; }
+  .rm-dot { display: flex; flex-direction: column; align-items: center; width: 44px; flex-shrink: 0; }
+  .rm-circle { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; z-index: 1; }
+  .rm-line { width: 2px; flex: 1; min-height: 12px; background: rgba(124,58,237,0.3); }
+  .rm-content { flex: 1; padding: 0 0 14px 12px; padding-top: 4px; }
+  .rm-phase { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; margin-bottom: 2px; }
+  .rm-title { font-family: 'Fredoka', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 5px; }
+  .rm-items { display: flex; flex-direction: column; gap: 3px; }
+  .rm-item { font-size: 12px; color: #9ca3af; line-height: 1.4; }
+  .rm-item strong { color: #e5e7eb; }
 
-  /* Zach recruitment section */
-  .recruit { background: linear-gradient(135deg, #0f1f0f, #1a1a0a); border: 2px solid #fbbf24; border-radius: 14px; padding: 18px; margin-bottom: 16px; }
-  .r-title { font-family: 'Fredoka', sans-serif; font-size: 17px; color: #fbbf24; margin-bottom: 10px; }
-  .r-body { font-size: 13px; color: #d1d5db; line-height: 1.8; }
-  .r-quote { border-left: 3px solid #fbbf24; padding-left: 12px; margin: 10px 0; font-style: italic; color: #fcd34d; font-size: 12px; }
+  /* Zach recruitment box */
+  .recruit { background: linear-gradient(135deg, #0d1f0d, #111827); border: 2px solid rgba(74,222,128,0.3); border-radius: 14px; padding: 18px; margin-bottom: 14px; }
+  .recruit-title { font-family: 'Fredoka', sans-serif; font-size: 18px; color: #4ade80; margin-bottom: 4px; }
+  .recruit-sub { font-size: 11px; color: #6b7280; margin-bottom: 14px; }
+  .recruit-args { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .ra { background: rgba(74,222,128,0.05); border-radius: 10px; padding: 10px 12px; border-left: 3px solid #22c55e; }
+  .ra-title { font-size: 12px; font-weight: 700; color: #86efac; margin-bottom: 4px; }
+  .ra-body { font-size: 11px; color: #9ca3af; line-height: 1.5; }
 
-  /* Risk flags */
-  .risks { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
-  .risk { background: rgba(239,68,68,0.07); border: 1px solid rgba(239,68,68,0.2); border-radius: 10px; padding: 12px; }
-  .risk-title { font-size: 12px; font-weight: 700; color: #fca5a5; margin-bottom: 4px; }
-  .risk-body { font-size: 11px; color: #9ca3af; line-height: 1.4; }
+  /* Odds bar */
+  .odds-section { margin-bottom: 14px; }
+  .odds-bar { display: flex; height: 28px; border-radius: 8px; overflow: hidden; margin: 10px 0 6px; }
+  .ob-seg { display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; }
+  .odds-labels { display: flex; gap: 6px; font-size: 11px; }
+  .ol { display: flex; align-items: center; gap: 4px; }
+  .ol-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 
-  .footer { text-align: center; font-size: 11px; color: #374151; }
+  .footer { text-align: center; font-size: 11px; color: #374151; padding-top: 12px; border-top: 1px solid #1f2937; }
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="max">
 
-<h1>⚔️ Vikings to the Super Bowl — The Game Plan</h1>
-<p class="sub">A roadmap to glory · Personalized for skeptics · Skol is a complete sentence</p>
-
-<!-- Breaking -->
-<div class="breaking">
-  <div class="br-badge">🔴 Breaking</div>
-  <div class="br-text"><strong style="color:#c4b5fd">Kyler Murray expected to sign a 1-year deal with Minnesota today</strong> (Rapoport, Schefter). He's in the building. Murray + J.J. McCarthy = the most interesting QB room in the NFC. He wants a showcase year to earn a big free agent deal in 2027 — meaning he has every incentive to go all-out.</div>
+<!-- Header -->
+<div class="header">
+  <div class="breaking">⚡ Breaking — Mar 12, 2026</div>
+  <h1>⚔️ Minnesota Vikings: Road to Glory</h1>
+  <div class="sub">The game plan for Super Bowl glory — featuring the newest Viking 🏈</div>
 </div>
 
-<!-- The path -->
-<div style="background:#111827;border-radius:12px;padding:14px;margin-bottom:16px">
-  <div style="font-family:'Fredoka',sans-serif;font-size:13px;color:#9ca3af;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px">🗺️ The Path to Glory</div>
-  <div class="path">
-    <div class="path-step">
-      <div class="ps-num" style="color:#60a5fa">1</div>
-      <div class="ps-title">Murray Wins the Room</div>
-      <div class="ps-body">Veteran presence elevates McCarthy. One of them starts, both are dangerous. Defenses can't scheme for two completely different QBs.</div>
-    </div>
-    <div class="path-step">
-      <div class="ps-num" style="color:#4ade80">2</div>
-      <div class="ps-title">Defense Stays Healthy</div>
-      <div class="ps-body">The D was elite last year when intact. Harrison Smith era ending, but young core is real. Keep them upright through October.</div>
-    </div>
-    <div class="path-step">
-      <div class="ps-num" style="color:#fbbf24">3</div>
-      <div class="ps-title">Jefferson Stays Hot</div>
-      <div class="ps-body">JJ is top-2 WR in the NFL. Give whichever QB is starting a clean pocket and watch the offense become a problem for everyone.</div>
-    </div>
-    <div class="path-step">
-      <div class="ps-num" style="color:#f87171">4</div>
-      <div class="ps-title">Win the NFC North</div>
-      <div class="ps-body">Detroit is the biggest hurdle. Take the division, get a bye, stay healthy into January. Home games in January in Minnesota = advantage.</div>
+<!-- Kyler Murray signing -->
+<div class="kyler">
+  <div class="kyler-flex">
+    <div class="kyler-num">1</div>
+    <div class="kyler-body">
+      <div class="kyler-name">🏈 Kyler Murray Signs with Minnesota</div>
+      <div class="kyler-role">Expected to sign 1-year deal Thursday · Competing with JJ McCarthy for QB1</div>
+      <div class="kyler-stats">
+        <div class="ks"><div class="ks-val">63%</div><div class="ks-label">Career Comp%</div></div>
+        <div class="ks"><div class="ks-val">~4,100</div><div class="ks-label">Pass Yds/Yr</div></div>
+        <div class="ks"><div class="ks-val">~700</div><div class="ks-label">Rush Yds/Yr</div></div>
+        <div class="ks"><div class="ks-val">31</div><div class="ks-label">Age</div></div>
+      </div>
+      <div class="kyler-desc">Murray on a 1-year "prove it" deal gives Minny real QB competition for the first time in years. If JJ McCarthy isn't ready, you have a legitimate NFL starter with dual-threat capability. If JJ IS ready, Murray on a prove-it deal is the cheapest insurance policy in the league. Either way, the Vikings just got significantly better at the most important position in football. Rapoport and Schefter both confirmed — this is happening.</div>
     </div>
   </div>
 </div>
 
-<!-- QB room -->
-<div style="background:#111827;border-radius:12px;padding:14px;margin-bottom:16px">
-  <div style="font-family:'Fredoka',sans-serif;font-size:13px;color:#9ca3af;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px">🏈 The QB Situation</div>
-  <div class="qb-grid">
-    <div class="qb-card" style="border-color:#a78bfa">
-      <div class="qb-name" style="color:#c4b5fd">Kyler Murray</div>
-      <div class="qb-role" style="color:#7c3aed">Signing Today · 1-Year Prove-It Deal</div>
-      <div class="qb-stat">💨 Elite scrambler — defense has to account for him every snap</div>
-      <div class="qb-stat">📈 His incentive: ball out, hit free agency in 2027, get paid</div>
-      <div class="qb-stat">⚡ Explosive play upside that McCarthy can't match yet</div>
-      <div class="qb-stat">🏥 Durability is the question (torn ACL 2022, injury history)</div>
-    </div>
-    <div class="qb-card" style="border-color:#60a5fa">
-      <div class="qb-name" style="color:#93c5fd">J.J. McCarthy</div>
-      <div class="qb-role" style="color:#2563eb">Year 2 · Franchise Future</div>
-      <div class="qb-stat">📚 Full year of film, full offseason of reps — second year leap incoming</div>
-      <div class="qb-stat">🧠 Smart, composed, doesn't beat himself — system QB with upside</div>
-      <div class="qb-stat">🤝 Competition with Murray makes both better</div>
-      <div class="qb-stat">❓ Hasn't proven he can win a playoff game yet</div>
+<!-- Two col: Roster + Road -->
+<div class="two-col">
+  <div class="card">
+    <div class="card-title">⚔️ The Weapons</div>
+    <div class="roadmap">
+      <div class="rm-row">
+        <div class="rm-dot">
+          <div class="rm-circle" style="background:#7c3aed;color:white">🎯</div>
+          <div class="rm-line"></div>
+        </div>
+        <div class="rm-content">
+          <div class="rm-phase" style="color:#a78bfa">QB Room</div>
+          <div class="rm-title" style="color:#f9fafb">JJ McCarthy + Kyler Murray</div>
+          <div class="rm-items">
+            <div class="rm-item">McCarthy: 23 y/o upside arm with a championship pedigree (Michigan)</div>
+            <div class="rm-item">Murray: veteran dual-threat insurance, 1-year deal</div>
+            <div class="rm-item"><strong>Competition = everyone gets better</strong></div>
+          </div>
+        </div>
+      </div>
+      <div class="rm-row">
+        <div class="rm-dot">
+          <div class="rm-circle" style="background:#059669;color:white">💨</div>
+          <div class="rm-line"></div>
+        </div>
+        <div class="rm-content">
+          <div class="rm-phase" style="color:#6ee7b7">Receiving Corps</div>
+          <div class="rm-title" style="color:#f9fafb">Justin Jefferson + Depth</div>
+          <div class="rm-items">
+            <div class="rm-item">JJ is top-3 WR in the league when healthy — full stop</div>
+            <div class="rm-item">Any competent QB makes this offense dangerous</div>
+          </div>
+        </div>
+      </div>
+      <div class="rm-row">
+        <div class="rm-dot">
+          <div class="rm-circle" style="background:#b45309;color:white">🛡️</div>
+        </div>
+        <div class="rm-content">
+          <div class="rm-phase" style="color:#fcd34d">Defense</div>
+          <div class="rm-title" style="color:#f9fafb">The Foundation</div>
+          <div class="rm-items">
+            <div class="rm-item">Brian Flores' defense has the bones to be elite</div>
+            <div class="rm-item">Need to stay healthy through January</div>
+            <div class="rm-item"><strong>SBs are won in January, not September</strong></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Three pillars -->
-<div style="background:#111827;border-radius:12px;padding:14px;margin-bottom:16px">
-  <div style="font-family:'Fredoka',sans-serif;font-size:13px;color:#9ca3af;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px">⚔️ Three Pillars of the Super Bowl Run</div>
-  <div class="pillars">
-    <div class="pillar" style="border-color:#f59e0b">
-      <div class="p-icon">⚡</div>
-      <div class="p-title">Explosive Offense</div>
-      <div class="p-body">Jefferson + Addison + a mobile QB who can extend plays = a nightmare matchup. No defense can consistently stop this offense when it's clicking. Murray's legs alone stress every zone coverage scheme in the NFC.</div>
-    </div>
-    <div class="pillar" style="border-color:#10b981">
-      <div class="p-icon">🛡️</div>
-      <div class="p-title">Bend-Don't-Break D</div>
-      <div class="p-body">Minnesota's D was top-10 last season. Brian Flores schemes well, the secondary is underrated. If they can stay out of predictable third-and-longs, they shut down half the NFC by themselves.</div>
-    </div>
-    <div class="pillar" style="border-color:#8b5cf6">
-      <div class="p-icon">🏟️</div>
-      <div class="p-title">January Home Field</div>
-      <div class="p-body">Bank Stadium is a dome but the crowd is genuinely terrifying in January. NFC North winner likely gets the 2-seed. One home playoff game changes the calculus for every road opponent in their bracket.</div>
+  <div class="card">
+    <div class="card-title">🗺️ Road to the Super Bowl</div>
+    <div class="roadmap">
+      <div class="rm-row">
+        <div class="rm-dot">
+          <div class="rm-circle" style="background:#1e3a5f;border:2px solid #60a5fa;font-size:12px">1</div>
+          <div class="rm-line"></div>
+        </div>
+        <div class="rm-content">
+          <div class="rm-phase" style="color:#60a5fa">Phase 1 · Regular Season</div>
+          <div class="rm-title" style="color:#bfdbfe">Win the NFC North</div>
+          <div class="rm-item">Detroit is the target. Home field in January matters — the Dome is loud. Lock up a top-2 seed and skip wild card weekend.</div>
+        </div>
+      </div>
+      <div class="rm-row">
+        <div class="rm-dot">
+          <div class="rm-circle" style="background:#1e3a5f;border:2px solid #a78bfa;font-size:12px">2</div>
+          <div class="rm-line"></div>
+        </div>
+        <div class="rm-content">
+          <div class="rm-phase" style="color:#a78bfa">Phase 2 · Playoffs</div>
+          <div class="rm-title" style="color:#ddd6fe">Survive the NFC bracket</div>
+          <div class="rm-item">Eagles/49ers/Lions are the obstacles. Vikings have beaten all of them in big games before. The Dome neutralizes road dog advantage.</div>
+        </div>
+      </div>
+      <div class="rm-row">
+        <div class="rm-dot">
+          <div class="rm-circle" style="background:#1a1033;border:2px solid #f5c518;font-size:12px">🏆</div>
+        </div>
+        <div class="rm-content">
+          <div class="rm-phase" style="color:#f5c518">Phase 3 · February</div>
+          <div class="rm-title" style="color:#fef08a">Super Bowl or Bust</div>
+          <div class="rm-item">The franchise has NEVER been to a Super Bowl. This roster + this QB room is the best shot in 50 years. The window is open. Skol.</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <!-- Zach recruitment -->
 <div class="recruit">
-  <div class="r-title">📜 A Personal Note to Zach (kaladout42)</div>
-  <div class="r-body">
-    Listen, Stormlight scholar. You understand better than anyone what it means to bet on a character arc. Kaladin didn't become Windrunner because things were easy — he became Windrunner because the pressure was real and the stakes were high.
-    <div class="r-quote">"The most important step a man can take. It's not the first one, is it? It's the next one. Always the next one." — Dalinar Kholin</div>
-    The Vikings are on that step right now. Two QBs, one shot, a receiver who might be the best in football, and a city that has never — not once — won a Super Bowl. This is the year of the next step. That's the Cosmere energy. That's Roshar in January.
-    <br><br>
-    Also — GME and Vikings fans are both people who believe in things the market hasn't priced correctly yet. You're already one of us. You just don't know it. <strong style="color:#fbbf24">Skol. ⚔️</strong>
-  </div>
-</div>
-
-<!-- Risk flags -->
-<div style="background:#111827;border-radius:12px;padding:14px;margin-bottom:16px">
-  <div style="font-family:'Fredoka',sans-serif;font-size:13px;color:#9ca3af;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px">⚠️ Risk Flags (Honest Assessment)</div>
-  <div class="risks">
-    <div class="risk">
-      <div class="risk-title">🏥 Murray's injury history</div>
-      <div class="risk-body">1-year deal means he's going all-out. Going all-out + existing injury history = durability risk. If Murray goes down in week 8, it's McCarthy's show earlier than planned.</div>
+  <div class="recruit-title">⚡ Special Section: The Case for Zach (kaladout42)</div>
+  <div class="recruit-sub">A personalized argument for joining the Skol side, from one Stormlight scholar to another</div>
+  <div class="recruit-args">
+    <div class="ra">
+      <div class="ra-title">📚 The Cosmere Parallel</div>
+      <div class="ra-body">The Vikings are the Kaladin Stormblessed of the NFC. Relentlessly talented, perpetually burdened by tragic timing, showing up to save everyone else while somehow never getting the W they deserve. You of all people should understand rooting for that guy.</div>
     </div>
-    <div class="risk">
-      <div class="risk-title">🦁 Detroit is real</div>
-      <div class="risk-body">The Lions didn't go away. Jared Goff + a complete roster = 11-12 win floor. The NFC North is a two-team race and it goes down to the last month.</div>
+    <div class="ra">
+      <div class="ra-title">🏈 The Investment Angle</div>
+      <div class="ra-body">You like undervalued assets with a legitimate bull thesis and insider buying. Kyler Murray signing is the equivalent of Ryan Cohen buying shares — skin in the game, one-year prove-it deal, pure upside play. The odds have shifted. The value is here.</div>
     </div>
-    <div class="risk">
-      <div class="risk-title">🏈 QB chemistry takes time</div>
-      <div class="risk-body">Two QBs competing = potential locker room tension if the wrong one starts in week 4. Kevin O'Connell has to manage this perfectly or it gets messy.</div>
+    <div class="ra">
+      <div class="ra-title">⚔️ Loyalty to the Long Suffering</div>
+      <div class="ra-body">The Vikings have never won a Super Bowl in 60+ years of trying. This is not a bandwagon. This is generational pain with a genuine shot at redemption. The payoff when it happens will be proportional to the suffering. That's how good stories work — and you know it.</div>
     </div>
-    <div class="risk">
-      <div class="risk-title">💜 It's still the Vikings</div>
-      <div class="risk-body">No comment. We know who we are. We've been to 4 Super Bowls and lost all 4. The curse is acknowledged and we are choosing to believe anyway.</div>
+    <div class="ra">
+      <div class="ra-title">🎯 Justin Jefferson Alone</div>
+      <div class="ra-body">You do not need any other reason. Justin Jefferson is the most fun player to watch in football. He is a cheat code in human form. Whatever team he's on is worth watching. It's that simple. Skol.</div>
     </div>
   </div>
 </div>
 
-<div class="footer">⚔️ Skol Vikings · 🔥 Cali Research · March 12, 2026 · Not a guarantee · The claw is not responsible for playoff heartbreak</div>
+<!-- Odds -->
+<div class="card odds-section">
+  <div class="card-title">📊 Claw's Super Bowl Odds (Post-Murray Signing)</div>
+  <div class="odds-bar">
+    <div class="ob-seg" style="width:22%;background:#f5c518;color:#1a1033">Vikings 22%</div>
+    <div class="ob-seg" style="width:20%;background:#3b82f6;color:white">Eagles 20%</div>
+    <div class="ob-seg" style="width:16%;background:#dc2626;color:white">49ers 16%</div>
+    <div class="ob-seg" style="width:14%;background:#b45309;color:white">Lions 14%</div>
+    <div class="ob-seg" style="width:28%;background:#374151;color:#9ca3af">Rest of NFC 28%</div>
+  </div>
+  <div class="odds-labels">
+    <div class="ol"><div class="ol-dot" style="background:#f5c518"></div>Vikings — NFC favorite post-Murray</div>
+    <div class="ol"><div class="ol-dot" style="background:#3b82f6"></div>Eagles — defending conference</div>
+    <div class="ol"><div class="ol-dot" style="background:#dc2626"></div>49ers — never fully counted out</div>
+    <div class="ol"><div class="ol-dot" style="background:#b45309"></div>Lions — the other suffering franchise</div>
+  </div>
+</div>
+
+<div class="footer">🔥 Cali Research · Mar 12, 2026 · SKOL · Not responsible for playoff heartbreak · Zach: we'll see you at the watch party</div>
 
 </div>
 </body>
