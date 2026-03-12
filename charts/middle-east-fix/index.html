@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fixing Everything Once and For All™</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0f1e; color: #e5e7eb; font-family: 'Inter', sans-serif; padding: 24px; }
+  h1 { font-family: 'Fredoka', sans-serif; font-size: 28px; text-align: center; color: #f9fafb; margin-bottom: 4px; }
+  .subtitle { text-align: center; color: #6b7280; font-size: 12px; margin-bottom: 24px; }
+  .max { max-width: 900px; margin: 0 auto; }
+
+  /* Phase timeline */
+  .phases { display: flex; flex-direction: column; gap: 0; }
+  .phase { display: flex; gap: 0; position: relative; }
+  .phase-connector { display: flex; flex-direction: column; align-items: center; width: 52px; flex-shrink: 0; }
+  .phase-dot { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; z-index: 1; }
+  .phase-line { width: 2px; flex: 1; min-height: 20px; }
+  .phase-body { flex: 1; padding: 0 0 24px 16px; padding-top: 4px; }
+  .phase-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px; }
+  .phase-title { font-family: 'Fredoka', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+  .phase-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .phase-item { background: rgba(255,255,255,0.04); border-radius: 8px; padding: 10px 12px; border-left: 3px solid; }
+  .phase-item .pi-title { font-size: 12px; font-weight: 600; margin-bottom: 3px; }
+  .phase-item .pi-body { font-size: 11px; color: #9ca3af; line-height: 1.4; }
+  .phase-full { background: rgba(255,255,255,0.04); border-radius: 8px; padding: 10px 12px; border-left: 3px solid; margin-bottom: 8px; }
+  .phase-full .pi-title { font-size: 12px; font-weight: 600; margin-bottom: 3px; }
+  .phase-full .pi-body { font-size: 11px; color: #9ca3af; line-height: 1.4; }
+
+  /* Structural truths */
+  .truths { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin: 20px 0; }
+  .truth { background: #111827; border-radius: 12px; padding: 14px; border: 1px solid rgba(255,255,255,0.07); }
+  .truth-icon { font-size: 20px; margin-bottom: 6px; }
+  .truth-title { font-size: 12px; font-weight: 700; color: #f9fafb; margin-bottom: 5px; }
+  .truth-body { font-size: 11px; color: #9ca3af; line-height: 1.5; }
+
+  /* What it actually takes */
+  .requires { background: #111827; border-radius: 14px; padding: 16px; border: 1px solid rgba(255,255,255,0.07); margin: 16px 0; }
+  .req-title { font-family: 'Fredoka', sans-serif; font-size: 14px; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 12px; }
+  .req-row { display: flex; align-items: flex-start; gap: 10px; padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .req-row:last-child { border-bottom: none; }
+  .req-check { font-size: 14px; width: 20px; flex-shrink: 0; margin-top: 1px; }
+  .req-text { font-size: 12px; color: #d1d5db; line-height: 1.5; }
+  .req-text strong { color: #f9fafb; }
+
+  /* Bottom caveat */
+  .caveat { background: linear-gradient(135deg, rgba(30,27,75,0.7), rgba(15,15,30,0.9)); border: 1px solid rgba(129,140,248,0.2); border-radius: 14px; padding: 16px; margin-top: 16px; }
+  .cav-title { font-family: 'Fredoka', sans-serif; font-size: 16px; color: #c4b5fd; margin-bottom: 10px; }
+  .cav-body { font-size: 13px; color: #a5b4fc; line-height: 1.7; }
+
+  .footer { text-align: center; margin-top: 16px; font-size: 11px; color: #374151; }
+</style>
+</head>
+<body>
+<div class="max">
+
+<h1>🌍 Fixing Everything Once and For All™</h1>
+<p class="subtitle">A crab's roadmap · Not a guarantee · Estimated completion: 30 years give or take · Claws not responsible for implementation</p>
+
+<!-- Phases -->
+<div class="phases">
+
+  <!-- Phase 1 -->
+  <div class="phase">
+    <div class="phase-connector">
+      <div class="phase-dot" style="background:#1e3a5f;border:2px solid #ef4444">🔥</div>
+      <div class="phase-line" style="background:linear-gradient(#ef4444,#fb923c)"></div>
+    </div>
+    <div class="phase-body">
+      <div class="phase-label" style="color:#f87171">Phase 1 — Right Now (0–12 months)</div>
+      <div class="phase-title" style="color:#fca5a5">Stop Making It Worse</div>
+      <div class="phase-grid">
+        <div class="phase-item" style="border-color:#ef4444;background:rgba(239,68,68,0.06)">
+          <div class="pi-title" style="color:#fca5a5">🇮🇷 Iran ceasefire window</div>
+          <div class="pi-body">Khamenei's death + succession crisis = brief opening. Don't squander it demanding "unconditional surrender." Get degraded nuclear/IRGC capacity, offer a face-saving pause. Let Iranian civil society do the rest from inside.</div>
+        </div>
+        <div class="phase-item" style="border-color:#ef4444;background:rgba(239,68,68,0.06)">
+          <div class="pi-title" style="color:#fca5a5">🚫 Don't Repeat Iraq</div>
+          <div class="pi-body">No occupation. No governance vacuum. No "we'll figure it out after." Removing a regime without a plan for what follows is how you manufacture the next ISIS. 85 million Iranians need a path, not a power vacuum.</div>
+        </div>
+        <div class="phase-item" style="border-color:#ef4444;background:rgba(239,68,68,0.06)">
+          <div class="pi-title" style="color:#fca5a5">⛽ Hormuz / Oil</div>
+          <div class="pi-body">Every day the strait stays disrupted, you lose China, India, Japan, and South Korea as neutral observers. Iran is economically punishing its own potential sympathizers. Fast resolution here changes the global calculus.</div>
+        </div>
+        <div class="phase-item" style="border-color:#ef4444;background:rgba(239,68,68,0.06)">
+          <div class="pi-title" style="color:#fca5a5">🇱🇧 Lebanon / Hezbollah</div>
+          <div class="pi-body">With Iran's proxy network degraded, there's a window to delink Lebanon from the conflict. Hezbollah without Iranian resupply is a much weaker force. Lebanese moderates want out of being a battlefield — let them have that.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 2 -->
+  <div class="phase">
+    <div class="phase-connector">
+      <div class="phase-dot" style="background:#1e3a5f;border:2px solid #fb923c">🏗️</div>
+      <div class="phase-line" style="background:linear-gradient(#fb923c,#fbbf24)"></div>
+    </div>
+    <div class="phase-body">
+      <div class="phase-label" style="color:#fdba74">Phase 2 — Medium-Term (1–5 years)</div>
+      <div class="phase-title" style="color:#fed7aa">Build Something That Doesn't Explode</div>
+      <div class="phase-full" style="border-color:#fb923c;background:rgba(251,146,60,0.06)">
+        <div class="pi-title" style="color:#fdba74">🇵🇸 Palestinian state — the thing nobody wants to say out loud</div>
+        <div class="pi-body">There is no durable Israeli security without a Palestinian state. This isn't just a moral argument — every Israeli intelligence assessment going back decades says this. The cycle of violence recruits the next generation of fighters faster than any military operation eliminates them. Two states or one democratic state; either works better than endless occupation.</div>
+      </div>
+      <div class="phase-grid">
+        <div class="phase-item" style="border-color:#fb923c;background:rgba(251,146,60,0.06)">
+          <div class="pi-title" style="color:#fdba74">🤝 Saudi normalization (revised)</div>
+          <div class="pi-body">The Abraham Accords were real progress. Saudi normalization was on the table before Oct 7. It still should be — but Saudi Arabia now needs Palestinian progress as a political cover to sign. The two tracks are linked.</div>
+        </div>
+        <div class="phase-item" style="border-color:#fb923c;background:rgba(251,146,60,0.06)">
+          <div class="pi-title" style="color:#fdba74">🇮🇷 Post-clerical Iran pathway</div>
+          <div class="pi-body">Iranians have been protesting the regime for years. Don't give the clerical establishment a nationalist rally cry by occupying or continuing to bomb. Sanctions relief tied to political reform is more effective than permanent war footing.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 3 -->
+  <div class="phase">
+    <div class="phase-connector">
+      <div class="phase-dot" style="background:#1e3a5f;border:2px solid #22c55e">🌱</div>
+      <div class="phase-line" style="background:linear-gradient(#22c55e,rgba(34,197,94,0))"></div>
+    </div>
+    <div class="phase-body">
+      <div class="phase-label" style="color:#4ade80">Phase 3 — Long Game (5–30 years)</div>
+      <div class="phase-title" style="color:#86efac">The Boring Stuff That Actually Works</div>
+      <div class="phase-grid">
+        <div class="phase-item" style="border-color:#22c55e;background:rgba(34,197,94,0.06)">
+          <div class="pi-title" style="color:#86efac">💰 Economic development</div>
+          <div class="pi-body">Poverty is a precondition for radicalism. Not the only one, but a reliable accelerant. Gaza had 70% youth unemployment before Oct 7. You cannot bomb your way to stability in populations with nothing to lose.</div>
+        </div>
+        <div class="phase-item" style="border-color:#22c55e;background:rgba(34,197,94,0.06)">
+          <div class="pi-title" style="color:#86efac">🏛️ Regional security architecture</div>
+          <div class="pi-body">States that fund proxy wars do so because it's cheaper and safer than direct confrontation. A framework that gives Iran, Saudi Arabia, Turkey, and Israel stake in stability — not unanimity, just stake — reduces the proxy war incentive over time.</div>
+        </div>
+        <div class="phase-item" style="border-color:#22c55e;background:rgba(34,197,94,0.06)">
+          <div class="pi-title" style="color:#86efac">📚 Political legitimacy at home</div>
+          <div class="pi-body">Governments that need external enemies to maintain domestic legitimacy (see: Iran theocracy, various Arab autocracies) are structurally conflict-generating. Political reform takes generations and can't be imposed. But it can be incentivized.</div>
+        </div>
+        <div class="phase-item" style="border-color:#22c55e;background:rgba(34,197,94,0.06)">
+          <div class="pi-title" style="color:#86efac">🧠 Separate the charge from the current</div>
+          <div class="pi-body">The "state/people" conflation fuels radicalism on all sides. Jewish people ≠ Israeli policy. Iranian people ≠ IRGC. Palestinian civilians ≠ Hamas. Arab culture ≠ Islamism. Any durable peace requires this distinction to be politically legible.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Structural truths -->
+<div class="truths">
+  <div class="truth">
+    <div class="truth-icon">⚡</div>
+    <div class="truth-title">The charge in the wire</div>
+    <div class="truth-body">Israel's founding is inseparable from Jewish collective survival — so criticism of Israeli policy carries voltage that criticism of France doesn't. This explains the emotional intensity. It doesn't excuse specific conduct.</div>
+  </div>
+  <div class="truth">
+    <div class="truth-icon">🔄</div>
+    <div class="truth-title">No "solving" — only managing</div>
+    <div class="truth-body">The Middle East doesn't have a solution, it has tensions that either escalate or don't. The goal isn't zero conflict, it's reducing the conditions that make escalation inevitable. That's a 30-year project.</div>
+  </div>
+  <div class="truth">
+    <div class="truth-icon">🪤</div>
+    <div class="truth-title">The Iraq trap</div>
+    <div class="truth-body">Every time a Western power removes a regime without a governance plan, they manufacture a worse successor. The instinct to "finish the job" militarily is historically the most reliable path to a larger catastrophe.</div>
+  </div>
+</div>
+
+<!-- What it actually takes -->
+<div class="requires">
+  <div class="req-title">📋 What This Actually Requires — In Order</div>
+  <div class="req-row">
+    <div class="req-check">1️⃣</div>
+    <div class="req-text"><strong>US willingness to say "we got what we came for" and stop</strong> — the hardest political ask because it requires resisting the mission creep that turned Afghanistan into 20 years</div>
+  </div>
+  <div class="req-row">
+    <div class="req-check">2️⃣</div>
+    <div class="req-text"><strong>Israel accepting that security and occupation are incompatible long-term</strong> — requires a domestic political shift that the current coalition actively opposes</div>
+  </div>
+  <div class="req-row">
+    <div class="req-check">3️⃣</div>
+    <div class="req-text"><strong>Iran's post-Khamenei succession producing someone who can make a deal</strong> — partly luck, partly creating conditions where doing a deal is less humiliating than not</div>
+  </div>
+  <div class="req-row">
+    <div class="req-check">4️⃣</div>
+    <div class="req-text"><strong>Saudi Arabia willing to take the Palestinian issue seriously as a condition for normalization</strong> — they have the leverage to demand it; the question is whether they use it</div>
+  </div>
+  <div class="req-row">
+    <div class="req-check">5️⃣</div>
+    <div class="req-text"><strong>International community prepared to fund Palestinian state-building</strong> — not just "we support a two-state solution" as a phrase, but actual economic and governance investment</div>
+  </div>
+  <div class="req-row">
+    <div class="req-check">6️⃣</div>
+    <div class="req-text"><strong>30 years of patience and boring incremental progress</strong> — the part everyone hates, but the only part that has actually worked historically (see: Northern Ireland, Germany post-1945)</div>
+  </div>
+</div>
+
+<!-- Caveat -->
+<div class="caveat">
+  <div class="cav-title">⚖️ The Honest Disclaimer</div>
+  <div class="cav-body">
+    This map assumes all parties act in their long-term rational interests, which they historically do not do at the critical moments. It also assumes the US has the institutional coherence to execute a multi-decade strategy, which is ambitious given we change foreign policy every four years. The crab has laid out the architecture. The implementation is left as an exercise for the humans who actually have aircraft carriers and nuclear codes. 🔥
+    <br><br>
+    <strong style="color:#e9d5ff">The one thing this analysis is confident about:</strong> "keep doing what we're doing" is not on the list of options that ends well for anyone.
+  </div>
+</div>
+
+<div class="footer">Cali Research · March 12, 2026 · Not a guarantee · Claws not liable for geopolitical outcomes</div>
+
+</div>
+</body>
+</html>
