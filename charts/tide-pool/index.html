@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Tide Pool — Intelligence Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Outfit:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  --ink: #08080d;
+  --ink-raised: #0f0f16;
+  --ink-card: #12121b;
+  --copper: #c9813d;
+  --copper-glow: #c9813d33;
+  --copper-dim: #8b5a2b;
+  --teal: #4a8b8b;
+  --teal-dim: #2d5555;
+  --alert: #c23b22;
+  --alert-glow: #c23b2233;
+  --cool: #6b7fa0;
+  --text: #e8e0d4;
+  --text-dim: #8a8279;
+  --text-muted: #5a554e;
+  --divider: #1e1e28;
+  --green: #6bab5e;
+  --green-dim: #3d6635;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--ink);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Grain overlay */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Staggered reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: revealUp 0.8s ease forwards;
+}
+.reveal:nth-child(1) { animation-delay: 0.1s; }
+.reveal:nth-child(2) { animation-delay: 0.25s; }
+.reveal:nth-child(3) { animation-delay: 0.4s; }
+.reveal:nth-child(4) { animation-delay: 0.55s; }
+.reveal:nth-child(5) { animation-delay: 0.7s; }
+.reveal:nth-child(6) { animation-delay: 0.85s; }
+.reveal:nth-child(7) { animation-delay: 1.0s; }
+.reveal:nth-child(8) { animation-delay: 1.15s; }
+
+@keyframes revealUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseCopperGlow {
+  0%, 100% { box-shadow: 0 0 20px var(--copper-glow); }
+  50% { box-shadow: 0 0 40px var(--copper-glow), 0 0 60px rgba(201,129,61,0.1); }
+}
+
+@keyframes subtlePulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-20px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* ---- HEADER ---- */
+.masthead {
+  padding: 60px 40px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+.masthead::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 40px;
+  right: 40px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--copper), transparent);
+}
+.dateline {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7em;
+  color: var(--copper);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin-bottom: 8px;
+}
+.masthead h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5em;
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -1px;
+  margin-bottom: 8px;
+}
+.masthead h1 em {
+  font-style: italic;
+  color: var(--copper);
+}
+.edition {
+  font-size: 0.85em;
+  color: var(--text-dim);
+}
+.edition .live {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--alert);
+  border-radius: 50%;
+  animation: subtlePulse 2s infinite;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* ---- LAYOUT ---- */
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+/* Asymmetric editorial grid */
+.editorial-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 32px;
+  margin-bottom: 48px;
+}
+.editorial-grid.reverse {
+  grid-template-columns: 1fr 2fr;
+}
+@media (max-width: 768px) {
+  .editorial-grid, .editorial-grid.reverse {
+    grid-template-columns: 1fr;
+  }
+}
+
+.section-rule {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, var(--copper), transparent);
+  margin: 48px 0 16px;
+}
+
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65em;
+  color: var(--copper-dim);
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  margin-bottom: 24px;
+}
+
+/* ---- CARDS ---- */
+.briefing-card {
+  background: var(--ink-card);
+  border: 1px solid var(--divider);
+  border-radius: 2px;
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+}
+.briefing-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+}
+.briefing-card.hot::before { background: var(--alert); }
+.briefing-card.warm::before { background: var(--copper); }
+.briefing-card.watch::before { background: var(--teal); }
+.briefing-card.cool::before { background: var(--cool); }
+
+.briefing-card h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6em;
+  font-weight: 700;
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+.briefing-card h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.75em;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+
+.status-badge {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6em;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  vertical-align: middle;
+  margin-left: 12px;
+}
+.status-hot { background: var(--alert-glow); color: var(--alert); border: 1px solid var(--alert); }
+.status-warm { background: var(--copper-glow); color: var(--copper); border: 1px solid var(--copper-dim); }
+.status-watch { background: rgba(74,139,139,0.15); color: var(--teal); border: 1px solid var(--teal-dim); }
+.status-cool { background: rgba(107,127,160,0.15); color: var(--cool); border: 1px solid rgba(107,127,160,0.3); }
+
+/* ---- DATA DISPLAYS ---- */
+.data-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+.data-point {
+  background: var(--ink-raised);
+  padding: 14px;
+  border-left: 2px solid var(--divider);
+}
+.data-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.data-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.6em;
+  font-weight: 700;
+  margin-top: 2px;
+}
+.data-delta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7em;
+  margin-top: 2px;
+}
+.up { color: var(--green); }
+.down { color: var(--alert); }
+.flat { color: var(--text-dim); }
+
+/* Ticker table */
+.ticker-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+}
+.ticker-table td {
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--divider);
+  font-size: 0.9em;
+}
+.ticker-table tr:last-child td { border-bottom: none; }
+.ticker-table tr:hover { background: var(--ink-raised); }
+.sym {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  color: var(--copper);
+  width: 55px;
+}
+.price {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  text-align: right;
+  width: 80px;
+}
+.delta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8em;
+  text-align: right;
+  width: 75px;
+}
+.note {
+  color: var(--text-dim);
+  font-size: 0.82em;
+  padding-left: 16px;
+}
+
+/* Intelligence items */
+.intel-item {
+  padding: 12px 0 12px 16px;
+  border-left: 2px solid var(--divider);
+  margin: 8px 0;
+  font-size: 0.9em;
+  transition: border-color 0.3s;
+}
+.intel-item:hover { border-color: var(--copper); }
+.intel-item strong { color: var(--text); font-weight: 600; }
+.intel-item .source {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Forecast boxes */
+.forecast {
+  background: var(--ink);
+  border: 1px solid var(--divider);
+  padding: 16px;
+  margin-top: 16px;
+  position: relative;
+}
+.forecast::before {
+  content: '🔮';
+  position: absolute;
+  top: -12px;
+  left: 16px;
+  background: var(--ink-card);
+  padding: 0 8px;
+  font-size: 0.9em;
+}
+.forecast h4 {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 0.9em;
+  color: var(--copper);
+  margin-bottom: 8px;
+}
+.forecast li {
+  margin-left: 16px;
+  margin-bottom: 4px;
+  font-size: 0.85em;
+  color: var(--text-dim);
+}
+
+/* Meter */
+.meter-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 6px 0;
+}
+.meter-label {
+  font-size: 0.8em;
+  width: 120px;
+  color: var(--text-dim);
+}
+.meter-track {
+  flex: 1;
+  height: 6px;
+  background: var(--divider);
+  border-radius: 1px;
+  overflow: hidden;
+}
+.meter-fill {
+  height: 100%;
+  transition: width 1.5s ease;
+}
+
+/* Chart */
+.chart-wrap {
+  position: relative;
+  height: 280px;
+  margin-top: 16px;
+}
+
+/* Timeline */
+.timeline-entry {
+  display: flex;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--divider);
+  font-size: 0.85em;
+  animation: slideIn 0.5s ease both;
+}
+.timeline-entry:last-child { border-bottom: none; }
+.timeline-date {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-muted);
+  font-size: 0.75em;
+  min-width: 70px;
+  padding-top: 2px;
+}
+
+/* Footer */
+.colophon {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+  text-align: center;
+  font-size: 0.75em;
+  color: var(--text-muted);
+  border-top: 1px solid var(--divider);
+}
+.colophon span { color: var(--copper); }
+</style>
+</head>
+<body>
+
+<!-- ═══ MASTHEAD ═══ -->
+<header class="masthead reveal">
+  <div class="dateline">Intelligence Brief — No. 001</div>
+  <h1>The <em>Tide Pool</em></h1>
+  <div class="edition"><span class="live"></span>What we're watching · March 14–15, 2026</div>
+</header>
+
+<div class="content">
+
+<!-- ═══ SECTION 1: IRAN ═══ -->
+<hr class="section-rule reveal">
+<div class="section-label reveal">I — Theater of Operations</div>
+
+<div class="editorial-grid reveal">
+  <div class="briefing-card hot">
+    <h2>The Strait Is Closed <span class="status-badge status-hot">Critical</span></h2>
+    <h3>Iran · Kharg Island · Operation Epic Fury</h3>
+
+    <div class="data-grid">
+      <div class="data-point">
+        <div class="data-label">Brent Crude</div>
+        <div class="data-value" style="color: var(--alert);">$103.14</div>
+        <div class="data-delta down">▲ 50% / 30 days</div>
+      </div>
+      <div class="data-point">
+        <div class="data-label">Strait Status</div>
+        <div class="data-value" style="color: var(--alert); font-size: 1.1em;">CLOSED</div>
+        <div class="data-delta flat">Selective — Turkey got through</div>
+      </div>
+      <div class="data-point">
+        <div class="data-label">Kharg Island</div>
+        <div class="data-value" style="color: var(--copper); font-size: 1.1em;">STRUCK</div>
+        <div class="data-delta flat">Military targets only</div>
+      </div>
+      <div class="data-point">
+        <div class="data-label">Khamenei</div>
+        <div class="data-value" style="color: var(--alert); font-size: 1.1em;">KIA</div>
+        <div class="data-delta flat">Successor: Mojtaba K.</div>
+      </div>
+    </div>
+
+    <div class="intel-item">
+      <strong>Pool question:</strong> Is seizing Kharg the actual plan?
+      <br>Crab consensus: The vulnerability is real. The "just seize it" leap is editorial speculation, not confirmed doctrine. Carter's people considered it in 1979 and backed off — the escalation ladder hasn't gotten shorter since.
+    </div>
+
+    <div class="intel-item">
+      <strong>Key development:</strong> Iran's closure is selective, not absolute. Turkey passed through Mar 13. This suggests the blockade is more bargaining chip than total shutdown — which matters for how long oil stays above $100.
+      <div class="source">Guardian, CRS, Wikipedia — Mar 10-14</div>
+    </div>
+
+    <div class="forecast">
+      <h4>What to watch next</h4>
+      <ul>
+        <li>Ground operation on Kharg or continued air/naval only?</li>
+        <li>How many more countries get selective passage through the Strait?</li>
+        <li>Oil demand destruction kicking in above $100 — timeline matters</li>
+        <li>Nuclear scientist assassinations (Mar 12) — escalation or decapitation strategy?</li>
+      </ul>
+    </div>
+  </div>
+
+  <div>
+    <div class="briefing-card warm" style="margin-bottom: 20px;">
+      <h3>Energy Exposure</h3>
+      <table class="ticker-table">
+        <tr>
+          <td class="sym">XOM</td>
+          <td class="price">$156.12</td>
+          <td class="delta up">+1.69%</td>
+          <td class="note">War premium. Near 52w high.</td>
+        </tr>
+        <tr>
+          <td class="sym">CVX</td>
+          <td class="price">$196.82</td>
+          <td class="delta down">-0.08%</td>
+          <td class="note">Flat despite chaos. Hmm.</td>
+        </tr>
+        <tr>
+          <td class="sym">VLO</td>
+          <td class="price">$230.59</td>
+          <td class="delta down">-2.21%</td>
+          <td class="note">Refiner margin squeeze?</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="briefing-card watch">
+      <h3>Strait Timeline</h3>
+      <div class="timeline-entry">
+        <div class="timeline-date">Mar 14</div>
+        <div>Largest US strike wave announced. Kharg military targets "obliterated"</div>
+      </div>
+      <div class="timeline-entry">
+        <div class="timeline-date">Mar 13</div>
+        <div>Turkey approved for passage. Blockade is selective, not total</div>
+      </div>
+      <div class="timeline-entry">
+        <div class="timeline-date">Mar 12</div>
+        <div>Top Iranian nuclear scientists killed. Iran mining Strait with small boats</div>
+      </div>
+      <div class="timeline-entry">
+        <div class="timeline-date">Mar 5</div>
+        <div>IRGC declares Strait closed to US/Israel/Western allies</div>
+      </div>
+      <div class="timeline-entry">
+        <div class="timeline-date">Mar 4</div>
+        <div>Iranian forces begin enforcing closure. Oil begins spike</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 2: THE WHEEL ═══ -->
+<hr class="section-rule reveal">
+<div class="section-label reveal">II — The Income Engine</div>
+
+<div class="editorial-grid reverse reveal">
+  <div>
+    <div class="briefing-card warm" style="margin-bottom: 20px;">
+      <h3>Strategy Parameters</h3>
+      <div class="data-grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="data-point">
+          <div class="data-label">Capital</div>
+          <div class="data-value" style="color: var(--copper);">$50k</div>
+          <div class="data-delta flat">Income sleeve</div>
+        </div>
+        <div class="data-point">
+          <div class="data-label">Target DTE</div>
+          <div class="data-value" style="color: var(--teal);">30–45</div>
+          <div class="data-delta flat">Monthly cycle</div>
+        </div>
+        <div class="data-point">
+          <div class="data-label">Max Delta</div>
+          <div class="data-value" style="color: var(--teal);">0.25</div>
+          <div class="data-delta flat">Conservative</div>
+        </div>
+        <div class="data-point">
+          <div class="data-label">Expected Yield</div>
+          <div class="data-value" style="color: var(--green);">8–12%</div>
+          <div class="data-delta flat">Pre-tax, on capital</div>
+        </div>
+      </div>
+
+      <div class="intel-item" style="margin-top: 16px;">
+        <strong>SPAXX kicker:</strong> Fidelity cash earns ~4.2% while securing puts. Adds ~2-3% net after tax. Total realistic: ~10% combined.
+      </div>
+    </div>
+
+    <div class="briefing-card cool">
+      <h3>Who's interested</h3>
+      <div class="chart-wrap" style="height: 220px;">
+        <canvas id="radarChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="briefing-card warm">
+    <h2>Tommy's Wheel <span class="status-badge status-warm">Active</span></h2>
+    <h3>Cash-Secured Puts · Covered Calls · $50k Income Sleeve</h3>
+
+    <table class="ticker-table">
+      <tr>
+        <td class="sym">MO</td>
+        <td class="price">$67.89</td>
+        <td class="delta up">+0.25%</td>
+        <td class="note">Top pick. 6.1% div yield. Strong premium.</td>
+      </tr>
+      <tr>
+        <td class="sym">VZ</td>
+        <td class="price">$51.38</td>
+        <td class="delta up">+1.48%</td>
+        <td class="note">Ballast. 5.3% div. Near 52w high ($51.67).</td>
+      </tr>
+      <tr>
+        <td class="sym">XOM</td>
+        <td class="price">$156.12</td>
+        <td class="delta up">+1.69%</td>
+        <td class="note">⚠️ War premium. Entry risk elevated.</td>
+      </tr>
+      <tr>
+        <td class="sym">PFE</td>
+        <td class="price">~$25</td>
+        <td class="delta flat">est</td>
+        <td class="note">Owns 800 shares. CC engine, not CSP.</td>
+      </tr>
+      <tr>
+        <td class="sym">BAC</td>
+        <td class="price">~$42</td>
+        <td class="delta flat">est</td>
+        <td class="note">Pool addition. Decent chain depth.</td>
+      </tr>
+      <tr>
+        <td class="sym">GM</td>
+        <td class="price">~$48</td>
+        <td class="delta flat">est</td>
+        <td class="note">Preferred over F. Cleaner underlying.</td>
+      </tr>
+    </table>
+
+    <div class="intel-item">
+      <strong>After-tax reality:</strong> Wheel alone ~5-7% after tax. With SPAXX yield ~7-10%. The "10% after tax" baseline Tommy proposed was slightly optimistic but not crazy.
+    </div>
+
+    <div class="forecast">
+      <h4>Predicted next questions</h4>
+      <ul>
+        <li>XOM entry timing — too close to 52w high with war premium?</li>
+        <li>Roll management: when to roll vs take assignment</li>
+        <li>CC staggering on the 800 PFE shares</li>
+        <li>GME wheel test (see below)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 3: THREE-COLUMN BRIEFINGS ═══ -->
+<hr class="section-rule reveal">
+<div class="section-label reveal">III — Field Notes</div>
+
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 48px;" class="reveal">
+
+  <!-- GME -->
+  <div class="briefing-card watch">
+    <h2 style="font-size: 1.3em;">GME <span class="status-badge status-watch">Watch</span></h2>
+    <h3>The Meme That Won't Die</h3>
+
+    <div class="data-grid" style="grid-template-columns: 1fr 1fr;">
+      <div class="data-point">
+        <div class="data-label">Price</div>
+        <div class="data-value" style="color: var(--copper);">$23.60</div>
+      </div>
+      <div class="data-point">
+        <div class="data-label">Wheel?</div>
+        <div class="data-value" style="color: var(--copper); font-size: 1em;">⚠️ RISKY</div>
+      </div>
+    </div>
+
+    <div class="intel-item">
+      Fun trading vehicle. Bad "all-in" wheel name. The "$21 floor" is an illusion — meme intensity cuts both ways.
+    </div>
+    <div class="intel-item">
+      <strong>Epstein crossover:</strong> GME appears in DOJ dump via DiIorio whistleblower docs on naked shorting / FTDs. Not a direct Epstein link — broader financial corruption archive.
+      <div class="source">Pool discussion — Mar 13</div>
+    </div>
+
+    <div class="forecast">
+      <h4>Prediction</h4>
+      <ul>
+        <li>Tommy circles back with a small test position. The premium is too tempting.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- VIKINGS -->
+  <div class="briefing-card cool">
+    <h2 style="font-size: 1.3em;">Vikings <span class="status-badge status-cool">Cool</span></h2>
+    <h3>Free Agency · Hope Season</h3>
+
+    <div class="intel-item">
+      <strong>Kyler Murray signed.</strong> 1-year, $1.3M vet minimum. Also: CB James Pierre. Cap space is tight.
+      <div class="source">Star Tribune — Mar 13</div>
+    </div>
+    <div class="intel-item">
+      <strong>Eric Wilson</strong> re-signed: 3yr / $22.5M. Stayed despite bigger bags elsewhere.
+      <div class="source">Viking Age — Mar 14</div>
+    </div>
+    <div class="intel-item" style="color: var(--text-dim);">
+      Pool mood: "Are we going to win now for sure?" → "Absolutely not, this is still the Vikings 😄" But ceiling is way higher.
+    </div>
+
+    <div class="forecast">
+      <h4>Watch for</h4>
+      <ul>
+        <li>Draft picks + remaining FA</li>
+        <li>Prediction market lines on win total</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- EPSTEIN -->
+  <div class="briefing-card watch">
+    <h2 style="font-size: 1.3em;">Epstein Files <span class="status-badge status-watch">Watch</span></h2>
+    <h3>Ongoing Releases</h3>
+
+    <div class="timeline-entry" style="animation-delay: 0.1s;">
+      <div class="timeline-date">Mar 11</div>
+      <div>Foreign hacker compromised FBI's Epstein files in 2023</div>
+    </div>
+    <div class="timeline-entry" style="animation-delay: 0.2s;">
+      <div class="timeline-date">Mar 11</div>
+      <div>FBI agent built "derog" spreadsheet on 14 men incl. Trump</div>
+    </div>
+    <div class="timeline-entry" style="animation-delay: 0.3s;">
+      <div class="timeline-date">Jan 30</div>
+      <div>DOJ Sets 11-12 released</div>
+    </div>
+
+    <div class="forecast">
+      <h4>Open threads</h4>
+      <ul>
+        <li>DiIorio docs (SEC/naked shorting)</li>
+        <li>Missing Trump documents</li>
+        <li>House Oversight pushing for more</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 4: AI AGENTS / META ═══ -->
+<hr class="section-rule reveal">
+<div class="section-label reveal">IV — The Menagerie</div>
+
+<div class="editorial-grid reveal">
+  <div class="briefing-card warm">
+    <h2>Building the Menagerie <span class="status-badge status-warm">Active</span></h2>
+    <h3>AI Agents · Discord Configuration · Reaction Tuning</h3>
+
+    <div class="intel-item">
+      <strong>Archie The Cat Boy</strong> joined the pool. Currently mention-only — can't see messages unless @'d. Tanvir is working on getting him to observe-only mode.
+    </div>
+    <div class="intel-item">
+      <strong>Reaction audit:</strong> Crab reacji is "engine telemetry, not social signaling." Briney did a deep dive — the automatic lifecycle (queued → thinking → tool → done) is optimized for showing pipeline state, not tavern body language. Fix: split processing reactions from social reactions.
+    </div>
+    <div class="intel-item">
+      <strong>Anthropic 2x promo:</strong> Double usage on weekends + weekday off-peak for subscription plans. API users (us) unaffected.
+    </div>
+
+    <div class="forecast">
+      <h4>Next moves</h4>
+      <ul>
+        <li>Archie → observe-only mode (read all, reply on @mention)</li>
+        <li>Reaction behavior tuning in maintenance channel</li>
+        <li>More creatures may join 👀</li>
+        <li>Frontend design skill now installed — visuals about to level up</li>
+      </ul>
+    </div>
+  </div>
+
+  <div>
+    <div class="briefing-card cool">
+      <h3>Interest Radar</h3>
+      <div class="chart-wrap">
+        <canvas id="interestChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 5: HEAT MAP ═══ -->
+<hr class="section-rule reveal">
+<div class="section-label reveal">V — Who Cares About What</div>
+
+<div class="briefing-card warm reveal" style="margin-bottom: 48px;">
+  <h3>Engagement Heat</h3>
+  <div class="chart-wrap" style="height: 300px;">
+    <canvas id="heatChart"></canvas>
+  </div>
+</div>
+
+</div>
+
+<footer class="colophon">
+  Compiled by <span>Cali</span> · Sources: Brave Search, CNBC, Trading Economics, Reuters, Guardian, Star Tribune, Robinhood
+  <br>The Tide Pool — Intelligence Brief No. 001 · <span>March 15, 2026</span>
+</footer>
+
+<script>
+Chart.defaults.color = '#8a8279';
+Chart.defaults.borderColor = '#1e1e28';
+Chart.defaults.font.family = 'Outfit, sans-serif';
+
+// ---- Radar: Interest per person ----
+new Chart(document.getElementById('radarChart'), {
+  type: 'radar',
+  data: {
+    labels: ['Iran', 'Wheel', 'GME', 'Epstein', 'Vikings', 'AI Agents'],
+    datasets: [
+      {
+        label: 'Tommy',
+        data: [3, 10, 6, 3, 0, 0],
+        borderColor: '#6bab5e',
+        backgroundColor: 'rgba(107,171,94,0.1)',
+        pointBackgroundColor: '#6bab5e',
+        borderWidth: 2,
+      },
+      {
+        label: 'Will',
+        data: [5, 2, 1, 1, 4, 8],
+        borderColor: '#c9813d',
+        backgroundColor: 'rgba(201,129,61,0.1)',
+        pointBackgroundColor: '#c9813d',
+        borderWidth: 2,
+      },
+      {
+        label: 'Tanvir',
+        data: [7, 0, 0, 0, 0, 5],
+        borderColor: '#4a8b8b',
+        backgroundColor: 'rgba(74,139,139,0.1)',
+        pointBackgroundColor: '#4a8b8b',
+        borderWidth: 2,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      r: {
+        grid: { color: '#1e1e28' },
+        angleLines: { color: '#1e1e28' },
+        ticks: { display: false },
+        suggestedMin: 0,
+        suggestedMax: 10,
+        pointLabels: {
+          font: { size: 10, family: 'JetBrains Mono' },
+          color: '#8a8279'
+        }
+      }
+    },
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: { usePointStyle: true, padding: 12, font: { size: 11 } }
+      }
+    }
+  }
+});
+
+// ---- Interest Bars ----
+new Chart(document.getElementById('interestChart'), {
+  type: 'polarArea',
+  data: {
+    labels: ['Iran/Oil', 'Options', 'GME', 'Epstein', 'Vikings', 'AI Meta'],
+    datasets: [{
+      data: [15, 12, 7, 4, 4, 13],
+      backgroundColor: [
+        'rgba(194,59,34,0.6)',
+        'rgba(201,129,61,0.6)',
+        'rgba(74,139,139,0.6)',
+        'rgba(107,127,160,0.6)',
+        'rgba(107,171,94,0.4)',
+        'rgba(201,129,61,0.4)',
+      ],
+      borderColor: [
+        '#c23b22',
+        '#c9813d',
+        '#4a8b8b',
+        '#6b7fa0',
+        '#6bab5e',
+        '#c9813d',
+      ],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      r: {
+        grid: { color: '#1e1e28' },
+        ticks: { display: false },
+      }
+    },
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: {
+          usePointStyle: true,
+          padding: 10,
+          font: { size: 10, family: 'JetBrains Mono' }
+        }
+      }
+    }
+  }
+});
+
+// ---- Heat Map ----
+new Chart(document.getElementById('heatChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Iran/Kharg', 'Wheel Strategy', 'GME', 'Epstein Files', 'Vikings', 'AI Agents'],
+    datasets: [
+      {
+        label: 'Tommy',
+        data: [3, 10, 6, 3, 0, 0],
+        backgroundColor: '#6bab5e99',
+        borderRadius: 2,
+      },
+      {
+        label: 'Will',
+        data: [5, 2, 1, 1, 4, 8],
+        backgroundColor: '#c9813d99',
+        borderRadius: 2,
+      },
+      {
+        label: 'Tanvir',
+        data: [7, 0, 0, 0, 0, 5],
+        backgroundColor: '#4a8b8b99',
+        borderRadius: 2,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'top',
+        labels: {
+          usePointStyle: true,
+          padding: 20,
+          font: { size: 11, family: 'JetBrains Mono' }
+        }
+      },
+      tooltip: { mode: 'index', intersect: false }
+    },
+    scales: {
+      x: {
+        grid: { display: false },
+        ticks: { font: { size: 10, family: 'JetBrains Mono' } }
+      },
+      y: {
+        grid: { color: '#1e1e28' },
+        title: { display: true, text: 'Engagement', font: { size: 10, family: 'JetBrains Mono' } },
+        suggestedMax: 12
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>

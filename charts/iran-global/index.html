@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Iran War — Global View</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0f1e; color: #e5e7eb; font-family: 'Inter', sans-serif; padding: 24px; }
+  h1 { font-family: 'Fredoka', sans-serif; font-size: 26px; text-align: center; color: #f9fafb; margin-bottom: 4px; }
+  .subtitle { text-align: center; color: #6b7280; font-size: 12px; margin-bottom: 22px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 900px; margin: 0 auto; }
+  .full { grid-column: 1 / -1; }
+  .card { background: #111827; border-radius: 14px; padding: 16px 18px; border: 1px solid rgba(255,255,255,0.07); }
+  .card-title { font-family: 'Fredoka', sans-serif; font-size: 13px; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 12px; }
+
+  /* Regional stance grid */
+  .region-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .region { border-radius: 10px; padding: 11px 13px; border-left: 4px solid; }
+  .region .name { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+  .region .stance { font-size: 11px; font-weight: 700; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .region .detail { font-size: 11px; color: #9ca3af; line-height: 1.4; }
+  .pro { background: rgba(30,58,38,0.5); border-color: #22c55e; }
+  .pro .stance { color: #4ade80; }
+  .lean-pro { background: rgba(20,50,40,0.4); border-color: #34d399; }
+  .lean-pro .stance { color: #6ee7b7; }
+  .neutral { background: rgba(55,65,81,0.5); border-color: #6b7280; }
+  .neutral .stance { color: #9ca3af; }
+  .lean-against { background: rgba(55,45,15,0.5); border-color: #f59e0b; }
+  .lean-against .stance { color: #fcd34d; }
+  .against { background: rgba(55,20,20,0.4); border-color: #ef4444; }
+  .against .stance { color: #f87171; }
+
+  /* Exposure bars */
+  .exp-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .exp-label { font-size: 12px; color: #d1d5db; width: 120px; flex-shrink: 0; }
+  .exp-track { flex: 1; height: 18px; background: #1f2937; border-radius: 4px; overflow: hidden; }
+  .exp-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 8px; font-size: 10px; font-weight: 700; color: white; }
+  .exp-note { font-size: 10px; color: #6b7280; width: 110px; flex-shrink: 0; text-align: right; }
+
+  /* Opinion matrix */
+  .matrix { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .mat-col { background: #1f2937; border-radius: 10px; padding: 10px 12px; }
+  .mat-header { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .mat-item { font-size: 11px; color: #9ca3af; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.04); line-height: 1.3; }
+  .mat-item:last-child { border-bottom: none; }
+  .mat-item strong { display: block; color: #d1d5db; font-size: 12px; }
+
+  /* Iran's PR problem */
+  .pr-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 8px; }
+  .pr-item { background: #1f2937; border-radius: 8px; padding: 10px; border-left: 3px solid #ef4444; }
+  .pr-item .pr-what { font-size: 12px; font-weight: 600; color: #fca5a5; margin-bottom: 3px; }
+  .pr-item .pr-why { font-size: 11px; color: #9ca3af; line-height: 1.4; }
+
+  /* Big number */
+  .big-num { font-family: 'Fredoka', sans-serif; font-size: 36px; font-weight: 700; }
+
+  .footer { text-align: center; margin-top: 14px; font-size: 11px; color: #374151; max-width: 900px; margin-left: auto; margin-right: auto; }
+</style>
+</head>
+<body>
+
+<h1>🌍 Iran War — Global View</h1>
+<p class="subtitle">How the world sees it · Oil exposure · Iran's PR problem · Atlantic Council · EUISS · Mar 2026</p>
+
+<div class="grid">
+
+  <!-- Regional stances -->
+  <div class="card full">
+    <div class="card-title">🗺️ Regional Stances on US-Israeli Action</div>
+    <div class="region-grid">
+      <div class="region pro">
+        <div class="name">🇮🇱 Israel & Gulf Arab States</div>
+        <div class="stance">✅ Supportive (Quietly)</div>
+        <div class="detail">Saudi Arabia, UAE quietly relieved — Iran has been attacking them too. Gulf states won't say it publicly but aren't upset Khamenei is gone. Israel is an active participant.</div>
+      </div>
+      <div class="region lean-pro">
+        <div class="name">🇬🇧 UK / 🇨🇦 Canada / 🇦🇷 Argentina</div>
+        <div class="stance">↗ Cautiously Aligned</div>
+        <div class="detail">UK "trying to stay out of it" but quietly aligned with allies. Canada calibrated + aligned. Argentina supportive — has its own terrorism grievances against Iran (1994 AMIA bombing).</div>
+      </div>
+      <div class="region lean-pro">
+        <div class="name">🇺🇦 Ukraine & Eastern Europe</div>
+        <div class="stance">↗ Schadenfreude + Concern</div>
+        <div class="detail">Ukraine quietly pleased Iran's drone capacity is being degraded — same drones hitting Ukrainian cities. But worried about precedent and US attention split.</div>
+      </div>
+      <div class="region neutral">
+        <div class="name">🇨🇳 China</div>
+        <div class="stance">➡ Restrained / Stuck</div>
+        <div class="detail">"Characteristically limp" response — formulaic condemnation of US/Israel. In an impossible bind: Iran is their anti-Western ally AND the oil disruption is hammering their economy. Can't help Iran militarily, won't.</div>
+      </div>
+      <div class="region neutral">
+        <div class="name">🇷🇺 Russia</div>
+        <div class="stance">➡ Not Riding to the Rescue</div>
+        <div class="detail">Condemned the strikes but doing nothing. Bogged down in Ukraine. Limited capacity and appetite to intervene. Iran is on its own strategically.</div>
+      </div>
+      <div class="region lean-against">
+        <div class="name">🇪🇺 EU (Divided)</div>
+        <div class="stance">↙ Split, Leaning Skeptical</div>
+        <div class="detail">No unity. Eastern members more supportive, France/Germany skeptical, Spain openly defiant. EU wants to defend rules-based order but won't follow US into this. Emergency energy meetings ongoing.</div>
+      </div>
+      <div class="region lean-against">
+        <div class="name">🌍 Global South / BRICS</div>
+        <div class="stance">↙ Skeptical of US</div>
+        <div class="detail">Default anti-Western framing. But Iran attacking commercial ships has alienated even some Global South countries that depend on Gulf shipping lanes. Not sympathy for Iran — more "both sides" energy.</div>
+      </div>
+      <div class="region against">
+        <div class="name">🇪🇸 Spain / Turkey / Some Arab states</div>
+        <div class="stance">❌ Actively Opposed</div>
+        <div class="detail">Spain refusing US use of joint military bases, driven by domestic politics. Turkey vocally opposed. Some Arab public opinion deeply anti-Israel regardless of regime position.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Oil exposure by region -->
+  <div class="card">
+    <div class="card-title">⛽ Oil Disruption — Who's Most Exposed</div>
+    <div style="font-size:11px;color:#6b7280;margin-bottom:10px">% of crude imports from Gulf region (approx)</div>
+    <div class="exp-row">
+      <div class="exp-label">South Korea</div>
+      <div class="exp-track"><div class="exp-fill" style="width:70%;background:linear-gradient(90deg,#ef4444,#dc2626)">~70%</div></div>
+      <div class="exp-note" style="color:#f87171">🔴 Critical</div>
+    </div>
+    <div class="exp-row">
+      <div class="exp-label">Japan</div>
+      <div class="exp-track"><div class="exp-fill" style="width:65%;background:linear-gradient(90deg,#ef4444,#dc2626)">~65%</div></div>
+      <div class="exp-note" style="color:#f87171">🔴 Critical</div>
+    </div>
+    <div class="exp-row">
+      <div class="exp-label">India</div>
+      <div class="exp-track"><div class="exp-fill" style="width:60%;background:linear-gradient(90deg,#fb923c,#ea580c)">~60%</div></div>
+      <div class="exp-note" style="color:#fb923c">🟠 Very High</div>
+    </div>
+    <div class="exp-row">
+      <div class="exp-label">China</div>
+      <div class="exp-track"><div class="exp-fill" style="width:55%;background:linear-gradient(90deg,#fb923c,#ea580c)">~33% crude</div></div>
+      <div class="exp-note" style="color:#fb923c">🟠 Very High</div>
+    </div>
+    <div class="exp-row">
+      <div class="exp-label">Europe</div>
+      <div class="exp-track"><div class="exp-fill" style="width:35%;background:linear-gradient(90deg,#fbbf24,#d97706)">~35%</div></div>
+      <div class="exp-note" style="color:#fbbf24">🟡 High</div>
+    </div>
+    <div class="exp-row">
+      <div class="exp-label">United States</div>
+      <div class="exp-track"><div class="exp-fill" style="width:20%;background:linear-gradient(90deg,#4ade80,#16a34a)">~20%</div></div>
+      <div class="exp-note" style="color:#4ade80">🟢 Lower</div>
+    </div>
+    <div style="font-size:11px;color:#6b7280;margin-top:10px;line-height:1.5">Asia is the real casualty here. South Korea and Japan cannot self-insure. Europe gets hit through jet fuel and diesel. The US has domestic production as a buffer.</div>
+  </div>
+
+  <!-- Opinion matrix -->
+  <div class="card">
+    <div class="card-title">🌐 Global Mood Matrix</div>
+    <div class="matrix">
+      <div class="mat-col">
+        <div class="mat-header" style="color:#4ade80">Pro-US Action</div>
+        <div class="mat-item"><strong>Israel</strong>Active partner</div>
+        <div class="mat-item"><strong>Saudi Arabia / UAE</strong>Quietly relieved</div>
+        <div class="mat-item"><strong>UK / Canada</strong>Aligned</div>
+        <div class="mat-item"><strong>Argentina</strong>Supportive</div>
+        <div class="mat-item"><strong>Ukraine / Poland</strong>Schadenfreude</div>
+      </div>
+      <div class="mat-col">
+        <div class="mat-header" style="color:#9ca3af">Neutral / Stuck</div>
+        <div class="mat-item"><strong>China</strong>In a bind</div>
+        <div class="mat-item"><strong>Russia</strong>Can't help</div>
+        <div class="mat-item"><strong>India</strong>Oil exposure, hedging</div>
+        <div class="mat-item"><strong>Japan / S. Korea</strong>Alarmed, no leverage</div>
+        <div class="mat-item"><strong>Most of ASEAN</strong>Watching shipping lanes</div>
+      </div>
+      <div class="mat-col">
+        <div class="mat-header" style="color:#f87171">Against US Action</div>
+        <div class="mat-item"><strong>Spain</strong>Blocking US base use</div>
+        <div class="mat-item"><strong>Turkey</strong>Vocally opposed</div>
+        <div class="mat-item"><strong>France / Germany</strong>Skeptical</div>
+        <div class="mat-item"><strong>Arab public opinion</strong>Anti-Israel baseline</div>
+        <div class="mat-item"><strong>BRICS/Global South</strong>Anti-Western framing</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Iran's PR problem -->
+  <div class="card full">
+    <div class="card-title">💀 Iran's PR Problem — Why Attacking Everyone Isn't Working</div>
+    <div class="pr-grid">
+      <div class="pr-item">
+        <div class="pr-what">Commercial Shipping Attacks</div>
+        <div class="pr-why">Hitting cargo ships from non-belligerent nations. China, India, Japan all importing through these lanes. Making enemies of the neutral observers who depend on Gulf trade.</div>
+      </div>
+      <div class="pr-item">
+        <div class="pr-what">US Embassy (Saudi Arabia)</div>
+        <div class="pr-why">Striking US infrastructure in Saudi Arabia pulls Riyadh closer to Washington. Saudi Arabia was trying to stay neutral. That position is harder to maintain now.</div>
+      </div>
+      <div class="pr-item">
+        <div class="pr-what">Kuwait / Regional Strikes</div>
+        <div class="pr-why">6 US soldiers killed in Kuwait. But Kuwait is an Arab country with its own public. Iran targeting it damages regional solidarity that might otherwise favor Tehran's anti-US framing.</div>
+      </div>
+      <div class="pr-item">
+        <div class="pr-what">Oil Disruption</div>
+        <div class="pr-why">The countries most hurt by Hormuz closure are China, India, Japan, South Korea — not the US. Iran is economically hurting its own potential supporters.</div>
+      </div>
+      <div class="pr-item">
+        <div class="pr-what">Lebanon / Hezbollah</div>
+        <div class="pr-why">Opening a second front with Israel in Lebanon. Lebanese civilians pay the cost. Hezbollah's "open war" declaration alienates Lebanese moderates who blame Iran for their country being a battlefield.</div>
+      </div>
+      <div class="pr-item">
+        <div class="pr-what">Rejection of Any Negotiation</div>
+        <div class="pr-why">Pezeshkian rejecting "unconditional surrender" is understandable, but Iran hasn't offered any alternative. "We won't talk" doesn't generate international sympathy for your position.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">Sources: Atlantic Council (Mar 4) · EU Institute for Security Studies · CSIS · IEA · 🔥 Cali Research · Mar 11, 2026</div>
+
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>VZ — Wheel Strategy Analysis</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0f1e; color: #e5e7eb; font-family: 'Inter', sans-serif; padding: 24px; }
+  h1 { font-family: 'Fredoka', sans-serif; font-size: 26px; text-align: center; color: #f9fafb; margin-bottom: 4px; }
+  .subtitle { text-align: center; color: #6b7280; font-size: 12px; margin-bottom: 22px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 920px; margin: 0 auto; }
+  .full { grid-column: 1 / -1; }
+  .card { background: #111827; border-radius: 14px; padding: 16px 18px; border: 1px solid rgba(255,255,255,0.07); }
+  .card-title { font-family: 'Fredoka', sans-serif; font-size: 13px; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 12px; }
+
+  /* Snapshot */
+  .snap-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .snap-box { background: #1f2937; border-radius: 10px; padding: 12px; text-align: center; }
+  .snap-val { font-family: 'Fredoka', sans-serif; font-size: 22px; font-weight: 700; color: #f9fafb; }
+  .snap-label { font-size: 10px; color: #6b7280; margin-top: 3px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .snap-sub { font-size: 11px; color: #9ca3af; margin-top: 2px; }
+
+  /* Pros / Cons */
+  .pc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .pc-col { border-radius: 10px; padding: 12px; }
+  .pc-col.pros { background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.15); }
+  .pc-col.cons { background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.15); }
+  .pc-header { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .pc-header.g { color: #4ade80; }
+  .pc-header.r { color: #f87171; }
+  .pc-item { display: flex; gap: 8px; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 12px; color: #d1d5db; line-height: 1.4; }
+  .pc-item:last-child { border-bottom: none; }
+  .pc-icon { flex-shrink: 0; width: 16px; }
+
+  /* Wheel math */
+  .wheel-cols { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .wheel-col { background: #1f2937; border-radius: 10px; padding: 12px; }
+  .wc-phase { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; margin-bottom: 6px; }
+  .wc-name { font-size: 14px; font-weight: 600; color: #f9fafb; margin-bottom: 8px; }
+  .wc-item { font-size: 11px; color: #9ca3af; padding: 3px 0; line-height: 1.4; }
+  .wc-item strong { color: #e5e7eb; }
+
+  /* Annual return stack */
+  .return-stack { display: flex; flex-direction: column; gap: 6px; }
+  .rs-row { display: flex; align-items: center; gap: 10px; }
+  .rs-label { font-size: 12px; color: #d1d5db; width: 160px; flex-shrink: 0; }
+  .rs-track { flex: 1; height: 20px; background: #1f2937; border-radius: 4px; overflow: hidden; }
+  .rs-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 8px; font-size: 11px; font-weight: 700; color: white; }
+  .rs-note { font-size: 10px; color: #6b7280; width: 80px; text-align: right; flex-shrink: 0; }
+
+  /* Risk scenarios */
+  .scenario { background: #1f2937; border-radius: 10px; padding: 12px; margin-bottom: 8px; border-left: 4px solid; }
+  .sc-name { font-size: 12px; font-weight: 700; margin-bottom: 4px; }
+  .sc-body { font-size: 11px; color: #9ca3af; line-height: 1.5; }
+
+  /* Verdict */
+  .verdict-box { background: linear-gradient(135deg, #0f1f0f, #111827); border: 1px solid rgba(74,222,128,0.2); border-radius: 14px; padding: 16px; }
+  .v-title { font-family: 'Fredoka', sans-serif; font-size: 17px; color: #86efac; margin-bottom: 10px; }
+  .v-body { font-size: 13px; color: #d1d5db; line-height: 1.7; }
+  .v-score { display: flex; gap: 12px; margin-top: 12px; flex-wrap: wrap; }
+  .vs { background: #1f2937; border-radius: 8px; padding: 8px 14px; font-size: 12px; }
+  .vs-val { font-family: 'Fredoka', sans-serif; font-size: 20px; font-weight: 700; }
+  .vs-label { font-size: 10px; color: #6b7280; }
+
+  .footer { text-align: center; margin-top: 14px; font-size: 11px; color: #374151; max-width: 920px; margin-left: auto; margin-right: auto; }
+</style>
+</head>
+<body>
+
+<h1>📡 VZ — Wheel Strategy Analysis</h1>
+<p class="subtitle">Cash-Secured Puts · Covered Calls · Dividends · Not financial advice · Do your own math</p>
+
+<div class="grid">
+
+  <!-- Snapshot -->
+  <div class="card full">
+    <div class="card-title">📊 VZ at a Glance (Mar 2026)</div>
+    <div class="snap-grid">
+      <div class="snap-box">
+        <div class="snap-val" style="color:#60a5fa">~$50</div>
+        <div class="snap-label">Stock Price</div>
+        <div class="snap-sub">Analyst target $49.02</div>
+      </div>
+      <div class="snap-box">
+        <div class="snap-val" style="color:#4ade80">5.62%</div>
+        <div class="snap-label">Dividend Yield</div>
+        <div class="snap-sub">$2.83/yr · $0.6775/qtr</div>
+      </div>
+      <div class="snap-box">
+        <div class="snap-val" style="color:#fbbf24">~0.42</div>
+        <div class="snap-label">Beta</div>
+        <div class="snap-sub">Low vol, slow mover</div>
+      </div>
+      <div class="snap-box">
+        <div class="snap-val" style="color:#a78bfa">~$150B</div>
+        <div class="snap-label">Long-Term Debt</div>
+        <div class="snap-sub">The big risk factor</div>
+      </div>
+    </div>
+    <div style="margin-top:10px;font-size:11px;color:#6b7280;text-align:center">Next ex-dividend date: April 10, 2026 · Quarterly payout</div>
+  </div>
+
+  <!-- Pros / Cons for wheel -->
+  <div class="card full">
+    <div class="card-title">⚖️ VZ as a Wheel Underlying — Pros & Cons</div>
+    <div class="pc-grid">
+      <div class="pc-col pros">
+        <div class="pc-header g">✅ Why VZ Works for the Wheel</div>
+        <div class="pc-item"><span class="pc-icon">🔒</span>Low beta (~0.42) means it rarely makes violent moves against your position. Puts you sold don't explode overnight.</div>
+        <div class="pc-item"><span class="pc-icon">💰</span>5.62% dividend means you're getting paid to wait if assigned. Your shares are working while you sell CCs.</div>
+        <div class="pc-item"><span class="pc-icon">📈</span>Predictable range-bound behavior. Telecom is utility-like — VZ doesn't 3x in a year or crash 50% without major catalyst.</div>
+        <div class="pc-item"><span class="pc-icon">💧</span>Good options liquidity. Tight bid-ask spreads mean you're not leaving money on the table at fill.</div>
+        <div class="pc-item"><span class="pc-icon">🛡️</span>If assigned on CSPs, you're holding a dividend machine with a floor story. Not the worst thing to own involuntarily.</div>
+        <div class="pc-item"><span class="pc-icon">🔄</span>True "widows and orphans" stock — institutional ownership is massive, providing price support.</div>
+      </div>
+      <div class="pc-col cons">
+        <div class="pc-header r">⚠️ Why VZ Is Annoying for the Wheel</div>
+        <div class="pc-item"><span class="pc-icon">📉</span>Low beta also means LOW premium. VZ IV is ~20-25%. You're not getting GME money — expect modest monthly yield from options.</div>
+        <div class="pc-item"><span class="pc-icon">🏗️</span>$150B debt load + 5G capex means the business is capital hungry. Dividend cut risk is non-zero if rates stay high.</div>
+        <div class="pc-item"><span class="pc-icon">🐢</span>Revenue growth is near zero. This stock doesn't rip, which means your covered calls cap upside that was already limited.</div>
+        <div class="pc-item"><span class="pc-icon">⏰</span>Opportunity cost. $5,000 tied up in VZ CSPs could be doing other work. The wheel on VZ requires patience with capital.</div>
+        <div class="pc-item"><span class="pc-icon">📅</span>Ex-dividend date risk. CCs can be exercised early to capture the $0.6775/qtr dividend. Don't sell ITM CCs near ex-div.</div>
+        <div class="pc-item"><span class="pc-icon">🌊</span>Rate sensitivity. VZ trades inversely to rates — if rates spike, VZ drops and your CSPs/shares get hurt simultaneously.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- The wheel math -->
+  <div class="card full">
+    <div class="card-title">🔄 The Wheel — How It Plays Out on VZ</div>
+    <div class="wheel-cols">
+      <div class="wheel-col">
+        <div class="wc-phase" style="color:#60a5fa">Phase 1</div>
+        <div class="wc-name">Cash-Secured Put</div>
+        <div class="wc-item"><strong>Strike idea:</strong> $47–$48 (5-8% OTM)</div>
+        <div class="wc-item"><strong>DTE:</strong> 30–45 days</div>
+        <div class="wc-item"><strong>Est. premium:</strong> $0.40–$0.70/contract</div>
+        <div class="wc-item"><strong>Yield on capital:</strong> ~0.8–1.4% per month</div>
+        <div class="wc-item"><strong>Capital required:</strong> ~$4,700–$4,800 per contract</div>
+        <div class="wc-item" style="margin-top:8px;color:#6b7280">If it expires worthless: sell another CSP. If assigned at $48, your effective cost basis is $48 minus premium collected — maybe $47.40 or so.</div>
+      </div>
+      <div class="wheel-col">
+        <div class="wc-phase" style="color:#4ade80">Phase 2</div>
+        <div class="wc-name">Covered Call</div>
+        <div class="wc-item"><strong>Strike idea:</strong> $52–$53 (4-6% OTM)</div>
+        <div class="wc-item"><strong>DTE:</strong> 30–45 days</div>
+        <div class="wc-item"><strong>Est. premium:</strong> $0.30–$0.55/contract</div>
+        <div class="wc-item"><strong>Yield on shares:</strong> ~0.6–1.1% per month</div>
+        <div class="wc-item"><strong>Watch:</strong> Don't sell near ex-div date</div>
+        <div class="wc-item" style="margin-top:8px;color:#6b7280">If shares get called away at $52–$53, you've made CSP premium + dividend (if collected) + CC premium + appreciation from your cost basis. That's a clean exit. Sell another CSP and restart.</div>
+      </div>
+      <div class="wheel-col">
+        <div class="wc-phase" style="color:#fbbf24">Ongoing</div>
+        <div class="wc-name">Dividend Collection</div>
+        <div class="wc-item"><strong>Amount:</strong> $0.6775/share/quarter</div>
+        <div class="wc-item"><strong>Annual:</strong> $2.83/share</div>
+        <div class="wc-item"><strong>On 100 shares:</strong> $283/year</div>
+        <div class="wc-item"><strong>Ex-div dates:</strong> Quarterly (next: Apr 10)</div>
+        <div class="wc-item"><strong>Must hold:</strong> before ex-div date</div>
+        <div class="wc-item" style="margin-top:8px;color:#6b7280">When assigned on CSPs, time your CC sales to capture the dividend before the next ex-date. This stacks on top of your options premium and is the "free money" layer of the strategy.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Return stack -->
+  <div class="card">
+    <div class="card-title">📈 Estimated Annual Return Stack (per $5K deployed)</div>
+    <div class="return-stack">
+      <div class="rs-row">
+        <div class="rs-label">Dividend yield</div>
+        <div class="rs-track"><div class="rs-fill" style="width:56%;background:#fbbf24">5.62%</div></div>
+        <div class="rs-note" style="color:#fcd34d">~$281</div>
+      </div>
+      <div class="rs-row">
+        <div class="rs-label">CSP premiums (12 mo)</div>
+        <div class="rs-track"><div class="rs-fill" style="width:80%;background:#60a5fa">8–12%</div></div>
+        <div class="rs-note" style="color:#93c5fd">~$400-600</div>
+      </div>
+      <div class="rs-row">
+        <div class="rs-label">CC premiums (if assigned)</div>
+        <div class="rs-track"><div class="rs-fill" style="width:60%;background:#4ade80">6–9%</div></div>
+        <div class="rs-note" style="color:#86efac">~$300-450</div>
+      </div>
+      <div class="rs-row">
+        <div class="rs-label" style="font-weight:700;color:#f9fafb">Total (smooth run)</div>
+        <div class="rs-track"><div class="rs-fill" style="width:100%;background:linear-gradient(90deg,#7c3aed,#6d28d9)">15–25% potential</div></div>
+        <div class="rs-note" style="color:#c4b5fd">~$750-1250</div>
+      </div>
+    </div>
+    <div style="font-size:11px;color:#6b7280;margin-top:10px;line-height:1.5">* "Smooth run" assumes no assignment-and-stuck scenario, no dividend cuts, stock stays rangebound. Real-world 12–16% is more honest.</div>
+  </div>
+
+  <!-- Risk scenarios -->
+  <div class="card">
+    <div class="card-title">⚠️ Risk Scenarios to Model</div>
+    <div class="scenario" style="border-color:#ef4444">
+      <div class="sc-name" style="color:#fca5a5">🔴 Rates spike → VZ drops to $42</div>
+      <div class="sc-body">Your CSPs at $47-48 get assigned. You own 100 shares at $47.40 effective cost with the stock at $42. You're now selling CCs below your cost basis while collecting $0.6775/qtr. Recovery takes time. This is the main risk — it's not catastrophic, but it ties up capital.</div>
+    </div>
+    <div class="scenario" style="border-color:#fb923c">
+      <div class="sc-name" style="color:#fdba74">🟠 Dividend cut</div>
+      <div class="sc-body">If Verizon's debt service gets strained (unlikely near-term but possible in a prolonged high-rate environment), a dividend cut would reprice the stock lower and reduce your income layer. The 5.62% yield would need to compress to something lower.</div>
+    </div>
+    <div class="scenario" style="border-color:#22c55e">
+      <div class="sc-name" style="color:#86efac">🟢 Stock rips to $55+</div>
+      <div class="sc-body">Your covered calls get exercised, shares called away at $52-53. You miss the upside — but you've already collected premium + dividend + appreciation from cost basis. Then you restart with new CSPs. For VZ, this scenario is low probability anyway given the growth profile.</div>
+    </div>
+  </div>
+
+  <!-- Verdict -->
+  <div class="card full">
+    <div class="verdict-box">
+      <div class="v-title">⚖️ Verdict — Is VZ a Good Wheel Underlying?</div>
+      <div class="v-body">
+        <strong style="color:#f9fafb">Yes, with realistic expectations.</strong> VZ is a <em>conservative income vehicle</em>, not a premium harvesting machine. The low beta means your puts don't blow up, but it also means the premiums are modest. The real power is stacking three income sources: options premium + dividend + potential appreciation. On $50,000 deployed (10 contracts), you're looking at $7,500–$12,500/year in a smooth environment — roughly 15–25% theoretical, 12–16% realistic after slippage and rough patches.
+        <br><br>
+        <strong style="color:#fbbf24">The key question:</strong> Are you comfortable owning VZ long-term if assigned? Because the wheel works best when you're genuinely okay holding the shares. VZ is the definition of "I'll own this forever and collect dividends while waiting." If that doesn't appeal to you, the opportunity cost of the capital may frustrate you.
+        <br><br>
+        <strong style="color:#f87171">The main watch item:</strong> Ex-dividend dates and rate sensitivity. Don't sell ITM covered calls into the April 10 ex-div. And if the Fed signals more rate hikes, reduce position size or roll down your strikes.
+      </div>
+      <div class="v-score">
+        <div class="vs"><div class="vs-val" style="color:#4ade80">A-</div><div class="vs-label">Premium stability</div></div>
+        <div class="vs"><div class="vs-val" style="color:#4ade80">A</div><div class="vs-label">Dividend reliability</div></div>
+        <div class="vs"><div class="vs-val" style="color:#fbbf24">B</div><div class="vs-label">Premium size</div></div>
+        <div class="vs"><div class="vs-val" style="color:#fbbf24">B-</div><div class="vs-label">Growth optionality</div></div>
+        <div class="vs"><div class="vs-val" style="color:#fb923c">C+</div><div class="vs-label">Debt risk mgmt</div></div>
+        <div class="vs"><div class="vs-val" style="color:#4ade80">A</div><div class="vs-label">Options liquidity</div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">Sources: StockAnalysis · MarketBeat · YahooFinance · 🔥 Cali Research · Mar 12, 2026 · Not financial advice</div>
+
+</body>
+</html>

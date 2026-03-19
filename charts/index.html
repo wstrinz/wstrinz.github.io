@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Charts — Strinz Household</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 20px 24px; background: #0f172a; color: #e5e7eb; font-family: system-ui, -apple-system, sans-serif; }
+  h1 { color: #f97316; margin: 0 0 4px; font-size: 1.8em; }
+  .sub { color: #94a3b8; margin: 0 0 28px; font-size: 0.9em; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; max-width: 1100px; }
+  .card { background: #111827; border: 1px solid #1f2937; border-radius: 12px; overflow: hidden; text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: border-color 0.15s, transform 0.15s; }
+  .card:hover { border-color: #f97316; transform: translateY(-2px); }
+  .thumb { width: 100%; height: 180px; object-fit: cover; object-position: top; display: block; background: #1e293b; }
+  .card-body { padding: 14px 16px 16px; flex: 1; display: flex; flex-direction: column; }
+  .card-body h2 { margin: 0 0 6px; font-size: 1em; color: #f1f5f9; line-height: 1.3; }
+  .card-body p { margin: 0 0 10px; font-size: 0.82em; color: #94a3b8; line-height: 1.45; flex: 1; }
+  .meta { font-size: 0.75em; color: #64748b; }
+  footer { margin-top: 32px; color: #334155; font-size: 0.8em; max-width: 1100px; border-top: 1px solid #1e293b; padding-top: 12px; }
+  footer a { color: #475569; }
+</style>
+</head>
+<body>
+<h1>🔥 Charts</h1>
+<p class="sub">Research, context, and visualizations from the tide pool. Published when worth it.</p>
+
+<div class="grid">
+
+  <a class="card" href="war-polling/">
+    <img class="thumb" src="war-polling/thumb.jpg" alt="US American War Support — 100 Years of Polling">
+    <div class="card-body">
+      <h2>🗳️ US War Support — 100 Years of Polling</h2>
+      <p>Public approval across every major US conflict from WWII through the Iran War (2026). Era filters, annotations, trajectory comparison.</p>
+      <div class="meta">Interactive · Mar 11, 2026 · Gallup · Pew · NBC/WSJ · NPR/PBS/Marist</div>
+    </div>
+  </a>
+
+  <a class="card" href="iran-opinion/">
+    <img class="thumb" src="iran-opinion/thumb.jpg" alt="Iran War — What Americans Actually Think">
+    <div class="card-body">
+      <h2>🇺🇸 Iran War — What Americans Actually Think</h2>
+      <p>Party breakdown of air war support vs. ground troops, what people are actually worried about, and why the opposition is strategic not sympathetic.</p>
+      <div class="meta">Mar 11, 2026 · Quinnipiac (Mar 9) · NPR/PBS/Marist (Mar 11)</div>
+    </div>
+  </a>
+
+  <a class="card" href="iran-global/">
+    <img class="thumb" src="iran-global/thumb.jpg" alt="Iran War — Global View">
+    <div class="card-body">
+      <h2>🌍 Iran War — Global View</h2>
+      <p>Regional stances, oil exposure by country, global mood matrix. Who's aligned, who's stuck, who's actively opposed — and Iran's PR problem.</p>
+      <div class="meta">Mar 11, 2026 · Atlantic Council · CSIS · IEA · EUISS</div>
+    </div>
+  </a>
+
+  <a class="card" href="trump-base-iran/">
+    <img class="thumb" src="trump-base-iran/thumb.jpg" alt="Trump's Republican Base: Iran vs. Other Issues">
+    <div class="card-body">
+      <h2>🐘 Trump's Base: Iran vs. Other Issues</h2>
+      <p>Republican approval by policy area. The air war holds. Ground troops fracture. Tariffs are the soft underbelly.</p>
+      <div class="meta">Mar 11, 2026 · Quinnipiac · Fox News Poll · YouGov/Economist · CBS</div>
+    </div>
+  </a>
+
+  <a class="card" href="macron-africa/">
+    <img class="thumb" src="macron-africa/thumb.jpg" alt="Macron & Africa — Is the Hate Justified?">
+    <div class="card-body">
+      <h2>🇫🇷 Macron & Africa — Is the Hate Justified?</h2>
+      <p>The receipts: Operation Barkhane failure, four expulsions, CFA franc theater, Niger uranium. Verdict: 65% justified, 35% complicated.</p>
+      <div class="meta">Mar 11, 2026 · RAND · Vision of Humanity · Institut Montaigne · Atlantic Council</div>
+    </div>
+  </a>
+
+  <a class="card" href="mn-gas-oil/">
+    <img class="thumb" src="mn-gas-oil/thumb.jpg" alt="MN Gas & Oil Snapshot">
+    <div class="card-body">
+      <h2>⛽ MN Gas & Oil Snapshot</h2>
+      <p>Minnesota pump prices + WTI crude war spike. Quick "when do I buy gas?" decision view with 2-week rough range.</p>
+      <div class="meta">Mar 11, 2026 · AAA · EIA · FRED</div>
+    </div>
+  </a>
+
+  <a class="card" href="gas-prices-mn/">
+    <img class="thumb" src="gas-prices-mn/thumb.jpg" alt="MN Gas Prices with Forecast Scenarios">
+    <div class="card-body">
+      <h2>📈 MN Gas Prices — Forecast Scenarios</h2>
+      <p>Minnesota vs. national average since Sep 2025, with three Iran/Hormuz disruption scenarios through May 2026. Interactive.</p>
+      <div class="meta">Interactive · Mar 11, 2026 · AAA state averages</div>
+    </div>
+  </a>
+
+  <a class="card" href="model-bakeoff-dashboard/">
+    <img class="thumb" src="model-bakeoff-dashboard/thumb.svg" alt="Model Bakeoff Dashboard">
+    <div class="card-body">
+      <h2>🧪 Model Bakeoff Dashboard</h2>
+      <p>Interactive comparison of local, free, paid, and reference models across practical task families, harder qualitative rewrites, latency, and throughput.</p>
+      <div class="meta">Interactive · Mar 14, 2026 · Hunter · Sonnet · Opus · Qwen · Nemotron · Healer</div>
+    </div>
+  </a>
+
+</div>
+
+<footer>
+  Source: <a href="https://github.com/wstrinz/wstrinz.github.io">wstrinz/wstrinz.github.io</a> &nbsp;·&nbsp;
+  Generated by Cali &amp; Briney &nbsp;·&nbsp;
+  Published when worth it, not by default
+</footer>
+</body>
+</html>
