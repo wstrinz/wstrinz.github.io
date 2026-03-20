@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Drift Briefing</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0f;
+    color: #9ca3af;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  .loader {
+    text-align: center;
+    max-width: 400px;
+    padding: 2rem;
+  }
+  .loader h1 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #e5e7eb;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+  .spinner {
+    width: 24px;
+    height: 24px;
+    border: 2px solid #1f2937;
+    border-top-color: #f97316;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 1.5rem;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .error {
+    color: #ef4444;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  .error a {
+    color: #f97316;
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+<div class="loader" id="loader">
+  <div class="spinner" id="spinner"></div>
+  <h1 id="status">Decrypting...</h1>
+</div>
+<script id="encrypted-payload" type="application/octet-stream">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</script>
+<script>
+(async () => {
+  const status = document.getElementById('status');
+  const spinner = document.getElementById('spinner');
+
+  function fail(msg) {
+    spinner.style.display = 'none';
+    status.innerHTML = '';
+    const el = document.createElement('div');
+    el.className = 'error';
+    el.innerHTML = msg || '🔥🦀<br><br>This fire is tended elsewhere.';
+    document.getElementById('loader').appendChild(el);
+  }
+
+  // Fail closed if Web Crypto unavailable (e.g. non-secure context, old browser)
+  if (!window.crypto || !window.crypto.subtle) return fail('This browser does not support secure decryption.');
+
+  try {
+    const hash = window.location.hash.slice(1);
+    if (!hash) return fail();
+
+    // Size guard: AES-256 key is exactly 32 bytes = 43 base64url chars (no padding)
+    // Reject anything wildly outside that range before decoding
+    if (hash.length < 40 || hash.length > 60) return fail();
+
+    // base64url decode (for key from URL fragment — uses - and _ instead of + and /)
+    const b64urlDecode = (s) => {
+      const b64 = s.replace(/-/g, '+').replace(/_/g, '/');
+      const pad = (4 - b64.length % 4) % 4;
+      return Uint8Array.from(atob(b64 + '='.repeat(pad)), c => c.charCodeAt(0));
+    };
+
+    // standard base64 decode (for payload and IV embedded in the page)
+    const b64Decode = (s) => {
+      return Uint8Array.from(atob(s), c => c.charCodeAt(0));
+    };
+
+    const keyBytes = b64urlDecode(hash);
+    if (keyBytes.length !== 32) return fail();
+
+    const ivB64 = 'lhxZjxp4Xy660UyH';
+    const iv = b64Decode(ivB64);
+
+    const payloadB64 = document.getElementById('encrypted-payload').textContent.trim();
+    const ciphertext = b64Decode(payloadB64);
+
+    const key = await crypto.subtle.importKey(
+      'raw', keyBytes, { name: 'AES-GCM' }, false, ['decrypt']
+    );
+
+    const plainBuf = await crypto.subtle.decrypt(
+      { name: 'AES-GCM', iv: iv }, key, ciphertext
+    );
+
+    const html = new TextDecoder().decode(plainBuf);
+
+    // Method: replace entire document via Blob URL navigation
+    // This is the most reliable cross-browser way to fully replace
+    // the page with a new HTML document, including all styles/scripts.
+    const blob = new Blob([html], { type: 'text/html; charset=utf-8' });
+    const blobUrl = URL.createObjectURL(blob);
+    window.location.replace(blobUrl);
+  } catch (e) {
+    fail();
+  }
+})();
+</script>
+</body>
+</html>
