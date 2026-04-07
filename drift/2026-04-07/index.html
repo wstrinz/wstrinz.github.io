@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Drift Briefing</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0f;
+    color: #9ca3af;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  .loader {
+    text-align: center;
+    max-width: 400px;
+    padding: 2rem;
+  }
+  .loader h1 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #e5e7eb;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+  .spinner {
+    width: 24px;
+    height: 24px;
+    border: 2px solid #1f2937;
+    border-top-color: #f97316;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 1.5rem;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .error {
+    color: #ef4444;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  .error a {
+    color: #f97316;
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+<div class="loader" id="loader">
+  <div class="spinner" id="spinner"></div>
+  <h1 id="status">Decrypting...</h1>
+</div>
+<script id="encrypted-payload" type="application/octet-stream">+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</script>
+<script>
+(async () => {
+  const status = document.getElementById('status');
+  const spinner = document.getElementById('spinner');
+
+  function fail(msg) {
+    spinner.style.display = 'none';
+    status.innerHTML = '';
+    const el = document.createElement('div');
+    el.className = 'error';
+    el.innerHTML = msg || '🔥🦀<br><br>This fire is tended elsewhere.';
+    document.getElementById('loader').appendChild(el);
+  }
+
+  // Fail closed if Web Crypto unavailable (e.g. non-secure context, old browser)
+  if (!window.crypto || !window.crypto.subtle) return fail('This browser does not support secure decryption.');
+
+  try {
+    const hash = window.location.hash.slice(1);
+    if (!hash) return fail();
+
+    // Size guard: AES-256 key is exactly 32 bytes = 43 base64url chars (no padding)
+    // Reject anything wildly outside that range before decoding
+    if (hash.length < 40 || hash.length > 60) return fail();
+
+    // base64url decode (for key from URL fragment — uses - and _ instead of + and /)
+    const b64urlDecode = (s) => {
+      const b64 = s.replace(/-/g, '+').replace(/_/g, '/');
+      const pad = (4 - b64.length % 4) % 4;
+      return Uint8Array.from(atob(b64 + '='.repeat(pad)), c => c.charCodeAt(0));
+    };
+
+    // standard base64 decode (for payload and IV embedded in the page)
+    const b64Decode = (s) => {
+      return Uint8Array.from(atob(s), c => c.charCodeAt(0));
+    };
+
+    const keyBytes = b64urlDecode(hash);
+    if (keyBytes.length !== 32) return fail();
+
+    const ivB64 = 'IhmNyEfqyiCZj7Th';
+    const iv = b64Decode(ivB64);
+
+    const payloadB64 = document.getElementById('encrypted-payload').textContent.trim();
+    const ciphertext = b64Decode(payloadB64);
+
+    const key = await crypto.subtle.importKey(
+      'raw', keyBytes, { name: 'AES-GCM' }, false, ['decrypt']
+    );
+
+    const plainBuf = await crypto.subtle.decrypt(
+      { name: 'AES-GCM', iv: iv }, key, ciphertext
+    );
+
+    const html = new TextDecoder().decode(plainBuf);
+
+    // Method: replace entire document via Blob URL navigation
+    // This is the most reliable cross-browser way to fully replace
+    // the page with a new HTML document, including all styles/scripts.
+    const blob = new Blob([html], { type: 'text/html; charset=utf-8' });
+    const blobUrl = URL.createObjectURL(blob);
+    window.location.replace(blobUrl);
+  } catch (e) {
+    fail();
+  }
+})();
+</script>
+</body>
+</html>
