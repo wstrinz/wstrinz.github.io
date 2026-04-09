@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Drift Briefing</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0f;
+    color: #9ca3af;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  .loader {
+    text-align: center;
+    max-width: 400px;
+    padding: 2rem;
+  }
+  .loader h1 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #e5e7eb;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+  .spinner {
+    width: 24px;
+    height: 24px;
+    border: 2px solid #1f2937;
+    border-top-color: #f97316;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 1.5rem;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .error {
+    color: #ef4444;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  .error a {
+    color: #f97316;
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+<div class="loader" id="loader">
+  <div class="spinner" id="spinner"></div>
+  <h1 id="status">Decrypting...</h1>
+</div>
+<script id="encrypted-payload" type="application/octet-stream">O5IHJFI4EsiloyjU7S0dLzCigcJHhzyHxy2s9aGYov5WVF3KR/Xa1xBrqMVbTAqS6gwLQ9povwI+5Ls2fIjOp0ZLG6/LkcUckngcW2hurP+ZRbyNna2TL0DU20Q2DqCQ0om7SXSOhn5Pfard8ekCmJwj3ikG4KXr8XNsPclnxq+bCGzsTffNFcK76IKoDL8fczBABV6aJlhDoHmpz/IT35gEW9v7LE4tmVmM7ismLAPlJ++81GbG8kWLp3ksFo23YExLeTOPF4eCCzGLPt9djtTkHmLB8YQacEN93picgkewjd6tIvZDX6/m/zkgK6dGB9IpTteBWKZHBacwfRQb1FYteCUM7sj5BEmMOOwFfhB7/vMEiQ+I4PfxJazgv1VgOlAdkAtD8XZfeUmk1vmNyIK72x7cEjPCXZ53f8D+LTBf/GQNvkIfOPVDTytNqxiHhwauZIsVs63kRbSnZ1s/ewExO/9H6zREUSK1O1b8WnT1creEM1jrBeuXsvCLwS7PPwDQzlFOAe0tYj6H3mWonUT2zsha3KgNvqeytoaMrCoMBhCrXNIecFq7ZrtYvLigS0HM2NMr5FpM9GFCmnCusM6J+xhqMwO9IJZmo73477AY6OFUEmt4dG+x8fsaTmcFVUUoiKAGbxlF0l7ys/HGY+/DXBsco0iS1RIqyZkFhYQDwfVlER2IjvU20vgkdN5idL9o2usp1OWdRBUqBlwyjuU2Dvr3afKdUHSDiL5oW4fvOTXIfLzuVs7hf7eZ+a8vCdrLUSiIK22ZTB0gJqGS1Vvbb4qHHsPHR9/+4xuCmbQni09rVtMmUOhD3CaWwVqLgskGduoUBOkOKt+shBQcWewDUcCisSjISM2wz0usNyooVWlpfXMR0D3W5vRc2rjRJaihv0ZnYn4ATKpZFgYrzFjVup5//WAl5LdzGITUfDY5m6gb/egF8Or3RkIBlMxEcfKpDT7WPwUvGGqO3DUjKGHzMVAK1bt1yjavufG8gKrlDIf4mQa91uMRRTM8n7RnJ0dTlOOkcJcVTs7hFynhCVOdyGMnqgygBCxJ4WAs25IGwEYeug+vf9PT2IHM+rijM8D3K1hbfNHMXMFxcSRRq1wi2dTtqJRDXTrS0wwQKPUaRrKOUErFU/nRI8TqeD0TjqDubp5mw4nF8NRtROwgTybUI36HPM3jvE99ZM+RgfgS/VqwMiZ4mv7BkRlNQhLqnOSEINlSdK+MZ6XiuC0i41v0Qb8m2Syd2i8R6q3MnQF52QhYVBqrIq/u8VySml/aWzhvf9rgAtbXSKfWYEtv1tawvlEirQaaM3Vrks4jqJu+rXHHragFo9sKDa9SEbgcqQmgh/imOFsHBNg9BHL43SPNXkXc0JLlLUU2tgTA0/mI/1I9KDx0HAwOL2cK97s+/VttMbU0582XkmG8NNcCv0Hkw0fsGDHSW7UaLU8TryEmCLb19YsfFzVDq+2orPQMdyu64USLsBsFxYWedqWSjfuFm9qx5RpcsG3LDyVvsvjbUhVna7KgxkkDkWl8T7CiEwgWdwDIyPJhu9eS6x9x4ggyg0ZMyR2pnn4m351QySRaPeBaMHDkun2Edna2vgMf5JWSK+3JfgAnjKZQtPWTgbYODEX1dMOsuGf6sxZ1esLytZ5UfA==</script>
+<script>
+(async () => {
+  const status = document.getElementById('status');
+  const spinner = document.getElementById('spinner');
+
+  function fail(msg) {
+    spinner.style.display = 'none';
+    status.innerHTML = '';
+    const el = document.createElement('div');
+    el.className = 'error';
+    el.innerHTML = msg || '🔥🦀<br><br>This fire is tended elsewhere.';
+    document.getElementById('loader').appendChild(el);
+  }
+
+  // Fail closed if Web Crypto unavailable (e.g. non-secure context, old browser)
+  if (!window.crypto || !window.crypto.subtle) return fail('This browser does not support secure decryption.');
+
+  try {
+    const hash = window.location.hash.slice(1);
+    if (!hash) return fail();
+
+    // Size guard: AES-256 key is exactly 32 bytes = 43 base64url chars (no padding)
+    // Reject anything wildly outside that range before decoding
+    if (hash.length < 40 || hash.length > 60) return fail();
+
+    // base64url decode (for key from URL fragment — uses - and _ instead of + and /)
+    const b64urlDecode = (s) => {
+      const b64 = s.replace(/-/g, '+').replace(/_/g, '/');
+      const pad = (4 - b64.length % 4) % 4;
+      return Uint8Array.from(atob(b64 + '='.repeat(pad)), c => c.charCodeAt(0));
+    };
+
+    // standard base64 decode (for payload and IV embedded in the page)
+    const b64Decode = (s) => {
+      return Uint8Array.from(atob(s), c => c.charCodeAt(0));
+    };
+
+    const keyBytes = b64urlDecode(hash);
+    if (keyBytes.length !== 32) return fail();
+
+    const ivB64 = 'X4XPcHXNTb0Z0c23';
+    const iv = b64Decode(ivB64);
+
+    const payloadB64 = document.getElementById('encrypted-payload').textContent.trim();
+    const ciphertext = b64Decode(payloadB64);
+
+    const key = await crypto.subtle.importKey(
+      'raw', keyBytes, { name: 'AES-GCM' }, false, ['decrypt']
+    );
+
+    const plainBuf = await crypto.subtle.decrypt(
+      { name: 'AES-GCM', iv: iv }, key, ciphertext
+    );
+
+    const html = new TextDecoder().decode(plainBuf);
+
+    // Method: replace entire document via Blob URL navigation
+    // This is the most reliable cross-browser way to fully replace
+    // the page with a new HTML document, including all styles/scripts.
+    const blob = new Blob([html], { type: 'text/html; charset=utf-8' });
+    const blobUrl = URL.createObjectURL(blob);
+    window.location.replace(blobUrl);
+  } catch (e) {
+    fail();
+  }
+})();
+</script>
+</body>
+</html>
