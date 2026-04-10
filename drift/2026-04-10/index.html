@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Drift Briefing</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0f;
+    color: #9ca3af;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  .loader {
+    text-align: center;
+    max-width: 400px;
+    padding: 2rem;
+  }
+  .loader h1 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #e5e7eb;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+  .spinner {
+    width: 24px;
+    height: 24px;
+    border: 2px solid #1f2937;
+    border-top-color: #f97316;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 1.5rem;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .error {
+    color: #ef4444;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  .error a {
+    color: #f97316;
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+<div class="loader" id="loader">
+  <div class="spinner" id="spinner"></div>
+  <h1 id="status">Decrypting...</h1>
+</div>
+<script id="encrypted-payload" type="application/octet-stream">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</script>
+<script>
+(async () => {
+  const status = document.getElementById('status');
+  const spinner = document.getElementById('spinner');
+
+  function fail(msg) {
+    spinner.style.display = 'none';
+    status.innerHTML = '';
+    const el = document.createElement('div');
+    el.className = 'error';
+    el.innerHTML = msg || '🔥🦀<br><br>This fire is tended elsewhere.';
+    document.getElementById('loader').appendChild(el);
+  }
+
+  // Fail closed if Web Crypto unavailable (e.g. non-secure context, old browser)
+  if (!window.crypto || !window.crypto.subtle) return fail('This browser does not support secure decryption.');
+
+  try {
+    const hash = window.location.hash.slice(1);
+    if (!hash) return fail();
+
+    // Size guard: AES-256 key is exactly 32 bytes = 43 base64url chars (no padding)
+    // Reject anything wildly outside that range before decoding
+    if (hash.length < 40 || hash.length > 60) return fail();
+
+    // base64url decode (for key from URL fragment — uses - and _ instead of + and /)
+    const b64urlDecode = (s) => {
+      const b64 = s.replace(/-/g, '+').replace(/_/g, '/');
+      const pad = (4 - b64.length % 4) % 4;
+      return Uint8Array.from(atob(b64 + '='.repeat(pad)), c => c.charCodeAt(0));
+    };
+
+    // standard base64 decode (for payload and IV embedded in the page)
+    const b64Decode = (s) => {
+      return Uint8Array.from(atob(s), c => c.charCodeAt(0));
+    };
+
+    const keyBytes = b64urlDecode(hash);
+    if (keyBytes.length !== 32) return fail();
+
+    const ivB64 = 'hn/IuO8Ojh4MT7Mo';
+    const iv = b64Decode(ivB64);
+
+    const payloadB64 = document.getElementById('encrypted-payload').textContent.trim();
+    const ciphertext = b64Decode(payloadB64);
+
+    const key = await crypto.subtle.importKey(
+      'raw', keyBytes, { name: 'AES-GCM' }, false, ['decrypt']
+    );
+
+    const plainBuf = await crypto.subtle.decrypt(
+      { name: 'AES-GCM', iv: iv }, key, ciphertext
+    );
+
+    const html = new TextDecoder().decode(plainBuf);
+
+    // Method: replace entire document via Blob URL navigation
+    // This is the most reliable cross-browser way to fully replace
+    // the page with a new HTML document, including all styles/scripts.
+    const blob = new Blob([html], { type: 'text/html; charset=utf-8' });
+    const blobUrl = URL.createObjectURL(blob);
+    window.location.replace(blobUrl);
+  } catch (e) {
+    fail();
+  }
+})();
+</script>
+</body>
+</html>
