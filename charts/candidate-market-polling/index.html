@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Candidate Market/Polling Watch</title>
+  <style>
+    :root {
+      --ink: #161615;
+      --muted: #6f6a60;
+      --paper: #f8f3e8;
+      --panel: #fffaf0;
+      --line: #d7cbb7;
+      --red: #bd3b33;
+      --blue: #2f6d8f;
+      --green: #527d50;
+      --gold: #b6792c;
+      --shadow: 0 16px 48px rgba(43, 34, 20, .13);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, rgba(22, 22, 21, .035) 1px, transparent 1px) 0 0 / 24px 24px,
+        linear-gradient(rgba(22, 22, 21, .028) 1px, transparent 1px) 0 0 / 24px 24px,
+        radial-gradient(circle at 20% 0%, rgba(189, 59, 51, .14), transparent 34rem),
+        radial-gradient(circle at 88% 12%, rgba(47, 109, 143, .16), transparent 28rem),
+        var(--paper);
+      font-family: Georgia, "Times New Roman", serif;
+      letter-spacing: 0;
+    }
+
+    .wrap {
+      width: min(1440px, calc(100vw - 40px));
+      margin: 0 auto;
+      padding: 28px 0 34px;
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 28px;
+      align-items: end;
+      padding: 18px 0 22px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 920px;
+      font-size: 86px;
+      line-height: .88;
+      font-weight: 900;
+      text-transform: uppercase;
+      overflow-wrap: anywhere;
+    }
+
+    .dek {
+      margin: 0;
+      color: var(--muted);
+      font: 16px/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    .stamp {
+      margin-top: 14px;
+      display: inline-flex;
+      border: 1px solid var(--ink);
+      padding: 7px 10px;
+      background: var(--panel);
+      font: 12px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-transform: uppercase;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    button, select {
+      min-height: 34px;
+      border: 1px solid var(--ink);
+      background: var(--panel);
+      color: var(--ink);
+      padding: 7px 10px;
+      font: 12px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    button.active {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .stat {
+      min-height: 116px;
+      padding: 16px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .label {
+      display: block;
+      color: var(--muted);
+      font: 11px/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-transform: uppercase;
+    }
+
+    .value {
+      display: block;
+      margin-top: 10px;
+      font-size: 34px;
+      line-height: 1;
+      font-weight: 900;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .board, .side {
+      background: rgba(255, 250, 240, .86);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 120px minmax(118px, 170px) 86px 86px 92px minmax(280px, 1fr);
+      gap: 12px;
+      min-height: 74px;
+      align-items: center;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .row.head {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      min-height: 42px;
+      background: var(--ink);
+      color: var(--paper);
+      font: 11px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-transform: uppercase;
+    }
+
+    .tier {
+      color: var(--muted);
+      font: 10px/1.25 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-transform: uppercase;
+    }
+
+    .name {
+      font-size: 24px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .num {
+      font: 16px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      white-space: nowrap;
+    }
+
+    .gap {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 76px;
+      min-height: 28px;
+      border: 1px solid var(--line);
+      font: 12px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background: var(--paper);
+    }
+
+    .gap.hot { border-color: rgba(189, 59, 51, .55); color: var(--red); }
+    .gap.cold { border-color: rgba(47, 109, 143, .55); color: var(--blue); }
+
+    .bars {
+      display: grid;
+      gap: 6px;
+      min-width: 240px;
+    }
+
+    .barline {
+      display: grid;
+      grid-template-columns: 50px 1fr;
+      gap: 8px;
+      align-items: center;
+      font: 10px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .track {
+      position: relative;
+      height: 9px;
+      background: rgba(22, 22, 21, .08);
+      overflow: hidden;
+    }
+
+    .fill {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: var(--w);
+    }
+
+    .poll { background: var(--blue); }
+    .market { background: var(--red); }
+    .unknown { opacity: .26; }
+
+    .note {
+      margin: 0;
+      color: #3f3a33;
+      font-size: 13px;
+      line-height: 1.32;
+    }
+
+    .side {
+      padding: 16px;
+    }
+
+    .side h2 {
+      margin: 0 0 12px;
+      font-size: 22px;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .rank {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .rank-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      padding-bottom: 9px;
+      border-bottom: 1px solid var(--line);
+      font: 13px/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    .small {
+      color: var(--muted);
+      font: 12px/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    .legend {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .key {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+      font: 11px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-transform: uppercase;
+    }
+
+    .swatch {
+      width: 18px;
+      height: 8px;
+      display: inline-block;
+    }
+
+    @media (max-width: 980px) {
+      header, main, .summary { grid-template-columns: 1fr; }
+      h1 { font-size: 58px; }
+      .row {
+        grid-template-columns: 84px minmax(110px, 1fr) 72px 72px 76px;
+      }
+      .row .bars, .row .note { grid-column: 2 / -1; }
+      .row.head { display: none; }
+    }
+
+    @media (max-width: 560px) {
+      .wrap { width: min(100vw - 22px, 1440px); }
+      h1 { font-size: 39px; }
+      .row {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      .tier, .name, .row .bars, .row .note { grid-column: 1 / -1; }
+      .gap { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Candidate Market/Polling Watch</h1>
+      </div>
+      <div>
+        <p class="dek">Seed dashboard for tracking polling, market implied probability, and the spread between them over time. Current view uses the image transcription as snapshot zero.</p>
+        <span class="stamp">Captured May 13, 2026 · 07:27 CDT</span>
+        <div class="legend">
+          <span class="key"><i class="swatch poll"></i> poll midpoint</span>
+          <span class="key"><i class="swatch market"></i> market implied</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="controls" id="controls"></div>
+    <section class="summary" id="summary"></section>
+
+    <main>
+      <section class="board" id="board"></section>
+      <aside class="side">
+        <h2>Signal Checks</h2>
+        <div class="rank" id="overpriced"></div>
+        <h2>Underpriced</h2>
+        <div class="rank" id="underpriced"></div>
+        <p class="small">Unknown market values stay in the candidate list but are excluded from spread rankings. Booker’s market cell had an OCR-looking “mod”, so it is held as unknown.</p>
+      </aside>
+    </main>
+  </div>
+
+  <script>
+    const snapshot = {
+      captured_at: "2026-05-13T07:27:00-05:00",
+      rows: [
+        ["Tier 1: Frontrunners","Newsom","24-34%",24,34,"21%",21,"CA gov, shadow campaign, has network and timing; coastal-progressive brand risk."],
+        ["Tier 1: Frontrunners","Harris","5-7%",5,7,"39%",39,"Leads polling on name ID; markets discount donor comeback risk less than operatives do."],
+        ["Tier 1: Frontrunners","AOC","8-9%",8,9,"10%",10,"Obama-tier grassroots energy; general-election ceiling is the priced risk."],
+        ["Tier 2: Serious Contenders","Shapiro","4-7%",4,7,"7%",7,"PA gov, disciplined Rust Belt messenger; 2026 reelection comes first."],
+        ["Tier 2: Serious Contenders","Buttigieg","3-5%",3,5,"7% (+75 NH)",7,"High measured favorability and communication skill; no governor track record or structural base."],
+        ["Tier 2: Serious Contenders","Pritzker","3-6%",3,6,"3%",3,"IL gov, deep pockets, anti-Trump fighter posture; could buy into top tier on populist economics."],
+        ["Tier 2: Serious Contenders","Ossoff","5-7%",5,7,"1%",1,"Georgia-incumbent story depends on Senate reelection first."],
+        ["Tier 3: Underpriced, Right Profile","Moore","4%",4,4,"unknown",null,"MD gov, Rhodes scholar, combat vet; likely underpriced if markets omit him."],
+        ["Tier 3: Underpriced, Right Profile","Beshear","2.5-5%",2.5,5,"1%",1,"Two-term KY gov, southern, religious, moderate; fits the post-2024 candidate-shape argument."],
+        ["Tier 3: Underpriced, Right Profile","Gallego","<1%",0,1,"unknown",null,"AZ senator, Marine combat vet, Latino, strong 2024 ticket-split overperformance."],
+        ["Tier 3: Underpriced, Right Profile","Stein","<1%",0,1,"unknown",null,"NC gov, won big while Harris lost the state; serious technocrat profile."],
+        ["Tier 3: Underpriced, Right Profile","Kelly","<1%",0,1,"6%",6,"AZ senator, ex-astronaut, ex-Navy, Giffords; clean competent-adult template, low ambition signal."],
+        ["Tier 3: Underpriced, Right Profile","Warnock","<1%",0,1,"unknown",null,"GA senator, Black pastor, won Georgia three times in four years."],
+        ["Tier 4: Dark Horses & Wild Cards","Whitmer","1.5-4%",1.5,4,"4%",4,"MI gov, strong Electoral College math; stock has slipped and gender handwringing weighs on the read."],
+        ["Tier 4: Dark Horses & Wild Cards","Slotkin","<1%",0,1,"unknown",null,"MI senator, ex-CIA, security-credentialed moderate; pure dark horse."],
+        ["Tier 4: Dark Horses & Wild Cards","Murphy","<1%",0,1,"unknown",null,"CT senator with aggressive post-2024 fight-harder messaging."],
+        ["Tier 4: Dark Horses & Wild Cards","Polis","<1%",0,1,"unknown",null,"CO gov, term-limited in 2026, anti-orthodoxy moderate-libertarian Democrat, out gay."],
+        ["Tier 4: Dark Horses & Wild Cards","Schatz","<1%",0,1,"unknown",null,"HI senator, smart progressive policy profile, low national profile."],
+        ["Tier 5: Bench & Long Shots","Booker","~1%",1,1,"unknown",null,"Filibuster-record protest moment got attention; 2020 ceiling may still bind."],
+        ["Tier 5: Bench & Long Shots","Walz","~1%",1,1,"unknown",null,"MN gov, 2024 VP nominee; bench cred but the loss drags on ceiling."],
+        ["Tier 5: Bench & Long Shots","Cooper","<1%",0,1,"unknown",null,"Former NC gov, two-term swing-state executive, awkward post-office timeline."],
+        ["Tier 5: Bench & Long Shots","Cuban","<1%",0,1,"unknown",null,"Businessman-celebrity outsider lane; credible for the genre but still longshot."],
+        ["Tier 5: Bench & Long Shots","Emanuel","<1%",0,1,"unknown",null,"Reportedly gearing up; probably not viable but reliably appears on lists."]
+      ].map(([tier, entity, poll_display, poll_low, poll_high, market_display, market_implied, note]) => ({
+        tier, entity, poll_display, poll_low, poll_high, market_display, market_implied, note,
+        poll_midpoint: (poll_low + poll_high) / 2
+      }))
+    };
+
+    const tiers = ["All", ...new Set(snapshot.rows.map(r => r.tier))];
+    let activeTier = "All";
+    let sortMode = "tier";
+
+    const fmt = n => n == null ? "unknown" : `${n > 0 ? "+" : ""}${n.toFixed(n % 1 ? 1 : 0)} pts`;
+    const pct = n => `${Math.max(1.5, Math.min(100, n / 40 * 100))}%`;
+
+    function spread(row) {
+      return row.market_implied == null ? null : row.market_implied - row.poll_midpoint;
+    }
+
+    function filteredRows() {
+      let rows = activeTier === "All" ? [...snapshot.rows] : snapshot.rows.filter(r => r.tier === activeTier);
+      if (sortMode === "market") rows.sort((a, b) => (b.market_implied ?? -1) - (a.market_implied ?? -1));
+      if (sortMode === "spread") rows.sort((a, b) => (spread(b) ?? -99) - (spread(a) ?? -99));
+      if (sortMode === "poll") rows.sort((a, b) => b.poll_midpoint - a.poll_midpoint);
+      return rows;
+    }
+
+    function renderControls() {
+      const controls = document.getElementById("controls");
+      controls.innerHTML = "";
+      tiers.forEach(tier => {
+        const button = document.createElement("button");
+        button.textContent = tier.replace("Tier ", "T");
+        button.className = tier === activeTier ? "active" : "";
+        button.onclick = () => { activeTier = tier; render(); };
+        controls.appendChild(button);
+      });
+
+      const select = document.createElement("select");
+      [["tier","Sort: tier order"],["market","Sort: market"],["poll","Sort: poll"],["spread","Sort: spread"]].forEach(([value, text]) => {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = text;
+        select.appendChild(option);
+      });
+      select.value = sortMode;
+      select.onchange = e => { sortMode = e.target.value; render(); };
+      controls.appendChild(select);
+    }
+
+    function renderSummary(rows) {
+      const withMarket = rows.filter(r => r.market_implied != null);
+      const avgPoll = rows.reduce((sum, r) => sum + r.poll_midpoint, 0) / rows.length;
+      const avgMarket = withMarket.reduce((sum, r) => sum + r.market_implied, 0) / Math.max(1, withMarket.length);
+      const biggestGap = withMarket.reduce((best, r) => Math.abs(spread(r)) > Math.abs(spread(best)) ? r : best, withMarket[0] || rows[0]);
+      const stats = [
+        ["Candidates", rows.length],
+        ["With market price", withMarket.length],
+        ["Avg poll midpoint", `${avgPoll.toFixed(1)}%`],
+        ["Biggest spread", withMarket.length ? `${biggestGap.entity} ${fmt(spread(biggestGap))}` : "none"]
+      ];
+      document.getElementById("summary").innerHTML = stats.map(([label, value]) => `
+        <article class="stat"><span class="label">${label}</span><span class="value">${value}</span></article>
+      `).join("");
+    }
+
+    function renderBoard(rows) {
+      document.getElementById("board").innerHTML = `
+        <div class="row head">
+          <span>Tier</span><span>Candidate</span><span>Poll</span><span>Market</span><span>Spread</span><span>Read</span>
+        </div>
+        ${rows.map(row => {
+          const s = spread(row);
+          const gapClass = s == null ? "" : s >= 3 ? "hot" : s <= -3 ? "cold" : "";
+          return `
+            <article class="row">
+              <div class="tier">${row.tier}</div>
+              <div class="name">${row.entity}</div>
+              <div class="num">${row.poll_display}</div>
+              <div class="num">${row.market_display}</div>
+              <div class="gap ${gapClass}">${s == null ? "n/a" : fmt(s)}</div>
+              <div class="bars">
+                <div class="barline"><span>poll</span><div class="track"><i class="fill poll" style="--w:${pct(row.poll_midpoint)}"></i></div></div>
+                <div class="barline"><span>market</span><div class="track"><i class="fill market ${row.market_implied == null ? "unknown" : ""}" style="--w:${row.market_implied == null ? "0%" : pct(row.market_implied)}"></i></div></div>
+              </div>
+              <p class="note">${row.note}</p>
+            </article>
+          `;
+        }).join("")}
+      `;
+    }
+
+    function renderRanks() {
+      const priced = snapshot.rows.filter(r => r.market_implied != null);
+      const over = [...priced].sort((a, b) => spread(b) - spread(a)).slice(0, 5);
+      const under = [...priced].sort((a, b) => spread(a) - spread(b)).slice(0, 5);
+      const item = r => `<div class="rank-item"><span>${r.entity}</span><strong>${fmt(spread(r))}</strong></div>`;
+      document.getElementById("overpriced").innerHTML = over.map(item).join("");
+      document.getElementById("underpriced").innerHTML = under.map(item).join("");
+    }
+
+    function render() {
+      renderControls();
+      const rows = filteredRows();
+      renderSummary(rows);
+      renderBoard(rows);
+      renderRanks();
+    }
+
+    render();
+  </script>
+</body>
+</html>

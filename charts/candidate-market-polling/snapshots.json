@@ -1,0 +1,239 @@
+{
+  "schema": "candidate-market-polling-snapshot-v1",
+  "captured_at": "2026-05-13T07:27:00-05:00",
+  "topic": "2028 Democratic nominee candidate poll and market watch",
+  "source_note": "Seed snapshot transcribed from the image text shared in Discord #the-tide-pool.",
+  "rows": [
+    {
+      "tier": "Tier 1: Frontrunners",
+      "entity": "Newsom",
+      "poll_display": "24-34%",
+      "poll_low": 24,
+      "poll_high": 34,
+      "market_display": "21%",
+      "market_implied": 21,
+      "note": "CA gov, shadow campaign, has network and timing; coastal-progressive brand risk."
+    },
+    {
+      "tier": "Tier 1: Frontrunners",
+      "entity": "Harris",
+      "poll_display": "5-7%",
+      "poll_low": 5,
+      "poll_high": 7,
+      "market_display": "39%",
+      "market_implied": 39,
+      "note": "Leads polling on name ID; markets discount donor comeback risk less than operatives do."
+    },
+    {
+      "tier": "Tier 1: Frontrunners",
+      "entity": "AOC",
+      "poll_display": "8-9%",
+      "poll_low": 8,
+      "poll_high": 9,
+      "market_display": "10%",
+      "market_implied": 10,
+      "note": "Obama-tier grassroots energy; general-election ceiling is the priced risk."
+    },
+    {
+      "tier": "Tier 2: Serious Contenders",
+      "entity": "Shapiro",
+      "poll_display": "4-7%",
+      "poll_low": 4,
+      "poll_high": 7,
+      "market_display": "7%",
+      "market_implied": 7,
+      "note": "PA gov, disciplined Rust Belt messenger; 2026 reelection comes first."
+    },
+    {
+      "tier": "Tier 2: Serious Contenders",
+      "entity": "Buttigieg",
+      "poll_display": "3-5%",
+      "poll_low": 3,
+      "poll_high": 5,
+      "market_display": "7% (+75 NH)",
+      "market_implied": 7,
+      "note": "High measured favorability and communication skill; no governor track record or structural base."
+    },
+    {
+      "tier": "Tier 2: Serious Contenders",
+      "entity": "Pritzker",
+      "poll_display": "3-6%",
+      "poll_low": 3,
+      "poll_high": 6,
+      "market_display": "3%",
+      "market_implied": 3,
+      "note": "IL gov, deep pockets, anti-Trump fighter posture; could buy into top tier on populist economics."
+    },
+    {
+      "tier": "Tier 2: Serious Contenders",
+      "entity": "Ossoff",
+      "poll_display": "5-7%",
+      "poll_low": 5,
+      "poll_high": 7,
+      "market_display": "1%",
+      "market_implied": 1,
+      "note": "Georgia-incumbent story depends on Senate reelection first."
+    },
+    {
+      "tier": "Tier 3: Underpriced, Right Profile",
+      "entity": "Moore",
+      "poll_display": "4%",
+      "poll_low": 4,
+      "poll_high": 4,
+      "market_display": "unknown",
+      "market_implied": null,
+      "note": "MD gov, Rhodes scholar, combat vet; likely underpriced if markets omit him."
+    },
+    {
+      "tier": "Tier 3: Underpriced, Right Profile",
+      "entity": "Beshear",
+      "poll_display": "2.5-5%",
+      "poll_low": 2.5,
+      "poll_high": 5,
+      "market_display": "1%",
+      "market_implied": 1,
+      "note": "Two-term KY gov, southern, religious, moderate; fits the post-2024 candidate-shape argument."
+    },
+    {
+      "tier": "Tier 3: Underpriced, Right Profile",
+      "entity": "Gallego",
+      "poll_display": "<1%",
+      "poll_low": 0,
+      "poll_high": 1,
+      "market_display": "unknown",
+      "market_implied": null,
+      "note": "AZ senator, Marine combat vet, Latino, strong 2024 ticket-split overperformance."
+    },
+    {
+      "tier": "Tier 3: Underpriced, Right Profile",
+      "entity": "Stein",
+      "poll_display": "<1%",
+      "poll_low": 0,
+      "poll_high": 1,
+      "market_display": "unknown",
+      "market_implied": null,
+      "note": "NC gov, won big while Harris lost the state; serious technocrat profile."
+    },
+    {
+      "tier": "Tier 3: Underpriced, Right Profile",
+      "entity": "Kelly",
+      "poll_display": "<1%",
+      "poll_low": 0,
+      "poll_high": 1,
+      "market_display": "6%",
+      "market_implied": 6,
+      "note": "AZ senator, ex-astronaut, ex-Navy, Giffords; clean competent-adult template, low ambition signal."
+    },
+    {
+      "tier": "Tier 3: Underpriced, Right Profile",
+      "entity": "Warnock",
+      "poll_display": "<1%",
+      "poll_low": 0,
+      "poll_high": 1,
+      "market_display": "unknown",
+      "market_implied": null,
+      "note": "GA senator, Black pastor, won Georgia three times in four years."
+    },
+    {
+      "tier": "Tier 4: Dark Horses & Wild Cards",
+      "entity": "Whitmer",
+      "poll_display": "1.5-4%",
+      "poll_low": 1.5,
+      "poll_high": 4,
+      "market_display": "4%",
+      "market_implied": 4,
+      "note": "MI gov, strong Electoral College math; stock has slipped and gender handwringing weighs on the read."
+    },
+    {
+      "tier": "Tier 4: Dark Horses & Wild Cards",
+      "entity": "Slotkin",
+      "poll_display": "<1%",
+      "poll_low": 0,
+      "poll_high": 1,
+      "market_display": "unknown",
+      "market_implied": null,
+      "note": "MI senator, ex-CIA, security-credentialed moderate; pure dark horse."
+    },
+    {
+      "tier": "Tier 4: Dark Horses & Wild Cards",
+      "entity": "Murphy",
+      "poll_display": "<1%",
+      "poll_low": 0,
+      "poll_high": 1,
+      "market_display": "unknown",
+      "market_implied": null,
+      "note": "CT senator with aggressive post-2024 fight-harder messaging."
+    },
+    {
+      "tier": "Tier 4: Dark Horses & Wild Cards",
+      "entity": "Polis",
+      "poll_display": "<1%",
+      "poll_low": 0,
+      "poll_high": 1,
+      "market_display": "unknown",
+      "market_implied": null,
+      "note": "CO gov, term-limited in 2026, anti-orthodoxy moderate-libertarian Democrat, out gay."
+    },
+    {
+      "tier": "Tier 4: Dark Horses & Wild Cards",
+      "entity": "Schatz",
+      "poll_display": "<1%",
+      "poll_low": 0,
+      "poll_high": 1,
+      "market_display": "unknown",
+      "market_implied": null,
+      "note": "HI senator, smart progressive policy profile, low national profile."
+    },
+    {
+      "tier": "Tier 5: Bench & Long Shots",
+      "entity": "Booker",
+      "poll_display": "~1%",
+      "poll_low": 1,
+      "poll_high": 1,
+      "market_display": "unknown",
+      "market_implied": null,
+      "raw_market": "OCR showed 'mod'; treated as unknown.",
+      "note": "Filibuster-record protest moment got attention; 2020 ceiling may still bind."
+    },
+    {
+      "tier": "Tier 5: Bench & Long Shots",
+      "entity": "Walz",
+      "poll_display": "~1%",
+      "poll_low": 1,
+      "poll_high": 1,
+      "market_display": "unknown",
+      "market_implied": null,
+      "note": "MN gov, 2024 VP nominee; bench cred but the loss drags on ceiling."
+    },
+    {
+      "tier": "Tier 5: Bench & Long Shots",
+      "entity": "Cooper",
+      "poll_display": "<1%",
+      "poll_low": 0,
+      "poll_high": 1,
+      "market_display": "unknown",
+      "market_implied": null,
+      "note": "Former NC gov, two-term swing-state executive, awkward post-office timeline."
+    },
+    {
+      "tier": "Tier 5: Bench & Long Shots",
+      "entity": "Cuban",
+      "poll_display": "<1%",
+      "poll_low": 0,
+      "poll_high": 1,
+      "market_display": "unknown",
+      "market_implied": null,
+      "note": "Businessman-celebrity outsider lane; credible for the genre but still longshot."
+    },
+    {
+      "tier": "Tier 5: Bench & Long Shots",
+      "entity": "Emanuel",
+      "poll_display": "<1%",
+      "poll_low": 0,
+      "poll_high": 1,
+      "market_display": "unknown",
+      "market_implied": null,
+      "note": "Reportedly gearing up; probably not viable but reliably appears on lists."
+    }
+  ]
+}
