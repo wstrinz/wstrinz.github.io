@@ -315,11 +315,11 @@
         <h1>Candidate Market/Polling Watch</h1>
       </div>
       <div>
-        <p class="dek">Seed dashboard for tracking polling, market implied probability, and the spread between them over time. Current view uses the image transcription as snapshot zero.</p>
+        <p class="dek">Seed dashboard for tracking market implied probability, polling, and the spread between them over time. Spread is polling minus market midpoint; OCR-unclear cells stay unknown.</p>
         <span class="stamp">Captured May 13, 2026 · 07:27 CDT</span>
         <div class="legend">
-          <span class="key"><i class="swatch poll"></i> poll midpoint</span>
-          <span class="key"><i class="swatch market"></i> market implied</span>
+          <span class="key"><i class="swatch market"></i> market midpoint</span>
+          <span class="key"><i class="swatch poll"></i> polling</span>
         </div>
       </div>
     </header>
@@ -330,11 +330,11 @@
     <main>
       <section class="board" id="board"></section>
       <aside class="side">
-        <h2>Signal Checks</h2>
+        <h2>Polling Above Market</h2>
         <div class="rank" id="overpriced"></div>
-        <h2>Underpriced</h2>
+        <h2>Market Above Polling</h2>
         <div class="rank" id="underpriced"></div>
-        <p class="small">Unknown market values stay in the candidate list but are excluded from spread rankings. Booker’s market cell had an OCR-looking “mod”, so it is held as unknown.</p>
+        <p class="small">Unknown polling values stay in the candidate list but are excluded from spread rankings. Booker’s polling cell had an OCR-looking “mod”, so it is held as unknown.</p>
       </aside>
     </main>
   </div>
@@ -343,32 +343,33 @@
     const snapshot = {
       captured_at: "2026-05-13T07:27:00-05:00",
       rows: [
-        ["Tier 1: Frontrunners","Newsom","24-34%",24,34,"21%",21,"CA gov, shadow campaign, has network and timing; coastal-progressive brand risk."],
-        ["Tier 1: Frontrunners","Harris","5-7%",5,7,"39%",39,"Leads polling on name ID; markets discount donor comeback risk less than operatives do."],
-        ["Tier 1: Frontrunners","AOC","8-9%",8,9,"10%",10,"Obama-tier grassroots energy; general-election ceiling is the priced risk."],
-        ["Tier 2: Serious Contenders","Shapiro","4-7%",4,7,"7%",7,"PA gov, disciplined Rust Belt messenger; 2026 reelection comes first."],
-        ["Tier 2: Serious Contenders","Buttigieg","3-5%",3,5,"7% (+75 NH)",7,"High measured favorability and communication skill; no governor track record or structural base."],
-        ["Tier 2: Serious Contenders","Pritzker","3-6%",3,6,"3%",3,"IL gov, deep pockets, anti-Trump fighter posture; could buy into top tier on populist economics."],
-        ["Tier 2: Serious Contenders","Ossoff","5-7%",5,7,"1%",1,"Georgia-incumbent story depends on Senate reelection first."],
-        ["Tier 3: Underpriced, Right Profile","Moore","4%",4,4,"unknown",null,"MD gov, Rhodes scholar, combat vet; likely underpriced if markets omit him."],
-        ["Tier 3: Underpriced, Right Profile","Beshear","2.5-5%",2.5,5,"1%",1,"Two-term KY gov, southern, religious, moderate; fits the post-2024 candidate-shape argument."],
-        ["Tier 3: Underpriced, Right Profile","Gallego","<1%",0,1,"unknown",null,"AZ senator, Marine combat vet, Latino, strong 2024 ticket-split overperformance."],
-        ["Tier 3: Underpriced, Right Profile","Stein","<1%",0,1,"unknown",null,"NC gov, won big while Harris lost the state; serious technocrat profile."],
-        ["Tier 3: Underpriced, Right Profile","Kelly","<1%",0,1,"6%",6,"AZ senator, ex-astronaut, ex-Navy, Giffords; clean competent-adult template, low ambition signal."],
-        ["Tier 3: Underpriced, Right Profile","Warnock","<1%",0,1,"unknown",null,"GA senator, Black pastor, won Georgia three times in four years."],
-        ["Tier 4: Dark Horses & Wild Cards","Whitmer","1.5-4%",1.5,4,"4%",4,"MI gov, strong Electoral College math; stock has slipped and gender handwringing weighs on the read."],
-        ["Tier 4: Dark Horses & Wild Cards","Slotkin","<1%",0,1,"unknown",null,"MI senator, ex-CIA, security-credentialed moderate; pure dark horse."],
-        ["Tier 4: Dark Horses & Wild Cards","Murphy","<1%",0,1,"unknown",null,"CT senator with aggressive post-2024 fight-harder messaging."],
-        ["Tier 4: Dark Horses & Wild Cards","Polis","<1%",0,1,"unknown",null,"CO gov, term-limited in 2026, anti-orthodoxy moderate-libertarian Democrat, out gay."],
-        ["Tier 4: Dark Horses & Wild Cards","Schatz","<1%",0,1,"unknown",null,"HI senator, smart progressive policy profile, low national profile."],
-        ["Tier 5: Bench & Long Shots","Booker","~1%",1,1,"unknown",null,"Filibuster-record protest moment got attention; 2020 ceiling may still bind."],
-        ["Tier 5: Bench & Long Shots","Walz","~1%",1,1,"unknown",null,"MN gov, 2024 VP nominee; bench cred but the loss drags on ceiling."],
-        ["Tier 5: Bench & Long Shots","Cooper","<1%",0,1,"unknown",null,"Former NC gov, two-term swing-state executive, awkward post-office timeline."],
-        ["Tier 5: Bench & Long Shots","Cuban","<1%",0,1,"unknown",null,"Businessman-celebrity outsider lane; credible for the genre but still longshot."],
-        ["Tier 5: Bench & Long Shots","Emanuel","<1%",0,1,"unknown",null,"Reportedly gearing up; probably not viable but reliably appears on lists."]
-      ].map(([tier, entity, poll_display, poll_low, poll_high, market_display, market_implied, note]) => ({
-        tier, entity, poll_display, poll_low, poll_high, market_display, market_implied, note,
-        poll_midpoint: (poll_low + poll_high) / 2
+        ["Tier 1: Frontrunners","Newsom","24-34%",24,34,"21%",21,21,"CA gov, shadow campaign, has network and timing; coastal-progressive brand risk."],
+        ["Tier 1: Frontrunners","Harris","5-7%",5,7,"39%",39,39,"Leads polling on name ID; markets discount donor comeback risk less than operatives do."],
+        ["Tier 1: Frontrunners","AOC","8-9%",8,9,"10%",10,10,"Obama-tier grassroots energy; general-election ceiling is the priced risk."],
+        ["Tier 2: Serious Contenders","Shapiro","4-7%",4,7,"7%",7,7,"PA gov, disciplined Rust Belt messenger; 2026 reelection comes first."],
+        ["Tier 2: Serious Contenders","Buttigieg","3-5%",3,5,"7% (+75 NH)",7,7,"High measured favorability and communication skill; no governor track record or structural base."],
+        ["Tier 2: Serious Contenders","Pritzker","3-6%",3,6,"3%",3,3,"IL gov, deep pockets, anti-Trump fighter posture; could buy into top tier on populist economics."],
+        ["Tier 2: Serious Contenders","Ossoff","5-7%",5,7,"1%",1,1,"Georgia-incumbent story depends on Senate reelection first."],
+        ["Tier 3: Underpriced, Right Profile","Moore","4%",4,4,"unknown",null,null,"MD gov, Rhodes scholar, combat vet; likely underpriced if markets omit him."],
+        ["Tier 3: Underpriced, Right Profile","Beshear","2.5-5%",2.5,5,"1%",1,1,"Two-term KY gov, southern, religious, moderate; fits the post-2024 candidate-shape argument."],
+        ["Tier 3: Underpriced, Right Profile","Gallego","<1%",0,1,"unknown",null,null,"AZ senator, Marine combat vet, Latino, strong 2024 ticket-split overperformance."],
+        ["Tier 3: Underpriced, Right Profile","Stein","<1%",0,1,"unknown",null,null,"NC gov, won big while Harris lost the state; serious technocrat profile."],
+        ["Tier 3: Underpriced, Right Profile","Kelly","<1%",0,1,"6%",6,6,"AZ senator, ex-astronaut, ex-Navy, Giffords; clean competent-adult template, low ambition signal."],
+        ["Tier 3: Underpriced, Right Profile","Warnock","<1%",0,1,"unknown",null,null,"GA senator, Black pastor, won Georgia three times in four years."],
+        ["Tier 4: Dark Horses & Wild Cards","Whitmer","1.5-4%",1.5,4,"4%",4,4,"MI gov, strong Electoral College math; stock has slipped and gender handwringing weighs on the read."],
+        ["Tier 4: Dark Horses & Wild Cards","Slotkin","<1%",0,1,"unknown",null,null,"MI senator, ex-CIA, security-credentialed moderate; pure dark horse."],
+        ["Tier 4: Dark Horses & Wild Cards","Murphy","<1%",0,1,"unknown",null,null,"CT senator with aggressive post-2024 fight-harder messaging."],
+        ["Tier 4: Dark Horses & Wild Cards","Polis","<1%",0,1,"unknown",null,null,"CO gov, term-limited in 2026, anti-orthodoxy moderate-libertarian Democrat, out gay."],
+        ["Tier 4: Dark Horses & Wild Cards","Schatz","<1%",0,1,"unknown",null,null,"HI senator, smart progressive policy profile, low national profile."],
+        ["Tier 5: Bench & Long Shots","Booker","~1%",1,1,"unknown",null,null,"Filibuster-record protest moment got attention; 2020 ceiling may still bind."],
+        ["Tier 5: Bench & Long Shots","Walz","~1%",1,1,"unknown",null,null,"MN gov, 2024 VP nominee; bench cred but the loss drags on ceiling."],
+        ["Tier 5: Bench & Long Shots","Cooper","<1%",0,1,"unknown",null,null,"Former NC gov, two-term swing-state executive, awkward post-office timeline."],
+        ["Tier 5: Bench & Long Shots","Cuban","<1%",0,1,"unknown",null,null,"Businessman-celebrity outsider lane; credible for the genre but still longshot."],
+        ["Tier 5: Bench & Long Shots","Emanuel","<1%",0,1,"unknown",null,null,"Reportedly gearing up; probably not viable but reliably appears on lists."]
+      ].map(([tier, entity, market_display, market_low, market_high, poll_display, poll_low, poll_high, note]) => ({
+        tier, entity, market_display, market_low, market_high, poll_display, poll_low, poll_high, note,
+        market_midpoint: (market_low + market_high) / 2,
+        poll_midpoint: poll_low == null || poll_high == null ? null : (poll_low + poll_high) / 2
       }))
     };
 
@@ -380,14 +381,14 @@
     const pct = n => `${Math.max(1.5, Math.min(100, n / 40 * 100))}%`;
 
     function spread(row) {
-      return row.market_implied == null ? null : row.market_implied - row.poll_midpoint;
+      return row.poll_midpoint == null ? null : row.poll_midpoint - row.market_midpoint;
     }
 
     function filteredRows() {
       let rows = activeTier === "All" ? [...snapshot.rows] : snapshot.rows.filter(r => r.tier === activeTier);
-      if (sortMode === "market") rows.sort((a, b) => (b.market_implied ?? -1) - (a.market_implied ?? -1));
+      if (sortMode === "market") rows.sort((a, b) => b.market_midpoint - a.market_midpoint);
       if (sortMode === "spread") rows.sort((a, b) => (spread(b) ?? -99) - (spread(a) ?? -99));
-      if (sortMode === "poll") rows.sort((a, b) => b.poll_midpoint - a.poll_midpoint);
+      if (sortMode === "poll") rows.sort((a, b) => (b.poll_midpoint ?? -1) - (a.poll_midpoint ?? -1));
       return rows;
     }
 
@@ -415,15 +416,14 @@
     }
 
     function renderSummary(rows) {
-      const withMarket = rows.filter(r => r.market_implied != null);
-      const avgPoll = rows.reduce((sum, r) => sum + r.poll_midpoint, 0) / rows.length;
-      const avgMarket = withMarket.reduce((sum, r) => sum + r.market_implied, 0) / Math.max(1, withMarket.length);
-      const biggestGap = withMarket.reduce((best, r) => Math.abs(spread(r)) > Math.abs(spread(best)) ? r : best, withMarket[0] || rows[0]);
+      const withPoll = rows.filter(r => r.poll_midpoint != null);
+      const avgMarket = rows.reduce((sum, r) => sum + r.market_midpoint, 0) / rows.length;
+      const biggestGap = withPoll.reduce((best, r) => Math.abs(spread(r)) > Math.abs(spread(best)) ? r : best, withPoll[0] || rows[0]);
       const stats = [
         ["Candidates", rows.length],
-        ["With market price", withMarket.length],
-        ["Avg poll midpoint", `${avgPoll.toFixed(1)}%`],
-        ["Biggest spread", withMarket.length ? `${biggestGap.entity} ${fmt(spread(biggestGap))}` : "none"]
+        ["With polling", withPoll.length],
+        ["Avg market midpoint", `${avgMarket.toFixed(1)}%`],
+        ["Biggest spread", withPoll.length ? `${biggestGap.entity} ${fmt(spread(biggestGap))}` : "none"]
       ];
       document.getElementById("summary").innerHTML = stats.map(([label, value]) => `
         <article class="stat"><span class="label">${label}</span><span class="value">${value}</span></article>
@@ -433,7 +433,7 @@
     function renderBoard(rows) {
       document.getElementById("board").innerHTML = `
         <div class="row head">
-          <span>Tier</span><span>Candidate</span><span>Poll</span><span>Market</span><span>Spread</span><span>Read</span>
+          <span>Tier</span><span>Candidate</span><span>Market</span><span>Poll</span><span>Spread</span><span>Read</span>
         </div>
         ${rows.map(row => {
           const s = spread(row);
@@ -442,12 +442,12 @@
             <article class="row">
               <div class="tier">${row.tier}</div>
               <div class="name">${row.entity}</div>
-              <div class="num">${row.poll_display}</div>
               <div class="num">${row.market_display}</div>
+              <div class="num">${row.poll_display}</div>
               <div class="gap ${gapClass}">${s == null ? "n/a" : fmt(s)}</div>
               <div class="bars">
-                <div class="barline"><span>poll</span><div class="track"><i class="fill poll" style="--w:${pct(row.poll_midpoint)}"></i></div></div>
-                <div class="barline"><span>market</span><div class="track"><i class="fill market ${row.market_implied == null ? "unknown" : ""}" style="--w:${row.market_implied == null ? "0%" : pct(row.market_implied)}"></i></div></div>
+                <div class="barline"><span>market</span><div class="track"><i class="fill market" style="--w:${pct(row.market_midpoint)}"></i></div></div>
+                <div class="barline"><span>poll</span><div class="track"><i class="fill poll ${row.poll_midpoint == null ? "unknown" : ""}" style="--w:${row.poll_midpoint == null ? "0%" : pct(row.poll_midpoint)}"></i></div></div>
               </div>
               <p class="note">${row.note}</p>
             </article>
@@ -457,12 +457,12 @@
     }
 
     function renderRanks() {
-      const priced = snapshot.rows.filter(r => r.market_implied != null);
-      const over = [...priced].sort((a, b) => spread(b) - spread(a)).slice(0, 5);
-      const under = [...priced].sort((a, b) => spread(a) - spread(b)).slice(0, 5);
+      const priced = snapshot.rows.filter(r => r.poll_midpoint != null);
+      const over = priced.filter(r => spread(r) > 0).sort((a, b) => spread(b) - spread(a)).slice(0, 5);
+      const under = priced.filter(r => spread(r) < 0).sort((a, b) => spread(a) - spread(b)).slice(0, 5);
       const item = r => `<div class="rank-item"><span>${r.entity}</span><strong>${fmt(spread(r))}</strong></div>`;
-      document.getElementById("overpriced").innerHTML = over.map(item).join("");
-      document.getElementById("underpriced").innerHTML = under.map(item).join("");
+      document.getElementById("overpriced").innerHTML = over.map(item).join("") || `<div class="rank-item"><span>None</span><strong>n/a</strong></div>`;
+      document.getElementById("underpriced").innerHTML = under.map(item).join("") || `<div class="rank-item"><span>None</span><strong>n/a</strong></div>`;
     }
 
     function render() {
