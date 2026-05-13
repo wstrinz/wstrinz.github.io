@@ -52,11 +52,11 @@
     h1 {
       margin: 0;
       max-width: 920px;
-      font-size: 86px;
+      font-size: 76px;
       line-height: .88;
       font-weight: 900;
       text-transform: uppercase;
-      overflow-wrap: anywhere;
+      overflow-wrap: normal;
     }
 
     .dek {
@@ -133,25 +133,133 @@
       font-weight: 900;
     }
 
+    .history {
+      margin: 18px 0;
+      padding: 16px;
+      background: rgba(255, 250, 240, .86);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      min-width: 0;
+    }
+
+    .history-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .history h2 {
+      margin: 0 0 5px;
+      font-size: 24px;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .chart-wrap {
+      min-height: 250px;
+      overflow: hidden;
+      border-top: 1px solid var(--line);
+      padding-top: 10px;
+    }
+
+    .chart {
+      display: block;
+      width: 100%;
+      height: 246px;
+    }
+
+    .chart-grid {
+      stroke: rgba(22, 22, 21, .12);
+      stroke-width: 1;
+    }
+
+    .chart-line {
+      fill: none;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .chart-dot {
+      stroke: var(--panel);
+      stroke-width: 2;
+    }
+
+    .chart-label {
+      fill: var(--ink);
+      font: 11px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    .chart-axis {
+      fill: var(--muted);
+      font: 10px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-transform: uppercase;
+    }
+
+    .chart-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+      margin-top: 10px;
+    }
+
+    .legend-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+      font: 11px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-transform: uppercase;
+    }
+
+    .legend-chip i {
+      width: 18px;
+      height: 3px;
+      display: inline-block;
+    }
+
+    .baseline-list {
+      display: grid;
+      gap: 8px;
+      padding: 12px 0 2px;
+    }
+
+    .baseline-row {
+      display: grid;
+      grid-template-columns: 108px minmax(0, 1fr) 58px;
+      gap: 10px;
+      align-items: center;
+      font: 12px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-transform: uppercase;
+    }
+
+    .baseline-row .track {
+      height: 11px;
+    }
+
     main {
       display: grid;
       grid-template-columns: 1fr 360px;
       gap: 18px;
       align-items: start;
+      min-width: 0;
     }
 
     .board, .side {
       background: rgba(255, 250, 240, .86);
       border: 1px solid var(--line);
       box-shadow: var(--shadow);
+      min-width: 0;
     }
 
     .row {
       display: grid;
-      grid-template-columns: 116px minmax(112px, 158px) 78px 78px 84px 76px minmax(260px, 1fr);
+      grid-template-columns: 108px minmax(118px, 154px) minmax(250px, 310px) minmax(360px, 1fr);
       gap: 12px;
       min-height: 74px;
-      align-items: center;
+      align-items: start;
       padding: 10px 14px;
       border-bottom: 1px solid var(--line);
     }
@@ -165,6 +273,23 @@
       color: var(--paper);
       font: 11px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       text-transform: uppercase;
+      align-items: center;
+    }
+
+    .sort-head {
+      border: 0;
+      min-height: 0;
+      padding: 0;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .sort-head.active::after {
+      content: attr(data-arrow);
+      margin-left: 5px;
     }
 
     .tier {
@@ -179,72 +304,80 @@
       line-height: 1;
     }
 
-    .num {
-      font: 16px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      white-space: nowrap;
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 6px;
+      min-width: 0;
     }
 
-    .gap {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 76px;
-      min-height: 28px;
+    .metric {
+      min-width: 0;
+      padding: 6px 7px;
       border: 1px solid var(--line);
-      font: 12px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       background: var(--paper);
     }
 
-    .gap.hot { border-color: rgba(189, 59, 51, .55); color: var(--red); }
-    .gap.cold { border-color: rgba(47, 109, 143, .55); color: var(--blue); }
-
-    .vibe {
-      display: inline-grid;
-      grid-template-columns: 28px 1fr;
-      align-items: center;
-      gap: 7px;
-      font: 12px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    }
-
-    .vibe b {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 28px;
-      height: 28px;
-      border: 1px solid var(--ink);
-      background: var(--panel);
-      font: 15px/1 Georgia, "Times New Roman", serif;
-    }
-
-    .vibe i {
-      height: 8px;
-      width: calc(var(--vibe) * 10px);
-      min-width: 10px;
-      max-width: 40px;
-      background: var(--green);
+    .metric b {
       display: block;
+      margin-bottom: 4px;
+      color: var(--muted);
+      font: 9px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-transform: uppercase;
     }
+
+    .metric span {
+      display: block;
+      min-height: 14px;
+      font: 13px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .metric.hot { border-color: rgba(189, 59, 51, .55); color: var(--red); }
+    .metric.cold { border-color: rgba(47, 109, 143, .55); color: var(--blue); }
 
     .read {
       display: grid;
-      gap: 6px;
-      min-width: 240px;
+      gap: 7px;
+      min-width: 0;
     }
 
-    .bars {
+    .signal-strip {
       display: grid;
-      gap: 6px;
-    }
-
-    .barline {
-      display: grid;
-      grid-template-columns: 50px 1fr;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 8px;
-      align-items: center;
+      align-items: stretch;
+      min-width: 0;
+    }
+
+    .signal {
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      gap: 5px;
+      min-width: 0;
+      padding: 6px;
+      background: rgba(22, 22, 21, .035);
       font: 10px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       text-transform: uppercase;
       color: var(--muted);
+    }
+
+    .signal-label {
+      min-width: 0;
+      line-height: 1.05;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .signal-value {
+      color: var(--ink);
+      font-size: 12px;
+      line-height: 1.05;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .track {
@@ -252,6 +385,13 @@
       height: 9px;
       background: rgba(22, 22, 21, .08);
       overflow: hidden;
+      min-width: 0;
+    }
+
+    .signal.vibe-signal .track {
+      background:
+        linear-gradient(90deg, rgba(22, 22, 21, .18) 1px, transparent 1px) 0 0 / 25% 100%,
+        rgba(22, 22, 21, .08);
     }
 
     .fill {
@@ -262,6 +402,10 @@
 
     .poll { background: var(--blue); }
     .market { background: var(--red); }
+    .vibes { background: var(--green); }
+    .spread-fill.hot { background: var(--red); }
+    .spread-fill.cold { background: var(--blue); }
+    .spread-fill.neutral { background: var(--gold); }
     .unknown { opacity: .26; }
 
     .note {
@@ -269,6 +413,7 @@
       color: #3f3a33;
       font-size: 13px;
       line-height: 1.32;
+      overflow-wrap: anywhere;
     }
 
     .vibe-note {
@@ -277,6 +422,7 @@
       font-size: 13px;
       line-height: 1.32;
       font-weight: 700;
+      overflow-wrap: anywhere;
     }
 
     .side {
@@ -344,9 +490,9 @@
       header, main, .summary { grid-template-columns: 1fr; }
       h1 { font-size: 58px; }
       .row {
-        grid-template-columns: 84px minmax(110px, 1fr) 72px 72px 76px 70px;
+        grid-template-columns: 82px minmax(110px, 1fr);
       }
-      .row .read { grid-column: 2 / -1; }
+      .metrics, .row .read { grid-column: 2 / -1; }
       .row.head { display: none; }
     }
 
@@ -369,13 +515,82 @@
       }
       .controls > * { width: 100%; }
       .read { min-width: 0; }
-      .row {
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-        gap: 8px;
+      main, .board, .side, .history {
+        width: calc(100vw - 20px);
+        max-width: calc(100vw - 20px);
+        overflow: hidden;
       }
-      .num { white-space: normal; }
-      .tier, .name, .row .read { grid-column: 1 / -1; }
-      .gap { width: 100%; }
+      .history-head {
+        display: grid;
+        gap: 10px;
+      }
+      .chart-wrap { min-height: 230px; }
+      .chart { height: 226px; }
+      .row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 10px;
+        width: calc(100vw - 20px);
+        max-width: calc(100vw - 20px);
+        overflow: hidden;
+        padding-top: 14px;
+      }
+      .tier, .name, .metrics, .row .read { grid-column: 1 / -1; }
+      .tier {
+        order: 1;
+        color: var(--muted);
+        min-height: 24px;
+      }
+      .name {
+        order: 2;
+        font-size: 28px;
+        line-height: .95;
+      }
+      .metrics {
+        display: none;
+        order: 3;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .read {
+        order: 4;
+      }
+      .signal-strip {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 6px;
+        width: 100%;
+        max-width: 100%;
+      }
+      .signal {
+        grid-template-columns: 72px minmax(0, 1fr);
+        grid-template-rows: auto auto;
+        align-items: center;
+        min-height: 32px;
+        padding: 3px 0;
+        background: transparent;
+      }
+      .signal-value {
+        display: block;
+        grid-column: 1;
+        grid-row: 2;
+        font-size: 11px;
+      }
+      .signal-label {
+        grid-column: 1;
+        grid-row: 1;
+      }
+      .signal .track {
+        grid-column: 2;
+        grid-row: 1 / 3;
+      }
+      .note, .vibe-note {
+        max-width: calc(100vw - 48px);
+        word-break: break-word;
+      }
+      .baseline-row {
+        grid-template-columns: 84px minmax(0, 1fr) 50px;
+        gap: 8px;
+        font-size: 10px;
+      }
     }
   </style>
 </head>
@@ -391,12 +606,28 @@
         <div class="legend">
           <span class="key"><i class="swatch market"></i> market midpoint</span>
           <span class="key"><i class="swatch poll"></i> polling</span>
+          <span class="key"><i class="swatch vibes"></i> vibes / 4</span>
         </div>
       </div>
     </header>
 
     <div class="controls" id="controls"></div>
     <section class="summary" id="summary"></section>
+    <section class="history">
+      <div class="history-head">
+        <div>
+          <h2>Change Over Time</h2>
+          <p class="small">Lines update as new snapshots are appended. With one capture, this shows the current baseline point.</p>
+        </div>
+        <select id="chartMetric" aria-label="Chart metric">
+          <option value="market_midpoint">Chart: market</option>
+          <option value="poll_midpoint">Chart: poll</option>
+          <option value="spread">Chart: spread</option>
+          <option value="vibes_score">Chart: vibes</option>
+        </select>
+      </div>
+      <div class="chart-wrap" id="historyChart"></div>
+    </section>
 
     <main>
       <section class="board" id="board"></section>
@@ -482,24 +713,59 @@
       Object.assign(row, { vibes_score, vibes_rationale });
     });
 
-    const tiers = ["All", ...new Set(snapshot.rows.map(r => r.tier))];
+    let tiers = ["All", ...new Set(snapshot.rows.map(r => r.tier))];
+    let history = [snapshot];
+    const chartColors = ["#bd3b33", "#2f6d8f", "#527d50", "#b6792c", "#633c2c", "#6f6a60", "#8b4b55", "#315d5d"];
     let activeTier = "All";
     let sortMode = "tier";
+    let sortDir = "asc";
+    let chartMetric = "market_midpoint";
 
     const fmt = n => n == null ? "unknown" : `${n > 0 ? "+" : ""}${n.toFixed(n % 1 ? 1 : 0)} pts`;
+    const fmtValue = (n, metric = chartMetric) => n == null ? "n/a" : `${n.toFixed(n % 1 ? 1 : 0)}${metric === "spread" ? " pts" : metric === "vibes_score" ? "/4" : "%"}`;
     const pct = n => `${Math.max(1.5, Math.min(100, n / 40 * 100))}%`;
+    const vibePct = n => `${Math.max(0, Math.min(100, n / 4 * 100))}%`;
+    const spreadPct = n => n == null ? "0%" : `${Math.max(1.5, Math.min(100, Math.abs(n) / 40 * 100))}%`;
 
     function spread(row) {
       return row.poll_midpoint == null ? null : row.poll_midpoint - row.market_midpoint;
     }
 
+    function sortValue(row, mode) {
+      if (mode === "candidate") return row.entity;
+      if (mode === "market") return row.market_midpoint;
+      if (mode === "poll") return row.poll_midpoint;
+      if (mode === "spread") return spread(row);
+      if (mode === "vibes") return row.vibes_score;
+      return snapshot.rows.indexOf(row);
+    }
+
+    function compareRows(a, b) {
+      const av = sortValue(a, sortMode);
+      const bv = sortValue(b, sortMode);
+      if (sortMode === "candidate") return sortDir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
+      const aMissing = av == null;
+      const bMissing = bv == null;
+      if (aMissing && bMissing) return snapshot.rows.indexOf(a) - snapshot.rows.indexOf(b);
+      if (aMissing) return 1;
+      if (bMissing) return -1;
+      return sortDir === "asc" ? av - bv : bv - av;
+    }
+
     function filteredRows() {
       let rows = activeTier === "All" ? [...snapshot.rows] : snapshot.rows.filter(r => r.tier === activeTier);
-      if (sortMode === "market") rows.sort((a, b) => b.market_midpoint - a.market_midpoint);
-      if (sortMode === "spread") rows.sort((a, b) => (spread(b) ?? -99) - (spread(a) ?? -99));
-      if (sortMode === "poll") rows.sort((a, b) => (b.poll_midpoint ?? -1) - (a.poll_midpoint ?? -1));
-      if (sortMode === "vibes") rows.sort((a, b) => b.vibes_score - a.vibes_score || b.market_midpoint - a.market_midpoint);
+      rows.sort(compareRows);
       return rows;
+    }
+
+    function setSort(mode) {
+      if (sortMode === mode) {
+        sortDir = sortDir === "asc" ? "desc" : "asc";
+      } else {
+        sortMode = mode;
+        sortDir = mode === "tier" || mode === "candidate" ? "asc" : "desc";
+      }
+      render();
     }
 
     function renderControls() {
@@ -514,15 +780,20 @@
       });
 
       const select = document.createElement("select");
-      [["tier","Sort: tier order"],["market","Sort: market"],["poll","Sort: poll"],["spread","Sort: spread"],["vibes","Sort: vibes"]].forEach(([value, text]) => {
+      [["tier","Sort: tier order"],["candidate","Sort: candidate"],["market","Sort: market"],["poll","Sort: poll"],["spread","Sort: spread"],["vibes","Sort: vibes"]].forEach(([value, text]) => {
         const option = document.createElement("option");
         option.value = value;
         option.textContent = text;
         select.appendChild(option);
       });
       select.value = sortMode;
-      select.onchange = e => { sortMode = e.target.value; render(); };
+      select.onchange = e => { sortMode = e.target.value; sortDir = sortMode === "tier" || sortMode === "candidate" ? "asc" : "desc"; render(); };
       controls.appendChild(select);
+
+      const dir = document.createElement("button");
+      dir.textContent = sortDir === "asc" ? "Sort: low to high" : "Sort: high to low";
+      dir.onclick = () => { sortDir = sortDir === "asc" ? "desc" : "asc"; render(); };
+      controls.appendChild(dir);
     }
 
     function renderSummary(rows) {
@@ -546,7 +817,14 @@
     function renderBoard(rows) {
       document.getElementById("board").innerHTML = `
         <div class="row head">
-          <span>Tier</span><span>Candidate</span><span>Market</span><span>Poll</span><span>Spread</span><span>Vibes</span><span>Read</span>
+          ${[
+            ["tier", "Tier"],
+            ["candidate", "Candidate"],
+            ["market", "Snapshot"],
+            ["vibes", "Signals / Read"]
+          ].map(([mode, label]) => `
+            <button class="sort-head ${sortMode === mode ? "active" : ""}" data-arrow="${sortDir === "asc" ? "up" : "down"}" onclick="setSort('${mode}')">${label}</button>
+          `).join("")}
         </div>
         ${rows.map(row => {
           const s = spread(row);
@@ -555,14 +833,18 @@
             <article class="row">
               <div class="tier">${row.tier}</div>
               <div class="name">${row.entity}</div>
-              <div class="num">${row.market_display}</div>
-              <div class="num">${row.poll_display}</div>
-              <div class="gap ${gapClass}">${s == null ? "n/a" : fmt(s)}</div>
-              <div class="vibe" style="--vibe:${row.vibes_score}"><b>${row.vibes_score}</b><i></i></div>
+              <div class="metrics">
+                <div class="metric"><b>Market</b><span>${row.market_display}</span></div>
+                <div class="metric"><b>Poll</b><span>${row.poll_display}</span></div>
+                <div class="metric ${gapClass}"><b>Spread</b><span>${s == null ? "n/a" : fmt(s)}</span></div>
+                <div class="metric"><b>Vibes</b><span>${row.vibes_score}/4</span></div>
+              </div>
               <div class="read">
-                <div class="bars">
-                  <div class="barline"><span>market</span><div class="track"><i class="fill market" style="--w:${pct(row.market_midpoint)}"></i></div></div>
-                  <div class="barline"><span>poll</span><div class="track"><i class="fill poll ${row.poll_midpoint == null ? "unknown" : ""}" style="--w:${row.poll_midpoint == null ? "0%" : pct(row.poll_midpoint)}"></i></div></div>
+                <div class="signal-strip">
+                  <div class="signal"><span class="signal-label">Market</span><span class="signal-value">${row.market_display}</span><div class="track"><i class="fill market" style="--w:${pct(row.market_midpoint)}"></i></div></div>
+                  <div class="signal"><span class="signal-label">Poll</span><span class="signal-value">${row.poll_display}</span><div class="track"><i class="fill poll ${row.poll_midpoint == null ? "unknown" : ""}" style="--w:${row.poll_midpoint == null ? "0%" : pct(row.poll_midpoint)}"></i></div></div>
+                  <div class="signal"><span class="signal-label">Spread</span><span class="signal-value">${s == null ? "n/a" : fmt(s)}</span><div class="track"><i class="fill spread-fill ${gapClass || "neutral"} ${s == null ? "unknown" : ""}" style="--w:${spreadPct(s)}"></i></div></div>
+                  <div class="signal vibe-signal"><span class="signal-label">Vibes</span><span class="signal-value">${row.vibes_score}/4</span><div class="track" title="Vibes Check ${row.vibes_score}/4"><i class="fill vibes" style="--w:${vibePct(row.vibes_score)}"></i></div></div>
                 </div>
                 <p class="vibe-note">${row.vibes_rationale}</p>
                 <p class="note">${row.note}</p>
@@ -570,6 +852,93 @@
             </article>
           `;
         }).join("")}
+      `;
+    }
+
+    function metricValue(row, metric) {
+      if (metric === "spread") return spread(row);
+      return row[metric];
+    }
+
+    function renderHistory(rows) {
+      const visible = rows
+        .filter(row => metricValue(row, chartMetric) != null)
+        .slice(0, 8);
+      if (history.length < 2) {
+        const max = chartMetric === "vibes_score"
+          ? 4
+          : chartMetric === "spread"
+            ? Math.max(6, ...visible.map(row => Math.abs(metricValue(row, chartMetric))))
+            : Math.max(10, ...visible.map(row => metricValue(row, chartMetric)));
+        document.getElementById("historyChart").innerHTML = `
+          <div class="baseline-list">
+            ${visible.map((row, index) => {
+              const value = metricValue(row, chartMetric);
+              const width = chartMetric === "spread" ? `${Math.min(100, Math.abs(value) / max * 100)}%` : `${Math.min(100, value / max * 100)}%`;
+              const color = chartColors[index % chartColors.length];
+              return `
+                <div class="baseline-row">
+                  <span>${row.entity}</span>
+                  <div class="track"><i class="fill" style="--w:${width}; background:${color}"></i></div>
+                  <strong>${fmtValue(value)}</strong>
+                </div>
+              `;
+            }).join("")}
+          </div>
+          <p class="small">First capture only. This panel becomes a line graph automatically after the next timestamped snapshot is added to snapshots.json.</p>
+        `;
+        return;
+      }
+
+      const pointsByEntity = visible.map((row, index) => {
+        const points = history.map((snap, snapIndex) => {
+          const match = snap.rows.find(candidate => candidate.entity === row.entity);
+          return {
+            snapIndex,
+            captured_at: snap.captured_at,
+            value: match ? metricValue(match, chartMetric) : null
+          };
+        }).filter(point => point.value != null);
+        return { row, points, color: chartColors[index % chartColors.length] };
+      }).filter(series => series.points.length);
+
+      if (!pointsByEntity.length) {
+        document.getElementById("historyChart").innerHTML = `<p class="small">No values available for this metric.</p>`;
+        return;
+      }
+
+      const allValues = pointsByEntity.flatMap(series => series.points.map(point => point.value));
+      const rawMin = Math.min(...allValues);
+      const rawMax = Math.max(...allValues);
+      const max = chartMetric === "vibes_score" ? 4 : Math.max(rawMax, chartMetric === "spread" ? 3 : 10);
+      const min = chartMetric === "spread" ? Math.min(rawMin, -3) : 0;
+      const width = 960;
+      const height = 240;
+      const pad = { top: 18, right: 20, bottom: 34, left: 44 };
+      const plotW = width - pad.left - pad.right;
+      const plotH = height - pad.top - pad.bottom;
+      const x = i => history.length === 1 ? pad.left + plotW / 2 : pad.left + (i / (history.length - 1)) * plotW;
+      const y = value => pad.top + (max - value) / (max - min || 1) * plotH;
+      const grid = [0, .25, .5, .75, 1].map(t => {
+        const gy = pad.top + t * plotH;
+        const val = max - t * (max - min);
+        return `<line class="chart-grid" x1="${pad.left}" x2="${width - pad.right}" y1="${gy}" y2="${gy}"></line><text class="chart-axis" x="8" y="${gy + 3}">${fmtValue(val)}</text>`;
+      }).join("");
+      const lines = pointsByEntity.map(series => {
+        const d = series.points.map((point, i) => `${i ? "L" : "M"}${x(point.snapIndex)},${y(point.value)}`).join(" ");
+        const dots = series.points.map(point => `<circle class="chart-dot" cx="${x(point.snapIndex)}" cy="${y(point.value)}" r="4" fill="${series.color}"><title>${series.row.entity}: ${fmtValue(point.value)}</title></circle>`).join("");
+        const last = series.points[series.points.length - 1];
+        return `<path class="chart-line" d="${d}" stroke="${series.color}"></path>${dots}<text class="chart-label" x="${Math.min(width - 120, x(last.snapIndex) + 8)}" y="${y(last.value) - 6}">${series.row.entity}</text>`;
+      }).join("");
+      const dates = history.map((snap, i) => `<text class="chart-axis" x="${x(i) - 32}" y="${height - 10}">${new Date(snap.captured_at).toLocaleDateString("en-US", { month: "short", day: "numeric" })}</text>`).join("");
+      const legend = pointsByEntity.map(series => `<span class="legend-chip"><i style="background:${series.color}"></i>${series.row.entity}</span>`).join("");
+      document.getElementById("historyChart").innerHTML = `
+        <svg class="chart" viewBox="0 0 ${width} ${height}" role="img" aria-label="Historical ${chartMetric.replace("_", " ")} line chart">
+          ${grid}
+          ${lines}
+          ${dates}
+        </svg>
+        <div class="chart-legend">${legend}</div>
       `;
     }
 
@@ -582,15 +951,68 @@
       document.getElementById("underpriced").innerHTML = under.map(item).join("") || `<div class="rank-item"><span>None</span><strong>n/a</strong></div>`;
     }
 
+    function normalizeSnapshot(raw) {
+      const rows = (raw.rows || []).map(row => {
+        const normalized = Array.isArray(row)
+          ? {
+              tier: row[0],
+              entity: row[1],
+              market_display: row[2],
+              market_low: row[3],
+              market_high: row[4],
+              poll_display: row[5],
+              poll_low: row[6],
+              poll_high: row[7],
+              note: row[8]
+            }
+          : { ...row };
+        normalized.market_midpoint = normalized.market_midpoint ?? (normalized.market_low + normalized.market_high) / 2;
+        normalized.poll_midpoint = normalized.poll_midpoint ?? (normalized.poll_low == null || normalized.poll_high == null ? null : (normalized.poll_low + normalized.poll_high) / 2);
+        if (normalized.vibes_score == null && vibes[normalized.entity]) {
+          [normalized.vibes_score, normalized.vibes_rationale] = vibes[normalized.entity];
+        }
+        return normalized;
+      });
+      return { ...raw, rows };
+    }
+
+    async function loadHistory() {
+      try {
+        const response = await fetch("snapshots.json", { cache: "no-store" });
+        if (!response.ok) return;
+        const data = await response.json();
+        const loaded = (Array.isArray(data) ? data : [data])
+          .map(normalizeSnapshot)
+          .filter(item => item.rows.length);
+        if (!loaded.length) return;
+        history = loaded.sort((a, b) => new Date(a.captured_at) - new Date(b.captured_at));
+        const latest = history[history.length - 1];
+        Object.assign(snapshot, latest);
+        tiers = ["All", ...new Set(snapshot.rows.map(r => r.tier))];
+        if (!tiers.includes(activeTier)) activeTier = "All";
+        document.querySelector(".stamp").textContent = `Captured ${new Date(snapshot.captured_at).toLocaleString("en-US", { month: "short", day: "numeric", year: "numeric", hour: "numeric", minute: "2-digit", timeZoneName: "short" })}`;
+        render();
+      } catch (error) {
+        console.warn("Using inline snapshot fallback", error);
+      }
+    }
+
     function render() {
       renderControls();
       const rows = filteredRows();
       renderSummary(rows);
+      renderHistory(rows);
       renderBoard(rows);
       renderRanks();
     }
 
+    document.getElementById("chartMetric").addEventListener("change", e => {
+      chartMetric = e.target.value;
+      render();
+    });
+
     render();
+    loadHistory();
   </script>
 </body>
 </html>
