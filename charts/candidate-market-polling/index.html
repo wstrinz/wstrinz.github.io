@@ -388,7 +388,7 @@
       min-width: 0;
     }
 
-    .signal.vibe-signal .track {
+    .signal.ahm-signal .track {
       background:
         linear-gradient(90deg, rgba(22, 22, 21, .18) 1px, transparent 1px) 0 0 / 25% 100%,
         rgba(22, 22, 21, .08);
@@ -416,7 +416,7 @@
       overflow-wrap: anywhere;
     }
 
-    .vibe-note {
+    .ahm-note {
       margin: 0 0 5px;
       color: #1f3f2f;
       font-size: 13px;
@@ -582,7 +582,7 @@
         grid-column: 2;
         grid-row: 1 / 3;
       }
-      .note, .vibe-note {
+      .note, .ahm-note {
         max-width: calc(100vw - 48px);
         word-break: break-word;
       }
@@ -601,12 +601,12 @@
         <h1>Candidate Market/Polling Watch</h1>
       </div>
       <div>
-        <p class="dek">Seed dashboard for tracking market implied probability, polling, spread, and a separate soft-signal read on patriotic-repair affect.</p>
+        <p class="dek">Seed dashboard for tracking market implied probability, polling, spread, and a separate Authentic Hopeful Material read.</p>
         <span class="stamp">Captured May 13, 2026 · 07:27 CDT</span>
         <div class="legend">
           <span class="key"><i class="swatch market"></i> market midpoint</span>
           <span class="key"><i class="swatch poll"></i> polling</span>
-          <span class="key"><i class="swatch vibes"></i> vibes / 4</span>
+          <span class="key"><i class="swatch vibes"></i> AHM / 4</span>
         </div>
       </div>
     </header>
@@ -623,7 +623,7 @@
           <option value="market_midpoint">Chart: market</option>
           <option value="poll_midpoint">Chart: poll</option>
           <option value="spread">Chart: spread</option>
-          <option value="vibes_score">Chart: vibes</option>
+          <option value="vibes_score">Chart: AHM</option>
         </select>
       </div>
       <div class="chart-wrap" id="historyChart"></div>
@@ -633,10 +633,10 @@
       <section class="board" id="board"></section>
       <aside class="side">
         <div class="thesis">
-          <h2>Vibes Check</h2>
-          <p class="small">Subjective read on patriotic-repair affect; hypothesis is that high scorers may gain as voters see more unscripted campaign exposure.</p>
-          <p class="small">Patriotic repair: optimistic about America, emotionally normal, clear-eyed without doom, fights systems/abusers/Trumpism rather than voters, and can survive long-form unscripted media without feeling synthetic.</p>
-          <p class="small">This is not a competence or coalition-building score; those should mostly show up in polling and markets. It is a squishier soft signal for what may become more visible as the primary heats up.</p>
+          <h2>AHM Check</h2>
+          <p class="small">Authentic Hopeful Material score: a subjective read on whether a candidate can carry a positive national story under sustained, low-filter exposure.</p>
+          <p class="small">The test combines five traits: positive vision, clear-eyed problem naming, selective fight-picking, comfort being themselves in long-form settings, and material specifics voters can actually point to.</p>
+          <p class="small">This is not a competence or coalition-building score; those should mostly show up in polling and markets. It is a soft signal for what may become more visible as the primary heats up.</p>
           <p class="small">4 = natural carrier. 3 = credible with a weakness. 2 = partial fit. 1 = brand fights the thesis.</p>
         </div>
         <h2>Polling Above Market</h2>
@@ -682,34 +682,34 @@
       }))
     };
 
-    const vibes = {
-      Newsom: [1, "Skilled fighter, but the coastal anti-Trump combat brand fights the broader welcome-and-repair thesis."],
+    const ahm = {
+      Newsom: [1, "Technically skilled, but the polish cracks under sustained exposure and the positive story reads PR-shaped."],
       Harris: [1, "High name ID, but the public style still reads scripted, institutional, and backward-linked to 2024."],
-      AOC: [2, "Authentic and future-facing with real grassroots warmth, but the factional brand narrows the welcome mat."],
+      AOC: [3, "Authentic, materially specific, and strong at fight-picking; the positive national vision is the weaker leg."],
       Shapiro: [3, "Competent patriotic-repair lane with Rust Belt discipline; warmth and long-form ease are less proven nationally."],
       Buttigieg: [4, "Probably the cleanest communicator for optimistic repair and long-form normie persuasion."],
-      Pritzker: [2, "Good fighter and material-policy messenger, but billionaire combat posture is not naturally a bring-people-in vibe."],
+      Pritzker: [3, "Has fight-picking and material Illinois delivery; authenticity has improved, though the billionaire frame still drags."],
       Ossoff: [2, "Calm and polished, but the national story and unscripted emotional texture are still thin."],
-      Moore: [3, "Biography and tone fit patriotic repair well; needs proof under national pressure and tougher fights."],
-      Beshear: [3, "Warm red-state repair profile with clear general-election shape; national charisma is still an open question."],
-      Gallego: [3, "Patriotic biography and working-class edge fit the thesis, though the hopeful national story is underdeveloped."],
-      Stein: [2, "Serious competence profile, but too little national affect or long-form identity to score higher yet."],
+      Moore: [4, "Service biography, tone, and material story fit the thesis; long-form proof is thinner, but the signals are strong."],
+      Beshear: [4, "Red-state crisis governing gives him competence, decency, specificity, and low-key authentic hope."],
+      Gallego: [4, "Marine vet origin story, swing-state proof, and fight-without-ideology coding make the profile unusually complete."],
+      Stein: [3, "Competence-and-AG-fight profile fits, but long-form national self and positive vision are still untested."],
       Kelly: [3, "Competent patriotic adult template with broad appeal, but he has not shown much appetite for narrative politics."],
       Warnock: [4, "Natural moral-patriotic storyteller who can name pain without sounding small or synthetic."],
-      Whitmer: [2, "Strong executive and fighter, but current national vibe feels more tactical than hopeful-repair."],
-      Slotkin: [2, "Security-credentialed and serious, but more institutional toughness than inclusive American story."],
-      Murphy: [2, "Has fight and moral clarity, but the post-2024 combat tour risks feeling more anti-crisis than repair."],
+      Whitmer: [3, "Lived threat, executive record, and fight-picking are real; the story has not fully translated beyond Michigan."],
+      Slotkin: [3, "CIA-pragmatist-moderate profile is authentic and materially specific, but the positive vision is still unfinished."],
+      Murphy: [2, "Fight-picking is strong, but the positive story is weak and the style can read sermonic."],
       Polis: [3, "Independent, relaxed, and anti-orthodox enough for long-form appeal; national emotional story is fuzzy."],
       Schatz: [2, "Smart and humane policy voice, but low-profile Senate affect does not yet carry the thesis."],
-      Booker: [3, "Can do hopeful moral language better than most, though prior national ceiling and theatricality are risks."],
-      Walz: [2, "Good hang and normal affect, but the 2024 loss and VP framing make the repair story harder."],
-      Cooper: [3, "Steady swing-state executive with normie repair shape; needs a fresher national voice."],
-      Cuban: [4, "Excellent unscripted normie-business appeal for the vibe test, with separate Dem-primary trust problems."],
-      Emanuel: [1, "Old-war-room insider brand is almost the opposite of hopeful patriotic repair."]
+      Booker: [2, "Positive-hopeful language is real but overplayed enough to feel rehearsed; fight-picking can turn theatrical."],
+      Walz: [3, "Natural long-form performer with normal affect and a real vernacular, though 2024 makes the story contested."],
+      Cooper: [2, "Pleasant and competent, but the story is not distinctive enough yet and long-form would likely be fine rather than magnetic."],
+      Cuban: [3, "Excellent long-form authenticity and material business language, but office ambition and primary trust are real questions."],
+      Emanuel: [1, "Authentic about who he is, unfortunately; old-war-room insider is wrong for the moment."]
     };
 
     snapshot.rows.forEach(row => {
-      const [vibes_score, vibes_rationale] = vibes[row.entity];
+      const [vibes_score, vibes_rationale] = ahm[row.entity];
       Object.assign(row, { vibes_score, vibes_rationale });
     });
 
@@ -780,7 +780,7 @@
       });
 
       const select = document.createElement("select");
-      [["tier","Sort: tier order"],["candidate","Sort: candidate"],["market","Sort: market"],["poll","Sort: poll"],["spread","Sort: spread"],["vibes","Sort: vibes"]].forEach(([value, text]) => {
+      [["tier","Sort: tier order"],["candidate","Sort: candidate"],["market","Sort: market"],["poll","Sort: poll"],["spread","Sort: spread"],["vibes","Sort: AHM"]].forEach(([value, text]) => {
         const option = document.createElement("option");
         option.value = value;
         option.textContent = text;
@@ -806,8 +806,8 @@
         ["Candidates", rows.length],
         ["With polling", withPoll.length],
         ["Avg market midpoint", `${avgMarket.toFixed(1)}%`],
-        ["Avg vibes", `${avgVibes.toFixed(1)} / 4`],
-        ["Top vibe", `${bestVibe.entity} ${bestVibe.vibes_score}/4`]
+        ["Avg AHM", `${avgVibes.toFixed(1)} / 4`],
+        ["Top AHM", `${bestVibe.entity} ${bestVibe.vibes_score}/4`]
       ];
       document.getElementById("summary").innerHTML = stats.map(([label, value]) => `
         <article class="stat"><span class="label">${label}</span><span class="value">${value}</span></article>
@@ -837,16 +837,16 @@
                 <div class="metric"><b>Market</b><span>${row.market_display}</span></div>
                 <div class="metric"><b>Poll</b><span>${row.poll_display}</span></div>
                 <div class="metric ${gapClass}"><b>Spread</b><span>${s == null ? "n/a" : fmt(s)}</span></div>
-                <div class="metric"><b>Vibes</b><span>${row.vibes_score}/4</span></div>
+                <div class="metric"><b>AHM</b><span>${row.vibes_score}/4</span></div>
               </div>
               <div class="read">
                 <div class="signal-strip">
                   <div class="signal"><span class="signal-label">Market</span><span class="signal-value">${row.market_display}</span><div class="track"><i class="fill market" style="--w:${pct(row.market_midpoint)}"></i></div></div>
                   <div class="signal"><span class="signal-label">Poll</span><span class="signal-value">${row.poll_display}</span><div class="track"><i class="fill poll ${row.poll_midpoint == null ? "unknown" : ""}" style="--w:${row.poll_midpoint == null ? "0%" : pct(row.poll_midpoint)}"></i></div></div>
                   <div class="signal"><span class="signal-label">Spread</span><span class="signal-value">${s == null ? "n/a" : fmt(s)}</span><div class="track"><i class="fill spread-fill ${gapClass || "neutral"} ${s == null ? "unknown" : ""}" style="--w:${spreadPct(s)}"></i></div></div>
-                  <div class="signal vibe-signal"><span class="signal-label">Vibes</span><span class="signal-value">${row.vibes_score}/4</span><div class="track" title="Vibes Check ${row.vibes_score}/4"><i class="fill vibes" style="--w:${vibePct(row.vibes_score)}"></i></div></div>
+                  <div class="signal ahm-signal"><span class="signal-label">AHM</span><span class="signal-value">${row.vibes_score}/4</span><div class="track" title="AHM Check ${row.vibes_score}/4"><i class="fill vibes" style="--w:${vibePct(row.vibes_score)}"></i></div></div>
                 </div>
-                <p class="vibe-note">${row.vibes_rationale}</p>
+                <p class="ahm-note">${row.vibes_rationale}</p>
                 <p class="note">${row.note}</p>
               </div>
             </article>
@@ -968,8 +968,8 @@
           : { ...row };
         normalized.market_midpoint = normalized.market_midpoint ?? (normalized.market_low + normalized.market_high) / 2;
         normalized.poll_midpoint = normalized.poll_midpoint ?? (normalized.poll_low == null || normalized.poll_high == null ? null : (normalized.poll_low + normalized.poll_high) / 2);
-        if (normalized.vibes_score == null && vibes[normalized.entity]) {
-          [normalized.vibes_score, normalized.vibes_rationale] = vibes[normalized.entity];
+        if (ahm[normalized.entity]) {
+          [normalized.vibes_score, normalized.vibes_rationale] = ahm[normalized.entity];
         }
         return normalized;
       });

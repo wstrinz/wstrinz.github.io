@@ -15,7 +15,7 @@
       "poll_high": 21,
       "note": "CA gov, shadow campaign, has network and timing; coastal-progressive brand risk.",
       "vibes_score": 1,
-      "vibes_rationale": "Skilled fighter, but the coastal anti-Trump combat brand fights the broader welcome-and-repair thesis."
+      "vibes_rationale": "Technically skilled, but the polish cracks under sustained exposure and the positive story reads PR-shaped."
     },
     {
       "tier": "Tier 1: Frontrunners",
@@ -40,8 +40,8 @@
       "poll_low": 10,
       "poll_high": 10,
       "note": "Obama-tier grassroots energy; general-election ceiling is the priced risk.",
-      "vibes_score": 2,
-      "vibes_rationale": "Authentic and future-facing with real grassroots warmth, but the factional brand narrows the welcome mat."
+      "vibes_score": 3,
+      "vibes_rationale": "Authentic, materially specific, and strong at fight-picking; the positive national vision is the weaker leg."
     },
     {
       "tier": "Tier 2: Serious Contenders",
@@ -79,8 +79,8 @@
       "poll_low": 3,
       "poll_high": 3,
       "note": "IL gov, deep pockets, anti-Trump fighter posture; could buy into top tier on populist economics.",
-      "vibes_score": 2,
-      "vibes_rationale": "Good fighter and material-policy messenger, but billionaire combat posture is not naturally a bring-people-in vibe."
+      "vibes_score": 3,
+      "vibes_rationale": "Has fight-picking and material Illinois delivery; authenticity has improved, though the billionaire frame still drags."
     },
     {
       "tier": "Tier 2: Serious Contenders",
@@ -105,8 +105,8 @@
       "poll_low": null,
       "poll_high": null,
       "note": "MD gov, Rhodes scholar, combat vet; likely underpriced if markets omit him.",
-      "vibes_score": 3,
-      "vibes_rationale": "Biography and tone fit patriotic repair well; needs proof under national pressure and tougher fights."
+      "vibes_score": 4,
+      "vibes_rationale": "Service biography, tone, and material story fit the thesis; long-form proof is thinner, but the signals are strong."
     },
     {
       "tier": "Tier 3: Underpriced, Right Profile",
@@ -118,8 +118,8 @@
       "poll_low": 1,
       "poll_high": 1,
       "note": "Two-term KY gov, southern, religious, moderate; fits the post-2024 candidate-shape argument.",
-      "vibes_score": 3,
-      "vibes_rationale": "Warm red-state repair profile with clear general-election shape; national charisma is still an open question."
+      "vibes_score": 4,
+      "vibes_rationale": "Red-state crisis governing gives him competence, decency, specificity, and low-key authentic hope."
     },
     {
       "tier": "Tier 3: Underpriced, Right Profile",
@@ -131,8 +131,8 @@
       "poll_low": null,
       "poll_high": null,
       "note": "AZ senator, Marine combat vet, Latino, strong 2024 ticket-split overperformance.",
-      "vibes_score": 3,
-      "vibes_rationale": "Patriotic biography and working-class edge fit the thesis, though the hopeful national story is underdeveloped."
+      "vibes_score": 4,
+      "vibes_rationale": "Marine vet origin story, swing-state proof, and fight-without-ideology coding make the profile unusually complete."
     },
     {
       "tier": "Tier 3: Underpriced, Right Profile",
@@ -144,8 +144,8 @@
       "poll_low": null,
       "poll_high": null,
       "note": "NC gov, won big while Harris lost the state; serious technocrat profile.",
-      "vibes_score": 2,
-      "vibes_rationale": "Serious competence profile, but too little national affect or long-form identity to score higher yet."
+      "vibes_score": 3,
+      "vibes_rationale": "Competence-and-AG-fight profile fits, but long-form national self and positive vision are still untested."
     },
     {
       "tier": "Tier 3: Underpriced, Right Profile",
@@ -183,8 +183,8 @@
       "poll_low": 4,
       "poll_high": 4,
       "note": "MI gov, strong Electoral College math; stock has slipped and gender handwringing weighs on the read.",
-      "vibes_score": 2,
-      "vibes_rationale": "Strong executive and fighter, but current national vibe feels more tactical than hopeful-repair."
+      "vibes_score": 3,
+      "vibes_rationale": "Lived threat, executive record, and fight-picking are real; the story has not fully translated beyond Michigan."
     },
     {
       "tier": "Tier 4: Dark Horses & Wild Cards",
@@ -196,8 +196,8 @@
       "poll_low": null,
       "poll_high": null,
       "note": "MI senator, ex-CIA, security-credentialed moderate; pure dark horse.",
-      "vibes_score": 2,
-      "vibes_rationale": "Security-credentialed and serious, but more institutional toughness than inclusive American story."
+      "vibes_score": 3,
+      "vibes_rationale": "CIA-pragmatist-moderate profile is authentic and materially specific, but the positive vision is still unfinished."
     },
     {
       "tier": "Tier 4: Dark Horses & Wild Cards",
@@ -210,7 +210,7 @@
       "poll_high": null,
       "note": "CT senator with aggressive post-2024 fight-harder messaging.",
       "vibes_score": 2,
-      "vibes_rationale": "Has fight and moral clarity, but the post-2024 combat tour risks feeling more anti-crisis than repair."
+      "vibes_rationale": "Fight-picking is strong, but the positive story is weak and the style can read sermonic."
     },
     {
       "tier": "Tier 4: Dark Horses & Wild Cards",
@@ -249,8 +249,8 @@
       "poll_high": null,
       "raw_poll": "OCR showed 'mod'; treated as unknown.",
       "note": "Filibuster-record protest moment got attention; 2020 ceiling may still bind.",
-      "vibes_score": 3,
-      "vibes_rationale": "Can do hopeful moral language better than most, though prior national ceiling and theatricality are risks."
+      "vibes_score": 2,
+      "vibes_rationale": "Positive-hopeful language is real but overplayed enough to feel rehearsed; fight-picking can turn theatrical."
     },
     {
       "tier": "Tier 5: Bench & Long Shots",
@@ -262,8 +262,8 @@
       "poll_low": null,
       "poll_high": null,
       "note": "MN gov, 2024 VP nominee; bench cred but the loss drags on ceiling.",
-      "vibes_score": 2,
-      "vibes_rationale": "Good hang and normal affect, but the 2024 loss and VP framing make the repair story harder."
+      "vibes_score": 3,
+      "vibes_rationale": "Natural long-form performer with normal affect and a real vernacular, though 2024 makes the story contested."
     },
     {
       "tier": "Tier 5: Bench & Long Shots",
@@ -275,8 +275,8 @@
       "poll_low": null,
       "poll_high": null,
       "note": "Former NC gov, two-term swing-state executive, awkward post-office timeline.",
-      "vibes_score": 3,
-      "vibes_rationale": "Steady swing-state executive with normie repair shape; needs a fresher national voice."
+      "vibes_score": 2,
+      "vibes_rationale": "Pleasant and competent, but the story is not distinctive enough yet and long-form would likely be fine rather than magnetic."
     },
     {
       "tier": "Tier 5: Bench & Long Shots",
@@ -288,8 +288,8 @@
       "poll_low": null,
       "poll_high": null,
       "note": "Businessman-celebrity outsider lane; credible for the genre but still longshot.",
-      "vibes_score": 4,
-      "vibes_rationale": "Excellent unscripted normie-business appeal for the vibe test, with separate Dem-primary trust problems."
+      "vibes_score": 3,
+      "vibes_rationale": "Excellent long-form authenticity and material business language, but office ambition and primary trust are real questions."
     },
     {
       "tier": "Tier 5: Bench & Long Shots",
@@ -302,7 +302,7 @@
       "poll_high": null,
       "note": "Reportedly gearing up; probably not viable but reliably appears on lists.",
       "vibes_score": 1,
-      "vibes_rationale": "Old-war-room insider brand is almost the opposite of hopeful patriotic repair."
+      "vibes_rationale": "Authentic about who he is, unfortunately; old-war-room insider is wrong for the moment."
     }
   ],
   "vibes_check": {
