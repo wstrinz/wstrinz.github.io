@@ -15,6 +15,7 @@
       --blue: #2f6d8f;
       --green: #527d50;
       --gold: #b6792c;
+      --teal: #315d5d;
       --shadow: 0 16px 48px rgba(43, 34, 20, .13);
     }
 
@@ -77,10 +78,18 @@
       text-transform: uppercase;
     }
 
+    .party-tabs,
     .controls {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
+    }
+
+    .party-tabs {
+      padding: 18px 0 0;
+    }
+
+    .controls {
       padding: 18px 0;
       border-bottom: 1px solid var(--line);
     }
@@ -110,64 +119,6 @@
       margin: 18px 0;
     }
 
-    .trend-deck {
-      display: grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 12px;
-      margin: 18px 0;
-    }
-
-    .trend-panel, .method-panel {
-      min-width: 0;
-      padding: 16px;
-      background: rgba(255, 250, 240, .86);
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-    }
-
-    .trend-panel h2, .method-panel h2 {
-      margin: 0 0 6px;
-      font-size: 24px;
-      line-height: 1;
-      text-transform: uppercase;
-    }
-
-    .trend-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    .trend-card {
-      min-width: 0;
-      padding: 10px;
-      border: 1px solid var(--line);
-      background: var(--paper);
-    }
-
-    .trend-card b {
-      display: block;
-      color: var(--muted);
-      font: 10px/1.15 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      text-transform: uppercase;
-    }
-
-    .trend-card strong {
-      display: block;
-      margin-top: 8px;
-      font-size: 24px;
-      line-height: .95;
-    }
-
-    .trend-card span {
-      display: block;
-      margin-top: 6px;
-      color: var(--muted);
-      font: 12px/1.35 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      overflow-wrap: anywhere;
-    }
-
     .stat {
       min-height: 116px;
       padding: 16px;
@@ -191,7 +142,7 @@
       font-weight: 900;
     }
 
-    .history {
+    .history, .mentions {
       margin: 18px 0;
       padding: 16px;
       background: rgba(255, 250, 240, .86);
@@ -200,7 +151,7 @@
       min-width: 0;
     }
 
-    .history-head {
+    .history-head, .mentions-head {
       display: flex;
       justify-content: space-between;
       align-items: end;
@@ -208,12 +159,59 @@
       margin-bottom: 12px;
     }
 
-    .history h2 {
+    .history h2, .mentions h2 {
       margin: 0 0 5px;
       font-size: 24px;
       line-height: 1;
       text-transform: uppercase;
     }
+
+    .mention-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .mention-card {
+      min-width: 0;
+      padding: 12px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+    }
+
+    .mention-card b {
+      display: block;
+      margin-bottom: 7px;
+      font: 11px/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-transform: uppercase;
+    }
+
+    .mention-lede {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 900;
+      overflow-wrap: anywhere;
+    }
+
+    .mention-meta {
+      display: block;
+      color: var(--muted);
+      font: 11px/1.35 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-transform: uppercase;
+      overflow-wrap: anywhere;
+    }
+
+    .mention-hypothesis {
+      margin: 12px 0 0;
+      padding: 10px 12px;
+      border-left: 3px solid var(--teal);
+      background: rgba(49, 93, 93, .08);
+    }
+
+    .mentions-line { background: var(--teal); }
 
     .chart-wrap {
       min-height: 250px;
@@ -396,38 +394,6 @@
     .metric.hot { border-color: rgba(189, 59, 51, .55); color: var(--red); }
     .metric.cold { border-color: rgba(47, 109, 143, .55); color: var(--blue); }
 
-    .mention-line {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 6px;
-      min-width: 0;
-    }
-
-    .mention-pill {
-      min-width: 0;
-      padding: 6px 7px;
-      border: 1px solid rgba(82, 125, 80, .24);
-      background: rgba(82, 125, 80, .06);
-      font: 10px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      text-transform: uppercase;
-    }
-
-    .mention-pill b {
-      display: block;
-      margin-bottom: 4px;
-      color: var(--muted);
-      font-weight: 400;
-    }
-
-    .mention-pill span {
-      display: block;
-      color: var(--ink);
-      font-size: 12px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
     .read {
       display: grid;
       gap: 7px;
@@ -493,6 +459,7 @@
     .poll { background: var(--blue); }
     .market { background: var(--red); }
     .vibes { background: var(--green); }
+    .mentions-fill { background: var(--teal); }
     .unknown { opacity: .26; }
 
     .note {
@@ -613,32 +580,103 @@
       text-transform: uppercase;
     }
 
-    .timeline {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 12px;
+    .catalyst-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 14px;
+      margin-bottom: 8px;
     }
 
-    .timeline-item {
+    .catalyst-head h2 {
+      margin-bottom: 0;
+    }
+
+    .calendar-timeline {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+      padding-top: 18px;
+    }
+
+    .calendar-timeline::before {
+      content: '';
+      position: absolute;
+      top: 7px;
+      left: 12px;
+      right: 12px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--blue), var(--gold), var(--red));
+    }
+
+    .calendar-event {
+      position: relative;
       min-width: 0;
-      padding: 10px;
+      padding: 12px;
       border: 1px solid var(--line);
       background: var(--paper);
     }
 
-    .timeline-item b {
-      display: block;
-      margin-bottom: 6px;
-      font: 11px/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      text-transform: uppercase;
+    .calendar-event::before {
+      content: '';
+      position: absolute;
+      top: -17px;
+      left: 12px;
+      width: 12px;
+      height: 12px;
+      border: 2px solid var(--panel);
+      border-radius: 999px;
+      background: var(--blue);
+      box-shadow: 0 0 0 1px var(--ink);
     }
 
-    .timeline-item span {
+    .calendar-event.near::before { background: var(--red); }
+    .calendar-event.mid::before { background: var(--gold); }
+    .calendar-event.far::before { background: var(--teal); }
+
+    .calendar-date {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+      font: 11px/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .calendar-date b {
+      color: var(--ink);
+      overflow-wrap: anywhere;
+    }
+
+    .calendar-date span {
+      white-space: nowrap;
+    }
+
+    .event-title {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 18px;
+      line-height: 1.05;
+      font-weight: 900;
+      overflow-wrap: anywhere;
+    }
+
+    .event-detail, .event-cadence {
       display: block;
       color: var(--muted);
       font-size: 13px;
-      line-height: 1.28;
+      line-height: 1.3;
+    }
+
+    .event-cadence {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid var(--line);
+      font: 10px/1.35 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-transform: uppercase;
     }
 
     .source-links {
@@ -694,8 +732,8 @@
     }
 
     @media (max-width: 980px) {
-      header, main, .summary, .trend-deck { grid-template-columns: 1fr; }
-      .timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      header, main, .summary { grid-template-columns: 1fr; }
+      .calendar-timeline, .mention-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       h1 { font-size: 58px; }
       .row {
         grid-template-columns: 82px minmax(110px, 1fr);
@@ -712,21 +750,20 @@
         overflow-x: hidden;
       }
       h1 {
-        font-size: 34px;
-        max-width: 340px;
-        word-break: break-word;
+        font-size: 30px;
+        max-width: 100%;
+        overflow-wrap: anywhere;
+        word-break: normal;
       }
-      .controls > * { max-width: calc(100vw - 20px); }
+      .party-tabs > *, .controls > * { max-width: calc(100vw - 20px); }
+      .party-tabs,
       .controls {
         display: grid;
         grid-template-columns: 1fr;
       }
-      .trend-grid, .mention-line {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .controls > * { width: 100%; }
+      .party-tabs > *, .controls > * { width: 100%; }
       .read { min-width: 0; }
-      main, .board, .side, .history {
+      main, .board, .side, .history, .mentions {
         width: calc(100vw - 20px);
         max-width: calc(100vw - 20px);
         overflow: hidden;
@@ -735,10 +772,29 @@
         width: calc(100vw - 20px);
         max-width: calc(100vw - 20px);
       }
-      .timeline {
+      .calendar-timeline {
         grid-template-columns: minmax(0, 1fr);
       }
-      .history-head {
+      .calendar-timeline::before {
+        top: 0;
+        bottom: 0;
+        left: 17px;
+        right: auto;
+        width: 2px;
+        height: auto;
+        background: linear-gradient(180deg, var(--blue), var(--gold), var(--red));
+      }
+      .calendar-event {
+        margin-left: 18px;
+      }
+      .calendar-event::before {
+        top: 15px;
+        left: -24px;
+      }
+      .mention-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .history-head, .mentions-head {
         display: grid;
         gap: 10px;
       }
@@ -838,19 +894,21 @@
         <h1>Candidate Market/Polling Watch</h1>
       </div>
       <div>
-        <p class="dek">Seed dashboard for tracking market implied probability, polling, catalyst watchpoints, and a separate derived Vibes Check read.</p>
+        <p class="dek">Seed dashboard for tracking market implied probability, polling, catalyst watchpoints, Vibes Check, and manual mention quality snapshots.</p>
         <span class="stamp">Captured May 13, 2026 · 07:27 CDT</span>
         <div class="legend">
           <span class="key"><i class="swatch market"></i> market midpoint</span>
           <span class="key"><i class="swatch poll"></i> polling</span>
           <span class="key"><i class="swatch vibes"></i> vibes / 4</span>
+          <span class="key"><i class="swatch mentions-fill"></i> good mentions</span>
         </div>
       </div>
     </header>
 
+    <div class="party-tabs" id="partyTabs" aria-label="Party tabs"></div>
     <div class="controls" id="controls"></div>
     <section class="summary" id="summary"></section>
-    <section class="trend-deck" id="trendDeck"></section>
+    <section class="mentions" id="mentions"></section>
     <section class="history">
       <div class="history-head">
         <div>
@@ -861,7 +919,8 @@
           <option value="market_midpoint">Chart: market</option>
           <option value="poll_midpoint">Chart: poll</option>
           <option value="vibes_score">Chart: vibes</option>
-          <option value="mention_positive_share">Chart: good mentions</option>
+          <option value="good_mention_share">Chart: good mentions</option>
+          <option value="mention_volume">Chart: mention volume</option>
         </select>
       </div>
       <div class="chart-wrap" id="historyChart"></div>
@@ -878,10 +937,14 @@
           <p class="small">This is not a competence or coalition-building score; those should mostly show up in polling and markets. It is a soft signal for what may become more visible as the primary heats up.</p>
           <p class="small">4 = natural carrier. 3 = credible with a weakness. 2 = partial fit. 1 = brand fights the thesis.</p>
         </div>
+        <div class="thesis">
+          <h2>Mention Test</h2>
+          <p class="small">Manual captures label each mention as good, bad, neutral, or unclear, with source/ref kept next to the count. Good-mention share and volume are tracked separately.</p>
+          <p class="small">The hypothesis is tested on lag: if better mentions precede later market or poll movement, the signal is useful. If mentions only move after markets move, it is descriptive rather than predictive.</p>
+        </div>
         <h2>Data Notes</h2>
         <p class="small">Unknown polling values stay in the candidate list and are excluded from poll-only charts. Booker’s polling cell had an OCR-looking “mod”, so it is held as unknown.</p>
         <p class="small">Market and polling series are tracked independently. The dashboard no longer derives a market-vs-poll gap because that read was noisier than the raw signals.</p>
-        <p class="small">Mention tracking is public-source and append-only: volume, good, bad, mixed, and representative refs. Twitter/X is not assumed; paid sources can be added later without changing the dashboard contract.</p>
       </aside>
     </main>
   </div>
@@ -1253,22 +1316,32 @@
     };
 
     const catalystModel = {
-      note: "Catalysts identify likely step-change windows for market/poll repricing. They are qualitative watchpoints, not a separate score.",
-      shared_windows: [
-        ["Now through summer 2026", "Earned-media moments, big speeches, viral interviews, donor/consultant leaks, PAC or staff moves, and early-state travel. Markets usually move before polls here."],
-        ["2026 primaries and filing season", "Ambition and ballot-path constraints get more legible. Georgia and Pennsylvania primary dates are listed as May 19, 2026 in the current federal calendar, subject to change."],
-        ["Fall 2026 campaign stretch", "Live-cycle governors and senators get tested on message discipline, fundraising, TV performance, and whether their lane looks exportable."],
-        ["Midterms: Nov 3, 2026", "The biggest reset point. Winners, losers, and overperformers shape what the party thinks the post-2024 lesson should be."],
-        ["Nov-Dec 2026", "Watch who gives future-of-the-party speeches, does Sunday shows, gets donor meetings, and starts visiting early states."],
-        ["Early 2027", "Exploratory committees, book launches, PAC moves, staff hires, and first serious national polling can move low-name-ID candidates into poll visibility."],
-        ["2027 calendar, cattle calls, and early-state polls", "The DNC early-state map and first cattle calls make regional advantages, favorability, and coalition tests more concrete."],
-        ["Late 2027 into early 2028", "Debates and actual voting are the classic reset window: communicators rise and paper candidates get exposed."]
+      note: "Catalysts are now tracked as a calendar: dated or seasonal windows where market and polling snapshots are most likely to deserve a fresh read.",
+      automation_note: "Manual watch for now; these dates are shaped so scheduled refresh jobs can be added later.",
+      calendar: [
+        { date: "Now-Aug 2026", horizon: "Near", className: "near", title: "Earned-media and staff tells", detail: "Big speeches, viral interviews, donor/consultant leaks, PAC or staff moves, and early-state travel. Markets usually move before polls here.", cadence: "Sample when a candidate gets an obvious breakout or pass signal." },
+        { date: "May 19, 2026", horizon: "Near", className: "near", title: "GA / PA primary gate", detail: "Georgia and Pennsylvania federal primaries make ambition and ballot-path constraints more legible for Ossoff, Shapiro, and adjacent lanes.", cadence: "Refresh after results; watch Georgia runoff path if needed." },
+        { date: "Sep-Nov 2026", horizon: "Mid", className: "mid", title: "Fall campaign stress test", detail: "Live-cycle governors and senators get tested on message discipline, fundraising, TV performance, and whether their lane looks exportable.", cadence: "Snapshot on major debates, polling breaks, or high-salience ads." },
+        { date: "Nov 3, 2026", horizon: "Mid", className: "mid", title: "Midterm reset", detail: "The biggest repricing window. Winners, losers, and overperformers shape what the party thinks the post-2024 lesson should be.", cadence: "Refresh market, poll, and mention baselines within the first week after election night." },
+        { date: "Nov-Dec 2026", horizon: "Mid", className: "mid", title: "Future-of-party tour", detail: "Watch who gives major speeches, does Sunday shows, gets donor meetings, and starts visiting early states.", cadence: "Capture explicit travel, PAC, book, and donor signals." },
+        { date: "Early 2027", horizon: "Far", className: "far", title: "Exploratory phase", detail: "Exploratory committees, book launches, PAC moves, staff hires, and first serious national polling can move low-name-ID candidates into visibility.", cadence: "Monthly baseline unless a candidate files, passes, or hires senior staff." },
+        { date: "2027 calendar", horizon: "Far", className: "far", title: "DNC and cattle-call calendar", detail: "The DNC early-state map and first cattle calls make regional advantages, favorability, and coalition tests more concrete.", cadence: "Refresh when the early-state order or major cattle-call schedule becomes concrete." },
+        { date: "Late 2027-early 2028", horizon: "Far", className: "far", title: "Debates and voting", detail: "Debates and actual voting are the classic reset window: communicators rise and paper candidates get exposed.", cadence: "Move from periodic snapshots to event-by-event updates." }
       ],
       source_links: [
         ["FEC 2026 primary dates PDF", "https://www.fec.gov/resources/cms-content/documents/2026pdates.pdf"],
         ["DNC 2028 calendar process", "https://democrats.org/news/dnc-rules-and-bylaws-committee-votes-to-advance-12-states-to-next-phase-of-2028-presidential-calendar-selection-process/"]
       ]
     };
+
+    const mentionModel = {
+      note: "Mention tracking is manual-first: capture accessible articles, clips, newsletters, forums, search/news results, and public pages; label each mention good, bad, neutral, or unclear; keep the raw ref for audit.",
+      hypothesis: "Useful mention signal should lead market or poll movement by at least one later snapshot. Same-week mirroring is descriptive, not predictive.",
+      labels: ["good", "bad", "neutral", "unclear"],
+      confidence: "high requires enough mentions and source diversity; low means thin volume or one-source distortion."
+    };
+
+    const inlineMentionInputs = {};
 
     const inlineCatalystInputs = {
       "Newsom": "National Dem elite signals, California succession politics, the 2026 California governor result, and any post-governor launch after January 2027.",
@@ -1296,17 +1369,6 @@
       "Emanuel": "Reported gearing-up becoming real, donor lane formation, and some fresh why-now rationale beyond old insider combat experience."
     };
 
-    const mentionModel = {
-      note: "Public-source mention tracking is append-only and optional. Store raw mention counts separately from sentiment so the dashboard can test whether positive mention movement leads poll or market movement.",
-      fields: {
-        mention_volume: "Total captured public mentions in the snapshot window.",
-        mention_positive: "Mentions labeled as favorable/good for the candidate.",
-        mention_negative: "Mentions labeled as unfavorable/bad for the candidate.",
-        mention_mixed: "Mentions that cut both ways or are unclear.",
-        mention_refs: "Representative public URLs or raw references for audit."
-      }
-    };
-
         function deriveVibesScore(row) {
           if (!row.vibes_dimensions) return row.vibes_score ?? null;
           const weights = vibesModel.weights;
@@ -1322,33 +1384,67 @@
           return total ? Math.round((weighted / total) * 10) / 10 : null;
         }
 
-        function hydrateMentions(row) {
-          const volume = Number(row.mention_volume);
-          const positive = Number(row.mention_positive);
-          const negative = Number(row.mention_negative);
-          const mixed = Number(row.mention_mixed);
-          row.mention_volume = Number.isFinite(volume) ? volume : null;
-          row.mention_positive = Number.isFinite(positive) ? positive : null;
-          row.mention_negative = Number.isFinite(negative) ? negative : null;
-          row.mention_mixed = Number.isFinite(mixed) ? mixed : null;
-          const denom = (row.mention_positive ?? 0) + (row.mention_negative ?? 0) + (row.mention_mixed ?? 0);
-          row.mention_positive_share = denom ? Math.round((row.mention_positive / denom) * 1000) / 10 : null;
-          row.mention_net = denom ? row.mention_positive - row.mention_negative : null;
-          row.mention_refs = Array.isArray(row.mention_refs) ? row.mention_refs : [];
-          return row;
-        }
-
         function hydrateVibes(row) {
           if (inlineVibesInputs[row.entity]) Object.assign(row, inlineVibesInputs[row.entity]);
           row.catalyst_note = row.catalyst_note || inlineCatalystInputs[row.entity] || "Watch for explicit run/pass signals, early-state travel, donor movement, and first 2027 polling.";
           row.vibes_score = deriveVibesScore(row);
+          return row;
+        }
+
+        function countTotal(counts) {
+          if (!counts) return null;
+          const labels = mentionModel.labels;
+          const values = labels
+            .map(label => counts[label])
+            .filter(value => value !== null && value !== undefined && value !== "")
+            .map(Number)
+            .filter(Number.isFinite);
+          if (!values.length) return null;
+          return values.reduce((sum, value) => sum + value, 0);
+        }
+
+        function goodShare(counts, volume) {
+          const good = Number(counts?.good);
+          if (!Number.isFinite(good) || !volume) return null;
+          return Math.round((good / volume) * 1000) / 10;
+        }
+
+        function hydrateMentions(row) {
+          if (inlineMentionInputs[row.entity]) {
+            row.mention_signal = { ...(row.mention_signal || {}), ...inlineMentionInputs[row.entity] };
+          }
+          const signal = row.mention_signal || {};
+          const current = signal.current || signal.counts || {};
+          const previous = signal.previous || {};
+          const currentVolume = Number.isFinite(Number(signal.volume)) ? Number(signal.volume) : countTotal(current);
+          const previousVolume = Number.isFinite(Number(signal.previous_volume)) ? Number(signal.previous_volume) : countTotal(previous);
+          const currentGoodShare = Number.isFinite(Number(signal.good_share)) ? Number(signal.good_share) : goodShare(current, currentVolume);
+          const previousGoodShare = Number.isFinite(Number(signal.previous_good_share)) ? Number(signal.previous_good_share) : goodShare(previous, previousVolume);
+          row.mention_volume = currentVolume;
+          row.mention_volume_delta = currentVolume == null || previousVolume == null ? null : currentVolume - previousVolume;
+          row.good_mention_share = currentGoodShare;
+          row.good_mention_share_delta = currentGoodShare == null || previousGoodShare == null ? null : Math.round((currentGoodShare - previousGoodShare) * 10) / 10;
+          row.bad_mention_share = currentVolume ? Math.round((Number(current.bad || 0) / currentVolume) * 1000) / 10 : null;
+          row.mention_confidence = signal.confidence || (currentVolume == null ? "pending" : currentVolume >= 20 ? "medium" : "low");
+          row.mention_note = signal.note || "Manual mention capture pending. Add counts and refs to snapshots.json or snapshots.csv when a week is sampled.";
+          row.mention_examples = signal.examples || [];
+          row.mention_sources = signal.sources || [];
+          return row;
+        }
+
+        function hydrateRow(row) {
+          hydrateVibes(row);
           hydrateMentions(row);
           return row;
         }
 
-        snapshot.rows.forEach(hydrateVibes);
+        snapshot.rows.forEach(hydrateRow);
 
-    let tiers = ["All", ...new Set(snapshot.rows.map(r => r.tier))];
+    const DEFAULT_PARTY = "Democratic";
+    const partyFor = row => row.party || DEFAULT_PARTY;
+    let activeParty = new URLSearchParams(window.location.search).get("party") || DEFAULT_PARTY;
+    let parties = [...new Set(snapshot.rows.map(partyFor))];
+    let tiers = ["All", ...new Set(snapshot.rows.filter(row => partyFor(row) === activeParty).map(r => r.tier))];
     let history = [snapshot];
     const chartColors = ["#bd3b33", "#2f6d8f", "#527d50", "#b6792c", "#633c2c", "#6f6a60", "#8b4b55", "#315d5d"];
     let activeTier = "All";
@@ -1357,10 +1453,17 @@
     let chartMetric = "market_midpoint";
 
     const fmtVibe = n => n == null ? "n/a" : n.toFixed(n % 1 ? 1 : 0);
-    const fmtValue = (n, metric = chartMetric) => n == null ? "n/a" : `${n.toFixed(n % 1 ? 1 : 0)}${metric === "vibes_score" ? "/4" : "%"}`;
-    const fmtCount = n => n == null ? "n/a" : n.toLocaleString("en-US");
-    const pct = n => `${Math.max(1.5, Math.min(100, n / 40 * 100))}%`;
+    const fmtValue = (n, metric = chartMetric) => {
+      if (n == null) return "n/a";
+      if (metric === "vibes_score") return `${n.toFixed(n % 1 ? 1 : 0)}/4`;
+      if (metric === "mention_volume") return n.toFixed(0);
+      return `${n.toFixed(n % 1 ? 1 : 0)}%`;
+    };
+    const fmtShare = n => n == null ? "pending" : `${n.toFixed(n % 1 ? 1 : 0)}%`;
+    const fmtSigned = (n, suffix = "") => n == null ? "no baseline" : `${n > 0 ? "+" : ""}${n.toFixed(n % 1 ? 1 : 0)}${suffix}`;
+    const pct = n => n == null ? "0%" : `${Math.max(1.5, Math.min(100, n / 40 * 100))}%`;
     const vibePct = n => `${Math.max(0, Math.min(100, n / 4 * 100))}%`;
+    const sharePct = n => `${Math.max(0, Math.min(100, n || 0))}%`;
 
     const dimensionLabels = [
       ["hope_story", "Hope"],
@@ -1401,6 +1504,7 @@
       if (mode === "market") return row.market_midpoint;
       if (mode === "poll") return row.poll_midpoint;
       if (mode === "vibes") return row.vibes_score;
+      if (mode === "mentions") return row.good_mention_share;
       return snapshot.rows.indexOf(row);
     }
 
@@ -1416,8 +1520,16 @@
       return sortDir === "asc" ? av - bv : bv - av;
     }
 
+    function partyRows() {
+      return snapshot.rows.filter(row => partyFor(row) === activeParty);
+    }
+
+    function currentTiers() {
+      return ["All", ...new Set(partyRows().map(r => r.tier))];
+    }
+
     function filteredRows() {
-      let rows = activeTier === "All" ? [...snapshot.rows] : snapshot.rows.filter(r => r.tier === activeTier);
+      let rows = activeTier === "All" ? [...partyRows()] : partyRows().filter(r => r.tier === activeTier);
       rows.sort(compareRows);
       return rows;
     }
@@ -1432,9 +1544,30 @@
       render();
     }
 
+    function renderPartyTabs() {
+      const tabs = document.getElementById("partyTabs");
+      tabs.innerHTML = "";
+      parties.forEach(party => {
+        const button = document.createElement("button");
+        button.textContent = party;
+        button.className = party === activeParty ? "active" : "";
+        button.onclick = () => {
+          activeParty = party;
+          activeTier = "All";
+          const url = new URL(window.location);
+          url.searchParams.set("party", party);
+          window.history.replaceState(null, "", url);
+          render();
+        };
+        tabs.appendChild(button);
+      });
+    }
+
     function renderControls() {
       const controls = document.getElementById("controls");
       controls.innerHTML = "";
+      tiers = currentTiers();
+      if (!tiers.includes(activeTier)) activeTier = "All";
       tiers.forEach(tier => {
         const button = document.createElement("button");
         button.textContent = tier.replace("Tier ", "T");
@@ -1444,7 +1577,7 @@
       });
 
       const select = document.createElement("select");
-      [["tier","Sort: tier order"],["candidate","Sort: candidate"],["market","Sort: market"],["poll","Sort: poll"],["vibes","Sort: vibes"]].forEach(([value, text]) => {
+      [["tier","Sort: tier order"],["candidate","Sort: candidate"],["market","Sort: market"],["poll","Sort: poll"],["vibes","Sort: vibes"],["mentions","Sort: good mentions"]].forEach(([value, text]) => {
         const option = document.createElement("option");
         option.value = value;
         option.textContent = text;
@@ -1462,116 +1595,89 @@
 
     function renderSummary(rows) {
       const withPoll = rows.filter(r => r.poll_midpoint != null);
-      const avgMarket = rows.reduce((sum, r) => sum + r.market_midpoint, 0) / rows.length;
-      const avgVibes = rows.reduce((sum, r) => sum + r.vibes_score, 0) / rows.length;
-      const bestVibe = rows.reduce((best, r) => r.vibes_score > best.vibes_score ? r : best, rows[0]);
+      const withMarket = rows.filter(r => r.market_midpoint != null);
+      const withVibes = rows.filter(r => r.vibes_score != null);
+      const avgMarket = withMarket.length ? withMarket.reduce((sum, r) => sum + r.market_midpoint, 0) / withMarket.length : null;
+      const avgVibes = withVibes.length ? withVibes.reduce((sum, r) => sum + r.vibes_score, 0) / withVibes.length : null;
+      const withMentions = rows.filter(r => r.mention_volume != null);
       const stats = [
-        ["Candidates", rows.length],
+        [`${activeParty} candidates`, rows.length],
         ["With polling", withPoll.length],
-        ["Avg market midpoint", `${avgMarket.toFixed(1)}%`],
-        ["Avg vibes", `${avgVibes.toFixed(1)} / 4`],
-        ["Top vibes", `${bestVibe.entity} ${fmtVibe(bestVibe.vibes_score)}/4`]
+        ["Avg market midpoint", avgMarket == null ? "n/a" : `${avgMarket.toFixed(1)}%`],
+        ["Avg vibes", avgVibes == null ? "n/a" : `${avgVibes.toFixed(1)} / 4`],
+        ["Mention baselines", withMentions.length ? withMentions.length : "pending"]
       ];
       document.getElementById("summary").innerHTML = stats.map(([label, value]) => `
         <article class="stat"><span class="label">${label}</span><span class="value">${value}</span></article>
       `).join("");
     }
 
-    function latestPreviousRow(entity) {
-      if (history.length < 2) return null;
-      return history[history.length - 2].rows.find(row => row.entity === entity) || null;
+    function bestMention(rows, field, dir = "desc") {
+      const available = rows.filter(row => row[field] != null);
+      if (!available.length) return null;
+      return available.sort((a, b) => dir === "desc" ? b[field] - a[field] : a[field] - b[field])[0];
     }
 
-    function delta(current, previous, field) {
-      if (!previous || current[field] == null || previous[field] == null) return null;
-      return Math.round((current[field] - previous[field]) * 10) / 10;
-    }
-
-    function movementRows(rows) {
-      return rows.map(row => {
-        const prev = latestPreviousRow(row.entity);
-        return {
-          row,
-          volume_delta: delta(row, prev, "mention_volume"),
-          positive_share_delta: delta(row, prev, "mention_positive_share"),
-          negative_delta: delta(row, prev, "mention_negative"),
-          market_delta: delta(row, prev, "market_midpoint"),
-          poll_delta: delta(row, prev, "poll_midpoint")
-        };
-      });
-    }
-
-    function topMovement(items, field, label, format) {
-      const ranked = items
-        .filter(item => item[field] != null)
-        .sort((a, b) => b[field] - a[field]);
-      if (!ranked.length) {
-        return `
-          <article class="trend-card">
-            <b>${label}</b>
-            <strong>No baseline yet</strong>
-            <span>Add a second mention snapshot to calculate week-over-week movement.</span>
-          </article>
-        `;
-      }
-      const item = ranked[0];
-      const companion = [
-        item.market_delta == null ? null : `market ${item.market_delta >= 0 ? "+" : ""}${item.market_delta}%`,
-        item.poll_delta == null ? null : `poll ${item.poll_delta >= 0 ? "+" : ""}${item.poll_delta}%`
-      ].filter(Boolean).join(" / ");
+    function renderMentionCard(label, row, value, meta) {
       return `
-        <article class="trend-card">
+        <article class="mention-card">
           <b>${label}</b>
-          <strong>${item.row.entity}</strong>
-          <span>${format(item[field])}${companion ? `; ${companion}` : ""}</span>
+          <span class="mention-lede">${row ? row.entity : "Pending"}</span>
+          <span class="mention-meta">${row ? value : "Awaiting first manual capture"}</span>
+          <span class="mention-meta">${row ? meta : "CSV/JSON fields are ready for good, bad, neutral, unclear, refs, and source mix."}</span>
         </article>
       `;
     }
 
-    function renderTrendDeck(rows) {
-      const moves = movementRows(rows);
-      const hasMentions = rows.some(row => row.mention_volume != null || row.mention_positive_share != null);
-      const hasMovement = moves.some(item => item.volume_delta != null || item.positive_share_delta != null || item.negative_delta != null);
-      const status = hasMovement
-        ? "Showing latest snapshot movement against the prior capture."
-        : hasMentions
-          ? "Mention counts are present; add the next capture to turn this into week-over-week movement."
-          : "Mention capture is wired but empty. Add public-source rows to snapshots.json or snapshots.csv to activate the leaderboard.";
-
-      document.getElementById("trendDeck").innerHTML = `
-        <section class="trend-panel">
-          <h2>Who's Trending</h2>
-          <p class="small">${status}</p>
-          <div class="trend-grid">
-            ${topMovement(moves, "positive_share_delta", "Good mention gain", value => `${value >= 0 ? "+" : ""}${value}% positive share`)}
-            ${topMovement(moves, "negative_delta", "Bad mention gain", value => `${value >= 0 ? "+" : ""}${fmtCount(value)} negative mentions`)}
-            ${topMovement(moves, "volume_delta", "Volume gain", value => `${value >= 0 ? "+" : ""}${fmtCount(value)} mentions`)}
+    function renderMentions(rows) {
+      const volumeMover = bestMention(rows, "mention_volume_delta");
+      const goodMover = bestMention(rows, "good_mention_share_delta");
+      const badMover = bestMention(rows, "bad_mention_share");
+      const goodShareLeader = bestMention(rows, "good_mention_share");
+      const hasData = rows.some(row => row.mention_volume != null);
+      document.getElementById("mentions").innerHTML = `
+        <div class="mentions-head">
+          <div>
+            <h2>Who Is Trending</h2>
+            <p class="small">Manual mention snapshots answer whether good mentions lead later market or poll movement. Twitter/X is intentionally out of scope for v1.</p>
           </div>
-        </section>
-        <section class="method-panel">
-          <h2>Hypothesis Test</h2>
-          <p class="small">Question: did good public mentions precede the next poll or market move?</p>
-          <p class="small">Track separate signals first: volume, good share, bad count, and raw refs. Then compare this snapshot's mention movement against the next snapshot's market/poll movement.</p>
-          <p class="small">A useful signal should lead price or polling by days. If it only moves after them, it is still context, but not predictive.</p>
-        </section>
+          <span class="stamp">${hasData ? "Mention baseline active" : "Mention capture pending"}</span>
+        </div>
+        <div class="mention-grid">
+          ${renderMentionCard("Good mention gain", goodMover, `${fmtSigned(goodMover?.good_mention_share_delta, " pts")} good share`, `${fmtShare(goodMover?.good_mention_share)} current · ${goodMover?.mention_confidence || "unknown"} confidence`)}
+          ${renderMentionCard("Volume gain", volumeMover, `${fmtSigned(volumeMover?.mention_volume_delta)} mentions`, `${volumeMover?.mention_volume ?? "n/a"} current mentions · ${volumeMover?.mention_confidence || "unknown"} confidence`)}
+          ${renderMentionCard("Negative watch", badMover, `${fmtShare(badMover?.bad_mention_share)} bad share`, `${badMover?.mention_volume ?? "n/a"} current mentions · ${badMover?.mention_confidence || "unknown"} confidence`)}
+          ${renderMentionCard("Best current share", goodShareLeader, `${fmtShare(goodShareLeader?.good_mention_share)} good`, `${goodShareLeader?.mention_volume ?? "n/a"} mentions · ${goodShareLeader?.mention_confidence || "unknown"} confidence`)}
+        </div>
+        <p class="small mention-hypothesis">${mentionModel.hypothesis}</p>
       `;
     }
 
     function renderCatalysts() {
-      const model = snapshot.catalyst_model || catalystModel;
-      const windows = (model.shared_windows || []).map(item => Array.isArray(item) ? { label: item[0], detail: item[1] } : item);
+      const model = snapshot.catalyst_models?.[activeParty] || snapshot.catalyst_model || catalystModel;
+      const fallbackWindows = (model.shared_windows || []).map(item => {
+        const normalized = Array.isArray(item) ? { label: item[0], detail: item[1] } : item;
+        return { date: normalized.label, title: normalized.title || normalized.label, detail: normalized.detail, horizon: normalized.horizon || "Watch", className: normalized.className || "mid", cadence: normalized.cadence || "Refresh when this window produces a real candidate signal." };
+      });
+      const events = (model.calendar || model.events || fallbackWindows).map(item => Array.isArray(item) ? { date: item[0], title: item[1], detail: item[2], horizon: item[3] || "Watch", className: "mid" } : item);
       const links = (model.source_links || []).map(item => Array.isArray(item) ? { label: item[0], url: item[1] } : item);
       document.getElementById("catalysts").innerHTML = `
-        <h2>Catalyst Watch</h2>
+        <div class="catalyst-head">
+          <h2>${activeParty} Catalyst Watch</h2>
+          <span class="stamp">Calendar view</span>
+        </div>
         <p class="small">${model.note || catalystModel.note}</p>
-        <div class="timeline">
-          ${windows.map(window => `
-            <article class="timeline-item">
-              <b>${window.label}</b>
-              <span>${window.detail}</span>
+        <div class="calendar-timeline">
+          ${events.map(event => `
+            <article class="calendar-event ${event.className || ""}">
+              <div class="calendar-date"><b>${event.date}</b><span>${event.horizon || "Watch"}</span></div>
+              <strong class="event-title">${event.title}</strong>
+              <span class="event-detail">${event.detail}</span>
+              <span class="event-cadence">${event.cadence || "Refresh when this window produces a real candidate signal."}</span>
             </article>
           `).join("")}
         </div>
+        <p class="small mention-hypothesis">${model.automation_note || catalystModel.automation_note}</p>
         <div class="source-links">
           ${links.map(link => `<a href="${link.url}">${link.label}</a>`).join("")}
         </div>
@@ -1585,7 +1691,7 @@
             ["tier", "Tier"],
             ["candidate", "Candidate"],
             ["market", "Snapshot"],
-            ["vibes", "Signals / Read"]
+            ["mentions", "Signals / Read"]
           ].map(([mode, label]) => `
             <button class="sort-head ${sortMode === mode ? "active" : ""}" data-arrow="${sortDir === "asc" ? "up" : "down"}" onclick="setSort('${mode}')">${label}</button>
           `).join("")}
@@ -1599,22 +1705,19 @@
                 <div class="metric"><b>Market</b><span>${row.market_display}</span></div>
                 <div class="metric"><b>Poll</b><span>${row.poll_display}</span></div>
                 <div class="metric"><b>Vibes</b><span>${fmtVibe(row.vibes_score)}/4</span></div>
+                <div class="metric"><b>Good mentions</b><span>${fmtShare(row.good_mention_share)}</span></div>
               </div>
               <div class="read">
                 <div class="signal-strip">
-                  <div class="signal"><span class="signal-label">Market</span><span class="signal-value">${row.market_display}</span><div class="track"><i class="fill market" style="--w:${pct(row.market_midpoint)}"></i></div></div>
+                  <div class="signal"><span class="signal-label">Market</span><span class="signal-value">${row.market_display}</span><div class="track"><i class="fill market ${row.market_midpoint == null ? "unknown" : ""}" style="--w:${pct(row.market_midpoint)}"></i></div></div>
                   <div class="signal"><span class="signal-label">Poll</span><span class="signal-value">${row.poll_display}</span><div class="track"><i class="fill poll ${row.poll_midpoint == null ? "unknown" : ""}" style="--w:${row.poll_midpoint == null ? "0%" : pct(row.poll_midpoint)}"></i></div></div>
                   <div class="signal vibes-signal"><span class="signal-label">Vibes</span><span class="signal-value">${fmtVibe(row.vibes_score)}/4</span><div class="track" title="Vibes Check ${fmtVibe(row.vibes_score)} / 4"><i class="fill vibes" style="--w:${vibePct(row.vibes_score)}"></i></div></div>
-                </div>
-                <div class="mention-line" title="${mentionModel.note}">
-                  <div class="mention-pill"><b>Mentions</b><span>${fmtCount(row.mention_volume)}</span></div>
-                  <div class="mention-pill"><b>Good</b><span>${row.mention_positive_share == null ? "n/a" : `${row.mention_positive_share}%`}</span></div>
-                  <div class="mention-pill"><b>Bad</b><span>${fmtCount(row.mention_negative)}</span></div>
-                  <div class="mention-pill"><b>Refs</b><span>${row.mention_refs.length || "pending"}</span></div>
+                  <div class="signal"><span class="signal-label">Good mentions</span><span class="signal-value">${fmtShare(row.good_mention_share)}</span><div class="track" title="${row.mention_note}"><i class="fill mentions-fill ${row.good_mention_share == null ? "unknown" : ""}" style="--w:${sharePct(row.good_mention_share)}"></i></div></div>
                 </div>
                 <p class="vibes-note">${row.vibes_rationale}</p>
                 ${renderSubscores(row)}
                 <p class="catalyst-note"><b>Next catalyst:</b> ${row.catalyst_note}</p>
+                <p class="catalyst-note"><b>Mention test:</b> ${row.mention_note}</p>
                 <p class="note">Confidence: ${row.confidence || "unknown"}. Evidence: ${row.evidence_notes || "not yet recorded"}. Liability: ${row.liability_notes || "not yet recorded"}.</p>
                 <p class="note">${row.note}</p>
               </div>
@@ -1632,12 +1735,16 @@
       const visible = rows
         .filter(row => metricValue(row, chartMetric) != null)
         .slice(0, 8);
+      if (!visible.length) {
+        document.getElementById("historyChart").innerHTML = `<p class="small">No values available for this metric yet.</p>`;
+        return;
+      }
       if (history.length < 2) {
         const max = chartMetric === "vibes_score"
           ? 4
-          : chartMetric === "mention_positive_share"
-            ? 100
-          : Math.max(10, ...visible.map(row => metricValue(row, chartMetric)));
+          : chartMetric === "mention_volume"
+            ? Math.max(10, ...visible.map(row => metricValue(row, chartMetric)))
+            : Math.max(10, ...visible.map(row => metricValue(row, chartMetric)));
         document.getElementById("historyChart").innerHTML = `
           <div class="baseline-list">
             ${visible.map((row, index) => {
@@ -1660,7 +1767,7 @@
 
       const pointsByEntity = visible.map((row, index) => {
         const points = history.map((snap, snapIndex) => {
-          const match = snap.rows.find(candidate => candidate.entity === row.entity);
+          const match = snap.rows.find(candidate => candidate.entity === row.entity && partyFor(candidate) === partyFor(row));
           return {
             snapIndex,
             captured_at: snap.captured_at,
@@ -1678,7 +1785,7 @@
       const allValues = pointsByEntity.flatMap(series => series.points.map(point => point.value));
       const rawMin = Math.min(...allValues);
       const rawMax = Math.max(...allValues);
-      const max = chartMetric === "vibes_score" ? 4 : chartMetric === "mention_positive_share" ? 100 : Math.max(rawMax, 10);
+      const max = chartMetric === "vibes_score" ? 4 : Math.max(rawMax, 10);
       const min = 0;
       const width = 960;
       const height = 240;
@@ -1725,9 +1832,10 @@
               note: row[8]
             }
           : { ...row };
-        normalized.market_midpoint = normalized.market_midpoint ?? (normalized.market_low + normalized.market_high) / 2;
-        normalized.poll_midpoint = normalized.poll_midpoint ?? (normalized.poll_low == null || normalized.poll_high == null ? null : (normalized.poll_low + normalized.poll_high) / 2);
-        return hydrateVibes(normalized);
+        normalized.party = normalized.party || DEFAULT_PARTY;
+        normalized.market_midpoint = normalized.market_midpoint ?? (normalized.market_low == null || normalized.market_high == null ? null : (Number(normalized.market_low) + Number(normalized.market_high)) / 2);
+        normalized.poll_midpoint = normalized.poll_midpoint ?? (normalized.poll_low == null || normalized.poll_high == null ? null : (Number(normalized.poll_low) + Number(normalized.poll_high)) / 2);
+        return hydrateRow(normalized);
       });
       return { ...raw, rows };
     }
@@ -1744,7 +1852,9 @@
         history = loaded.sort((a, b) => new Date(a.captured_at) - new Date(b.captured_at));
         const latest = history[history.length - 1];
         Object.assign(snapshot, latest);
-        tiers = ["All", ...new Set(snapshot.rows.map(r => r.tier))];
+        parties = [...new Set(snapshot.rows.map(partyFor))];
+        if (!parties.includes(activeParty)) activeParty = parties[0] || DEFAULT_PARTY;
+        tiers = currentTiers();
         if (!tiers.includes(activeTier)) activeTier = "All";
         document.querySelector(".stamp").textContent = `Captured ${new Date(snapshot.captured_at).toLocaleString("en-US", { month: "short", day: "numeric", year: "numeric", hour: "numeric", minute: "2-digit", timeZoneName: "short" })}`;
         render();
@@ -1754,10 +1864,11 @@
     }
 
     function render() {
+      renderPartyTabs();
       renderControls();
       const rows = filteredRows();
       renderSummary(rows);
-      renderTrendDeck(rows);
+      renderMentions(rows);
       renderCatalysts();
       renderHistory(rows);
       renderBoard(rows);

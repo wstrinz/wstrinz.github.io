@@ -1,8 +1,8 @@
 {
-  "schema": "candidate-market-polling-snapshot-v3",
+  "schema": "candidate-market-polling-snapshot-v5",
   "captured_at": "2026-05-13T07:27:00-05:00",
   "topic": "2028 Democratic nominee candidate poll and market watch",
-  "source_note": "Seed snapshot transcribed from the image text shared in Discord #the-tide-pool. Corrected after audit: the source columns are Candidate / Markets / Polling / Read. V2 stores vibes ingredients and derives the displayed bar from weighted component scores. Catalyst notes added 2026-05-13 from Tide Pool discussion; they are qualitative watchpoints, not probability updates. V3 adds optional public-source mention tracking fields for week-over-week trend tests; empty mention fields mean no capture has been logged yet, not zero mentions.",
+  "source_note": "Seed snapshot transcribed from the image text shared in Discord #the-tide-pool. Corrected after audit: the source columns are Candidate / Markets / Polling / Read. V2 stores vibes ingredients and derives the displayed bar from weighted component scores. Catalyst notes added 2026-05-13 from Tide Pool discussion; they are qualitative watchpoints, not probability updates. V3 adds a manual mention-signal capture shape: good/bad/neutral/unclear counts, previous-week comparison, source mix, and example refs. Twitter/X is intentionally excluded unless a usable source is explicitly provided. V4 presents catalysts as a calendar/timeline surface with manual refresh cadence; scheduled automation is intentionally not wired yet. V5 adds a separate Republican tab with seeded GOP rows from current public polling/market references; GOP fields are intentionally marked lower-confidence where markets and polls disagree.",
   "rows": [
     {
       "tier": "Tier 1: Frontrunners",
@@ -26,11 +26,24 @@
       "evidence_notes": "California governing record; extensive national media exposure; shadow-campaign signals.",
       "liability_notes": "CA machine-polish; coastal-progressive brand risk; scripted affect under sustained exposure.",
       "catalyst_note": "National Dem elite signals, California succession politics, the 2026 California governor result, and any post-governor launch after January 2027.",
-      "mention_volume": null,
-      "mention_positive": null,
-      "mention_negative": null,
-      "mention_mixed": null,
-      "mention_refs": []
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
     },
     {
       "tier": "Tier 1: Frontrunners",
@@ -54,11 +67,24 @@
       "evidence_notes": "2020 and 2024 national campaign record; VP record; high name ID polling.",
       "liability_notes": "2024 loss; donor skepticism; scripted institutional style; backward-looking brand.",
       "catalyst_note": "Explicit run/pass signal, donor re-entry, and signs that party elites are willing to relitigate 2024 instead of moving on.",
-      "mention_volume": null,
-      "mention_positive": null,
-      "mention_negative": null,
-      "mention_mixed": null,
-      "mention_refs": []
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
     },
     {
       "tier": "Tier 1: Frontrunners",
@@ -82,11 +108,24 @@
       "evidence_notes": "Long-form interviews; grassroots fundraising; clear issue advocacy and hostile-media reps.",
       "liability_notes": "General-election ceiling concern; positive national unity story less proven than combat/story specificity.",
       "catalyst_note": "Progressive primary wins in 2026, grassroots fundraising shocks, and whether electability panic fades after midterm lessons settle.",
-      "mention_volume": null,
-      "mention_positive": null,
-      "mention_negative": null,
-      "mention_mixed": null,
-      "mention_refs": []
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
     },
     {
       "tier": "Tier 2: Serious Contenders",
@@ -110,11 +149,24 @@
       "evidence_notes": "Pennsylvania executive record; disciplined Rust Belt messaging; crisis response profile.",
       "liability_notes": "2026 reelection gate; national long-form warmth less proven; Gaza/education fights may complicate primary.",
       "catalyst_note": "Pennsylvania reelection margin on Nov 3, 2026; a strong swing-state overperformance is the cleanest repricing event.",
-      "mention_volume": null,
-      "mention_positive": null,
-      "mention_negative": null,
-      "mention_mixed": null,
-      "mention_refs": []
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
     },
     {
       "tier": "Tier 2: Serious Contenders",
@@ -138,11 +190,24 @@
       "evidence_notes": "Long-form interviews; Fox/news hits; high measured favorability where tested.",
       "liability_notes": "No governor track record; weak structural base; 2020 coalition ceiling still a question.",
       "catalyst_note": "DNC early-state calendar, New Hampshire-style favorability tests, early-state polling, and whether he finds an office-holder story.",
-      "mention_volume": null,
-      "mention_positive": null,
-      "mention_negative": null,
-      "mention_mixed": null,
-      "mention_refs": []
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
     },
     {
       "tier": "Tier 2: Serious Contenders",
@@ -166,11 +231,24 @@
       "evidence_notes": "Illinois governing record; economic-populist messaging; anti-Trump fight posture.",
       "liability_notes": "Billionaire frame; can read over-managed; national voter familiarity limited.",
       "catalyst_note": "Illinois reelection margin, anti-Trump donor spending, and whether money plus combat becomes the party lane after 2026.",
-      "mention_volume": null,
-      "mention_positive": null,
-      "mention_negative": null,
-      "mention_mixed": null,
-      "mention_refs": []
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
     },
     {
       "tier": "Tier 2: Serious Contenders",
@@ -194,11 +272,24 @@
       "evidence_notes": "Georgia Senate record; calm media presence; incumbent swing-state story.",
       "liability_notes": "Must win reelection; national story thin; limited unscripted emotional texture.",
       "catalyst_note": "Georgia Senate path: May 19, 2026 primary, Nov 3, 2026 general. Win keeps him live; loss probably ends the 2028 case.",
-      "mention_volume": null,
-      "mention_positive": null,
-      "mention_negative": null,
-      "mention_mixed": null,
-      "mention_refs": []
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
     },
     {
       "tier": "Tier 3: Underpriced, Right Profile",
@@ -222,11 +313,24 @@
       "evidence_notes": "Maryland executive record; service biography; memoir/public speaking profile.",
       "liability_notes": "Limited national testing; long-form proof thinner than the biography; early hype risk.",
       "catalyst_note": "National rollout, early-state visits, service/reform speeches, and insider signs that the biography is being treated as presidential rather than just impressive.",
-      "mention_volume": null,
-      "mention_positive": null,
-      "mention_negative": null,
-      "mention_mixed": null,
-      "mention_refs": []
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
     },
     {
       "tier": "Tier 3: Underpriced, Right Profile",
@@ -250,11 +354,24 @@
       "evidence_notes": "Two-term Kentucky governing record; disaster response; red-state reelection proof.",
       "liability_notes": "Low national exposure; moderate lane may blur in a primary; national fight selection untested.",
       "catalyst_note": "Post-midterm lesson-taking around red-state Democratic overperformance, plus early-state travel or donor signals that his moderation has a lane.",
-      "mention_volume": null,
-      "mention_positive": null,
-      "mention_negative": null,
-      "mention_mixed": null,
-      "mention_refs": []
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
     },
     {
       "tier": "Tier 3: Underpriced, Right Profile",
@@ -278,11 +395,24 @@
       "evidence_notes": "Arizona Senate win; Marine biography; ticket-split overperformance.",
       "liability_notes": "Limited national testing; Senate record still new; inferred more from profile than campaign exposure.",
       "catalyst_note": "Sun Belt and ticket-split lessons after 2026, veteran/Latino swing-state messaging, and any donor or early-state interest treating him as real.",
-      "mention_volume": null,
-      "mention_positive": null,
-      "mention_negative": null,
-      "mention_mixed": null,
-      "mention_refs": []
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
     },
     {
       "tier": "Tier 3: Underpriced, Right Profile",
@@ -306,11 +436,24 @@
       "evidence_notes": "North Carolina win; attorney-general record; technocratic executive profile.",
       "liability_notes": "Low national profile; positive vision and long-form persona mostly untested.",
       "catalyst_note": "North Carolina performance as a party lesson, technocratic competence becoming fashionable, and early-state visits that raise his national profile.",
-      "mention_volume": null,
-      "mention_positive": null,
-      "mention_negative": null,
-      "mention_mixed": null,
-      "mention_refs": []
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
     },
     {
       "tier": "Tier 3: Underpriced, Right Profile",
@@ -334,11 +477,24 @@
       "evidence_notes": "Arizona Senate record; Navy/astronaut biography; broad competence brand.",
       "liability_notes": "Low ambition signal; narrative politics not a strength; restrained affect may not travel.",
       "catalyst_note": "Any ambition signal, VP/speculation cycle, Sun Belt security-and-competence lane, or early-state polling that rewards the competent-adult profile.",
-      "mention_volume": null,
-      "mention_positive": null,
-      "mention_negative": null,
-      "mention_mixed": null,
-      "mention_refs": []
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
     },
     {
       "tier": "Tier 3: Underpriced, Right Profile",
@@ -362,11 +518,24 @@
       "evidence_notes": "Georgia statewide wins; pastoral speaking style; moral-patriotic campaign message.",
       "liability_notes": "National-primary appetite unknown; Senate lane may not translate; market omission risk.",
       "catalyst_note": "Southern-state and Georgia lessons after 2026, moral-patriotic speeches, donor interest, and any early-state rollout showing he wants the lane.",
-      "mention_volume": null,
-      "mention_positive": null,
-      "mention_negative": null,
-      "mention_mixed": null,
-      "mention_refs": []
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
     },
     {
       "tier": "Tier 4: Dark Horses & Wild Cards",
@@ -390,11 +559,24 @@
       "evidence_notes": "Michigan executive record; post-kidnapping threat history; national surrogate role.",
       "liability_notes": "Stock has slipped; gender handwringing; story not fully translated beyond Michigan.",
       "catalyst_note": "Michigan 2026 results, whether Michigan keeps early-calendar leverage, and whether she turns post-governor status into a future-party tour.",
-      "mention_volume": null,
-      "mention_positive": null,
-      "mention_negative": null,
-      "mention_mixed": null,
-      "mention_refs": []
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
     },
     {
       "tier": "Tier 4: Dark Horses & Wild Cards",
@@ -418,11 +600,24 @@
       "evidence_notes": "Michigan Senate win; national-security biography; moderate pragmatist brand.",
       "liability_notes": "Pure dark horse; positive vision unfinished; limited national charisma testing.",
       "catalyst_note": "Michigan calendar leverage, national-security moderate demand, and any 2027 rollout that turns her from profile-fit dark horse into actual contender.",
-      "mention_volume": null,
-      "mention_positive": null,
-      "mention_negative": null,
-      "mention_mixed": null,
-      "mention_refs": []
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
     },
     {
       "tier": "Tier 4: Dark Horses & Wild Cards",
@@ -446,11 +641,24 @@
       "evidence_notes": "Post-2024 fight-harder messaging; Senate issue advocacy; long-running gun-safety profile.",
       "liability_notes": "Can sound sermonic; positive story lags fight posture; New England senator lane.",
       "catalyst_note": "A viral fight or policy speech, post-2024 fight-harder tour momentum, exploratory/PAC moves, and proof the style can become a positive story.",
-      "mention_volume": null,
-      "mention_positive": null,
-      "mention_negative": null,
-      "mention_mixed": null,
-      "mention_refs": []
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
     },
     {
       "tier": "Tier 4: Dark Horses & Wild Cards",
@@ -474,11 +682,24 @@
       "evidence_notes": "Colorado executive record; anti-orthodoxy positioning; relaxed media style.",
       "liability_notes": "National emotional story fuzzy; libertarian-moderate profile may confuse primary voters.",
       "catalyst_note": "Post-governor 2027 availability, anti-orthodoxy media moments, and whether a moderate-libertarian Dem lane looks useful rather than niche.",
-      "mention_volume": null,
-      "mention_positive": null,
-      "mention_negative": null,
-      "mention_mixed": null,
-      "mention_refs": []
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
     },
     {
       "tier": "Tier 4: Dark Horses & Wild Cards",
@@ -502,11 +723,24 @@
       "evidence_notes": "Senate policy work; smart progressive voice; climate/policy credibility.",
       "liability_notes": "Low national profile; Senate affect; limited proof of campaign-stage magnetism.",
       "catalyst_note": "A climate or governance policy moment, future-party speech, early-state travel, or viral long-form appearance that lifts him out of Senate-low-profile mode.",
-      "mention_volume": null,
-      "mention_positive": null,
-      "mention_negative": null,
-      "mention_mixed": null,
-      "mention_refs": []
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
     },
     {
       "tier": "Tier 5: Bench & Long Shots",
@@ -531,11 +765,24 @@
       "evidence_notes": "2020 campaign; Senate record; filibuster protest visibility.",
       "liability_notes": "Hope language can feel over-rehearsed; 2020 ceiling; fight-picking can turn theatrical.",
       "catalyst_note": "Future-party speech, another high-visibility protest moment, early-state polling, and whether hopeful language feels less rehearsed this time.",
-      "mention_volume": null,
-      "mention_positive": null,
-      "mention_negative": null,
-      "mention_mixed": null,
-      "mention_refs": []
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
     },
     {
       "tier": "Tier 5: Bench & Long Shots",
@@ -559,11 +806,24 @@
       "evidence_notes": "Minnesota governing record; 2024 VP run; natural long-form/vernacular media style.",
       "liability_notes": "2024 loss overhang; VP brand tied to failed ticket; national story contested.",
       "catalyst_note": "The 2024 loss fading, Midwest calendar leverage, strong long-form appearances, and whether the party wants normal vernacular affect again.",
-      "mention_volume": null,
-      "mention_positive": null,
-      "mention_negative": null,
-      "mention_mixed": null,
-      "mention_refs": []
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
     },
     {
       "tier": "Tier 5: Bench & Long Shots",
@@ -587,11 +847,24 @@
       "evidence_notes": "Two-term North Carolina governorship; swing-state executive record.",
       "liability_notes": "Post-office timing; low distinctiveness; long-form likely fine rather than magnetic.",
       "catalyst_note": "Post-office rollout, North Carolina or Southern electability lesson-taking, donor meetings, and a clearer why-now story.",
-      "mention_volume": null,
-      "mention_positive": null,
-      "mention_negative": null,
-      "mention_mixed": null,
-      "mention_refs": []
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
     },
     {
       "tier": "Tier 5: Bench & Long Shots",
@@ -615,11 +888,24 @@
       "evidence_notes": "Long-form business/media presence; outsider brand; consumer/business specificity.",
       "liability_notes": "Not a conventional Democrat; office ambition unclear; primary trust barrier.",
       "catalyst_note": "Explicit interest, viral long-form interviews, outsider/business lane demand, and materially specific consumer or economic policy hooks.",
-      "mention_volume": null,
-      "mention_positive": null,
-      "mention_negative": null,
-      "mention_mixed": null,
-      "mention_refs": []
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
     },
     {
       "tier": "Tier 5: Bench & Long Shots",
@@ -643,11 +929,444 @@
       "evidence_notes": "Long public record; reported ambition; known operator persona.",
       "liability_notes": "Old-war-room insider brand; combative without renewal story; probably wrong for the moment.",
       "catalyst_note": "Reported gearing-up becoming real, donor lane formation, and some fresh why-now rationale beyond old insider combat experience.",
-      "mention_volume": null,
-      "mention_positive": null,
-      "mention_negative": null,
-      "mention_mixed": null,
-      "mention_refs": []
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
+    },
+    {
+      "party": "Republican",
+      "tier": "Tier 1: Succession Fight",
+      "entity": "Vance",
+      "market_display": "34%",
+      "market_low": 34,
+      "market_high": 34,
+      "poll_display": "29.6-44.8%",
+      "poll_low": 29.6,
+      "poll_high": 44.8,
+      "note": "Vice president and default Trump-heir lane; strongest machine case, but Rubio chatter has become a live stress test.",
+      "vibes_rationale": "Authentic factional voice with a clear pugilist story, but broader optimism and coalition expansion remain weak points.",
+      "vibes_dimensions": {
+        "hope_story": 2,
+        "material_specificity": 3,
+        "authentic_longform": 3,
+        "problem_clarity": 4,
+        "fight_selection": 4
+      },
+      "confidence": "high",
+      "evidence_notes": "Vice president; RNC finance role; early GOP polling lead in many averages; market favorite on nominee-specific pages.",
+      "liability_notes": "Approval softness, over-identification with incumbent outcomes, and Rubio comparison risk.",
+      "catalyst_note": "Midterm barnstorming, Trump endorsement signals, Iowa/NH travel, and any post-midterm launch conversation with Trump.",
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
+    },
+    {
+      "party": "Republican",
+      "tier": "Tier 1: Succession Fight",
+      "entity": "Rubio",
+      "market_display": "27-31%",
+      "market_low": 27,
+      "market_high": 31,
+      "poll_display": "14.1-45.4%",
+      "poll_low": 14.1,
+      "poll_high": 45.4,
+      "note": "Secretary of State / national-security portfolio has turned him into the live alternative to Vance.",
+      "vibes_rationale": "High fluency and institutional polish; the question is whether MAGA voters read him as heir, rival, or running mate.",
+      "vibes_dimensions": {
+        "hope_story": 3,
+        "material_specificity": 4,
+        "authentic_longform": 3,
+        "problem_clarity": 3,
+        "fight_selection": 3
+      },
+      "confidence": "high",
+      "evidence_notes": "Recent market climb; AtlasIntel Rubio surge; administration visibility and donor chatter.",
+      "liability_notes": "Could be boxed into VP/elder-statesman role; old 2016 anti-Trump residue; needs permission structure from Trump world.",
+      "catalyst_note": "Trump public temperature checks, foreign-policy spotlight cycles, donor organization, and whether Vance/Rubio becomes explicit rivalry.",
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
+    },
+    {
+      "party": "Republican",
+      "tier": "Tier 1: Succession Fight",
+      "entity": "DeSantis",
+      "market_display": "4-8%",
+      "market_low": 4,
+      "market_high": 8,
+      "poll_display": "8-11.2%",
+      "poll_low": 8,
+      "poll_high": 11.2,
+      "note": "Term-limited Florida governor with a real 2024 apparatus scar; still the most obvious non-administration reboot.",
+      "vibes_rationale": "Material governing record is strong, but the 2024 campaign exposed warmth, long-form, and charisma limits.",
+      "vibes_dimensions": {
+        "hope_story": 2,
+        "material_specificity": 4,
+        "authentic_longform": 2,
+        "problem_clarity": 3,
+        "fight_selection": 3
+      },
+      "confidence": "high",
+      "evidence_notes": "Florida executive record; prior national campaign; single-digit but persistent market pricing.",
+      "liability_notes": "Already lost the anti-Trump-without-breaking-with-Trump lane; awkward if Vance and Rubio both run.",
+      "catalyst_note": "Florida post-governor positioning, book/tour choices, and whether he can wait out a Vance/Rubio collision.",
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
+    },
+    {
+      "party": "Republican",
+      "tier": "Tier 2: MAGA Bench",
+      "entity": "Trump Jr.",
+      "market_display": "low single digits",
+      "market_low": 1,
+      "market_high": 4,
+      "poll_display": "14-15%",
+      "poll_low": 14,
+      "poll_high": 15,
+      "note": "Name-ID heir with online-faction pull; more likely kingmaker or media force than disciplined nominee.",
+      "vibes_rationale": "Authentic to the base and fluent online, but the governing story and campaign discipline are thin.",
+      "vibes_dimensions": {
+        "hope_story": 2,
+        "material_specificity": 1,
+        "authentic_longform": 3,
+        "problem_clarity": 3,
+        "fight_selection": 4
+      },
+      "confidence": "medium",
+      "evidence_notes": "Appears in RCP-tracked GOP polling as a double-digit option; market mentions remain low.",
+      "liability_notes": "Unclear appetite, nepotism fatigue, and high downside if the party wants professionalized succession.",
+      "catalyst_note": "Any explicit pass/run signal, Trump family positioning, podcast/media tour intensity, and whether he attacks or blesses Vance/Rubio.",
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
+    },
+    {
+      "party": "Republican",
+      "tier": "Tier 2: MAGA Bench",
+      "entity": "Kennedy Jr.",
+      "market_display": "watch",
+      "market_low": null,
+      "market_high": null,
+      "poll_display": "3-4%",
+      "poll_low": 3,
+      "poll_high": 4,
+      "note": "Cabinet-adjacent outsider brand; mostly a chaos or lane-fracture watchpoint rather than a normal nomination path.",
+      "vibes_rationale": "High authenticity and heterodox appeal, but message coherence and party fit are unstable.",
+      "vibes_dimensions": {
+        "hope_story": 2,
+        "material_specificity": 2,
+        "authentic_longform": 4,
+        "problem_clarity": 2,
+        "fight_selection": 2
+      },
+      "confidence": "low",
+      "evidence_notes": "Shows up in some GOP preference lists; cross-partisan name ID.",
+      "liability_notes": "Party fit, administrative baggage, and unpredictable coalition shape.",
+      "catalyst_note": "Health/agency fights, Trump relationship, and whether anti-establishment Republicans treat him as useful pressure or actual nominee.",
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
+    },
+    {
+      "party": "Republican",
+      "tier": "Tier 2: MAGA Bench",
+      "entity": "Cruz",
+      "market_display": "watch",
+      "market_low": null,
+      "market_high": null,
+      "poll_display": "2-3%",
+      "poll_low": 2,
+      "poll_high": 3,
+      "note": "Known Iowa-capable conservative operator; probably more ceiling than floor.",
+      "vibes_rationale": "Clear ideological combat and debate skill, but low warmth and old-brand fatigue limit expansion.",
+      "vibes_dimensions": {
+        "hope_story": 1,
+        "material_specificity": 3,
+        "authentic_longform": 2,
+        "problem_clarity": 3,
+        "fight_selection": 4
+      },
+      "confidence": "medium",
+      "evidence_notes": "2016 runner-up infrastructure memory; recurring low-single-digit polling.",
+      "liability_notes": "Personal favorability drag; hard to see Trump-world permission against Vance/Rubio.",
+      "catalyst_note": "Iowa religious-conservative testing, Senate posture, and whether a foreign-policy or constitutional fight gives him a lane.",
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
+    },
+    {
+      "party": "Republican",
+      "tier": "Tier 3: Outside Pressure",
+      "entity": "Haley",
+      "market_display": "watch",
+      "market_low": null,
+      "market_high": null,
+      "poll_display": "3-6%",
+      "poll_low": 3,
+      "poll_high": 6,
+      "note": "Anti-chaos / old-GOP option with residual 2024 donor network; difficult path unless the Trump succession breaks badly.",
+      "vibes_rationale": "Polished and clear, but her coalition is too anti-MAGA-coded for the current primary without a major failure cascade.",
+      "vibes_dimensions": {
+        "hope_story": 2,
+        "material_specificity": 3,
+        "authentic_longform": 2,
+        "problem_clarity": 3,
+        "fight_selection": 2
+      },
+      "confidence": "medium",
+      "evidence_notes": "2024 campaign; early-state name ID; low but measurable polling.",
+      "liability_notes": "Base trust problem; hard to reenter if party treats 2024 as settled.",
+      "catalyst_note": "A Vance/Rubio collapse, donor panic, foreign-policy crisis, or early New Hampshire polls that reopen the anti-chaos lane.",
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
+    },
+    {
+      "party": "Republican",
+      "tier": "Tier 3: Outside Pressure",
+      "entity": "Ramaswamy",
+      "market_display": "watch",
+      "market_low": null,
+      "market_high": null,
+      "poll_display": "2-3%",
+      "poll_low": 2,
+      "poll_high": 3,
+      "note": "Media-native insurgent who can pressure the discourse even if the nomination path is narrow.",
+      "vibes_rationale": "Very high long-form energy and ideological specificity; also high performative-combat risk.",
+      "vibes_dimensions": {
+        "hope_story": 2,
+        "material_specificity": 3,
+        "authentic_longform": 4,
+        "problem_clarity": 3,
+        "fight_selection": 4
+      },
+      "confidence": "medium",
+      "evidence_notes": "2024 debate/media profile; recurring low-single-digit polling.",
+      "liability_notes": "Novelty fade, executive-record gap, and crowded MAGA successor lane.",
+      "catalyst_note": "Podcast/long-form breakouts, Ohio or administration positioning, and whether he becomes attack dog against one of the top two.",
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
+    },
+    {
+      "party": "Republican",
+      "tier": "Tier 3: Outside Pressure",
+      "entity": "Tucker Carlson",
+      "market_display": "3-6%",
+      "market_low": 3,
+      "market_high": 6,
+      "poll_display": "2%",
+      "poll_low": 2,
+      "poll_high": 2,
+      "note": "Market-visible media figure and factional pressure point; has publicly denied interest, so this is mostly tail-risk tracking.",
+      "vibes_rationale": "Dominant long-form media presence and anti-establishment clarity, but candidate discipline and actual appetite are unproven.",
+      "vibes_dimensions": {
+        "hope_story": 2,
+        "material_specificity": 2,
+        "authentic_longform": 4,
+        "problem_clarity": 4,
+        "fight_selection": 4
+      },
+      "confidence": "low",
+      "evidence_notes": "Market pages keep him in the mix despite denial; low polling when listed.",
+      "liability_notes": "No campaign structure, explicit non-run signals, and hard ceiling with institutional Republicans.",
+      "catalyst_note": "Run/pass restatements, feud with administration figures, and whether markets keep pricing media influence as candidacy risk.",
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
+    },
+    {
+      "party": "Republican",
+      "tier": "Tier 4: Governors & Wild Cards",
+      "entity": "Youngkin",
+      "market_display": "watch",
+      "market_low": null,
+      "market_high": null,
+      "poll_display": "1%",
+      "poll_low": 1,
+      "poll_high": 1,
+      "note": "Virginia governor sleeper profile; plausible only if the party wants electability and cultural conservatism without full MAGA theater.",
+      "vibes_rationale": "Suburban cultural-conservative story is coherent, but national charisma and MAGA permission are untested.",
+      "vibes_dimensions": {
+        "hope_story": 3,
+        "material_specificity": 3,
+        "authentic_longform": 2,
+        "problem_clarity": 3,
+        "fight_selection": 2
+      },
+      "confidence": "low",
+      "evidence_notes": "Virginia executive profile; occasional polling/market listing.",
+      "liability_notes": "Low national profile and no obvious lane if Vance/Rubio remain healthy.",
+      "catalyst_note": "Virginia/GOP donor chatter, education/culture-war reprise, and post-midterm appetite for a governor instead of administration succession.",
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
     }
   ],
   "vibes_check": {
@@ -686,39 +1405,72 @@
     "note": "The displayed vibes_score is a weighted average of the five stored ingredients, not a hand-entered primary field."
   },
   "catalyst_model": {
-    "note": "Catalysts identify likely step-change windows for market/poll repricing. They are qualitative watchpoints, not a separate score.",
-    "shared_windows": [
+    "note": "Catalysts are tracked as a calendar: dated or seasonal windows where market and polling snapshots are most likely to deserve a fresh read.",
+    "automation_note": "Manual watch for now; these dates are shaped so scheduled refresh jobs can be added later.",
+    "calendar": [
       {
-        "label": "Now through summer 2026",
-        "detail": "Earned-media moments, big speeches, viral interviews, donor/consultant leaks, PAC or staff moves, and early-state travel. Markets usually move before polls here."
+        "date": "Now-Aug 2026",
+        "horizon": "Near",
+        "className": "near",
+        "title": "Earned-media and staff tells",
+        "detail": "Big speeches, viral interviews, donor/consultant leaks, PAC or staff moves, and early-state travel. Markets usually move before polls here.",
+        "cadence": "Sample when a candidate gets an obvious breakout or pass signal."
       },
       {
-        "label": "2026 primaries and filing season",
-        "detail": "Ambition and ballot-path constraints get more legible. Georgia and Pennsylvania primary dates are listed as May 19, 2026 in the current federal calendar, subject to change."
+        "date": "May 19, 2026",
+        "horizon": "Near",
+        "className": "near",
+        "title": "GA / PA primary gate",
+        "detail": "Georgia and Pennsylvania federal primaries make ambition and ballot-path constraints more legible for Ossoff, Shapiro, and adjacent lanes.",
+        "cadence": "Refresh after results; watch Georgia runoff path if needed."
       },
       {
-        "label": "Fall 2026 campaign stretch",
-        "detail": "Live-cycle governors and senators get tested on message discipline, fundraising, TV performance, and whether their lane looks exportable."
+        "date": "Sep-Nov 2026",
+        "horizon": "Mid",
+        "className": "mid",
+        "title": "Fall campaign stress test",
+        "detail": "Live-cycle governors and senators get tested on message discipline, fundraising, TV performance, and whether their lane looks exportable.",
+        "cadence": "Snapshot on major debates, polling breaks, or high-salience ads."
       },
       {
-        "label": "Midterms: Nov 3, 2026",
-        "detail": "The biggest reset point. Winners, losers, and overperformers shape what the party thinks the post-2024 lesson should be."
+        "date": "Nov 3, 2026",
+        "horizon": "Mid",
+        "className": "mid",
+        "title": "Midterm reset",
+        "detail": "The biggest repricing window. Winners, losers, and overperformers shape what the party thinks the post-2024 lesson should be.",
+        "cadence": "Refresh market, poll, and mention baselines within the first week after election night."
       },
       {
-        "label": "Nov-Dec 2026",
-        "detail": "Watch who gives future-of-the-party speeches, does Sunday shows, gets donor meetings, and starts visiting early states."
+        "date": "Nov-Dec 2026",
+        "horizon": "Mid",
+        "className": "mid",
+        "title": "Future-of-party tour",
+        "detail": "Watch who gives major speeches, does Sunday shows, gets donor meetings, and starts visiting early states.",
+        "cadence": "Capture explicit travel, PAC, book, and donor signals."
       },
       {
-        "label": "Early 2027",
-        "detail": "Exploratory committees, book launches, PAC moves, staff hires, and first serious national polling can move low-name-ID candidates into poll visibility."
+        "date": "Early 2027",
+        "horizon": "Far",
+        "className": "far",
+        "title": "Exploratory phase",
+        "detail": "Exploratory committees, book launches, PAC moves, staff hires, and first serious national polling can move low-name-ID candidates into visibility.",
+        "cadence": "Monthly baseline unless a candidate files, passes, or hires senior staff."
       },
       {
-        "label": "2027 calendar, cattle calls, and early-state polls",
-        "detail": "The DNC early-state map and first cattle calls make regional advantages, favorability, and coalition tests more concrete."
+        "date": "2027 calendar",
+        "horizon": "Far",
+        "className": "far",
+        "title": "DNC and cattle-call calendar",
+        "detail": "The DNC early-state map and first cattle calls make regional advantages, favorability, and coalition tests more concrete.",
+        "cadence": "Refresh when the early-state order or major cattle-call schedule becomes concrete."
       },
       {
-        "label": "Late 2027 into early 2028",
-        "detail": "Debates and actual voting are the classic reset window: communicators rise and paper candidates get exposed."
+        "date": "Late 2027-early 2028",
+        "horizon": "Far",
+        "className": "far",
+        "title": "Debates and voting",
+        "detail": "Debates and actual voting are the classic reset window: communicators rise and paper candidates get exposed.",
+        "cadence": "Move from periodic snapshots to event-by-event updates."
       }
     ],
     "source_links": [
@@ -733,14 +1485,174 @@
     ]
   },
   "mention_model": {
-    "note": "Append-only public-source mention tracking. Keep paid sources optional; Twitter/X is not assumed.",
+    "note": "Manual-first mention tracking. Capture accessible articles, clips, newsletters, forums, search/news results, and public pages; label each mention good, bad, neutral, or unclear; keep raw refs for audit.",
+    "hypothesis": "Useful mention signal should lead market or poll movement by at least one later snapshot. Same-week mirroring is descriptive, not predictive.",
+    "labels": [
+      "good",
+      "bad",
+      "neutral",
+      "unclear"
+    ],
     "fields": {
-      "mention_volume": "Total captured public mentions in the snapshot window.",
-      "mention_positive": "Mentions labeled favorable/good for the candidate.",
-      "mention_negative": "Mentions labeled unfavorable/bad for the candidate.",
-      "mention_mixed": "Mentions that cut both ways or are unclear.",
-      "mention_refs": "Representative public URLs or raw references for audit."
+      "current": "Current snapshot counts by label.",
+      "previous": "Previous comparable-window counts by label.",
+      "sources": "List of source buckets used in this capture.",
+      "examples": "Representative refs/snippets, kept short and linkable.",
+      "confidence": "pending, low, medium, or high based on volume and source diversity."
+    }
+  },
+  "catalyst_models": {
+    "Democratic": {
+      "note": "Catalysts are tracked as a calendar: dated or seasonal windows where market and polling snapshots are most likely to deserve a fresh read.",
+      "automation_note": "Manual watch for now; these dates are shaped so scheduled refresh jobs can be added later.",
+      "calendar": [
+        {
+          "date": "Now-Aug 2026",
+          "horizon": "Near",
+          "className": "near",
+          "title": "Earned-media and staff tells",
+          "detail": "Big speeches, viral interviews, donor/consultant leaks, PAC or staff moves, and early-state travel. Markets usually move before polls here.",
+          "cadence": "Sample when a candidate gets an obvious breakout or pass signal."
+        },
+        {
+          "date": "May 19, 2026",
+          "horizon": "Near",
+          "className": "near",
+          "title": "GA / PA primary gate",
+          "detail": "Georgia and Pennsylvania federal primaries make ambition and ballot-path constraints more legible for Ossoff, Shapiro, and adjacent lanes.",
+          "cadence": "Refresh after results; watch Georgia runoff path if needed."
+        },
+        {
+          "date": "Sep-Nov 2026",
+          "horizon": "Mid",
+          "className": "mid",
+          "title": "Fall campaign stress test",
+          "detail": "Live-cycle governors and senators get tested on message discipline, fundraising, TV performance, and whether their lane looks exportable.",
+          "cadence": "Snapshot on major debates, polling breaks, or high-salience ads."
+        },
+        {
+          "date": "Nov 3, 2026",
+          "horizon": "Mid",
+          "className": "mid",
+          "title": "Midterm reset",
+          "detail": "The biggest repricing window. Winners, losers, and overperformers shape what the party thinks the post-2024 lesson should be.",
+          "cadence": "Refresh market, poll, and mention baselines within the first week after election night."
+        },
+        {
+          "date": "Nov-Dec 2026",
+          "horizon": "Mid",
+          "className": "mid",
+          "title": "Future-of-party tour",
+          "detail": "Watch who gives major speeches, does Sunday shows, gets donor meetings, and starts visiting early states.",
+          "cadence": "Capture explicit travel, PAC, book, and donor signals."
+        },
+        {
+          "date": "Early 2027",
+          "horizon": "Far",
+          "className": "far",
+          "title": "Exploratory phase",
+          "detail": "Exploratory committees, book launches, PAC moves, staff hires, and first serious national polling can move low-name-ID candidates into visibility.",
+          "cadence": "Monthly baseline unless a candidate files, passes, or hires senior staff."
+        },
+        {
+          "date": "2027 calendar",
+          "horizon": "Far",
+          "className": "far",
+          "title": "DNC and cattle-call calendar",
+          "detail": "The DNC early-state map and first cattle calls make regional advantages, favorability, and coalition tests more concrete.",
+          "cadence": "Refresh when the early-state order or major cattle-call schedule becomes concrete."
+        },
+        {
+          "date": "Late 2027-early 2028",
+          "horizon": "Far",
+          "className": "far",
+          "title": "Debates and voting",
+          "detail": "Debates and actual voting are the classic reset window: communicators rise and paper candidates get exposed.",
+          "cadence": "Move from periodic snapshots to event-by-event updates."
+        }
+      ],
+      "source_links": [
+        {
+          "label": "FEC 2026 primary dates PDF",
+          "url": "https://www.fec.gov/resources/cms-content/documents/2026pdates.pdf"
+        },
+        {
+          "label": "DNC 2028 calendar process",
+          "url": "https://democrats.org/news/dnc-rules-and-bylaws-committee-votes-to-advance-12-states-to-next-phase-of-2028-presidential-calendar-selection-process/"
+        }
+      ]
     },
-    "hypothesis_test": "Compare this snapshot window's mention volume, positive share, and negative count against the next snapshot's market/poll movement to see whether good mentions lead rather than trail."
+    "Republican": {
+      "note": "Republican catalysts are tracked as a succession calendar: Trump permission signals, 2026 midterm ownership, early-state tells, and whether the Vance/Rubio race stays friendly or turns real.",
+      "automation_note": "Manual watch for now; this is shaped for later refresh jobs around major speeches, state visits, polls, and market breaks.",
+      "calendar": [
+        {
+          "date": "Now-Aug 2026",
+          "horizon": "Near",
+          "className": "near",
+          "title": "Trump-heir temperature checks",
+          "detail": "Watch public praise, dinner-poll anecdotes, adviser leaks, and whether Trump keeps Vance and Rubio in managed rivalry.",
+          "cadence": "Refresh when Trump explicitly names, praises, tests, or undercuts a successor."
+        },
+        {
+          "date": "May-Nov 2026",
+          "horizon": "Near",
+          "className": "near",
+          "title": "Midterm ownership tour",
+          "detail": "Vance has RNC finance and barnstorming duties; Rubio has administration visibility. Both get judged against the midterm outcome.",
+          "cadence": "Snapshot after major Iowa/NH/SC/NV visits, fundraising reports, or national surrogate moments."
+        },
+        {
+          "date": "Nov 3, 2026",
+          "horizon": "Mid",
+          "className": "mid",
+          "title": "GOP midterm reset",
+          "detail": "If Republicans overperform, the heir to Trump gets stronger. If they underperform, donors and media may reopen the successor question.",
+          "cadence": "Refresh market, poll, and mention baselines in the week after election night."
+        },
+        {
+          "date": "Late 2026-early 2027",
+          "horizon": "Mid",
+          "className": "mid",
+          "title": "Pass/run and staffing tells",
+          "detail": "Senior consultants, super PAC posture, book/media plans, and donor networks clarify whether the race is Vance-default, Rubio-live, or wider.",
+          "cadence": "Capture senior-hire leaks, PAC filings, donor meetings, and explicit deferrals."
+        },
+        {
+          "date": "2027",
+          "horizon": "Far",
+          "className": "far",
+          "title": "Carve-out state circuit",
+          "detail": "Republican early-state gravity still runs through Iowa, New Hampshire, South Carolina, and Nevada unless rules change.",
+          "cadence": "Refresh when the RNC calendar is concrete or candidates start repeated visits."
+        },
+        {
+          "date": "Late 2027-early 2028",
+          "horizon": "Far",
+          "className": "far",
+          "title": "Debates and first contests",
+          "detail": "The succession story meets voters: Vance tests heir status, Rubio tests crossover inside MAGA, and governors/media figures test whether there is room.",
+          "cadence": "Move from periodic snapshots to event-by-event updates."
+        }
+      ],
+      "source_links": [
+        {
+          "label": "RCP 2028 GOP polling",
+          "url": "https://www.realclearpolling.com/polls/president/republican-primary/2028/national"
+        },
+        {
+          "label": "Covers GOP nominee markets",
+          "url": "https://www.covers.com/politics/2028-republican-presidential-nominees-prediction-market"
+        },
+        {
+          "label": "WSN GOP market odds",
+          "url": "https://www.wsn.com/prediction-markets/events/republican-nomination-2028/"
+        },
+        {
+          "label": "RNC calendar rule context",
+          "url": "https://www.thegreenpapers.com/P24/R-Alloc.phtml"
+        }
+      ]
+    }
   }
 }
