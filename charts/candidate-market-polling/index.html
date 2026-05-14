@@ -403,9 +403,6 @@
     .poll { background: var(--blue); }
     .market { background: var(--red); }
     .vibes { background: var(--green); }
-    .spread-fill.hot { background: var(--red); }
-    .spread-fill.cold { background: var(--blue); }
-    .spread-fill.neutral { background: var(--gold); }
     .unknown { opacity: .26; }
 
     .note {
@@ -748,7 +745,7 @@
         <h1>Candidate Market/Polling Watch</h1>
       </div>
       <div>
-        <p class="dek">Seed dashboard for tracking market implied probability, polling, spread, and a separate derived Vibes Check read.</p>
+        <p class="dek">Seed dashboard for tracking market implied probability, polling, catalyst watchpoints, and a separate derived Vibes Check read.</p>
         <span class="stamp">Captured May 13, 2026 · 07:27 CDT</span>
         <div class="legend">
           <span class="key"><i class="swatch market"></i> market midpoint</span>
@@ -769,7 +766,6 @@
         <select id="chartMetric" aria-label="Chart metric">
           <option value="market_midpoint">Chart: market</option>
           <option value="poll_midpoint">Chart: poll</option>
-          <option value="spread">Chart: spread</option>
           <option value="vibes_score">Chart: vibes</option>
         </select>
       </div>
@@ -787,11 +783,9 @@
           <p class="small">This is not a competence or coalition-building score; those should mostly show up in polling and markets. It is a soft signal for what may become more visible as the primary heats up.</p>
           <p class="small">4 = natural carrier. 3 = credible with a weakness. 2 = partial fit. 1 = brand fights the thesis.</p>
         </div>
-        <h2>Polling Above Market</h2>
-        <div class="rank" id="overpriced"></div>
-        <h2>Market Above Polling</h2>
-        <div class="rank" id="underpriced"></div>
-        <p class="small">Unknown polling values stay in the candidate list but are excluded from spread rankings. Booker’s polling cell had an OCR-looking “mod”, so it is held as unknown.</p>
+        <h2>Data Notes</h2>
+        <p class="small">Unknown polling values stay in the candidate list and are excluded from poll-only charts. Booker’s polling cell had an OCR-looking “mod”, so it is held as unknown.</p>
+        <p class="small">Market and polling series are tracked independently. The dashboard no longer derives a market-vs-poll gap because that read was noisier than the raw signals.</p>
       </aside>
     </main>
   </div>
@@ -1238,16 +1232,10 @@
     let sortDir = "asc";
     let chartMetric = "market_midpoint";
 
-    const fmt = n => n == null ? "unknown" : `${n > 0 ? "+" : ""}${n.toFixed(n % 1 ? 1 : 0)} pts`;
     const fmtVibe = n => n == null ? "n/a" : n.toFixed(n % 1 ? 1 : 0);
-    const fmtValue = (n, metric = chartMetric) => n == null ? "n/a" : `${n.toFixed(n % 1 ? 1 : 0)}${metric === "spread" ? " pts" : metric === "vibes_score" ? "/4" : "%"}`;
+    const fmtValue = (n, metric = chartMetric) => n == null ? "n/a" : `${n.toFixed(n % 1 ? 1 : 0)}${metric === "vibes_score" ? "/4" : "%"}`;
     const pct = n => `${Math.max(1.5, Math.min(100, n / 40 * 100))}%`;
     const vibePct = n => `${Math.max(0, Math.min(100, n / 4 * 100))}%`;
-    const spreadPct = n => n == null ? "0%" : `${Math.max(1.5, Math.min(100, Math.abs(n) / 40 * 100))}%`;
-
-    function spread(row) {
-      return row.poll_midpoint == null ? null : row.poll_midpoint - row.market_midpoint;
-    }
 
     const dimensionLabels = [
       ["hope_story", "Hope"],
@@ -1287,7 +1275,6 @@
       if (mode === "candidate") return row.entity;
       if (mode === "market") return row.market_midpoint;
       if (mode === "poll") return row.poll_midpoint;
-      if (mode === "spread") return spread(row);
       if (mode === "vibes") return row.vibes_score;
       return snapshot.rows.indexOf(row);
     }
@@ -1332,7 +1319,7 @@
       });
 
       const select = document.createElement("select");
-      [["tier","Sort: tier order"],["candidate","Sort: candidate"],["market","Sort: market"],["poll","Sort: poll"],["spread","Sort: spread"],["vibes","Sort: vibes"]].forEach(([value, text]) => {
+      [["tier","Sort: tier order"],["candidate","Sort: candidate"],["market","Sort: market"],["poll","Sort: poll"],["vibes","Sort: vibes"]].forEach(([value, text]) => {
         const option = document.createElement("option");
         option.value = value;
         option.textContent = text;
@@ -1352,7 +1339,6 @@
       const withPoll = rows.filter(r => r.poll_midpoint != null);
       const avgMarket = rows.reduce((sum, r) => sum + r.market_midpoint, 0) / rows.length;
       const avgVibes = rows.reduce((sum, r) => sum + r.vibes_score, 0) / rows.length;
-      const biggestGap = withPoll.reduce((best, r) => Math.abs(spread(r)) > Math.abs(spread(best)) ? r : best, withPoll[0] || rows[0]);
       const bestVibe = rows.reduce((best, r) => r.vibes_score > best.vibes_score ? r : best, rows[0]);
       const stats = [
         ["Candidates", rows.length],
@@ -1400,8 +1386,6 @@
           `).join("")}
         </div>
         ${rows.map(row => {
-          const s = spread(row);
-          const gapClass = s == null ? "" : s >= 3 ? "hot" : s <= -3 ? "cold" : "";
           return `
             <article class="row">
               <div class="tier">${row.tier}</div>
@@ -1409,14 +1393,12 @@
               <div class="metrics">
                 <div class="metric"><b>Market</b><span>${row.market_display}</span></div>
                 <div class="metric"><b>Poll</b><span>${row.poll_display}</span></div>
-                <div class="metric ${gapClass}"><b>Spread</b><span>${s == null ? "n/a" : fmt(s)}</span></div>
                 <div class="metric"><b>Vibes</b><span>${fmtVibe(row.vibes_score)}/4</span></div>
               </div>
               <div class="read">
                 <div class="signal-strip">
                   <div class="signal"><span class="signal-label">Market</span><span class="signal-value">${row.market_display}</span><div class="track"><i class="fill market" style="--w:${pct(row.market_midpoint)}"></i></div></div>
                   <div class="signal"><span class="signal-label">Poll</span><span class="signal-value">${row.poll_display}</span><div class="track"><i class="fill poll ${row.poll_midpoint == null ? "unknown" : ""}" style="--w:${row.poll_midpoint == null ? "0%" : pct(row.poll_midpoint)}"></i></div></div>
-                  <div class="signal"><span class="signal-label">Spread</span><span class="signal-value">${s == null ? "n/a" : fmt(s)}</span><div class="track"><i class="fill spread-fill ${gapClass || "neutral"} ${s == null ? "unknown" : ""}" style="--w:${spreadPct(s)}"></i></div></div>
                   <div class="signal vibes-signal"><span class="signal-label">Vibes</span><span class="signal-value">${fmtVibe(row.vibes_score)}/4</span><div class="track" title="Vibes Check ${fmtVibe(row.vibes_score)} / 4"><i class="fill vibes" style="--w:${vibePct(row.vibes_score)}"></i></div></div>
                 </div>
                 <p class="vibes-note">${row.vibes_rationale}</p>
@@ -1432,7 +1414,6 @@
     }
 
     function metricValue(row, metric) {
-      if (metric === "spread") return spread(row);
       return row[metric];
     }
 
@@ -1443,14 +1424,12 @@
       if (history.length < 2) {
         const max = chartMetric === "vibes_score"
           ? 4
-          : chartMetric === "spread"
-            ? Math.max(6, ...visible.map(row => Math.abs(metricValue(row, chartMetric))))
-            : Math.max(10, ...visible.map(row => metricValue(row, chartMetric)));
+          : Math.max(10, ...visible.map(row => metricValue(row, chartMetric)));
         document.getElementById("historyChart").innerHTML = `
           <div class="baseline-list">
             ${visible.map((row, index) => {
               const value = metricValue(row, chartMetric);
-              const width = chartMetric === "spread" ? `${Math.min(100, Math.abs(value) / max * 100)}%` : `${Math.min(100, value / max * 100)}%`;
+              const width = `${Math.min(100, value / max * 100)}%`;
               const color = chartColors[index % chartColors.length];
               return `
                 <div class="baseline-row">
@@ -1486,8 +1465,8 @@
       const allValues = pointsByEntity.flatMap(series => series.points.map(point => point.value));
       const rawMin = Math.min(...allValues);
       const rawMax = Math.max(...allValues);
-      const max = chartMetric === "vibes_score" ? 4 : Math.max(rawMax, chartMetric === "spread" ? 3 : 10);
-      const min = chartMetric === "spread" ? Math.min(rawMin, -3) : 0;
+      const max = chartMetric === "vibes_score" ? 4 : Math.max(rawMax, 10);
+      const min = 0;
       const width = 960;
       const height = 240;
       const pad = { top: 18, right: 20, bottom: 34, left: 44 };
@@ -1516,15 +1495,6 @@
         </svg>
         <div class="chart-legend">${legend}</div>
       `;
-    }
-
-    function renderRanks() {
-      const priced = snapshot.rows.filter(r => r.poll_midpoint != null);
-      const over = priced.filter(r => spread(r) > 0).sort((a, b) => spread(b) - spread(a)).slice(0, 5);
-      const under = priced.filter(r => spread(r) < 0).sort((a, b) => spread(a) - spread(b)).slice(0, 5);
-      const item = r => `<div class="rank-item"><span>${r.entity}</span><strong>${fmt(spread(r))}</strong></div>`;
-      document.getElementById("overpriced").innerHTML = over.map(item).join("") || `<div class="rank-item"><span>None</span><strong>n/a</strong></div>`;
-      document.getElementById("underpriced").innerHTML = under.map(item).join("") || `<div class="rank-item"><span>None</span><strong>n/a</strong></div>`;
     }
 
     function normalizeSnapshot(raw) {
@@ -1577,7 +1547,6 @@
       renderCatalysts();
       renderHistory(rows);
       renderBoard(rows);
-      renderRanks();
     }
 
     document.getElementById("chartMetric").addEventListener("change", e => {
