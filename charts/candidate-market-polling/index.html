@@ -110,6 +110,64 @@
       margin: 18px 0;
     }
 
+    .trend-deck {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .trend-panel, .method-panel {
+      min-width: 0;
+      padding: 16px;
+      background: rgba(255, 250, 240, .86);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .trend-panel h2, .method-panel h2 {
+      margin: 0 0 6px;
+      font-size: 24px;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .trend-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .trend-card {
+      min-width: 0;
+      padding: 10px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+    }
+
+    .trend-card b {
+      display: block;
+      color: var(--muted);
+      font: 10px/1.15 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-transform: uppercase;
+    }
+
+    .trend-card strong {
+      display: block;
+      margin-top: 8px;
+      font-size: 24px;
+      line-height: .95;
+    }
+
+    .trend-card span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font: 12px/1.35 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      overflow-wrap: anywhere;
+    }
+
     .stat {
       min-height: 116px;
       padding: 16px;
@@ -337,6 +395,38 @@
 
     .metric.hot { border-color: rgba(189, 59, 51, .55); color: var(--red); }
     .metric.cold { border-color: rgba(47, 109, 143, .55); color: var(--blue); }
+
+    .mention-line {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .mention-pill {
+      min-width: 0;
+      padding: 6px 7px;
+      border: 1px solid rgba(82, 125, 80, .24);
+      background: rgba(82, 125, 80, .06);
+      font: 10px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-transform: uppercase;
+    }
+
+    .mention-pill b {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .mention-pill span {
+      display: block;
+      color: var(--ink);
+      font-size: 12px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
     .read {
       display: grid;
@@ -604,7 +694,7 @@
     }
 
     @media (max-width: 980px) {
-      header, main, .summary { grid-template-columns: 1fr; }
+      header, main, .summary, .trend-deck { grid-template-columns: 1fr; }
       .timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       h1 { font-size: 58px; }
       .row {
@@ -630,6 +720,9 @@
       .controls {
         display: grid;
         grid-template-columns: 1fr;
+      }
+      .trend-grid, .mention-line {
+        grid-template-columns: minmax(0, 1fr);
       }
       .controls > * { width: 100%; }
       .read { min-width: 0; }
@@ -757,6 +850,7 @@
 
     <div class="controls" id="controls"></div>
     <section class="summary" id="summary"></section>
+    <section class="trend-deck" id="trendDeck"></section>
     <section class="history">
       <div class="history-head">
         <div>
@@ -767,6 +861,7 @@
           <option value="market_midpoint">Chart: market</option>
           <option value="poll_midpoint">Chart: poll</option>
           <option value="vibes_score">Chart: vibes</option>
+          <option value="mention_positive_share">Chart: good mentions</option>
         </select>
       </div>
       <div class="chart-wrap" id="historyChart"></div>
@@ -786,6 +881,7 @@
         <h2>Data Notes</h2>
         <p class="small">Unknown polling values stay in the candidate list and are excluded from poll-only charts. Booker’s polling cell had an OCR-looking “mod”, so it is held as unknown.</p>
         <p class="small">Market and polling series are tracked independently. The dashboard no longer derives a market-vs-poll gap because that read was noisier than the raw signals.</p>
+        <p class="small">Mention tracking is public-source and append-only: volume, good, bad, mixed, and representative refs. Twitter/X is not assumed; paid sources can be added later without changing the dashboard contract.</p>
       </aside>
     </main>
   </div>
@@ -1200,6 +1296,17 @@
       "Emanuel": "Reported gearing-up becoming real, donor lane formation, and some fresh why-now rationale beyond old insider combat experience."
     };
 
+    const mentionModel = {
+      note: "Public-source mention tracking is append-only and optional. Store raw mention counts separately from sentiment so the dashboard can test whether positive mention movement leads poll or market movement.",
+      fields: {
+        mention_volume: "Total captured public mentions in the snapshot window.",
+        mention_positive: "Mentions labeled as favorable/good for the candidate.",
+        mention_negative: "Mentions labeled as unfavorable/bad for the candidate.",
+        mention_mixed: "Mentions that cut both ways or are unclear.",
+        mention_refs: "Representative public URLs or raw references for audit."
+      }
+    };
+
         function deriveVibesScore(row) {
           if (!row.vibes_dimensions) return row.vibes_score ?? null;
           const weights = vibesModel.weights;
@@ -1215,10 +1322,27 @@
           return total ? Math.round((weighted / total) * 10) / 10 : null;
         }
 
+        function hydrateMentions(row) {
+          const volume = Number(row.mention_volume);
+          const positive = Number(row.mention_positive);
+          const negative = Number(row.mention_negative);
+          const mixed = Number(row.mention_mixed);
+          row.mention_volume = Number.isFinite(volume) ? volume : null;
+          row.mention_positive = Number.isFinite(positive) ? positive : null;
+          row.mention_negative = Number.isFinite(negative) ? negative : null;
+          row.mention_mixed = Number.isFinite(mixed) ? mixed : null;
+          const denom = (row.mention_positive ?? 0) + (row.mention_negative ?? 0) + (row.mention_mixed ?? 0);
+          row.mention_positive_share = denom ? Math.round((row.mention_positive / denom) * 1000) / 10 : null;
+          row.mention_net = denom ? row.mention_positive - row.mention_negative : null;
+          row.mention_refs = Array.isArray(row.mention_refs) ? row.mention_refs : [];
+          return row;
+        }
+
         function hydrateVibes(row) {
           if (inlineVibesInputs[row.entity]) Object.assign(row, inlineVibesInputs[row.entity]);
           row.catalyst_note = row.catalyst_note || inlineCatalystInputs[row.entity] || "Watch for explicit run/pass signals, early-state travel, donor movement, and first 2027 polling.";
           row.vibes_score = deriveVibesScore(row);
+          hydrateMentions(row);
           return row;
         }
 
@@ -1234,6 +1358,7 @@
 
     const fmtVibe = n => n == null ? "n/a" : n.toFixed(n % 1 ? 1 : 0);
     const fmtValue = (n, metric = chartMetric) => n == null ? "n/a" : `${n.toFixed(n % 1 ? 1 : 0)}${metric === "vibes_score" ? "/4" : "%"}`;
+    const fmtCount = n => n == null ? "n/a" : n.toLocaleString("en-US");
     const pct = n => `${Math.max(1.5, Math.min(100, n / 40 * 100))}%`;
     const vibePct = n => `${Math.max(0, Math.min(100, n / 4 * 100))}%`;
 
@@ -1352,6 +1477,86 @@
       `).join("");
     }
 
+    function latestPreviousRow(entity) {
+      if (history.length < 2) return null;
+      return history[history.length - 2].rows.find(row => row.entity === entity) || null;
+    }
+
+    function delta(current, previous, field) {
+      if (!previous || current[field] == null || previous[field] == null) return null;
+      return Math.round((current[field] - previous[field]) * 10) / 10;
+    }
+
+    function movementRows(rows) {
+      return rows.map(row => {
+        const prev = latestPreviousRow(row.entity);
+        return {
+          row,
+          volume_delta: delta(row, prev, "mention_volume"),
+          positive_share_delta: delta(row, prev, "mention_positive_share"),
+          negative_delta: delta(row, prev, "mention_negative"),
+          market_delta: delta(row, prev, "market_midpoint"),
+          poll_delta: delta(row, prev, "poll_midpoint")
+        };
+      });
+    }
+
+    function topMovement(items, field, label, format) {
+      const ranked = items
+        .filter(item => item[field] != null)
+        .sort((a, b) => b[field] - a[field]);
+      if (!ranked.length) {
+        return `
+          <article class="trend-card">
+            <b>${label}</b>
+            <strong>No baseline yet</strong>
+            <span>Add a second mention snapshot to calculate week-over-week movement.</span>
+          </article>
+        `;
+      }
+      const item = ranked[0];
+      const companion = [
+        item.market_delta == null ? null : `market ${item.market_delta >= 0 ? "+" : ""}${item.market_delta}%`,
+        item.poll_delta == null ? null : `poll ${item.poll_delta >= 0 ? "+" : ""}${item.poll_delta}%`
+      ].filter(Boolean).join(" / ");
+      return `
+        <article class="trend-card">
+          <b>${label}</b>
+          <strong>${item.row.entity}</strong>
+          <span>${format(item[field])}${companion ? `; ${companion}` : ""}</span>
+        </article>
+      `;
+    }
+
+    function renderTrendDeck(rows) {
+      const moves = movementRows(rows);
+      const hasMentions = rows.some(row => row.mention_volume != null || row.mention_positive_share != null);
+      const hasMovement = moves.some(item => item.volume_delta != null || item.positive_share_delta != null || item.negative_delta != null);
+      const status = hasMovement
+        ? "Showing latest snapshot movement against the prior capture."
+        : hasMentions
+          ? "Mention counts are present; add the next capture to turn this into week-over-week movement."
+          : "Mention capture is wired but empty. Add public-source rows to snapshots.json or snapshots.csv to activate the leaderboard.";
+
+      document.getElementById("trendDeck").innerHTML = `
+        <section class="trend-panel">
+          <h2>Who's Trending</h2>
+          <p class="small">${status}</p>
+          <div class="trend-grid">
+            ${topMovement(moves, "positive_share_delta", "Good mention gain", value => `${value >= 0 ? "+" : ""}${value}% positive share`)}
+            ${topMovement(moves, "negative_delta", "Bad mention gain", value => `${value >= 0 ? "+" : ""}${fmtCount(value)} negative mentions`)}
+            ${topMovement(moves, "volume_delta", "Volume gain", value => `${value >= 0 ? "+" : ""}${fmtCount(value)} mentions`)}
+          </div>
+        </section>
+        <section class="method-panel">
+          <h2>Hypothesis Test</h2>
+          <p class="small">Question: did good public mentions precede the next poll or market move?</p>
+          <p class="small">Track separate signals first: volume, good share, bad count, and raw refs. Then compare this snapshot's mention movement against the next snapshot's market/poll movement.</p>
+          <p class="small">A useful signal should lead price or polling by days. If it only moves after them, it is still context, but not predictive.</p>
+        </section>
+      `;
+    }
+
     function renderCatalysts() {
       const model = snapshot.catalyst_model || catalystModel;
       const windows = (model.shared_windows || []).map(item => Array.isArray(item) ? { label: item[0], detail: item[1] } : item);
@@ -1401,6 +1606,12 @@
                   <div class="signal"><span class="signal-label">Poll</span><span class="signal-value">${row.poll_display}</span><div class="track"><i class="fill poll ${row.poll_midpoint == null ? "unknown" : ""}" style="--w:${row.poll_midpoint == null ? "0%" : pct(row.poll_midpoint)}"></i></div></div>
                   <div class="signal vibes-signal"><span class="signal-label">Vibes</span><span class="signal-value">${fmtVibe(row.vibes_score)}/4</span><div class="track" title="Vibes Check ${fmtVibe(row.vibes_score)} / 4"><i class="fill vibes" style="--w:${vibePct(row.vibes_score)}"></i></div></div>
                 </div>
+                <div class="mention-line" title="${mentionModel.note}">
+                  <div class="mention-pill"><b>Mentions</b><span>${fmtCount(row.mention_volume)}</span></div>
+                  <div class="mention-pill"><b>Good</b><span>${row.mention_positive_share == null ? "n/a" : `${row.mention_positive_share}%`}</span></div>
+                  <div class="mention-pill"><b>Bad</b><span>${fmtCount(row.mention_negative)}</span></div>
+                  <div class="mention-pill"><b>Refs</b><span>${row.mention_refs.length || "pending"}</span></div>
+                </div>
                 <p class="vibes-note">${row.vibes_rationale}</p>
                 ${renderSubscores(row)}
                 <p class="catalyst-note"><b>Next catalyst:</b> ${row.catalyst_note}</p>
@@ -1424,6 +1635,8 @@
       if (history.length < 2) {
         const max = chartMetric === "vibes_score"
           ? 4
+          : chartMetric === "mention_positive_share"
+            ? 100
           : Math.max(10, ...visible.map(row => metricValue(row, chartMetric)));
         document.getElementById("historyChart").innerHTML = `
           <div class="baseline-list">
@@ -1465,7 +1678,7 @@
       const allValues = pointsByEntity.flatMap(series => series.points.map(point => point.value));
       const rawMin = Math.min(...allValues);
       const rawMax = Math.max(...allValues);
-      const max = chartMetric === "vibes_score" ? 4 : Math.max(rawMax, 10);
+      const max = chartMetric === "vibes_score" ? 4 : chartMetric === "mention_positive_share" ? 100 : Math.max(rawMax, 10);
       const min = 0;
       const width = 960;
       const height = 240;
@@ -1544,6 +1757,7 @@
       renderControls();
       const rows = filteredRows();
       renderSummary(rows);
+      renderTrendDeck(rows);
       renderCatalysts();
       renderHistory(rows);
       renderBoard(rows);
