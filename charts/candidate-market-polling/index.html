@@ -511,6 +511,79 @@
       background: rgba(82, 125, 80, .08);
     }
 
+    .catalysts {
+      margin: 18px 0;
+      padding: 16px;
+      background: rgba(255, 250, 240, .86);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .catalysts h2 {
+      margin: 0 0 5px;
+      font-size: 24px;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .timeline-item {
+      min-width: 0;
+      padding: 10px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+    }
+
+    .timeline-item b {
+      display: block;
+      margin-bottom: 6px;
+      font: 11px/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-transform: uppercase;
+    }
+
+    .timeline-item span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.28;
+    }
+
+    .source-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 12px;
+      margin-top: 12px;
+      font: 11px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-transform: uppercase;
+    }
+
+    .source-links a {
+      color: var(--blue);
+    }
+
+    .catalyst-note {
+      margin: 2px 0 0;
+      padding: 8px 9px;
+      border-left: 3px solid var(--gold);
+      background: rgba(182, 121, 44, .09);
+      color: #4b341f;
+      font-size: 13px;
+      line-height: 1.32;
+      overflow-wrap: anywhere;
+    }
+
+    .catalyst-note b {
+      font: 10px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
     .legend {
       display: flex;
       gap: 12px;
@@ -535,6 +608,7 @@
 
     @media (max-width: 980px) {
       header, main, .summary { grid-template-columns: 1fr; }
+      .timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       h1 { font-size: 58px; }
       .row {
         grid-template-columns: 82px minmax(110px, 1fr);
@@ -566,6 +640,13 @@
         width: calc(100vw - 20px);
         max-width: calc(100vw - 20px);
         overflow: hidden;
+      }
+      .catalysts {
+        width: calc(100vw - 20px);
+        max-width: calc(100vw - 20px);
+      }
+      .timeline {
+        grid-template-columns: minmax(0, 1fr);
       }
       .history-head {
         display: grid;
@@ -694,6 +775,7 @@
       </div>
       <div class="chart-wrap" id="historyChart"></div>
     </section>
+    <section class="catalysts" id="catalysts"></section>
 
     <main>
       <section class="board" id="board"></section>
@@ -1080,6 +1162,50 @@
           }
     };
 
+    const catalystModel = {
+      note: "Catalysts identify likely step-change windows for market/poll repricing. They are qualitative watchpoints, not a separate score.",
+      shared_windows: [
+        ["Now through summer 2026", "Earned-media moments, big speeches, viral interviews, donor/consultant leaks, PAC or staff moves, and early-state travel. Markets usually move before polls here."],
+        ["2026 primaries and filing season", "Ambition and ballot-path constraints get more legible. Georgia and Pennsylvania primary dates are listed as May 19, 2026 in the current federal calendar, subject to change."],
+        ["Fall 2026 campaign stretch", "Live-cycle governors and senators get tested on message discipline, fundraising, TV performance, and whether their lane looks exportable."],
+        ["Midterms: Nov 3, 2026", "The biggest reset point. Winners, losers, and overperformers shape what the party thinks the post-2024 lesson should be."],
+        ["Nov-Dec 2026", "Watch who gives future-of-the-party speeches, does Sunday shows, gets donor meetings, and starts visiting early states."],
+        ["Early 2027", "Exploratory committees, book launches, PAC moves, staff hires, and first serious national polling can move low-name-ID candidates into poll visibility."],
+        ["2027 calendar, cattle calls, and early-state polls", "The DNC early-state map and first cattle calls make regional advantages, favorability, and coalition tests more concrete."],
+        ["Late 2027 into early 2028", "Debates and actual voting are the classic reset window: communicators rise and paper candidates get exposed."]
+      ],
+      source_links: [
+        ["FEC 2026 primary dates PDF", "https://www.fec.gov/resources/cms-content/documents/2026pdates.pdf"],
+        ["DNC 2028 calendar process", "https://democrats.org/news/dnc-rules-and-bylaws-committee-votes-to-advance-12-states-to-next-phase-of-2028-presidential-calendar-selection-process/"]
+      ]
+    };
+
+    const inlineCatalystInputs = {
+      "Newsom": "National Dem elite signals, California succession politics, the 2026 California governor result, and any post-governor launch after January 2027.",
+      "Harris": "Explicit run/pass signal, donor re-entry, and signs that party elites are willing to relitigate 2024 instead of moving on.",
+      "AOC": "Progressive primary wins in 2026, grassroots fundraising shocks, and whether electability panic fades after midterm lessons settle.",
+      "Shapiro": "Pennsylvania reelection margin on Nov 3, 2026; a strong swing-state overperformance is the cleanest repricing event.",
+      "Buttigieg": "DNC early-state calendar, New Hampshire-style favorability tests, early-state polling, and whether he finds an office-holder story.",
+      "Pritzker": "Illinois reelection margin, anti-Trump donor spending, and whether money plus combat becomes the party lane after 2026.",
+      "Ossoff": "Georgia Senate path: May 19, 2026 primary, Nov 3, 2026 general. Win keeps him live; loss probably ends the 2028 case.",
+      "Moore": "National rollout, early-state visits, service/reform speeches, and insider signs that the biography is being treated as presidential rather than just impressive.",
+      "Beshear": "Post-midterm lesson-taking around red-state Democratic overperformance, plus early-state travel or donor signals that his moderation has a lane.",
+      "Gallego": "Sun Belt and ticket-split lessons after 2026, veteran/Latino swing-state messaging, and any donor or early-state interest treating him as real.",
+      "Stein": "North Carolina performance as a party lesson, technocratic competence becoming fashionable, and early-state visits that raise his national profile.",
+      "Kelly": "Any ambition signal, VP/speculation cycle, Sun Belt security-and-competence lane, or early-state polling that rewards the competent-adult profile.",
+      "Warnock": "Southern-state and Georgia lessons after 2026, moral-patriotic speeches, donor interest, and any early-state rollout showing he wants the lane.",
+      "Whitmer": "Michigan 2026 results, whether Michigan keeps early-calendar leverage, and whether she turns post-governor status into a future-party tour.",
+      "Slotkin": "Michigan calendar leverage, national-security moderate demand, and any 2027 rollout that turns her from profile-fit dark horse into actual contender.",
+      "Murphy": "A viral fight or policy speech, post-2024 fight-harder tour momentum, exploratory/PAC moves, and proof the style can become a positive story.",
+      "Polis": "Post-governor 2027 availability, anti-orthodoxy media moments, and whether a moderate-libertarian Dem lane looks useful rather than niche.",
+      "Schatz": "A climate or governance policy moment, future-party speech, early-state travel, or viral long-form appearance that lifts him out of Senate-low-profile mode.",
+      "Booker": "Future-party speech, another high-visibility protest moment, early-state polling, and whether hopeful language feels less rehearsed this time.",
+      "Walz": "The 2024 loss fading, Midwest calendar leverage, strong long-form appearances, and whether the party wants normal vernacular affect again.",
+      "Cooper": "Post-office rollout, North Carolina or Southern electability lesson-taking, donor meetings, and a clearer why-now story.",
+      "Cuban": "Explicit interest, viral long-form interviews, outsider/business lane demand, and materially specific consumer or economic policy hooks.",
+      "Emanuel": "Reported gearing-up becoming real, donor lane formation, and some fresh why-now rationale beyond old insider combat experience."
+    };
+
         function deriveVibesScore(row) {
           if (!row.vibes_dimensions) return row.vibes_score ?? null;
           const weights = vibesModel.weights;
@@ -1097,6 +1223,7 @@
 
         function hydrateVibes(row) {
           if (inlineVibesInputs[row.entity]) Object.assign(row, inlineVibesInputs[row.entity]);
+          row.catalyst_note = row.catalyst_note || inlineCatalystInputs[row.entity] || "Watch for explicit run/pass signals, early-state travel, donor movement, and first 2027 polling.";
           row.vibes_score = deriveVibesScore(row);
           return row;
         }
@@ -1239,6 +1366,27 @@
       `).join("");
     }
 
+    function renderCatalysts() {
+      const model = snapshot.catalyst_model || catalystModel;
+      const windows = (model.shared_windows || []).map(item => Array.isArray(item) ? { label: item[0], detail: item[1] } : item);
+      const links = (model.source_links || []).map(item => Array.isArray(item) ? { label: item[0], url: item[1] } : item);
+      document.getElementById("catalysts").innerHTML = `
+        <h2>Catalyst Watch</h2>
+        <p class="small">${model.note || catalystModel.note}</p>
+        <div class="timeline">
+          ${windows.map(window => `
+            <article class="timeline-item">
+              <b>${window.label}</b>
+              <span>${window.detail}</span>
+            </article>
+          `).join("")}
+        </div>
+        <div class="source-links">
+          ${links.map(link => `<a href="${link.url}">${link.label}</a>`).join("")}
+        </div>
+      `;
+    }
+
     function renderBoard(rows) {
       document.getElementById("board").innerHTML = `
         <div class="row head">
@@ -1273,6 +1421,7 @@
                 </div>
                 <p class="vibes-note">${row.vibes_rationale}</p>
                 ${renderSubscores(row)}
+                <p class="catalyst-note"><b>Next catalyst:</b> ${row.catalyst_note}</p>
                 <p class="note">Confidence: ${row.confidence || "unknown"}. Evidence: ${row.evidence_notes || "not yet recorded"}. Liability: ${row.liability_notes || "not yet recorded"}.</p>
                 <p class="note">${row.note}</p>
               </div>
@@ -1425,6 +1574,7 @@
       renderControls();
       const rows = filteredRows();
       renderSummary(rows);
+      renderCatalysts();
       renderHistory(rows);
       renderBoard(rows);
       renderRanks();

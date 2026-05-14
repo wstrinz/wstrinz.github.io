@@ -2,7 +2,7 @@
   "schema": "candidate-market-polling-snapshot-v2",
   "captured_at": "2026-05-13T07:27:00-05:00",
   "topic": "2028 Democratic nominee candidate poll and market watch",
-  "source_note": "Seed snapshot transcribed from the image text shared in Discord #the-tide-pool. Corrected after audit: the source columns are Candidate / Markets / Polling / Read. V2 stores vibes ingredients and derives the displayed bar from weighted component scores.",
+  "source_note": "Seed snapshot transcribed from the image text shared in Discord #the-tide-pool. Corrected after audit: the source columns are Candidate / Markets / Polling / Read. V2 stores vibes ingredients and derives the displayed bar from weighted component scores. Catalyst notes added 2026-05-13 from Tide Pool discussion; they are qualitative watchpoints, not probability updates.",
   "rows": [
     {
       "tier": "Tier 1: Frontrunners",
@@ -24,7 +24,8 @@
       },
       "confidence": "high",
       "evidence_notes": "California governing record; extensive national media exposure; shadow-campaign signals.",
-      "liability_notes": "CA machine-polish; coastal-progressive brand risk; scripted affect under sustained exposure."
+      "liability_notes": "CA machine-polish; coastal-progressive brand risk; scripted affect under sustained exposure.",
+      "catalyst_note": "National Dem elite signals, California succession politics, the 2026 California governor result, and any post-governor launch after January 2027."
     },
     {
       "tier": "Tier 1: Frontrunners",
@@ -46,7 +47,8 @@
       },
       "confidence": "high",
       "evidence_notes": "2020 and 2024 national campaign record; VP record; high name ID polling.",
-      "liability_notes": "2024 loss; donor skepticism; scripted institutional style; backward-looking brand."
+      "liability_notes": "2024 loss; donor skepticism; scripted institutional style; backward-looking brand.",
+      "catalyst_note": "Explicit run/pass signal, donor re-entry, and signs that party elites are willing to relitigate 2024 instead of moving on."
     },
     {
       "tier": "Tier 1: Frontrunners",
@@ -68,7 +70,8 @@
       },
       "confidence": "high",
       "evidence_notes": "Long-form interviews; grassroots fundraising; clear issue advocacy and hostile-media reps.",
-      "liability_notes": "General-election ceiling concern; positive national unity story less proven than combat/story specificity."
+      "liability_notes": "General-election ceiling concern; positive national unity story less proven than combat/story specificity.",
+      "catalyst_note": "Progressive primary wins in 2026, grassroots fundraising shocks, and whether electability panic fades after midterm lessons settle."
     },
     {
       "tier": "Tier 2: Serious Contenders",
@@ -90,7 +93,8 @@
       },
       "confidence": "medium",
       "evidence_notes": "Pennsylvania executive record; disciplined Rust Belt messaging; crisis response profile.",
-      "liability_notes": "2026 reelection gate; national long-form warmth less proven; Gaza/education fights may complicate primary."
+      "liability_notes": "2026 reelection gate; national long-form warmth less proven; Gaza/education fights may complicate primary.",
+      "catalyst_note": "Pennsylvania reelection margin on Nov 3, 2026; a strong swing-state overperformance is the cleanest repricing event."
     },
     {
       "tier": "Tier 2: Serious Contenders",
@@ -112,7 +116,8 @@
       },
       "confidence": "high",
       "evidence_notes": "Long-form interviews; Fox/news hits; high measured favorability where tested.",
-      "liability_notes": "No governor track record; weak structural base; 2020 coalition ceiling still a question."
+      "liability_notes": "No governor track record; weak structural base; 2020 coalition ceiling still a question.",
+      "catalyst_note": "DNC early-state calendar, New Hampshire-style favorability tests, early-state polling, and whether he finds an office-holder story."
     },
     {
       "tier": "Tier 2: Serious Contenders",
@@ -134,7 +139,8 @@
       },
       "confidence": "medium",
       "evidence_notes": "Illinois governing record; economic-populist messaging; anti-Trump fight posture.",
-      "liability_notes": "Billionaire frame; can read over-managed; national voter familiarity limited."
+      "liability_notes": "Billionaire frame; can read over-managed; national voter familiarity limited.",
+      "catalyst_note": "Illinois reelection margin, anti-Trump donor spending, and whether money plus combat becomes the party lane after 2026."
     },
     {
       "tier": "Tier 2: Serious Contenders",
@@ -156,7 +162,8 @@
       },
       "confidence": "medium",
       "evidence_notes": "Georgia Senate record; calm media presence; incumbent swing-state story.",
-      "liability_notes": "Must win reelection; national story thin; limited unscripted emotional texture."
+      "liability_notes": "Must win reelection; national story thin; limited unscripted emotional texture.",
+      "catalyst_note": "Georgia Senate path: May 19, 2026 primary, Nov 3, 2026 general. Win keeps him live; loss probably ends the 2028 case."
     },
     {
       "tier": "Tier 3: Underpriced, Right Profile",
@@ -178,7 +185,8 @@
       },
       "confidence": "low",
       "evidence_notes": "Maryland executive record; service biography; memoir/public speaking profile.",
-      "liability_notes": "Limited national testing; long-form proof thinner than the biography; early hype risk."
+      "liability_notes": "Limited national testing; long-form proof thinner than the biography; early hype risk.",
+      "catalyst_note": "National rollout, early-state visits, service/reform speeches, and insider signs that the biography is being treated as presidential rather than just impressive."
     },
     {
       "tier": "Tier 3: Underpriced, Right Profile",
@@ -200,7 +208,8 @@
       },
       "confidence": "medium",
       "evidence_notes": "Two-term Kentucky governing record; disaster response; red-state reelection proof.",
-      "liability_notes": "Low national exposure; moderate lane may blur in a primary; national fight selection untested."
+      "liability_notes": "Low national exposure; moderate lane may blur in a primary; national fight selection untested.",
+      "catalyst_note": "Post-midterm lesson-taking around red-state Democratic overperformance, plus early-state travel or donor signals that his moderation has a lane."
     },
     {
       "tier": "Tier 3: Underpriced, Right Profile",
@@ -222,7 +231,8 @@
       },
       "confidence": "low",
       "evidence_notes": "Arizona Senate win; Marine biography; ticket-split overperformance.",
-      "liability_notes": "Limited national testing; Senate record still new; inferred more from profile than campaign exposure."
+      "liability_notes": "Limited national testing; Senate record still new; inferred more from profile than campaign exposure.",
+      "catalyst_note": "Sun Belt and ticket-split lessons after 2026, veteran/Latino swing-state messaging, and any donor or early-state interest treating him as real."
     },
     {
       "tier": "Tier 3: Underpriced, Right Profile",
@@ -244,7 +254,8 @@
       },
       "confidence": "low",
       "evidence_notes": "North Carolina win; attorney-general record; technocratic executive profile.",
-      "liability_notes": "Low national profile; positive vision and long-form persona mostly untested."
+      "liability_notes": "Low national profile; positive vision and long-form persona mostly untested.",
+      "catalyst_note": "North Carolina performance as a party lesson, technocratic competence becoming fashionable, and early-state visits that raise his national profile."
     },
     {
       "tier": "Tier 3: Underpriced, Right Profile",
@@ -266,7 +277,8 @@
       },
       "confidence": "medium",
       "evidence_notes": "Arizona Senate record; Navy/astronaut biography; broad competence brand.",
-      "liability_notes": "Low ambition signal; narrative politics not a strength; restrained affect may not travel."
+      "liability_notes": "Low ambition signal; narrative politics not a strength; restrained affect may not travel.",
+      "catalyst_note": "Any ambition signal, VP/speculation cycle, Sun Belt security-and-competence lane, or early-state polling that rewards the competent-adult profile."
     },
     {
       "tier": "Tier 3: Underpriced, Right Profile",
@@ -288,7 +300,8 @@
       },
       "confidence": "medium",
       "evidence_notes": "Georgia statewide wins; pastoral speaking style; moral-patriotic campaign message.",
-      "liability_notes": "National-primary appetite unknown; Senate lane may not translate; market omission risk."
+      "liability_notes": "National-primary appetite unknown; Senate lane may not translate; market omission risk.",
+      "catalyst_note": "Southern-state and Georgia lessons after 2026, moral-patriotic speeches, donor interest, and any early-state rollout showing he wants the lane."
     },
     {
       "tier": "Tier 4: Dark Horses & Wild Cards",
@@ -310,7 +323,8 @@
       },
       "confidence": "high",
       "evidence_notes": "Michigan executive record; post-kidnapping threat history; national surrogate role.",
-      "liability_notes": "Stock has slipped; gender handwringing; story not fully translated beyond Michigan."
+      "liability_notes": "Stock has slipped; gender handwringing; story not fully translated beyond Michigan.",
+      "catalyst_note": "Michigan 2026 results, whether Michigan keeps early-calendar leverage, and whether she turns post-governor status into a future-party tour."
     },
     {
       "tier": "Tier 4: Dark Horses & Wild Cards",
@@ -332,7 +346,8 @@
       },
       "confidence": "low",
       "evidence_notes": "Michigan Senate win; national-security biography; moderate pragmatist brand.",
-      "liability_notes": "Pure dark horse; positive vision unfinished; limited national charisma testing."
+      "liability_notes": "Pure dark horse; positive vision unfinished; limited national charisma testing.",
+      "catalyst_note": "Michigan calendar leverage, national-security moderate demand, and any 2027 rollout that turns her from profile-fit dark horse into actual contender."
     },
     {
       "tier": "Tier 4: Dark Horses & Wild Cards",
@@ -354,7 +369,8 @@
       },
       "confidence": "medium",
       "evidence_notes": "Post-2024 fight-harder messaging; Senate issue advocacy; long-running gun-safety profile.",
-      "liability_notes": "Can sound sermonic; positive story lags fight posture; New England senator lane."
+      "liability_notes": "Can sound sermonic; positive story lags fight posture; New England senator lane.",
+      "catalyst_note": "A viral fight or policy speech, post-2024 fight-harder tour momentum, exploratory/PAC moves, and proof the style can become a positive story."
     },
     {
       "tier": "Tier 4: Dark Horses & Wild Cards",
@@ -376,7 +392,8 @@
       },
       "confidence": "medium",
       "evidence_notes": "Colorado executive record; anti-orthodoxy positioning; relaxed media style.",
-      "liability_notes": "National emotional story fuzzy; libertarian-moderate profile may confuse primary voters."
+      "liability_notes": "National emotional story fuzzy; libertarian-moderate profile may confuse primary voters.",
+      "catalyst_note": "Post-governor 2027 availability, anti-orthodoxy media moments, and whether a moderate-libertarian Dem lane looks useful rather than niche."
     },
     {
       "tier": "Tier 4: Dark Horses & Wild Cards",
@@ -398,7 +415,8 @@
       },
       "confidence": "low",
       "evidence_notes": "Senate policy work; smart progressive voice; climate/policy credibility.",
-      "liability_notes": "Low national profile; Senate affect; limited proof of campaign-stage magnetism."
+      "liability_notes": "Low national profile; Senate affect; limited proof of campaign-stage magnetism.",
+      "catalyst_note": "A climate or governance policy moment, future-party speech, early-state travel, or viral long-form appearance that lifts him out of Senate-low-profile mode."
     },
     {
       "tier": "Tier 5: Bench & Long Shots",
@@ -421,7 +439,8 @@
       },
       "confidence": "high",
       "evidence_notes": "2020 campaign; Senate record; filibuster protest visibility.",
-      "liability_notes": "Hope language can feel over-rehearsed; 2020 ceiling; fight-picking can turn theatrical."
+      "liability_notes": "Hope language can feel over-rehearsed; 2020 ceiling; fight-picking can turn theatrical.",
+      "catalyst_note": "Future-party speech, another high-visibility protest moment, early-state polling, and whether hopeful language feels less rehearsed this time."
     },
     {
       "tier": "Tier 5: Bench & Long Shots",
@@ -443,7 +462,8 @@
       },
       "confidence": "high",
       "evidence_notes": "Minnesota governing record; 2024 VP run; natural long-form/vernacular media style.",
-      "liability_notes": "2024 loss overhang; VP brand tied to failed ticket; national story contested."
+      "liability_notes": "2024 loss overhang; VP brand tied to failed ticket; national story contested.",
+      "catalyst_note": "The 2024 loss fading, Midwest calendar leverage, strong long-form appearances, and whether the party wants normal vernacular affect again."
     },
     {
       "tier": "Tier 5: Bench & Long Shots",
@@ -465,7 +485,8 @@
       },
       "confidence": "medium",
       "evidence_notes": "Two-term North Carolina governorship; swing-state executive record.",
-      "liability_notes": "Post-office timing; low distinctiveness; long-form likely fine rather than magnetic."
+      "liability_notes": "Post-office timing; low distinctiveness; long-form likely fine rather than magnetic.",
+      "catalyst_note": "Post-office rollout, North Carolina or Southern electability lesson-taking, donor meetings, and a clearer why-now story."
     },
     {
       "tier": "Tier 5: Bench & Long Shots",
@@ -487,7 +508,8 @@
       },
       "confidence": "medium",
       "evidence_notes": "Long-form business/media presence; outsider brand; consumer/business specificity.",
-      "liability_notes": "Not a conventional Democrat; office ambition unclear; primary trust barrier."
+      "liability_notes": "Not a conventional Democrat; office ambition unclear; primary trust barrier.",
+      "catalyst_note": "Explicit interest, viral long-form interviews, outsider/business lane demand, and materially specific consumer or economic policy hooks."
     },
     {
       "tier": "Tier 5: Bench & Long Shots",
@@ -509,7 +531,8 @@
       },
       "confidence": "high",
       "evidence_notes": "Long public record; reported ambition; known operator persona.",
-      "liability_notes": "Old-war-room insider brand; combative without renewal story; probably wrong for the moment."
+      "liability_notes": "Old-war-room insider brand; combative without renewal story; probably wrong for the moment.",
+      "catalyst_note": "Reported gearing-up becoming real, donor lane formation, and some fresh why-now rationale beyond old insider combat experience."
     }
   ],
   "vibes_check": {
@@ -546,5 +569,52 @@
       "low"
     ],
     "note": "The displayed vibes_score is a weighted average of the five stored ingredients, not a hand-entered primary field."
+  },
+  "catalyst_model": {
+    "note": "Catalysts identify likely step-change windows for market/poll repricing. They are qualitative watchpoints, not a separate score.",
+    "shared_windows": [
+      {
+        "label": "Now through summer 2026",
+        "detail": "Earned-media moments, big speeches, viral interviews, donor/consultant leaks, PAC or staff moves, and early-state travel. Markets usually move before polls here."
+      },
+      {
+        "label": "2026 primaries and filing season",
+        "detail": "Ambition and ballot-path constraints get more legible. Georgia and Pennsylvania primary dates are listed as May 19, 2026 in the current federal calendar, subject to change."
+      },
+      {
+        "label": "Fall 2026 campaign stretch",
+        "detail": "Live-cycle governors and senators get tested on message discipline, fundraising, TV performance, and whether their lane looks exportable."
+      },
+      {
+        "label": "Midterms: Nov 3, 2026",
+        "detail": "The biggest reset point. Winners, losers, and overperformers shape what the party thinks the post-2024 lesson should be."
+      },
+      {
+        "label": "Nov-Dec 2026",
+        "detail": "Watch who gives future-of-the-party speeches, does Sunday shows, gets donor meetings, and starts visiting early states."
+      },
+      {
+        "label": "Early 2027",
+        "detail": "Exploratory committees, book launches, PAC moves, staff hires, and first serious national polling can move low-name-ID candidates into poll visibility."
+      },
+      {
+        "label": "2027 calendar, cattle calls, and early-state polls",
+        "detail": "The DNC early-state map and first cattle calls make regional advantages, favorability, and coalition tests more concrete."
+      },
+      {
+        "label": "Late 2027 into early 2028",
+        "detail": "Debates and actual voting are the classic reset window: communicators rise and paper candidates get exposed."
+      }
+    ],
+    "source_links": [
+      {
+        "label": "FEC 2026 primary dates PDF",
+        "url": "https://www.fec.gov/resources/cms-content/documents/2026pdates.pdf"
+      },
+      {
+        "label": "DNC 2028 calendar process",
+        "url": "https://democrats.org/news/dnc-rules-and-bylaws-committee-votes-to-advance-12-states-to-next-phase-of-2028-presidential-calendar-selection-process/"
+      }
+    ]
   }
 }
