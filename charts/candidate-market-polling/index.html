@@ -750,6 +750,132 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .early-calendar .small {
+      max-width: 1080px;
+    }
+
+    .early-track {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+      padding-top: 18px;
+    }
+
+    .early-track::before {
+      content: '';
+      position: absolute;
+      top: 7px;
+      left: 18px;
+      right: 18px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--green), var(--blue), var(--gold), var(--red));
+    }
+
+    .calendar-slot {
+      position: relative;
+      min-width: 0;
+      min-height: 320px;
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      gap: 10px;
+      padding: 12px;
+      border: 2px solid var(--ink);
+      background:
+        linear-gradient(rgba(22, 22, 21, .045) 1px, transparent 1px) 0 0 / 100% 38px,
+        var(--panel);
+      box-shadow: 0 10px 24px rgba(43, 34, 20, .10);
+    }
+
+    .calendar-slot::before {
+      content: '';
+      position: absolute;
+      top: -18px;
+      left: 17px;
+      width: 13px;
+      height: 13px;
+      border: 2px solid var(--panel);
+      border-radius: 999px;
+      background: var(--green);
+      box-shadow: 0 0 0 1px var(--ink);
+    }
+
+    .calendar-slot.open::before {
+      background: var(--gold);
+    }
+
+    .slot-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      color: var(--muted);
+      font: 10px/1.15 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-transform: uppercase;
+    }
+
+    .slot-meta b {
+      color: var(--ink);
+    }
+
+    .slot-title {
+      display: grid;
+      gap: 4px;
+      min-height: 76px;
+      align-content: start;
+    }
+
+    .slot-title strong {
+      font-size: 28px;
+      line-height: .92;
+      text-transform: uppercase;
+      overflow-wrap: anywhere;
+    }
+
+    .slot-title span {
+      color: var(--muted);
+      font: 11px/1.25 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-transform: uppercase;
+    }
+
+    .slot-body {
+      display: grid;
+      gap: 8px;
+      align-content: start;
+    }
+
+    .fixed-read,
+    .state-option {
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.32;
+      overflow-wrap: anywhere;
+    }
+
+    .state-option:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .state-option b {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--ink);
+      font: 13px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-transform: uppercase;
+    }
+
+    .calendar-ruling {
+      margin-top: 14px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      background: rgba(82, 125, 80, .08);
+      color: var(--muted);
+      font: 12px/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
     .combo-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
@@ -840,6 +966,7 @@
       header, main, .summary { grid-template-columns: 1fr; }
       .calendar-timeline, .mention-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .calendar-grid, .combo-grid, .impact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .early-track { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       h1 { font-size: 58px; }
       .row {
         grid-template-columns: 82px minmax(110px, 1fr);
@@ -883,6 +1010,27 @@
       }
       .calendar-grid, .combo-grid, .impact-grid {
         grid-template-columns: minmax(0, 1fr);
+      }
+      .early-track {
+        grid-template-columns: minmax(0, 1fr);
+        padding-top: 0;
+      }
+      .early-track::before {
+        top: 0;
+        bottom: 0;
+        left: 17px;
+        right: auto;
+        width: 2px;
+        height: auto;
+        background: linear-gradient(180deg, var(--green), var(--blue), var(--gold), var(--red));
+      }
+      .calendar-slot {
+        min-height: 0;
+        margin-left: 18px;
+      }
+      .calendar-slot::before {
+        top: 17px;
+        left: -25px;
       }
       .calendar-timeline::before {
         top: 0;
@@ -1820,30 +1968,61 @@
         return;
       }
       section.hidden = false;
-      const fixed = model.fixed_states?.length ? model.fixed_states.join(" + ") : "pending";
+      const fixedStates = model.fixed_states || [];
+      const fixed = fixedStates.length ? fixedStates.join(" + ") : "pending";
       const regions = model.regions || [];
       const combos = model.combinations || [];
       const impacts = model.candidate_impacts || [];
       const links = (model.source_links || []).map(item => Array.isArray(item) ? { label: item[0], url: item[1] } : item);
+      const fixedReads = {
+        "New Hampshire": "Locked retail and earned-media test. Helps candidates with long-form comfort, town-hall discipline, and early favorability, especially Buttigieg-style communicators.",
+        "Nevada": "Locked diverse West test. Latino voters, labor/service unions, and Sun Belt coalition signals help Harris, Gallego, AOC, and candidates who can organize beyond white retail politics."
+      };
+      const slots = [
+        ...fixedStates.map((state, index) => ({
+          status: "Fixed",
+          label: `Early slot ${index + 1}`,
+          title: state,
+          read: fixedReads[state] || "Locked early-state slot.",
+          open: false
+        })),
+        ...regions.map((region, index) => ({
+          status: "Open",
+          label: `Regional slot ${index + 1}`,
+          title: region.name.replace(/ slot$/i, ""),
+          read: region.read || "Applicant states still pending.",
+          states: region.states || [],
+          open: true
+        }))
+      ];
       section.innerHTML = `
         <div class="catalyst-head">
           <h2>${model.title || "Dem Early Calendar"}</h2>
           <span class="stamp">Fixed: ${fixed}</span>
         </div>
         <p class="small">${model.summary || ""}</p>
-        <div class="calendar-grid">
-          ${regions.map(region => `
-            <article class="state-card">
-              <h3>${region.name}</h3>
-              <p class="small">${region.read || ""}</p>
-              <ul class="state-list">
-                ${(region.states || []).map(state => `
-                  <li><b>${state.state}</b>: ${state.effect}</li>
-                `).join("")}
-              </ul>
+        <div class="early-track">
+          ${slots.map(slot => `
+            <article class="calendar-slot ${slot.open ? "open" : "fixed"}">
+              <div class="slot-meta"><b>${slot.label}</b><span>${slot.status}</span></div>
+              <div class="slot-title">
+                <strong>${slot.title}</strong>
+                <span>${slot.open ? "DNC applicant slot" : "Assumed locked"}</span>
+              </div>
+              <div class="slot-body">
+                ${slot.open ? `
+                  <p class="fixed-read">${slot.read}</p>
+                  ${slot.states.map(state => `
+                    <div class="state-option"><b>${state.state}</b>${state.effect}</div>
+                  `).join("")}
+                ` : `
+                  <p class="fixed-read">${slot.read}</p>
+                `}
+              </div>
             </article>
           `).join("")}
         </div>
+        <p class="calendar-ruling">Fast read: Michigan vs Illinois is mostly Whitmer/Slotkin vs Pritzker/Emanuel. Georgia vs South Carolina is Warnock/Ossoff Atlanta-growth coalition vs Harris/Booker/Moore older Black-establishment coalition. Iowa or Tennessee would signal a return to retail/rural/white-working-class testing.</p>
         <h3 class="calendar-subhead">Calendar Pair Triggers</h3>
         <div class="combo-grid">
           ${combos.map(combo => `
