@@ -1422,7 +1422,8 @@
         ["Tier 5: Bench & Long Shots","Walz","~1%",1,1,"unknown",null,null,"MN gov, 2024 VP nominee; bench cred but the loss drags on ceiling."],
         ["Tier 5: Bench & Long Shots","Cooper","<1%",0,1,"unknown",null,null,"Former NC gov, two-term swing-state executive, awkward post-office timeline."],
         ["Tier 5: Bench & Long Shots","Cuban","<1%",0,1,"unknown",null,null,"Businessman-celebrity outsider lane; credible for the genre but still longshot."],
-        ["Tier 5: Bench & Long Shots","Emanuel","<1%",0,1,"unknown",null,null,"Reportedly gearing up; probably not viable but reliably appears on lists."]
+        ["Tier 5: Bench & Long Shots","Emanuel","<1%",0,1,"unknown",null,null,"Reportedly gearing up; probably not viable but reliably appears on lists."],
+        ["Tier 5: Bench & Long Shots","Stephen A. Smith","<1%",0,1,"unknown",null,null,"ESPN/media personality floating political interest; name ID and combat-media skill, but no party or governing base."]
       ].map(([tier, entity, market_display, market_low, market_high, poll_display, poll_low, poll_high, note]) => ({
         tier, entity, market_display, market_low, market_high, poll_display, poll_low, poll_high, note,
         market_midpoint: (market_low + market_high) / 2,
@@ -1759,6 +1760,19 @@
                 "evidence_notes": "Long public record; reported ambition; known operator persona.",
                 "liability_notes": "Old-war-room insider brand; combative without renewal story; probably wrong for the moment.",
                 "vibes_rationale": "Authentic about who he is, unfortunately; old-war-room insider is wrong for the moment."
+          },
+          "Stephen A. Smith": {
+                "vibes_dimensions": {
+                      "hope_story": 2,
+                      "material_specificity": 1,
+                      "authentic_longform": 4,
+                      "problem_clarity": 2,
+                      "fight_selection": 4
+                },
+                "confidence": "low",
+                "evidence_notes": "Large media platform; repeated public political commentary; outsider celebrity profile.",
+                "liability_notes": "No elected record, no visible Democratic organization, entertainer-to-candidate trust barrier, and unclear seriousness.",
+                "vibes_rationale": "High-filter media combat and authentic voice, but the positive governing story and policy specificity are thin."
           }
     };
 
@@ -1813,7 +1827,8 @@
       "Walz": "The 2024 loss fading, Midwest calendar leverage, strong long-form appearances, and whether the party wants normal vernacular affect again.",
       "Cooper": "Post-office rollout, North Carolina or Southern electability lesson-taking, donor meetings, and a clearer why-now story.",
       "Cuban": "Explicit interest, viral long-form interviews, outsider/business lane demand, and materially specific consumer or economic policy hooks.",
-      "Emanuel": "Reported gearing-up becoming real, donor lane formation, and some fresh why-now rationale beyond old insider combat experience."
+      "Emanuel": "Reported gearing-up becoming real, donor lane formation, and some fresh why-now rationale beyond old insider combat experience.",
+      "Stephen A. Smith": "Explicit run/pass signal, donor or adviser attachment, early-state travel, and whether media attention converts into actual Democratic primary support."
     };
 
         function deriveVibesScore(row) {
@@ -2168,14 +2183,14 @@
       "Illinois": {
         code: "IL",
         signal: "Chicago, suburbs, donor/media gravity, diverse urban Democrats.",
-        boosts: ["Pritzker", "Emanuel", "Harris", "Booker", "AOC", "Newsom"],
+        boosts: ["Pritzker", "Emanuel", "Harris", "Booker", "AOC", "Newsom", "Stephen A. Smith"],
         downgrades: ["Whitmer", "Slotkin"]
       },
       "Iowa": {
         code: "IA",
         signal: "Retail campaigning, rural/moderate Democrats, older white electorate.",
         boosts: ["Buttigieg", "Beshear", "Walz", "Polis"],
-        downgrades: ["Harris", "AOC", "Booker", "Warnock", "Moore"]
+        downgrades: ["Harris", "AOC", "Booker", "Warnock", "Moore", "Stephen A. Smith"]
       },
       "Georgia": {
         code: "GA",
@@ -2193,19 +2208,19 @@
         code: "SC",
         signal: "Older Black Democratic, church, and establishment networks.",
         boosts: ["Harris", "Booker", "Moore", "Warnock"],
-        downgrades: ["Buttigieg", "Newsom", "Polis", "Cuban"]
+        downgrades: ["Buttigieg", "Newsom", "Polis", "Cuban", "Stephen A. Smith"]
       },
       "Virginia": {
         code: "VA",
         signal: "Federal/suburban, moderate, technocratic, security-state terrain.",
-        boosts: ["Murphy", "Cuban", "Shapiro", "Buttigieg", "Moore"],
+        boosts: ["Murphy", "Cuban", "Shapiro", "Buttigieg", "Moore", "Stephen A. Smith"],
         downgrades: ["Beshear", "Walz"]
       },
       "Tennessee": {
         code: "TN",
         signal: "Rural, Appalachian/Southern moderate, white-working-class test.",
         boosts: ["Beshear", "Walz"],
-        downgrades: ["Harris", "AOC", "Booker", "Moore", "Newsom"]
+        downgrades: ["Harris", "AOC", "Booker", "Moore", "Newsom", "Stephen A. Smith"]
       }
     };
 

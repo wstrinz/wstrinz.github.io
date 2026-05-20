@@ -1,8 +1,8 @@
 {
-  "schema": "candidate-market-polling-snapshot-v8",
-  "captured_at": "2026-05-20T12:40:00-05:00",
+  "schema": "candidate-market-polling-snapshot-v9",
+  "captured_at": "2026-05-20T16:05:00-05:00",
   "topic": "2028 Democratic nominee candidate poll and market watch",
-  "source_note": "Seed snapshot transcribed from the image text shared in Discord #the-tide-pool. Corrected after audit: the source columns are Candidate / Markets / Polling / Read. V2 stores vibes ingredients and derives the displayed bar from weighted component scores. Catalyst notes added 2026-05-13 from Tide Pool discussion; they are qualitative watchpoints, not probability updates. V3 adds a manual mention-signal capture shape: good/bad/neutral/unclear counts, previous-week comparison, source mix, and example refs. Twitter/X is intentionally excluded unless a usable source is explicitly provided. V4 presents catalysts as a calendar/timeline surface with manual refresh cadence; scheduled automation is intentionally not wired yet. V5 adds a separate Republican tab with seeded GOP rows from current public polling/market references; GOP fields are intentionally marked lower-confidence where markets and polls disagree. V6 adds a Republican-only Trump endorsement chance field. V7 shifts that field away from polling weight and toward Trump relationship, loyalty, vindictiveness, surrogate behavior, and permission-structure evidence. V8 adds Democratic early-state calendar tracking for the live Midwest/South applicant pool with candidate boost/downgrade reads.",
+  "source_note": "Seed snapshot transcribed from the image text shared in Discord #the-tide-pool. Corrected after audit: the source columns are Candidate / Markets / Polling / Read. V2 stores vibes ingredients and derives the displayed bar from weighted component scores. Catalyst notes added 2026-05-13 from Tide Pool discussion; they are qualitative watchpoints, not probability updates. V3 adds a manual mention-signal capture shape: good/bad/neutral/unclear counts, previous-week comparison, source mix, and example refs. Twitter/X is intentionally excluded unless a usable source is explicitly provided. V4 presents catalysts as a calendar/timeline surface with manual refresh cadence; scheduled automation is intentionally not wired yet. V5 adds a separate Republican tab with seeded GOP rows from current public polling/market references; GOP fields are intentionally marked lower-confidence where markets and polls disagree. V6 adds a Republican-only Trump endorsement chance field. V7 shifts that field away from polling weight and toward Trump relationship, loyalty, vindictiveness, surrogate behavior, and permission-structure evidence. V8 adds Democratic early-state calendar tracking for the live Midwest/South applicant pool with candidate boost/downgrade reads. V9 adds Stephen A. Smith as a Democratic long-shot media-celebrity row.",
   "rows": [
     {
       "tier": "Tier 1: Frontrunners",
@@ -929,6 +929,47 @@
       "evidence_notes": "Long public record; reported ambition; known operator persona.",
       "liability_notes": "Old-war-room insider brand; combative without renewal story; probably wrong for the moment.",
       "catalyst_note": "Reported gearing-up becoming real, donor lane formation, and some fresh why-now rationale beyond old insider combat experience.",
+      "mention_signal": {
+        "current": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "previous": {
+          "good": null,
+          "bad": null,
+          "neutral": null,
+          "unclear": null
+        },
+        "sources": [],
+        "examples": [],
+        "confidence": "pending",
+        "note": "Manual mention capture pending."
+      }
+    },
+    {
+      "tier": "Tier 5: Bench & Long Shots",
+      "entity": "Stephen A. Smith",
+      "market_display": "<1%",
+      "market_low": 0,
+      "market_high": 1,
+      "poll_display": "unknown",
+      "poll_low": null,
+      "poll_high": null,
+      "note": "ESPN/media personality floating political interest; name ID and combat-media skill, but no party or governing base.",
+      "vibes_rationale": "High-filter media combat and authentic voice, but the positive governing story and policy specificity are thin.",
+      "vibes_dimensions": {
+        "hope_story": 2,
+        "material_specificity": 1,
+        "authentic_longform": 4,
+        "problem_clarity": 2,
+        "fight_selection": 4
+      },
+      "confidence": "low",
+      "evidence_notes": "Large media platform; repeated public political commentary; outsider celebrity profile.",
+      "liability_notes": "No elected record, no visible Democratic organization, entertainer-to-candidate trust barrier, and unclear seriousness.",
+      "catalyst_note": "Explicit run/pass signal, donor or adviser attachment, early-state travel, and whether media attention converts into actual Democratic primary support.",
       "mention_signal": {
         "current": {
           "good": null,
@@ -1958,6 +1999,12 @@
         "best": "Illinois; Virginia or Georgia.",
         "worst": "Iowa or South Carolina.",
         "read": "Urban operator credibility needs IL. Leftier or Black-establishment tests make his downside louder."
+      },
+      {
+        "candidate": "Stephen A. Smith",
+        "best": "Illinois or Virginia; Nevada already helps a little through media-aware diverse electorates.",
+        "worst": "Iowa, South Carolina, or Tennessee.",
+        "read": "Needs big media markets and high-information voters willing to entertain an outsider. Retail, Black-establishment, or rural tests expose lack of party structure."
       }
     ],
     "source_links": [
