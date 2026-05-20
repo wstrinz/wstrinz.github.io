@@ -16,6 +16,7 @@
       --green: #527d50;
       --gold: #b6792c;
       --teal: #315d5d;
+      --endorse: #8b4b55;
       --shadow: 0 16px 48px rgba(43, 34, 20, .13);
     }
 
@@ -367,6 +368,10 @@
       min-width: 0;
     }
 
+    .metrics.five-up {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
     .metric {
       min-width: 0;
       padding: 6px 7px;
@@ -406,6 +411,10 @@
       gap: 8px;
       align-items: stretch;
       min-width: 0;
+    }
+
+    .signal-strip.five-up {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
     }
 
     .signal {
@@ -460,6 +469,7 @@
     .market { background: var(--red); }
     .vibes { background: var(--green); }
     .mentions-fill { background: var(--teal); }
+    .endorse { background: var(--endorse); }
     .unknown { opacity: .26; }
 
     .note {
@@ -901,6 +911,7 @@
           <span class="key"><i class="swatch poll"></i> polling</span>
           <span class="key"><i class="swatch vibes"></i> vibes / 4</span>
           <span class="key"><i class="swatch mentions-fill"></i> good mentions</span>
+          <span class="key"><i class="swatch endorse"></i> Trump endorsement</span>
         </div>
       </div>
     </header>
@@ -919,6 +930,7 @@
           <option value="market_midpoint">Chart: market</option>
           <option value="poll_midpoint">Chart: poll</option>
           <option value="vibes_score">Chart: vibes</option>
+          <option value="trump_endorsement_chance">Chart: Trump endorse</option>
           <option value="good_mention_share">Chart: good mentions</option>
           <option value="mention_volume">Chart: mention volume</option>
         </select>
@@ -1442,7 +1454,8 @@
 
     const DEFAULT_PARTY = "Democratic";
     const partyFor = row => row.party || DEFAULT_PARTY;
-    let activeParty = new URLSearchParams(window.location.search).get("party") || DEFAULT_PARTY;
+    const requestedParty = new URLSearchParams(window.location.search).get("party");
+    let activeParty = requestedParty || DEFAULT_PARTY;
     let parties = [...new Set(snapshot.rows.map(partyFor))];
     let tiers = ["All", ...new Set(snapshot.rows.filter(row => partyFor(row) === activeParty).map(r => r.tier))];
     let history = [snapshot];
@@ -1464,6 +1477,11 @@
     const pct = n => n == null ? "0%" : `${Math.max(1.5, Math.min(100, n / 40 * 100))}%`;
     const vibePct = n => `${Math.max(0, Math.min(100, n / 4 * 100))}%`;
     const sharePct = n => `${Math.max(0, Math.min(100, n || 0))}%`;
+    const fullPct = n => `${Math.max(0, Math.min(100, n || 0))}%`;
+    const hasTrumpEndorsement = row => row.trump_endorsement_chance != null;
+    const fmtTrumpEndorsement = row => hasTrumpEndorsement(row)
+      ? (row.trump_endorsement_display || fmtValue(row.trump_endorsement_chance, "trump_endorsement_chance"))
+      : "n/a";
 
     const dimensionLabels = [
       ["hope_story", "Hope"],
@@ -1504,6 +1522,7 @@
       if (mode === "market") return row.market_midpoint;
       if (mode === "poll") return row.poll_midpoint;
       if (mode === "vibes") return row.vibes_score;
+      if (mode === "trump") return row.trump_endorsement_chance;
       if (mode === "mentions") return row.good_mention_share;
       return snapshot.rows.indexOf(row);
     }
@@ -1577,7 +1596,10 @@
       });
 
       const select = document.createElement("select");
-      [["tier","Sort: tier order"],["candidate","Sort: candidate"],["market","Sort: market"],["poll","Sort: poll"],["vibes","Sort: vibes"],["mentions","Sort: good mentions"]].forEach(([value, text]) => {
+      const sortOptions = [["tier","Sort: tier order"],["candidate","Sort: candidate"],["market","Sort: market"],["poll","Sort: poll"],["vibes","Sort: vibes"]];
+      if (activeParty === "Republican") sortOptions.push(["trump","Sort: Trump endorse"]);
+      sortOptions.push(["mentions","Sort: good mentions"]);
+      sortOptions.forEach(([value, text]) => {
         const option = document.createElement("option");
         option.value = value;
         option.textContent = text;
@@ -1600,12 +1622,17 @@
       const avgMarket = withMarket.length ? withMarket.reduce((sum, r) => sum + r.market_midpoint, 0) / withMarket.length : null;
       const avgVibes = withVibes.length ? withVibes.reduce((sum, r) => sum + r.vibes_score, 0) / withVibes.length : null;
       const withMentions = rows.filter(r => r.mention_volume != null);
+      const endorsementLeader = rows
+        .filter(r => r.trump_endorsement_chance != null)
+        .sort((a, b) => b.trump_endorsement_chance - a.trump_endorsement_chance)[0];
       const stats = [
         [`${activeParty} candidates`, rows.length],
         ["With polling", withPoll.length],
         ["Avg market midpoint", avgMarket == null ? "n/a" : `${avgMarket.toFixed(1)}%`],
         ["Avg vibes", avgVibes == null ? "n/a" : `${avgVibes.toFixed(1)} / 4`],
-        ["Mention baselines", withMentions.length ? withMentions.length : "pending"]
+        endorsementLeader
+          ? ["Trump endorse leader", `${endorsementLeader.entity} ${fmtTrumpEndorsement(endorsementLeader)}`]
+          : ["Mention baselines", withMentions.length ? withMentions.length : "pending"]
       ];
       document.getElementById("summary").innerHTML = stats.map(([label, value]) => `
         <article class="stat"><span class="label">${label}</span><span class="value">${value}</span></article>
@@ -1701,22 +1728,25 @@
             <article class="row">
               <div class="tier">${row.tier}</div>
               <div class="name">${row.entity}</div>
-              <div class="metrics">
+              <div class="metrics ${hasTrumpEndorsement(row) ? "five-up" : ""}">
                 <div class="metric"><b>Market</b><span>${row.market_display}</span></div>
                 <div class="metric"><b>Poll</b><span>${row.poll_display}</span></div>
+                ${hasTrumpEndorsement(row) ? `<div class="metric"><b>Trump endorse</b><span>${fmtTrumpEndorsement(row)}</span></div>` : ""}
                 <div class="metric"><b>Vibes</b><span>${fmtVibe(row.vibes_score)}/4</span></div>
                 <div class="metric"><b>Good mentions</b><span>${fmtShare(row.good_mention_share)}</span></div>
               </div>
               <div class="read">
-                <div class="signal-strip">
+                <div class="signal-strip ${hasTrumpEndorsement(row) ? "five-up" : ""}">
                   <div class="signal"><span class="signal-label">Market</span><span class="signal-value">${row.market_display}</span><div class="track"><i class="fill market ${row.market_midpoint == null ? "unknown" : ""}" style="--w:${pct(row.market_midpoint)}"></i></div></div>
                   <div class="signal"><span class="signal-label">Poll</span><span class="signal-value">${row.poll_display}</span><div class="track"><i class="fill poll ${row.poll_midpoint == null ? "unknown" : ""}" style="--w:${row.poll_midpoint == null ? "0%" : pct(row.poll_midpoint)}"></i></div></div>
+                  ${hasTrumpEndorsement(row) ? `<div class="signal"><span class="signal-label">Trump endorse</span><span class="signal-value">${fmtTrumpEndorsement(row)}</span><div class="track" title="${row.trump_endorsement_note || "Current subjective chance of a meaningful Trump endorsement."}"><i class="fill endorse" style="--w:${fullPct(row.trump_endorsement_chance)}"></i></div></div>` : ""}
                   <div class="signal vibes-signal"><span class="signal-label">Vibes</span><span class="signal-value">${fmtVibe(row.vibes_score)}/4</span><div class="track" title="Vibes Check ${fmtVibe(row.vibes_score)} / 4"><i class="fill vibes" style="--w:${vibePct(row.vibes_score)}"></i></div></div>
                   <div class="signal"><span class="signal-label">Good mentions</span><span class="signal-value">${fmtShare(row.good_mention_share)}</span><div class="track" title="${row.mention_note}"><i class="fill mentions-fill ${row.good_mention_share == null ? "unknown" : ""}" style="--w:${sharePct(row.good_mention_share)}"></i></div></div>
                 </div>
                 <p class="vibes-note">${row.vibes_rationale}</p>
                 ${renderSubscores(row)}
                 <p class="catalyst-note"><b>Next catalyst:</b> ${row.catalyst_note}</p>
+                ${hasTrumpEndorsement(row) ? `<p class="catalyst-note"><b>Trump endorsement:</b> ${row.trump_endorsement_note || "Track explicit praise, adviser leaks, joint appearances, donor movement, and whether Trump boxes the candidate in or grants permission."}</p>` : ""}
                 <p class="catalyst-note"><b>Mention test:</b> ${row.mention_note}</p>
                 <p class="note">Confidence: ${row.confidence || "unknown"}. Evidence: ${row.evidence_notes || "not yet recorded"}. Liability: ${row.liability_notes || "not yet recorded"}.</p>
                 <p class="note">${row.note}</p>
@@ -1742,7 +1772,9 @@
       if (history.length < 2) {
         const max = chartMetric === "vibes_score"
           ? 4
-          : chartMetric === "mention_volume"
+          : chartMetric === "trump_endorsement_chance" || chartMetric === "good_mention_share"
+            ? 100
+            : chartMetric === "mention_volume"
             ? Math.max(10, ...visible.map(row => metricValue(row, chartMetric)))
             : Math.max(10, ...visible.map(row => metricValue(row, chartMetric)));
         document.getElementById("historyChart").innerHTML = `
@@ -1785,7 +1817,7 @@
       const allValues = pointsByEntity.flatMap(series => series.points.map(point => point.value));
       const rawMin = Math.min(...allValues);
       const rawMax = Math.max(...allValues);
-      const max = chartMetric === "vibes_score" ? 4 : Math.max(rawMax, 10);
+      const max = chartMetric === "vibes_score" ? 4 : chartMetric === "trump_endorsement_chance" || chartMetric === "good_mention_share" ? 100 : Math.max(rawMax, 10);
       const min = 0;
       const width = 960;
       const height = 240;
@@ -1835,6 +1867,7 @@
         normalized.party = normalized.party || DEFAULT_PARTY;
         normalized.market_midpoint = normalized.market_midpoint ?? (normalized.market_low == null || normalized.market_high == null ? null : (Number(normalized.market_low) + Number(normalized.market_high)) / 2);
         normalized.poll_midpoint = normalized.poll_midpoint ?? (normalized.poll_low == null || normalized.poll_high == null ? null : (Number(normalized.poll_low) + Number(normalized.poll_high)) / 2);
+        normalized.trump_endorsement_chance = normalized.trump_endorsement_chance == null ? null : Number(normalized.trump_endorsement_chance);
         return hydrateRow(normalized);
       });
       return { ...raw, rows };
@@ -1853,6 +1886,7 @@
         const latest = history[history.length - 1];
         Object.assign(snapshot, latest);
         parties = [...new Set(snapshot.rows.map(partyFor))];
+        if (!requestedParty && parties.includes("Republican")) activeParty = "Republican";
         if (!parties.includes(activeParty)) activeParty = parties[0] || DEFAULT_PARTY;
         tiers = currentTiers();
         if (!tiers.includes(activeTier)) activeTier = "All";

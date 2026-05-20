@@ -1,8 +1,8 @@
 {
-  "schema": "candidate-market-polling-snapshot-v5",
+  "schema": "candidate-market-polling-snapshot-v7",
   "captured_at": "2026-05-13T07:27:00-05:00",
   "topic": "2028 Democratic nominee candidate poll and market watch",
-  "source_note": "Seed snapshot transcribed from the image text shared in Discord #the-tide-pool. Corrected after audit: the source columns are Candidate / Markets / Polling / Read. V2 stores vibes ingredients and derives the displayed bar from weighted component scores. Catalyst notes added 2026-05-13 from Tide Pool discussion; they are qualitative watchpoints, not probability updates. V3 adds a manual mention-signal capture shape: good/bad/neutral/unclear counts, previous-week comparison, source mix, and example refs. Twitter/X is intentionally excluded unless a usable source is explicitly provided. V4 presents catalysts as a calendar/timeline surface with manual refresh cadence; scheduled automation is intentionally not wired yet. V5 adds a separate Republican tab with seeded GOP rows from current public polling/market references; GOP fields are intentionally marked lower-confidence where markets and polls disagree.",
+  "source_note": "Seed snapshot transcribed from the image text shared in Discord #the-tide-pool. Corrected after audit: the source columns are Candidate / Markets / Polling / Read. V2 stores vibes ingredients and derives the displayed bar from weighted component scores. Catalyst notes added 2026-05-13 from Tide Pool discussion; they are qualitative watchpoints, not probability updates. V3 adds a manual mention-signal capture shape: good/bad/neutral/unclear counts, previous-week comparison, source mix, and example refs. Twitter/X is intentionally excluded unless a usable source is explicitly provided. V4 presents catalysts as a calendar/timeline surface with manual refresh cadence; scheduled automation is intentionally not wired yet. V5 adds a separate Republican tab with seeded GOP rows from current public polling/market references; GOP fields are intentionally marked lower-confidence where markets and polls disagree. V6 adds a Republican-only Trump endorsement chance field. V7 shifts that field away from polling weight and toward Trump relationship, loyalty, vindictiveness, surrogate behavior, and permission-structure evidence.",
   "rows": [
     {
       "tier": "Tier 1: Frontrunners",
@@ -988,7 +988,10 @@
         "examples": [],
         "confidence": "pending",
         "note": "Manual mention capture pending."
-      }
+      },
+      "trump_endorsement_chance": 52,
+      "trump_endorsement_display": "52%",
+      "trump_endorsement_note": "Default-heir case: VP, RNC finance role, and clearest loyalty/proximity argument. Main risk is Trump keeping Rubio live or refusing to crown anyone early."
     },
     {
       "party": "Republican",
@@ -1030,7 +1033,10 @@
         "examples": [],
         "confidence": "pending",
         "note": "Manual mention capture pending."
-      }
+      },
+      "trump_endorsement_chance": 29,
+      "trump_endorsement_display": "29%",
+      "trump_endorsement_note": "Live alternative case: administration visibility, disciplined loyalty posture, and donor/media momentum. Needs clear Trump permission because old 2016 residue and Vance-default status still matter."
     },
     {
       "party": "Republican",
@@ -1072,7 +1078,10 @@
         "examples": [],
         "confidence": "pending",
         "note": "Manual mention capture pending."
-      }
+      },
+      "trump_endorsement_chance": 0.5,
+      "trump_endorsement_display": "<1%",
+      "trump_endorsement_note": "Near-zero endorsement case: the 2024 rivalry, Trump's personal grievance style, and DeSantis's attempt to inherit the movement without permission make a direct Trump blessing highly unlikely."
     },
     {
       "party": "Republican",
@@ -1114,7 +1123,10 @@
         "examples": [],
         "confidence": "pending",
         "note": "Manual mention capture pending."
-      }
+      },
+      "trump_endorsement_chance": 7,
+      "trump_endorsement_display": "7%",
+      "trump_endorsement_note": "Family-name path exists and relationship evidence matters more than polling here, but a formal run still looks less likely than kingmaker/media influence. Chance rises only if he signals real appetite."
     },
     {
       "party": "Republican",
@@ -1156,7 +1168,10 @@
         "examples": [],
         "confidence": "pending",
         "note": "Manual mention capture pending."
-      }
+      },
+      "trump_endorsement_chance": 2,
+      "trump_endorsement_display": "2%",
+      "trump_endorsement_note": "Useful heterodox ally, weak party-fit case. Track agency/health fights and whether Trump treats him as a movement partner rather than a GOP nominee."
     },
     {
       "party": "Republican",
@@ -1198,7 +1213,10 @@
         "examples": [],
         "confidence": "pending",
         "note": "Manual mention capture pending."
-      }
+      },
+      "trump_endorsement_chance": 2,
+      "trump_endorsement_display": "2%",
+      "trump_endorsement_note": "Known conservative operator, but low warmth and 2016 history make him a long-shot recipient unless the succession race collapses."
     },
     {
       "party": "Republican",
@@ -1240,7 +1258,10 @@
         "examples": [],
         "confidence": "pending",
         "note": "Manual mention capture pending."
-      }
+      },
+      "trump_endorsement_chance": 0.5,
+      "trump_endorsement_display": "<1%",
+      "trump_endorsement_note": "Residual 2024 opposition lane and base-trust problem make a Trump endorsement close to zero without a major party shock."
     },
     {
       "party": "Republican",
@@ -1282,7 +1303,10 @@
         "examples": [],
         "confidence": "pending",
         "note": "Manual mention capture pending."
-      }
+      },
+      "trump_endorsement_chance": 4,
+      "trump_endorsement_display": "4%",
+      "trump_endorsement_note": "Loyal media-native pressure candidate. More plausible as surrogate or attack dog unless Trump wants a disruptive non-Vance/non-Rubio option."
     },
     {
       "party": "Republican",
@@ -1324,7 +1348,10 @@
         "examples": [],
         "confidence": "pending",
         "note": "Manual mention capture pending."
-      }
+      },
+      "trump_endorsement_chance": 1,
+      "trump_endorsement_display": "1%",
+      "trump_endorsement_note": "Factional media influence is real; formal candidate appetite and Trump permission are both thin."
     },
     {
       "party": "Republican",
@@ -1366,7 +1393,10 @@
         "examples": [],
         "confidence": "pending",
         "note": "Manual mention capture pending."
-      }
+      },
+      "trump_endorsement_chance": 1,
+      "trump_endorsement_display": "1%",
+      "trump_endorsement_note": "Governor/electability lane needs a party mood shift and explicit Trump tolerance; currently more donor fantasy than succession favorite."
     }
   ],
   "vibes_check": {
@@ -1583,16 +1613,16 @@
       ]
     },
     "Republican": {
-      "note": "Republican catalysts are tracked as a succession calendar: Trump permission signals, 2026 midterm ownership, early-state tells, and whether the Vance/Rubio race stays friendly or turns real.",
-      "automation_note": "Manual watch for now; this is shaped for later refresh jobs around major speeches, state visits, polls, and market breaks.",
+      "note": "Republican catalysts are tracked as a succession calendar: Trump relationship and endorsement probability first, then 2026 midterm ownership, early-state tells, polling, and markets.",
+      "automation_note": "Manual watch for now; relationship sources lead this metric, while polls and markets are confirmation signals.",
       "calendar": [
         {
           "date": "Now-Aug 2026",
           "horizon": "Near",
           "className": "near",
           "title": "Trump-heir temperature checks",
-          "detail": "Watch public praise, dinner-poll anecdotes, adviser leaks, and whether Trump keeps Vance and Rubio in managed rivalry.",
-          "cadence": "Refresh when Trump explicitly names, praises, tests, or undercuts a successor."
+          "detail": "Watch public praise, nicknames, humiliation, feud temperature, reconciliation reporting, adviser leaks, and whether Trump keeps Vance and Rubio in managed rivalry.",
+          "cadence": "Refresh when Trump explicitly names, praises, tests, humiliates, forgives, or undercuts a successor."
         },
         {
           "date": "May-Nov 2026",
@@ -1637,6 +1667,38 @@
       ],
       "source_links": [
         {
+          "label": "Trump Truth Social",
+          "url": "https://truthsocial.com/@realDonaldTrump"
+        },
+        {
+          "label": "White House Briefing Room",
+          "url": "https://www.whitehouse.gov/briefing-room/"
+        },
+        {
+          "label": "RNC / GOP events",
+          "url": "https://gop.com/"
+        },
+        {
+          "label": "Save America FEC spending",
+          "url": "https://www.fec.gov/data/committee/C00762591/?tab=spending"
+        },
+        {
+          "label": "Brookings: Trump endorsements and loyalty",
+          "url": "https://www.brookings.edu/articles/when-it-comes-to-trumps-endorsements-its-all-about-loyalty-unless-youre-a-celebrity/"
+        },
+        {
+          "label": "AP: former Trump critics as VP hopefuls",
+          "url": "https://www.ap.org/news-highlights/elections/2024/the-republicans-who-want-to-be-trumps-vp-were-once-harsh-critics-with-key-policy-differences/"
+        },
+        {
+          "label": "ABC: Trump and DeSantis bury-the-hatchet report",
+          "url": "https://abcnews.com/Politics/trump-desantis-meet-bury-hatchet-after-2024-primary/story?id=109731949"
+        },
+        {
+          "label": "NBC: Trump pressure on disloyal Republicans",
+          "url": "https://www.nbcnews.com/politics/politics-news/trumps-crusade-oust-disloyal-republicans-politics-desk-rcna345786"
+        },
+        {
           "label": "RCP 2028 GOP polling",
           "url": "https://www.realclearpolling.com/polls/president/republican-primary/2028/national"
         },
@@ -1649,10 +1711,29 @@
           "url": "https://www.wsn.com/prediction-markets/events/republican-nomination-2028/"
         },
         {
+          "label": "Lines GOP nominee market",
+          "url": "https://www.lines.com/prediction-markets/elections/republican-presidential-nominee-2028"
+        },
+        {
           "label": "RNC calendar rule context",
           "url": "https://www.thegreenpapers.com/P24/R-Alloc.phtml"
         }
       ]
     }
+  },
+  "trump_endorsement_model": {
+    "applies_to": "Republican rows only",
+    "field": "trump_endorsement_chance",
+    "display_field": "trump_endorsement_display",
+    "definition": "Current subjective probability that Trump gives this candidate the meaningful pre-primary endorsement, blessing, or permission structure before the GOP field settles.",
+    "scale": "0-100 percent. Candidate probabilities are candidate-level monitoring estimates, not a poll. Polling and markets are secondary confirmation; relationship evidence and Trump-world behavior lead the update.",
+    "update_triggers": [
+      "Explicit Truth Social posts, rally remarks, nicknames, praise, or public humiliation patterns",
+      "Reporting on Trump grievances, reconciliation attempts, private calls, dinners, and adviser temperature checks",
+      "Joint appearances, delegated surrogate roles, cabinet/administration proximity, and who gets protected or undercut",
+      "FEC/PAC money, donor bundling, senior-staff movement, and super PAC posture tied to Trump-world permission",
+      "Polling or prediction-market breaks only when they coincide with relationship or loyalty evidence"
+    ],
+    "caution": "Keep this separate from nominee probability: Trump can bless one candidate, delay endorsement, float several names, or use praise tactically. Do not raise a rival just because they poll well if the personal relationship evidence points the other way."
   }
 }
