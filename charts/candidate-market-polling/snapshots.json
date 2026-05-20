@@ -1,8 +1,8 @@
 {
-  "schema": "candidate-market-polling-snapshot-v7",
-  "captured_at": "2026-05-13T07:27:00-05:00",
+  "schema": "candidate-market-polling-snapshot-v8",
+  "captured_at": "2026-05-20T12:40:00-05:00",
   "topic": "2028 Democratic nominee candidate poll and market watch",
-  "source_note": "Seed snapshot transcribed from the image text shared in Discord #the-tide-pool. Corrected after audit: the source columns are Candidate / Markets / Polling / Read. V2 stores vibes ingredients and derives the displayed bar from weighted component scores. Catalyst notes added 2026-05-13 from Tide Pool discussion; they are qualitative watchpoints, not probability updates. V3 adds a manual mention-signal capture shape: good/bad/neutral/unclear counts, previous-week comparison, source mix, and example refs. Twitter/X is intentionally excluded unless a usable source is explicitly provided. V4 presents catalysts as a calendar/timeline surface with manual refresh cadence; scheduled automation is intentionally not wired yet. V5 adds a separate Republican tab with seeded GOP rows from current public polling/market references; GOP fields are intentionally marked lower-confidence where markets and polls disagree. V6 adds a Republican-only Trump endorsement chance field. V7 shifts that field away from polling weight and toward Trump relationship, loyalty, vindictiveness, surrogate behavior, and permission-structure evidence.",
+  "source_note": "Seed snapshot transcribed from the image text shared in Discord #the-tide-pool. Corrected after audit: the source columns are Candidate / Markets / Polling / Read. V2 stores vibes ingredients and derives the displayed bar from weighted component scores. Catalyst notes added 2026-05-13 from Tide Pool discussion; they are qualitative watchpoints, not probability updates. V3 adds a manual mention-signal capture shape: good/bad/neutral/unclear counts, previous-week comparison, source mix, and example refs. Twitter/X is intentionally excluded unless a usable source is explicitly provided. V4 presents catalysts as a calendar/timeline surface with manual refresh cadence; scheduled automation is intentionally not wired yet. V5 adds a separate Republican tab with seeded GOP rows from current public polling/market references; GOP fields are intentionally marked lower-confidence where markets and polls disagree. V6 adds a Republican-only Trump endorsement chance field. V7 shifts that field away from polling weight and toward Trump relationship, loyalty, vindictiveness, surrogate behavior, and permission-structure evidence. V8 adds Democratic early-state calendar tracking for the live Midwest/South applicant pool with candidate boost/downgrade reads.",
   "rows": [
     {
       "tier": "Tier 1: Frontrunners",
@@ -1735,5 +1735,248 @@
       "Polling or prediction-market breaks only when they coincide with relationship or loyalty evidence"
     ],
     "caution": "Keep this separate from nominee probability: Trump can bless one candidate, delay endorsement, float several names, or use praise tactically. Do not raise a rival just because they poll well if the personal relationship evidence points the other way."
+  },
+  "early_state_calendar": {
+    "title": "Dem Early Calendar Tracker",
+    "updated_at": "2026-05-20T12:40:00-05:00",
+    "fixed_states": [
+      "New Hampshire",
+      "Nevada"
+    ],
+    "summary": "Assumes New Hampshire and Nevada are locked early. The remaining calendar signal is the Midwest slot, currently Illinois / Iowa / Michigan, and the South slot, currently Georgia / North Carolina / South Carolina / Tennessee / Virginia. Use this as a market trigger map when the DNC narrows or sets the schedule.",
+    "regions": [
+      {
+        "name": "Midwest slot",
+        "read": "Main axis: Whitmer/Slotkin home-state Michigan vs Pritzker/Emanuel home-state Illinois vs old-school retail Iowa.",
+        "states": [
+          {
+            "state": "Michigan",
+            "effect": "Biggest boost to Whitmer; Slotkin up; also useful for Shapiro, Buttigieg, Gallego, and Kelly because it tests unions, Detroit Black voters, Arab/Muslim voters, college suburbs, and industrial working-class messaging. Pritzker loses the home-state jackpot."
+          },
+          {
+            "state": "Illinois",
+            "effect": "Big boost to Pritzker and Emanuel. Also friendlier to Harris, Booker, AOC, and Newsom than Iowa because Chicago/suburbs make it diverse, urban, donor/media-heavy, and college-heavy. Whitmer and Slotkin lose their cleanest calendar catalyst."
+          },
+          {
+            "state": "Iowa",
+            "effect": "Boosts Buttigieg, Beshear, Walz, Polis, and retail-campaign unknowns. Downgrades Harris, AOC, Booker, Warnock, and Moore because it recreates the older, whiter, less representative early-state problem."
+          }
+        ]
+      },
+      {
+        "name": "South slot",
+        "read": "Main axis: Georgia growth/swing-state coalition vs South Carolina older Black establishment vs North Carolina hybrid suburbs/Black electorate/rural test.",
+        "states": [
+          {
+            "state": "Georgia",
+            "effect": "Warnock and Ossoff get the biggest direct boost. Harris, Booker, Moore, AOC, and Gallego also benefit from Atlanta metro, younger Black voters, college suburbs, Asian/Latino growth, and swing-state electability."
+          },
+          {
+            "state": "North Carolina",
+            "effect": "Cooper and Stein get the largest home-state boost. Also helps Beshear, Kelly, Gallego, Shapiro, and Buttigieg-style swing/suburban candidates. Harris, Booker, and Moore remain fine, but it is less clean for them than South Carolina."
+          },
+          {
+            "state": "South Carolina",
+            "effect": "Boosts Harris, Booker, Moore, and Warnock through older Black Democratic, church, and establishment networks. Downgrades Buttigieg, Newsom, Polis, and Cuban unless they build real Black institutional support."
+          },
+          {
+            "state": "Virginia",
+            "effect": "Boosts suburban, moderate, technocratic, security-state candidates; helpful to Spanberger-style profiles, Moore regionally, and Buttigieg-ish technocrats. Black-church and rural-populist lanes lose some force."
+          },
+          {
+            "state": "Tennessee",
+            "effect": "Oddball pick. Boosts Beshear and Walz-ish rural/moderate/Appalachian/Southern white-working-class appeal. Downgrades most national diverse-coalition candidates and weakens the argument that the early South slot should center Black Democratic voters."
+          }
+        ]
+      }
+    ],
+    "combinations": [
+      {
+        "combo": "MI + GA",
+        "effect": "Whitmer and Warnock/Ossoff up; Harris, Booker, Moore, AOC, and Gallego also up. Pritzker down. Best future-coalition/swing-state signal."
+      },
+      {
+        "combo": "MI + SC",
+        "effect": "Whitmer up plus Harris, Booker, Moore, and Warnock up. Warnock gets less than with Georgia. Newsom and Pritzker weaker."
+      },
+      {
+        "combo": "IL + SC",
+        "effect": "Pritzker/Emanuel up and Harris/Booker/Moore up. Whitmer/Slotkin down; Buttigieg/Beshear retail lane weaker."
+      },
+      {
+        "combo": "IA + SC",
+        "effect": "Buttigieg/Beshear/Walz/Polis retail lane up, while Harris/Booker/Moore retain SC protection. Whitmer and Pritzker lose home-state boosts."
+      },
+      {
+        "combo": "IL + GA",
+        "effect": "Pritzker plus Warnock/Ossoff is the clearest dual home-field outcome. Diverse/urban/media candidates up; rural and retail candidates down."
+      },
+      {
+        "combo": "MI + NC",
+        "effect": "Whitmer/Slotkin plus Cooper/Stein up. Also helps Shapiro, Buttigieg, Kelly, Gallego, and Beshear-style swing/suburban candidates."
+      },
+      {
+        "combo": "IA + TN",
+        "effect": "Strong signal that DNC wants retail/rural/white-working-class testing back in the early window. Beshear/Walz/Buttigieg-style candidates up; diverse-coalition candidates down."
+      }
+    ],
+    "candidate_impacts": [
+      {
+        "candidate": "Harris",
+        "best": "South Carolina, then Georgia; Michigan or Illinois in the Midwest.",
+        "worst": "Iowa plus Tennessee, or a South slot that bypasses Black establishment power.",
+        "read": "SC is a real boost because it protects the older Black institutional lane; NC is okay but less clean."
+      },
+      {
+        "candidate": "Newsom",
+        "best": "Georgia or North Carolina; Illinois or Michigan.",
+        "worst": "Iowa and South Carolina.",
+        "read": "Needs diverse metro/suburban terrain. White retail states and SC institutional tests make the California-polish liability louder."
+      },
+      {
+        "candidate": "AOC",
+        "best": "Georgia; Michigan or Illinois.",
+        "worst": "Iowa or Tennessee.",
+        "read": "Young, diverse, labor, Latino, and urban/progressive density helps. SC is not fatal but older establishment Black electorate is not her cleanest test."
+      },
+      {
+        "candidate": "Shapiro",
+        "best": "Michigan; North Carolina or Virginia.",
+        "worst": "Illinois plus South Carolina.",
+        "read": "Swing-state suburban and working-class terrain helps more than a pure party-base test."
+      },
+      {
+        "candidate": "Buttigieg",
+        "best": "Iowa; North Carolina or Virginia.",
+        "worst": "South Carolina.",
+        "read": "NH already helps. Iowa revives the retail lane; SC reopens the Black-voter weakness story."
+      },
+      {
+        "candidate": "Pritzker",
+        "best": "Illinois; Georgia or North Carolina.",
+        "worst": "Michigan or Iowa plus South Carolina.",
+        "read": "Illinois is the jackpot but can look favorite-son. Losing Illinois is a direct downgrade."
+      },
+      {
+        "candidate": "Ossoff",
+        "best": "Georgia; Michigan or Illinois.",
+        "worst": "South Carolina, North Carolina, or Tennessee.",
+        "read": "Georgia early is his cleanest calendar catalyst; any other South pick makes him more generic."
+      },
+      {
+        "candidate": "Moore",
+        "best": "South Carolina or North Carolina; Michigan or Illinois.",
+        "worst": "Iowa or Tennessee.",
+        "read": "Black electorate plus service/governor biography is the fit, with NC as a regional hybrid."
+      },
+      {
+        "candidate": "Beshear",
+        "best": "Iowa or Tennessee; North Carolina.",
+        "worst": "Illinois plus Georgia.",
+        "read": "Wants white working-class/moderate Democrats and rural credibility, not a purely metro-progressive calendar."
+      },
+      {
+        "candidate": "Gallego",
+        "best": "Nevada fixed, plus Georgia or North Carolina and Michigan.",
+        "worst": "Iowa or South Carolina.",
+        "read": "Veteran + Latino + swing-state story needs diverse swing electorates; old-school SC is less direct."
+      },
+      {
+        "candidate": "Stein",
+        "best": "North Carolina.",
+        "worst": "Georgia or South Carolina.",
+        "read": "NC early makes him real; other South picks leave him as a generic low-name-ID governor."
+      },
+      {
+        "candidate": "Kelly",
+        "best": "North Carolina or Georgia; Michigan.",
+        "worst": "South Carolina or Iowa.",
+        "read": "Military/suburban competence calendar is the fit; SC does not naturally amplify him."
+      },
+      {
+        "candidate": "Warnock",
+        "best": "Georgia; South Carolina second.",
+        "worst": "North Carolina, Virginia, or Tennessee.",
+        "read": "Georgia early is a major boost; SC still helps through Black church and establishment networks."
+      },
+      {
+        "candidate": "Whitmer",
+        "best": "Michigan.",
+        "worst": "Illinois or Iowa.",
+        "read": "Michigan early is probably the biggest single Midwest boost for any candidate."
+      },
+      {
+        "candidate": "Slotkin",
+        "best": "Michigan; Iowa as a secondary Midwest fit.",
+        "worst": "Illinois.",
+        "read": "Michigan turns her from profile-fit dark horse into a live calendar story."
+      },
+      {
+        "candidate": "Murphy",
+        "best": "Illinois or Michigan; Virginia or North Carolina.",
+        "worst": "Iowa or Tennessee.",
+        "read": "Needs suburban, professional-class, competence-liberal terrain. SC is neutral-to-soft."
+      },
+      {
+        "candidate": "Polis",
+        "best": "Iowa; Virginia or North Carolina.",
+        "worst": "South Carolina.",
+        "read": "Best with NH/Iowa-style high-information electorates; weak in Black-establishment tests."
+      },
+      {
+        "candidate": "Schatz",
+        "best": "Nevada fixed, plus Illinois/Michigan and Georgia/North Carolina.",
+        "worst": "Iowa, Tennessee, or South Carolina.",
+        "read": "Needs diverse, younger, high-information Democratic electorates."
+      },
+      {
+        "candidate": "Booker",
+        "best": "South Carolina or Georgia; Illinois or Michigan.",
+        "worst": "Iowa or Tennessee.",
+        "read": "Charisma plus church/civic coalition benefits from Black electorate states."
+      },
+      {
+        "candidate": "Walz",
+        "best": "Iowa or Tennessee; North Carolina.",
+        "worst": "Illinois plus Georgia.",
+        "read": "Rural/teacher/vernacular Midwest affect wants retail and working-class exposure."
+      },
+      {
+        "candidate": "Cooper",
+        "best": "North Carolina; South Carolina second.",
+        "worst": "Georgia or Tennessee.",
+        "read": "NC early is his huge catalyst; otherwise he needs donor/media proof of why-now."
+      },
+      {
+        "candidate": "Cuban",
+        "best": "Illinois, Michigan, Georgia, North Carolina, or Virginia.",
+        "worst": "South Carolina or Iowa.",
+        "read": "Needs big media markets and suburban/business outsider voters; party-trust tests expose weakness."
+      },
+      {
+        "candidate": "Emanuel",
+        "best": "Illinois; Virginia or Georgia.",
+        "worst": "Iowa or South Carolina.",
+        "read": "Urban operator credibility needs IL. Leftier or Black-establishment tests make his downside louder."
+      }
+    ],
+    "source_links": [
+      {
+        "label": "DNC applicant pool / region rule",
+        "url": "https://demrulz.org/dnc-rbc-considers-early-state-proposals/"
+      },
+      {
+        "label": "Census QuickFacts baseline",
+        "url": "https://www.census.gov/quickfacts/"
+      },
+      {
+        "label": "2024 calendar precedent",
+        "url": "https://apnews.com/article/a4c1338de9649e0cdd14cc9211f0a1bc"
+      },
+      {
+        "label": "DNC 2028 calendar process",
+        "url": "https://democrats.org/news/dnc-rules-and-bylaws-committee-votes-to-advance-12-states-to-next-phase-of-2028-presidential-calendar-selection-process/"
+      }
+    ]
   }
 }

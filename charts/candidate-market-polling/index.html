@@ -719,6 +719,101 @@
       color: var(--gold);
     }
 
+    .early-calendar {
+      margin: 18px 0;
+      padding: 16px;
+      background: rgba(248, 243, 232, .94);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .early-calendar[hidden] {
+      display: none;
+    }
+
+    .early-calendar h2 {
+      margin: 0 0 5px;
+      font-size: 24px;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .calendar-grid,
+    .combo-grid,
+    .impact-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .calendar-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .combo-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .impact-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .state-card,
+    .combo-card,
+    .impact-card {
+      min-width: 0;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      padding: 12px;
+    }
+
+    .state-card h3,
+    .combo-card h3,
+    .impact-card h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      line-height: 1.05;
+      text-transform: uppercase;
+      overflow-wrap: anywhere;
+    }
+
+    .state-list,
+    .impact-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .state-list li,
+    .impact-list li {
+      padding-top: 8px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.32;
+      overflow-wrap: anywhere;
+    }
+
+    .state-list li:first-child,
+    .impact-list li:first-child {
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .state-list b,
+    .impact-list b {
+      color: var(--ink);
+      font-weight: 900;
+    }
+
+    .calendar-subhead {
+      margin: 18px 0 0;
+      font: 12px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-transform: uppercase;
+    }
+
     .legend {
       display: flex;
       gap: 12px;
@@ -744,6 +839,7 @@
     @media (max-width: 980px) {
       header, main, .summary { grid-template-columns: 1fr; }
       .calendar-timeline, .mention-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .calendar-grid, .combo-grid, .impact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       h1 { font-size: 58px; }
       .row {
         grid-template-columns: 82px minmax(110px, 1fr);
@@ -773,7 +869,7 @@
       }
       .party-tabs > *, .controls > * { width: 100%; }
       .read { min-width: 0; }
-      main, .board, .side, .history, .mentions {
+      main, .board, .side, .history, .mentions, .early-calendar {
         width: calc(100vw - 20px);
         max-width: calc(100vw - 20px);
         overflow: hidden;
@@ -783,6 +879,9 @@
         max-width: calc(100vw - 20px);
       }
       .calendar-timeline {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .calendar-grid, .combo-grid, .impact-grid {
         grid-template-columns: minmax(0, 1fr);
       }
       .calendar-timeline::before {
@@ -938,6 +1037,7 @@
       <div class="chart-wrap" id="historyChart"></div>
     </section>
     <section class="catalysts" id="catalysts"></section>
+    <section class="early-calendar" id="earlyCalendar" hidden></section>
 
     <main>
       <section class="board" id="board"></section>
@@ -1711,6 +1811,67 @@
       `;
     }
 
+    function renderEarlyCalendar() {
+      const section = document.getElementById("earlyCalendar");
+      const model = activeParty === "Democratic" ? snapshot.early_state_calendar : null;
+      if (!model) {
+        section.hidden = true;
+        section.innerHTML = "";
+        return;
+      }
+      section.hidden = false;
+      const fixed = model.fixed_states?.length ? model.fixed_states.join(" + ") : "pending";
+      const regions = model.regions || [];
+      const combos = model.combinations || [];
+      const impacts = model.candidate_impacts || [];
+      const links = (model.source_links || []).map(item => Array.isArray(item) ? { label: item[0], url: item[1] } : item);
+      section.innerHTML = `
+        <div class="catalyst-head">
+          <h2>${model.title || "Dem Early Calendar"}</h2>
+          <span class="stamp">Fixed: ${fixed}</span>
+        </div>
+        <p class="small">${model.summary || ""}</p>
+        <div class="calendar-grid">
+          ${regions.map(region => `
+            <article class="state-card">
+              <h3>${region.name}</h3>
+              <p class="small">${region.read || ""}</p>
+              <ul class="state-list">
+                ${(region.states || []).map(state => `
+                  <li><b>${state.state}</b>: ${state.effect}</li>
+                `).join("")}
+              </ul>
+            </article>
+          `).join("")}
+        </div>
+        <h3 class="calendar-subhead">Calendar Pair Triggers</h3>
+        <div class="combo-grid">
+          ${combos.map(combo => `
+            <article class="combo-card">
+              <h3>${combo.combo}</h3>
+              <p class="small">${combo.effect}</p>
+            </article>
+          `).join("")}
+        </div>
+        <h3 class="calendar-subhead">Candidate Boost / Downgrade</h3>
+        <div class="impact-grid">
+          ${impacts.map(item => `
+            <article class="impact-card">
+              <h3>${item.candidate}</h3>
+              <ul class="impact-list">
+                <li><b>Best:</b> ${item.best}</li>
+                <li><b>Worst:</b> ${item.worst}</li>
+                <li><b>Read:</b> ${item.read}</li>
+              </ul>
+            </article>
+          `).join("")}
+        </div>
+        <div class="source-links">
+          ${links.map(link => `<a href="${link.url}">${link.label}</a>`).join("")}
+        </div>
+      `;
+    }
+
     function renderBoard(rows) {
       document.getElementById("board").innerHTML = `
         <div class="row head">
@@ -1904,6 +2065,7 @@
       renderSummary(rows);
       renderMentions(rows);
       renderCatalysts();
+      renderEarlyCalendar();
       renderHistory(rows);
       renderBoard(rows);
     }
