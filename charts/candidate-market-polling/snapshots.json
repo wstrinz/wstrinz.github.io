@@ -1,8 +1,8 @@
 {
-  "schema": "candidate-market-polling-snapshot-v9",
+  "schema": "candidate-market-polling-snapshot-v10",
   "captured_at": "2026-05-20T16:05:00-05:00",
   "topic": "2028 Democratic nominee candidate poll and market watch",
-  "source_note": "Seed snapshot transcribed from the image text shared in Discord #the-tide-pool. Corrected after audit: the source columns are Candidate / Markets / Polling / Read. V2 stores vibes ingredients and derives the displayed bar from weighted component scores. Catalyst notes added 2026-05-13 from Tide Pool discussion; they are qualitative watchpoints, not probability updates. V3 adds a manual mention-signal capture shape: good/bad/neutral/unclear counts, previous-week comparison, source mix, and example refs. Twitter/X is intentionally excluded unless a usable source is explicitly provided. V4 presents catalysts as a calendar/timeline surface with manual refresh cadence; scheduled automation is intentionally not wired yet. V5 adds a separate Republican tab with seeded GOP rows from current public polling/market references; GOP fields are intentionally marked lower-confidence where markets and polls disagree. V6 adds a Republican-only Trump endorsement chance field. V7 shifts that field away from polling weight and toward Trump relationship, loyalty, vindictiveness, surrogate behavior, and permission-structure evidence. V8 adds Democratic early-state calendar tracking for the live Midwest/South applicant pool with candidate boost/downgrade reads. V9 adds Stephen A. Smith as a Democratic long-shot media-celebrity row.",
+  "source_note": "Seed snapshot transcribed from the image text shared in Discord #the-tide-pool. Corrected after audit: the source columns are Candidate / Markets / Polling / Read. V2 stores vibes ingredients and derives the displayed bar from weighted component scores. Catalyst notes added 2026-05-13 from Tide Pool discussion; they are qualitative watchpoints, not probability updates. V3 adds a manual mention-signal capture shape: good/bad/neutral/unclear counts, previous-week comparison, source mix, and example refs. Twitter/X is intentionally excluded unless a usable source is explicitly provided. V4 presents catalysts as a calendar/timeline surface with manual refresh cadence; scheduled automation is intentionally not wired yet. V5 adds a separate Republican tab with seeded GOP rows from current public polling/market references; GOP fields are intentionally marked lower-confidence where markets and polls disagree. V6 adds a Republican-only Trump endorsement chance field. V7 shifts that field away from polling weight and toward Trump relationship, loyalty, vindictiveness, surrogate behavior, and permission-structure evidence. V8 adds Democratic early-state calendar tracking for the live Midwest/South applicant pool with candidate boost/downgrade reads. V9 adds Stephen A. Smith as a Democratic long-shot media-celebrity row. V10 adds auditable Vibes Check formula metadata, named cycle-lens weight profiles, mention-test seed flags, and the Cuban hope-story recalibration.",
   "rows": [
     {
       "tier": "Tier 1: Frontrunners",
@@ -84,7 +84,8 @@
         "examples": [],
         "confidence": "pending",
         "note": "Manual mention capture pending."
-      }
+      },
+      "mention_test_seed": true
     },
     {
       "tier": "Tier 1: Frontrunners",
@@ -371,7 +372,8 @@
         "examples": [],
         "confidence": "pending",
         "note": "Manual mention capture pending."
-      }
+      },
+      "mention_test_seed": true
     },
     {
       "tier": "Tier 3: Underpriced, Right Profile",
@@ -494,7 +496,8 @@
         "examples": [],
         "confidence": "pending",
         "note": "Manual mention capture pending."
-      }
+      },
+      "mention_test_seed": true
     },
     {
       "tier": "Tier 3: Underpriced, Right Profile",
@@ -878,7 +881,7 @@
       "note": "Businessman-celebrity outsider lane; credible for the genre but still longshot.",
       "vibes_rationale": "Excellent long-form authenticity and material business language, but office ambition and primary trust are real questions.",
       "vibes_dimensions": {
-        "hope_story": 3,
+        "hope_story": 2,
         "material_specificity": 3,
         "authentic_longform": 4,
         "problem_clarity": 3,
@@ -1473,7 +1476,32 @@
       "medium",
       "low"
     ],
-    "note": "The displayed vibes_score is a weighted average of the five stored ingredients, not a hand-entered primary field."
+    "note": "The displayed vibes_score is a weighted average of the five stored ingredients. Snapshots record the weight_profile and formula_version used for auditability.",
+    "formula_version": "derived-vibes-v2",
+    "default_weight_profile": "hope_cycle",
+    "weight_profile": "hope_cycle",
+    "weight_profiles": {
+      "hope_cycle": {
+        "label": "Hope cycle",
+        "weights": {
+          "hope_story": 1.2,
+          "material_specificity": 1.2,
+          "authentic_longform": 1.2,
+          "problem_clarity": 1,
+          "fight_selection": 1
+        }
+      },
+      "referendum_cycle": {
+        "label": "Referendum cycle",
+        "weights": {
+          "hope_story": 1,
+          "material_specificity": 1,
+          "authentic_longform": 1,
+          "problem_clarity": 1.2,
+          "fight_selection": 1.2
+        }
+      }
+    }
   },
   "catalyst_model": {
     "note": "Catalysts are tracked as a calendar: dated or seasonal windows where market and polling snapshots are most likely to deserve a fresh read.",
@@ -2025,5 +2053,7 @@
         "url": "https://democrats.org/news/dnc-rules-and-bylaws-committee-votes-to-advance-12-states-to-next-phase-of-2028-presidential-calendar-selection-process/"
       }
     ]
-  }
+  },
+  "weight_profile": "hope_cycle",
+  "formula_version": "derived-vibes-v2"
 }

@@ -1380,7 +1380,8 @@
         <div class="thesis">
           <h2>Vibes Check</h2>
           <p class="small">Derived Vibes Check score: a weighted read on whether a candidate can carry a positive national story under sustained, low-filter exposure.</p>
-          <p class="small">The stored data keeps five 1-4 ingredients: hope story, material specificity, authentic longform, problem clarity, and fight selection. The bar is derived from those ingredients, with hope/material/longform weighted slightly higher.</p>
+          <p class="small">Functionally, this is a candidate-authorship score: how much the candidate, rather than the campaign apparatus, appears to generate the campaign's story and substance. Low-authorship campaigns read staff-shaped and backward-linked; high-authorship campaigns read like the candidate can carry the argument in their own voice under pressure.</p>
+          <p class="small">The stored data keeps five 1-4 ingredients: hope story, material specificity, authentic longform, problem clarity, and fight selection. The Cycle lens control changes which ingredients carry extra weight without changing the stored ingredients.</p>
           <p class="small">This is not a competence or coalition-building score; those should mostly show up in polling and markets. It is a soft signal for what may become more visible as the primary heats up.</p>
           <p class="small">4 = natural carrier. 3 = credible with a weakness. 2 = partial fit. 1 = brand fights the thesis.</p>
         </div>
@@ -1399,6 +1400,8 @@
   <script>
     const snapshot = {
       captured_at: "2026-05-13T07:27:00-05:00",
+      weight_profile: "hope_cycle",
+      formula_version: "derived-vibes-v2",
       rows: [
         ["Tier 1: Frontrunners","Newsom","24-34%",24,34,"21%",21,21,"CA gov, shadow campaign, has network and timing; coastal-progressive brand risk."],
         ["Tier 1: Frontrunners","Harris","5-7%",5,7,"39%",39,39,"Leads polling on name ID; markets discount donor comeback risk less than operatives do."],
@@ -1446,12 +1449,37 @@
                 "3": "credible",
                 "4": "strong"
           },
+          "formula_version": "derived-vibes-v2",
+          "default_weight_profile": "hope_cycle",
+          "weight_profile": "hope_cycle",
           "weights": {
                 "hope_story": 1.2,
                 "material_specificity": 1.2,
                 "authentic_longform": 1.2,
                 "problem_clarity": 1,
                 "fight_selection": 1
+          },
+          "weight_profiles": {
+                "hope_cycle": {
+                      "label": "Hope cycle",
+                      "weights": {
+                            "hope_story": 1.2,
+                            "material_specificity": 1.2,
+                            "authentic_longform": 1.2,
+                            "problem_clarity": 1,
+                            "fight_selection": 1
+                      }
+                },
+                "referendum_cycle": {
+                      "label": "Referendum cycle",
+                      "weights": {
+                            "hope_story": 1,
+                            "material_specificity": 1,
+                            "authentic_longform": 1,
+                            "problem_clarity": 1.2,
+                            "fight_selection": 1.2
+                      }
+                }
           },
           "confidence": [
                 "high",
@@ -1737,7 +1765,7 @@
           },
           "Cuban": {
                 "vibes_dimensions": {
-                      "hope_story": 3,
+                      "hope_story": 2,
                       "material_specificity": 3,
                       "authentic_longform": 4,
                       "problem_clarity": 3,
@@ -1803,6 +1831,7 @@
     };
 
     const inlineMentionInputs = {};
+    const inlineMentionTestSeeds = new Set(["Harris", "Beshear", "Kelly"]);
 
     const inlineCatalystInputs = {
       "Newsom": "National Dem elite signals, California succession politics, the 2026 California governor result, and any post-governor launch after January 2027.",
@@ -1831,9 +1860,33 @@
       "Stephen A. Smith": "Explicit run/pass signal, donor or adviser attachment, early-state travel, and whether media attention converts into actual Democratic primary support."
     };
 
-        function deriveVibesScore(row) {
+        const DEFAULT_WEIGHT_PROFILE = "hope_cycle";
+        const requestedWeightProfile = new URLSearchParams(window.location.search).get("lens");
+        let activeWeightProfile = requestedWeightProfile || vibesModel.weight_profile || vibesModel.default_weight_profile || DEFAULT_WEIGHT_PROFILE;
+
+        function weightProfiles() {
+          return vibesModel.weight_profiles || {
+            [DEFAULT_WEIGHT_PROFILE]: {
+              label: "Hope cycle",
+              weights: vibesModel.weights
+            }
+          };
+        }
+
+        function normalizeWeightProfile(profile) {
+          return weightProfiles()[profile] ? profile : DEFAULT_WEIGHT_PROFILE;
+        }
+
+        function weightsForProfile(profile = activeWeightProfile) {
+          const normalized = normalizeWeightProfile(profile);
+          return weightProfiles()[normalized]?.weights || vibesModel.weights;
+        }
+
+        activeWeightProfile = normalizeWeightProfile(activeWeightProfile);
+
+        function deriveVibesScore(row, profile = activeWeightProfile) {
           if (!row.vibes_dimensions) return row.vibes_score ?? null;
-          const weights = vibesModel.weights;
+          const weights = weightsForProfile(profile);
           let weighted = 0;
           let total = 0;
           Object.entries(weights).forEach(([key, weight]) => {
@@ -1875,6 +1928,7 @@
           if (inlineMentionInputs[row.entity]) {
             row.mention_signal = { ...(row.mention_signal || {}), ...inlineMentionInputs[row.entity] };
           }
+          row.mention_test_seed = Boolean(row.mention_test_seed || inlineMentionTestSeeds.has(row.entity));
           const signal = row.mention_signal || {};
           const current = signal.current || signal.counts || {};
           const previous = signal.previous || {};
@@ -1888,7 +1942,10 @@
           row.good_mention_share_delta = currentGoodShare == null || previousGoodShare == null ? null : Math.round((currentGoodShare - previousGoodShare) * 10) / 10;
           row.bad_mention_share = currentVolume ? Math.round((Number(current.bad || 0) / currentVolume) * 1000) / 10 : null;
           row.mention_confidence = signal.confidence || (currentVolume == null ? "pending" : currentVolume >= 20 ? "medium" : "low");
-          row.mention_note = signal.note || "Manual mention capture pending. Add counts and refs to snapshots.json or snapshots.csv when a week is sampled.";
+          const mentionNote = signal.note || "Manual mention capture pending. Add counts and refs to snapshots.json or snapshots.csv when a week is sampled.";
+          row.mention_note = row.mention_test_seed
+            ? `${mentionNote} Priority seed for first manual mention-test capture.`
+            : mentionNote;
           row.mention_examples = signal.examples || [];
           row.mention_sources = signal.sources || [];
           return row;
@@ -1914,6 +1971,12 @@
     let sortMode = "tier";
     let sortDir = "asc";
     let chartMetric = "market_midpoint";
+
+    function rederiveVibesScores() {
+      history.forEach(snap => snap.rows.forEach(row => {
+        row.vibes_score = deriveVibesScore(row);
+      }));
+    }
 
     const fmtVibe = n => n == null ? "n/a" : n.toFixed(n % 1 ? 1 : 0);
     const fmtValue = (n, metric = chartMetric) => {
@@ -2063,6 +2126,25 @@
       dir.textContent = sortDir === "asc" ? "Sort: low to high" : "Sort: high to low";
       dir.onclick = () => { sortDir = sortDir === "asc" ? "desc" : "asc"; render(); };
       controls.appendChild(dir);
+
+      const lens = document.createElement("select");
+      lens.setAttribute("aria-label", "Cycle lens");
+      Object.entries(weightProfiles()).forEach(([value, profile]) => {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = `Cycle lens: ${profile.label || value}`;
+        lens.appendChild(option);
+      });
+      lens.value = activeWeightProfile;
+      lens.onchange = e => {
+        activeWeightProfile = normalizeWeightProfile(e.target.value);
+        rederiveVibesScores();
+        const url = new URL(window.location);
+        url.searchParams.set("lens", activeWeightProfile);
+        window.history.replaceState(null, "", url);
+        render();
+      };
+      controls.appendChild(lens);
     }
 
     function renderSummary(rows) {
@@ -2496,7 +2578,12 @@
         normalized.trump_endorsement_chance = normalized.trump_endorsement_chance == null ? null : Number(normalized.trump_endorsement_chance);
         return hydrateRow(normalized);
       });
-      return { ...raw, rows };
+      return {
+        ...raw,
+        weight_profile: raw.weight_profile || raw.vibes_model?.weight_profile || raw.vibes_model?.default_weight_profile || DEFAULT_WEIGHT_PROFILE,
+        formula_version: raw.formula_version || raw.vibes_formula_version || raw.vibes_model?.formula_version || vibesModel.formula_version,
+        rows
+      };
     }
 
     async function loadHistory() {
