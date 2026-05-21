@@ -1,8 +1,26 @@
 {
-  "schema": "candidate-market-polling-snapshot-v9",
+  "schema": "candidate-market-polling-snapshot-v10",
   "captured_at": "2026-05-20T16:05:00-05:00",
+  "weight_profile": "hope_cycle",
+  "vibes_formula_version": "vibes-v2-weight-profiles",
+  "vibes_weight_profiles": {
+    "hope_cycle": {
+      "hope_story": 1.2,
+      "material_specificity": 1.2,
+      "authentic_longform": 1.2,
+      "problem_clarity": 1,
+      "fight_selection": 1
+    },
+    "referendum_cycle": {
+      "hope_story": 1,
+      "material_specificity": 1,
+      "authentic_longform": 1,
+      "problem_clarity": 1.2,
+      "fight_selection": 1.2
+    }
+  },
   "topic": "2028 Democratic nominee candidate poll and market watch",
-  "source_note": "Seed snapshot transcribed from the image text shared in Discord #the-tide-pool. Corrected after audit: the source columns are Candidate / Markets / Polling / Read. V2 stores vibes ingredients and derives the displayed bar from weighted component scores. Catalyst notes added 2026-05-13 from Tide Pool discussion; they are qualitative watchpoints, not probability updates. V3 adds a manual mention-signal capture shape: good/bad/neutral/unclear counts, previous-week comparison, source mix, and example refs. Twitter/X is intentionally excluded unless a usable source is explicitly provided. V4 presents catalysts as a calendar/timeline surface with manual refresh cadence; scheduled automation is intentionally not wired yet. V5 adds a separate Republican tab with seeded GOP rows from current public polling/market references; GOP fields are intentionally marked lower-confidence where markets and polls disagree. V6 adds a Republican-only Trump endorsement chance field. V7 shifts that field away from polling weight and toward Trump relationship, loyalty, vindictiveness, surrogate behavior, and permission-structure evidence. V8 adds Democratic early-state calendar tracking for the live Midwest/South applicant pool with candidate boost/downgrade reads. V9 adds Stephen A. Smith as a Democratic long-shot media-celebrity row.",
+  "source_note": "Seed snapshot transcribed from the image text shared in Discord #the-tide-pool. Corrected after audit: the source columns are Candidate / Markets / Polling / Read. V2 stores vibes ingredients and derives the displayed bar from weighted component scores. Catalyst notes added 2026-05-13 from Tide Pool discussion; they are qualitative watchpoints, not probability updates. V3 adds a manual mention-signal capture shape: good/bad/neutral/unclear counts, previous-week comparison, source mix, and example refs. Twitter/X is intentionally excluded unless a usable source is explicitly provided. V4 presents catalysts as a calendar/timeline surface with manual refresh cadence; scheduled automation is intentionally not wired yet. V5 adds a separate Republican tab with seeded GOP rows from current public polling/market references; GOP fields are intentionally marked lower-confidence where markets and polls disagree. V6 adds a Republican-only Trump endorsement chance field. V7 shifts that field away from polling weight and toward Trump relationship, loyalty, vindictiveness, surrogate behavior, and permission-structure evidence. V8 adds Democratic early-state calendar tracking for the live Midwest/South applicant pool with candidate boost/downgrade reads. V9 adds Stephen A. Smith as a Democratic long-shot media-celebrity row. V10 records the active Vibes weight profile and formula version so future snapshots can distinguish hope-cycle and referendum-cycle views.",
   "rows": [
     {
       "tier": "Tier 1: Frontrunners",
@@ -48,6 +66,7 @@
     {
       "tier": "Tier 1: Frontrunners",
       "entity": "Harris",
+      "mention_test_seed": true,
       "market_display": "5-7%",
       "market_low": 5,
       "market_high": 7,
@@ -335,6 +354,7 @@
     {
       "tier": "Tier 3: Underpriced, Right Profile",
       "entity": "Beshear",
+      "mention_test_seed": true,
       "market_display": "2.5-5%",
       "market_low": 2.5,
       "market_high": 5,
@@ -458,6 +478,7 @@
     {
       "tier": "Tier 3: Underpriced, Right Profile",
       "entity": "Kelly",
+      "mention_test_seed": true,
       "market_display": "<1%",
       "market_low": 0,
       "market_high": 1,
@@ -878,7 +899,7 @@
       "note": "Businessman-celebrity outsider lane; credible for the genre but still longshot.",
       "vibes_rationale": "Excellent long-form authenticity and material business language, but office ambition and primary trust are real questions.",
       "vibes_dimensions": {
-        "hope_story": 3,
+        "hope_story": 2,
         "material_specificity": 3,
         "authentic_longform": 4,
         "problem_clarity": 3,

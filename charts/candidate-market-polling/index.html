@@ -1380,7 +1380,8 @@
         <div class="thesis">
           <h2>Vibes Check</h2>
           <p class="small">Derived Vibes Check score: a weighted read on whether a candidate can carry a positive national story under sustained, low-filter exposure.</p>
-          <p class="small">The stored data keeps five 1-4 ingredients: hope story, material specificity, authentic longform, problem clarity, and fight selection. The bar is derived from those ingredients, with hope/material/longform weighted slightly higher.</p>
+          <p class="small">The stored data keeps five 1-4 ingredients: hope story, material specificity, authentic longform, problem clarity, and fight selection. The Cycle lens control changes only the weighting, not the stored scores.</p>
+          <p class="small">Functionally, this is a candidate-authorship score: how much the candidate, rather than the campaign apparatus, seems to generate the campaign's story and substance.</p>
           <p class="small">This is not a competence or coalition-building score; those should mostly show up in polling and markets. It is a soft signal for what may become more visible as the primary heats up.</p>
           <p class="small">4 = natural carrier. 3 = credible with a weakness. 2 = partial fit. 1 = brand fights the thesis.</p>
         </div>
@@ -1397,7 +1398,11 @@
   </div>
 
   <script>
+    const urlParams = new URLSearchParams(window.location.search);
+
     const snapshot = {
+      weight_profile: "hope_cycle",
+      vibes_formula_version: "vibes-v2-weight-profiles",
       captured_at: "2026-05-13T07:27:00-05:00",
       rows: [
         ["Tier 1: Frontrunners","Newsom","24-34%",24,34,"21%",21,21,"CA gov, shadow campaign, has network and timing; coastal-progressive brand risk."],
@@ -1452,6 +1457,34 @@
                 "authentic_longform": 1.2,
                 "problem_clarity": 1,
                 "fight_selection": 1
+          },
+          "formula_version": "vibes-v2-weight-profiles",
+          "default_weight_profile": "hope_cycle",
+          "weight_profiles": {
+                "hope_cycle": {
+                      "label": "Hope cycle",
+                      "short_label": "Hope",
+                      "weights": {
+                            "hope_story": 1.2,
+                            "material_specificity": 1.2,
+                            "authentic_longform": 1.2,
+                            "problem_clarity": 1,
+                            "fight_selection": 1
+                      },
+                      "note": "Current baseline: positive story, material specificity, and authentic longform carry slightly more weight."
+                },
+                "referendum_cycle": {
+                      "label": "Referendum cycle",
+                      "short_label": "Referendum",
+                      "weights": {
+                            "hope_story": 1,
+                            "material_specificity": 1,
+                            "authentic_longform": 1,
+                            "problem_clarity": 1.2,
+                            "fight_selection": 1.2
+                      },
+                      "note": "Alternate lens for an unpopular-incumbent referendum cycle: problem clarity and fight selection carry slightly more weight."
+                }
           },
           "confidence": [
                 "high",
@@ -1737,7 +1770,7 @@
           },
           "Cuban": {
                 "vibes_dimensions": {
-                      "hope_story": 3,
+                      "hope_story": 2,
                       "material_specificity": 3,
                       "authentic_longform": 4,
                       "problem_clarity": 3,
@@ -1804,6 +1837,8 @@
 
     const inlineMentionInputs = {};
 
+    const mentionTestSeeds = new Set(["Kelly", "Beshear", "Harris"]);
+
     const inlineCatalystInputs = {
       "Newsom": "National Dem elite signals, California succession politics, the 2026 California governor result, and any post-governor launch after January 2027.",
       "Harris": "Explicit run/pass signal, donor re-entry, and signs that party elites are willing to relitigate 2024 instead of moving on.",
@@ -1831,9 +1866,25 @@
       "Stephen A. Smith": "Explicit run/pass signal, donor or adviser attachment, early-state travel, and whether media attention converts into actual Democratic primary support."
     };
 
+        const requestedWeightProfile = urlParams.get("weight_profile");
+
+        function normalizeWeightProfileKey(key) {
+          return vibesModel.weight_profiles?.[key] ? key : vibesModel.default_weight_profile;
+        }
+
+        let activeWeightProfile = normalizeWeightProfileKey(requestedWeightProfile || snapshot.weight_profile || vibesModel.default_weight_profile);
+
+        function currentWeightProfile() {
+          return vibesModel.weight_profiles[activeWeightProfile] || vibesModel.weight_profiles[vibesModel.default_weight_profile];
+        }
+
+        function currentWeights() {
+          return currentWeightProfile().weights || vibesModel.weights;
+        }
+
         function deriveVibesScore(row) {
           if (!row.vibes_dimensions) return row.vibes_score ?? null;
-          const weights = vibesModel.weights;
+          const weights = currentWeights();
           let weighted = 0;
           let total = 0;
           Object.entries(weights).forEach(([key, weight]) => {
@@ -1849,6 +1900,8 @@
         function hydrateVibes(row) {
           if (inlineVibesInputs[row.entity]) Object.assign(row, inlineVibesInputs[row.entity]);
           row.catalyst_note = row.catalyst_note || inlineCatalystInputs[row.entity] || "Watch for explicit run/pass signals, early-state travel, donor movement, and first 2027 polling.";
+          row.vibes_weight_profile = activeWeightProfile;
+          row.vibes_formula_version = vibesModel.formula_version;
           row.vibes_score = deriveVibesScore(row);
           return row;
         }
@@ -1876,6 +1929,7 @@
             row.mention_signal = { ...(row.mention_signal || {}), ...inlineMentionInputs[row.entity] };
           }
           const signal = row.mention_signal || {};
+          row.mention_test_seed = row.mention_test_seed ?? mentionTestSeeds.has(row.entity);
           const current = signal.current || signal.counts || {};
           const previous = signal.previous || {};
           const currentVolume = Number.isFinite(Number(signal.volume)) ? Number(signal.volume) : countTotal(current);
@@ -1888,7 +1942,10 @@
           row.good_mention_share_delta = currentGoodShare == null || previousGoodShare == null ? null : Math.round((currentGoodShare - previousGoodShare) * 10) / 10;
           row.bad_mention_share = currentVolume ? Math.round((Number(current.bad || 0) / currentVolume) * 1000) / 10 : null;
           row.mention_confidence = signal.confidence || (currentVolume == null ? "pending" : currentVolume >= 20 ? "medium" : "low");
-          row.mention_note = signal.note || "Manual mention capture pending. Add counts and refs to snapshots.json or snapshots.csv when a week is sampled.";
+          const hasGenericMentionNote = !signal.note || signal.note === "Manual mention capture pending.";
+          row.mention_note = hasGenericMentionNote ? (row.mention_test_seed
+            ? "Priority mention-test seed. Capture this row first when weekly manual rounds begin."
+            : "Manual mention capture pending. Add counts and refs to snapshots.json or snapshots.csv when a week is sampled.") : signal.note;
           row.mention_examples = signal.examples || [];
           row.mention_sources = signal.sources || [];
           return row;
@@ -1900,11 +1957,17 @@
           return row;
         }
 
+        function rehydrateSnapshots() {
+          history.forEach(snap => snap.rows.forEach(hydrateRow));
+          snapshot.weight_profile = activeWeightProfile;
+          snapshot.vibes_formula_version = vibesModel.formula_version;
+        }
+
         snapshot.rows.forEach(hydrateRow);
 
     const DEFAULT_PARTY = "Democratic";
     const partyFor = row => row.party || DEFAULT_PARTY;
-    const requestedParty = new URLSearchParams(window.location.search).get("party");
+    const requestedParty = urlParams.get("party");
     let activeParty = requestedParty || DEFAULT_PARTY;
     let parties = [...new Set(snapshot.rows.map(partyFor))];
     let tiers = ["All", ...new Set(snapshot.rows.filter(row => partyFor(row) === activeParty).map(r => r.tier))];
@@ -1943,10 +2006,12 @@
 
     function dimensionRows(row) {
       const d = row.vibes_dimensions || {};
+      const weights = currentWeights();
       return dimensionLabels.map(([key, label]) => ({
         key,
         label,
         value: d[key],
+        weight: weights[key] || 1,
         definition: vibesModel.dimensions[key]
       }));
     }
@@ -1954,8 +2019,8 @@
     function renderSubscores(row) {
       return `
         <div class="subscores" aria-label="Vibes Check subscores">
-          ${dimensionRows(row).map(({ label, value, definition }) => `
-            <div class="subscore" title="${definition}">
+          ${dimensionRows(row).map(({ label, value, weight, definition }) => `
+            <div class="subscore" title="${definition} Weight: ${weight}x in ${currentWeightProfile().label}.">
               <div class="subscore-head">
                 <span class="subscore-name">${label}</span>
                 <span class="subscore-value">${value ?? "?"}/4</span>
@@ -2063,6 +2128,25 @@
       dir.textContent = sortDir === "asc" ? "Sort: low to high" : "Sort: high to low";
       dir.onclick = () => { sortDir = sortDir === "asc" ? "desc" : "asc"; render(); };
       controls.appendChild(dir);
+
+      const profile = document.createElement("select");
+      profile.setAttribute("aria-label", "Cycle lens");
+      Object.entries(vibesModel.weight_profiles).forEach(([value, model]) => {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = `Cycle lens: ${model.label}`;
+        profile.appendChild(option);
+      });
+      profile.value = activeWeightProfile;
+      profile.onchange = e => {
+        activeWeightProfile = normalizeWeightProfileKey(e.target.value);
+        const url = new URL(window.location);
+        url.searchParams.set("weight_profile", activeWeightProfile);
+        window.history.replaceState(null, "", url);
+        rehydrateSnapshots();
+        render();
+      };
+      controls.appendChild(profile);
     }
 
     function renderSummary(rows) {
@@ -2079,7 +2163,7 @@
         [`${activeParty} candidates`, rows.length],
         ["With polling", withPoll.length],
         ["Avg market midpoint", avgMarket == null ? "n/a" : `${avgMarket.toFixed(1)}%`],
-        ["Avg vibes", avgVibes == null ? "n/a" : `${avgVibes.toFixed(1)} / 4`],
+        [`Avg vibes (${currentWeightProfile().short_label})`, avgVibes == null ? "n/a" : `${avgVibes.toFixed(1)} / 4`],
         endorsementLeader
           ? ["Trump endorse leader", `${endorsementLeader.entity} ${fmtTrumpEndorsement(endorsementLeader)}`]
           : ["Mention baselines", withMentions.length ? withMentions.length : "pending"]
@@ -2366,14 +2450,14 @@
                   <div class="signal"><span class="signal-label">Market</span><span class="signal-value">${row.market_display}</span><div class="track"><i class="fill market ${row.market_midpoint == null ? "unknown" : ""}" style="--w:${pct(row.market_midpoint)}"></i></div></div>
                   <div class="signal"><span class="signal-label">Poll</span><span class="signal-value">${row.poll_display}</span><div class="track"><i class="fill poll ${row.poll_midpoint == null ? "unknown" : ""}" style="--w:${row.poll_midpoint == null ? "0%" : pct(row.poll_midpoint)}"></i></div></div>
                   ${hasTrumpEndorsement(row) ? `<div class="signal"><span class="signal-label">Trump endorse</span><span class="signal-value">${fmtTrumpEndorsement(row)}</span><div class="track" title="${row.trump_endorsement_note || "Current subjective chance of a meaningful Trump endorsement."}"><i class="fill endorse" style="--w:${fullPct(row.trump_endorsement_chance)}"></i></div></div>` : ""}
-                  <div class="signal vibes-signal"><span class="signal-label">Vibes</span><span class="signal-value">${fmtVibe(row.vibes_score)}/4</span><div class="track" title="Vibes Check ${fmtVibe(row.vibes_score)} / 4"><i class="fill vibes" style="--w:${vibePct(row.vibes_score)}"></i></div></div>
+                  <div class="signal vibes-signal"><span class="signal-label">Vibes</span><span class="signal-value">${fmtVibe(row.vibes_score)}/4</span><div class="track" title="Vibes Check ${fmtVibe(row.vibes_score)} / 4 using ${currentWeightProfile().label}"><i class="fill vibes" style="--w:${vibePct(row.vibes_score)}"></i></div></div>
                   <div class="signal"><span class="signal-label">Good mentions</span><span class="signal-value">${fmtShare(row.good_mention_share)}</span><div class="track" title="${row.mention_note}"><i class="fill mentions-fill ${row.good_mention_share == null ? "unknown" : ""}" style="--w:${sharePct(row.good_mention_share)}"></i></div></div>
                 </div>
                 <p class="vibes-note">${row.vibes_rationale}</p>
                 ${renderSubscores(row)}
                 <p class="catalyst-note"><b>Next catalyst:</b> ${row.catalyst_note}</p>
                 ${hasTrumpEndorsement(row) ? `<p class="catalyst-note"><b>Trump endorsement:</b> ${row.trump_endorsement_note || "Track explicit praise, adviser leaks, joint appearances, donor movement, and whether Trump boxes the candidate in or grants permission."}</p>` : ""}
-                <p class="catalyst-note"><b>Mention test:</b> ${row.mention_note}</p>
+                <p class="catalyst-note"><b>${row.mention_test_seed ? "Priority mention test" : "Mention test"}:</b> ${row.mention_note}</p>
                 <p class="note">Confidence: ${row.confidence || "unknown"}. Evidence: ${row.evidence_notes || "not yet recorded"}. Liability: ${row.liability_notes || "not yet recorded"}.</p>
                 <p class="note">${row.note}</p>
               </div>
@@ -2511,6 +2595,8 @@
         history = loaded.sort((a, b) => new Date(a.captured_at) - new Date(b.captured_at));
         const latest = history[history.length - 1];
         Object.assign(snapshot, latest);
+        if (!requestedWeightProfile) activeWeightProfile = normalizeWeightProfileKey(snapshot.weight_profile || vibesModel.default_weight_profile);
+        rehydrateSnapshots();
         parties = [...new Set(snapshot.rows.map(partyFor))];
         if (!requestedParty && parties.includes("Republican")) activeParty = "Republican";
         if (!parties.includes(activeParty)) activeParty = parties[0] || DEFAULT_PARTY;
