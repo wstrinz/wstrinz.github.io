@@ -926,8 +926,7 @@
     }
 
     .calendar-grid,
-    .combo-grid,
-    .impact-grid {
+    .combo-grid {
       display: grid;
       gap: 12px;
       margin-top: 14px;
@@ -1069,13 +1068,8 @@
       padding-bottom: 4px;
     }
 
-    .impact-grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
     .state-card,
-    .combo-card,
-    .impact-card {
+    .combo-card {
       min-width: 0;
       border: 1px solid var(--line);
       background: var(--panel);
@@ -1083,8 +1077,7 @@
     }
 
     .state-card h3,
-    .combo-card h3,
-    .impact-card h3 {
+    .combo-card h3 {
       margin: 0 0 8px;
       font-size: 18px;
       line-height: 1.05;
@@ -1110,14 +1103,21 @@
       line-height: 1;
     }
 
-    .impact-card {
+    .candidate-calendar-impact {
       display: grid;
       gap: 8px;
-      align-content: start;
+      margin: 12px 0;
+      padding: 12px;
+      border: 1px solid rgba(82, 125, 80, .32);
+      background:
+        linear-gradient(180deg, rgba(82, 125, 80, .08), transparent 58px),
+        rgba(255, 250, 240, .72);
     }
 
-    .impact-card h3 {
-      margin-bottom: 0;
+    .candidate-calendar-impact .impact-title {
+      color: var(--ink);
+      font: 11px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-transform: uppercase;
     }
 
     .state-list,
@@ -1182,7 +1182,7 @@
     @media (max-width: 980px) {
       header, main, .summary { grid-template-columns: 1fr; }
       .calendar-timeline, .mention-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .calendar-grid, .impact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .calendar-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .early-calendar-board { grid-template-columns: 1fr; }
       h1 { font-size: 58px; }
       .row {
@@ -1225,7 +1225,7 @@
       .calendar-timeline {
         grid-template-columns: minmax(0, 1fr);
       }
-      .calendar-grid, .impact-grid {
+      .calendar-grid {
         grid-template-columns: minmax(0, 1fr);
       }
       .combo-grid { grid-template-columns: repeat(7, minmax(155px, 72vw)); }
@@ -2332,6 +2332,27 @@
       `;
     }
 
+    function candidateImpactFor(candidateName) {
+      return (snapshot.early_state_calendar?.candidate_impacts || [])
+        .find(item => item.candidate === candidateName);
+    }
+
+    function renderCandidateImpact(row) {
+      if (row.party !== "Democratic") return "";
+      const item = candidateImpactFor(row.entity);
+      if (!item) return "";
+      return `
+        <div class="candidate-calendar-impact">
+          <span class="impact-title">Early calendar boost / downgrade</span>
+          <ul class="impact-list">
+            <li><b>Best:</b> ${item.best}</li>
+            <li><b>Worst:</b> ${item.worst}</li>
+            <li><b>Read:</b> ${item.read}</li>
+          </ul>
+        </div>
+      `;
+    }
+
     function renderStateTile(state, slotLabel, index) {
       const meta = earlyStateSignals[state.state] || {};
       const code = meta.code || state.state.slice(0, 2).toUpperCase();
@@ -2365,7 +2386,6 @@
       const fixed = fixedStates.length ? fixedStates.join(" + ") : "pending";
       const regions = model.regions || [];
       const combos = model.combinations || [];
-      const impacts = model.candidate_impacts || [];
       const links = (model.source_links || []).map(item => Array.isArray(item) ? { label: item[0], url: item[1] } : item);
       const regionSlots = regions.slice(0, 2);
       section.innerHTML = `
@@ -2416,19 +2436,6 @@
             </article>
           `).join("")}
         </div>
-        <h3 class="calendar-subhead">Candidate Boost / Downgrade</h3>
-        <div class="impact-grid">
-          ${impacts.map(item => `
-            <article class="impact-card">
-              <h3>${item.candidate}</h3>
-              <ul class="impact-list">
-                <li><b>Best:</b> ${item.best}</li>
-                <li><b>Worst:</b> ${item.worst}</li>
-                <li><b>Read:</b> ${item.read}</li>
-              </ul>
-            </article>
-          `).join("")}
-        </div>
         <div class="source-links">
           ${links.map(link => `<a href="${link.url}">${link.label}</a>`).join("")}
         </div>
@@ -2471,6 +2478,7 @@
                 ${renderSubscores(row)}
                 <p class="catalyst-note"><b>Next catalyst:</b> ${row.catalyst_note}</p>
                 ${hasTrumpEndorsement(row) ? `<p class="catalyst-note"><b>Trump endorsement:</b> ${row.trump_endorsement_note || "Track explicit praise, adviser leaks, joint appearances, donor movement, and whether Trump boxes the candidate in or grants permission."}</p>` : ""}
+                ${renderCandidateImpact(row)}
                 <p class="catalyst-note"><b>${row.mention_test_seed ? "Priority mention test" : "Mention test"}:</b> ${row.mention_note}</p>
                 <p class="note">Confidence: ${row.confidence || "unknown"}. Evidence: ${row.evidence_notes || "not yet recorded"}. Liability: ${row.liability_notes || "not yet recorded"}.</p>
                 <p class="note">${row.note}</p>

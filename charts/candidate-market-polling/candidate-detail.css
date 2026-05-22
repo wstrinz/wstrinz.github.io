@@ -207,6 +207,41 @@ h1 {
   color: var(--ink);
 }
 
+.calendar-impact {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid rgba(82, 125, 80, .32);
+  background:
+    linear-gradient(180deg, rgba(82, 125, 80, .08), transparent 58px),
+    rgba(248, 243, 232, .66);
+}
+
+.calendar-impact ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.calendar-impact li {
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.34;
+}
+
+.calendar-impact li:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.calendar-impact b {
+  color: var(--ink);
+}
+
 .subscores {
   display: grid;
   gap: 10px;

@@ -153,6 +153,27 @@ function historyRows(history, candidateName, profile) {
   `).join("");
 }
 
+function candidateImpactFor(snapshot, candidateName) {
+  return (snapshot.early_state_calendar?.candidate_impacts || [])
+    .find(item => item.candidate === candidateName);
+}
+
+function renderCandidateImpact(snapshot, row) {
+  if (row.party !== "Democratic") return "";
+  const item = candidateImpactFor(snapshot, row.entity);
+  if (!item) return "";
+  return `
+    <div class="calendar-impact">
+      <span class="section-kicker">Early calendar boost / downgrade</span>
+      <ul>
+        <li><b>Best:</b> ${escapeHtml(item.best)}</li>
+        <li><b>Worst:</b> ${escapeHtml(item.worst)}</li>
+        <li><b>Read:</b> ${escapeHtml(item.read)}</li>
+      </ul>
+    </div>
+  `;
+}
+
 function render(snapshot, history) {
   const slug = document.body.dataset.candidateSlug || slugify(location.pathname.split("/").filter(Boolean).pop() || "");
   const profile = weightProfile(snapshot);
@@ -219,6 +240,7 @@ function render(snapshot, history) {
           <div class="note-list">
             <p class="note"><b>Next catalyst:</b> ${escapeHtml(row.catalyst_note || "Watch for explicit run/pass signals, early-state travel, donor movement, and first serious polling.")}</p>
             ${hasTrump ? `<p class="note"><b>Trump endorsement:</b> ${escapeHtml(row.trump_endorsement_note || "")}</p>` : ""}
+            ${renderCandidateImpact(snapshot, row)}
             <p class="note"><b>${row.mention_test_seed ? "Priority mention test" : "Mention test"}:</b> ${escapeHtml(row.mention_note)}</p>
             <p class="note"><b>Evidence:</b> ${escapeHtml(row.evidence_notes || "not yet recorded")}</p>
             <p class="note"><b>Liability:</b> ${escapeHtml(row.liability_notes || "not yet recorded")}</p>
