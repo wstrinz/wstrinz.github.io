@@ -361,6 +361,18 @@
       line-height: 1;
     }
 
+    .name a {
+      color: inherit;
+      text-decoration-color: rgba(22, 22, 21, .35);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 4px;
+    }
+
+    .name a:hover,
+    .name a:focus-visible {
+      text-decoration-color: var(--red);
+    }
+
     .metrics {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1987,6 +1999,8 @@
     };
     const fmtShare = n => n == null ? "pending" : `${n.toFixed(n % 1 ? 1 : 0)}%`;
     const fmtSigned = (n, suffix = "") => n == null ? "no baseline" : `${n > 0 ? "+" : ""}${n.toFixed(n % 1 ? 1 : 0)}${suffix}`;
+    const candidateSlug = name => String(name).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    const candidateUrl = row => `candidates/${candidateSlug(row.entity)}/?weight_profile=${encodeURIComponent(activeWeightProfile)}`;
     const pct = n => n == null ? "0%" : `${Math.max(1.5, Math.min(100, n / 40 * 100))}%`;
     const vibePct = n => `${Math.max(0, Math.min(100, n / 4 * 100))}%`;
     const sharePct = n => `${Math.max(0, Math.min(100, n || 0))}%`;
@@ -2437,7 +2451,7 @@
           return `
             <article class="row">
               <div class="tier">${row.tier}</div>
-              <div class="name">${row.entity}</div>
+              <div class="name"><a href="${candidateUrl(row)}">${row.entity}</a></div>
               <div class="metrics ${hasTrumpEndorsement(row) ? "five-up" : ""}">
                 <div class="metric"><b>Market</b><span>${row.market_display}</span></div>
                 <div class="metric"><b>Poll</b><span>${row.poll_display}</span></div>
