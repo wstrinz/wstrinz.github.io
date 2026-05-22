@@ -46,9 +46,14 @@ function normalizeRow(row) {
 
 function weightProfile(snapshot) {
   const model = snapshot.vibes_model || {};
-  const profiles = model.weight_profiles || {};
+  const rawProfiles = model.weight_profiles || snapshot.vibes_weight_profiles || {};
+  const profiles = Object.fromEntries(Object.entries(rawProfiles).map(([key, value]) => [
+    key,
+    value?.weights ? value : { weights: value }
+  ]));
   const requested = params.get("weight_profile");
-  const key = profiles[requested] ? requested : snapshot.weight_profile || model.default_weight_profile || "hope_cycle";
+  const fallback = snapshot.weight_profile || model.default_weight_profile || "hope_cycle";
+  const key = profiles[requested] ? requested : profiles[fallback] ? fallback : Object.keys(profiles)[0] || "hope_cycle";
   return {
     key,
     label: profiles[key]?.label || key.replace(/_/g, " "),
