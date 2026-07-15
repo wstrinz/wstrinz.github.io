@@ -285,7 +285,7 @@ async function init() {
   const response = await fetch("../../snapshots.json", { cache: "no-store" });
   if (!response.ok) throw new Error(`Unable to load snapshots.json: ${response.status}`);
   const data = await response.json();
-  const history = Array.isArray(data) ? data : [data];
+  const history = Array.isArray(data) ? data : [...(data.history || []), data];
   const latest = history
     .filter(snapshot => snapshot.rows?.length)
     .sort((a, b) => new Date(a.captured_at) - new Date(b.captured_at))

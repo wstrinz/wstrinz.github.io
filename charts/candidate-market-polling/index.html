@@ -677,6 +677,29 @@
       white-space: nowrap;
     }
 
+    .calendar-status {
+      display: inline-block;
+      margin-top: 9px;
+      padding: 3px 6px;
+      border: 1px solid currentColor;
+      color: var(--muted);
+      font: 10px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .calendar-status.in-progress { color: var(--teal); }
+    .calendar-status.retrospective { color: var(--red); }
+    .calendar-status.scheduled { color: #9a6517; }
+
+    .event-status-note {
+      display: block;
+      margin-top: 7px;
+      color: var(--ink);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
     .event-title {
       display: block;
       margin-bottom: 6px;
@@ -1370,7 +1393,7 @@
       <div class="history-head">
         <div>
           <h2>Change Over Time</h2>
-          <p class="small">Lines update as new snapshots are appended. With one capture, this shows the current baseline point.</p>
+          <p class="small">With two captures, this is a slope read: direction, not momentum. Later snapshots turn it into a proper trend line.</p>
         </div>
         <select id="chartMetric" aria-label="Chart metric">
           <option value="market_midpoint">Chart: market</option>
@@ -1826,7 +1849,7 @@
       automation_note: "Manual watch for now; these dates are shaped so scheduled refresh jobs can be added later.",
       calendar: [
         { date: "Now-Aug 2026", horizon: "Near", className: "near", title: "Earned-media and staff tells", detail: "Big speeches, viral interviews, donor/consultant leaks, PAC or staff moves, and early-state travel. Markets usually move before polls here.", cadence: "Sample when a candidate gets an obvious breakout or pass signal." },
-        { date: "May 19, 2026", horizon: "Near", className: "near", title: "GA / PA primary gate", detail: "Georgia and Pennsylvania federal primaries make ambition and ballot-path constraints more legible for Ossoff, Shapiro, and adjacent lanes.", cadence: "Refresh after results; watch Georgia runoff path if needed." },
+        { date: "May 19, 2026", horizon: "Near", className: "near", title: "GA / PA primary gate", detail: "The primary gate is settled: Shapiro was uncontested in Pennsylvania, Ossoff was unopposed in Georgia, and Mike Collins won the June 16 GOP runoff to face Ossoff. November is the consequential test now.", status: "Retrospective", status_note: "Logged Jul. 15: the tracker missed a standalone post-primary capture; carry the resolved ballot path forward to the Nov. 3 incumbent tests.", cadence: "Watch the Collins-Ossoff general-election path and Pennsylvania reelection case." },
         { date: "Sep-Nov 2026", horizon: "Mid", className: "mid", title: "Fall campaign stress test", detail: "Live-cycle governors and senators get tested on message discipline, fundraising, TV performance, and whether their lane looks exportable.", cadence: "Snapshot on major debates, polling breaks, or high-salience ads." },
         { date: "Nov 3, 2026", horizon: "Mid", className: "mid", title: "Midterm reset", detail: "The biggest repricing window. Winners, losers, and overperformers shape what the party thinks the post-2024 lesson should be.", cadence: "Refresh market, poll, and mention baselines within the first week after election night." },
         { date: "Nov-Dec 2026", horizon: "Mid", className: "mid", title: "Future-of-party tour", detail: "Watch who gives major speeches, does Sunday shows, gets donor meetings, and starts visiting early states.", cadence: "Capture explicit travel, PAC, book, and donor signals." },
@@ -1858,7 +1881,7 @@
       "Shapiro": "Pennsylvania reelection margin on Nov 3, 2026; a strong swing-state overperformance is the cleanest repricing event.",
       "Buttigieg": "DNC early-state calendar, New Hampshire-style favorability tests, early-state polling, and whether he finds an office-holder story.",
       "Pritzker": "Illinois reelection margin, anti-Trump donor spending, and whether money plus combat becomes the party lane after 2026.",
-      "Ossoff": "Georgia Senate path: May 19, 2026 primary, Nov 3, 2026 general. Win keeps him live; loss probably ends the 2028 case.",
+      "Ossoff": "Ossoff was unopposed in the May primary; Mike Collins won the June 16 GOP runoff. The Nov. 3 general-election result is the decisive 2028 gate.",
       "Moore": "National rollout, early-state visits, service/reform speeches, and insider signs that the biography is being treated as presidential rather than just impressive.",
       "Beshear": "Post-midterm lesson-taking around red-state Democratic overperformance, plus early-state travel or donor signals that his moderation has a lane.",
       "Gallego": "Sun Belt and ticket-split lessons after 2026, veteran/Latino swing-state messaging, and any donor or early-state interest treating him as real.",
@@ -2248,6 +2271,8 @@
               <div class="calendar-date"><b>${event.date}</b><span>${event.horizon || "Watch"}</span></div>
               <strong class="event-title">${event.title}</strong>
               <span class="event-detail">${event.detail}</span>
+              ${event.status ? `<span class="calendar-status ${String(event.status).toLowerCase().replace(/[^a-z]+/g, "-")}">${event.status}</span>` : ""}
+              ${event.status_note ? `<span class="event-status-note">${event.status_note}</span>` : ""}
               <span class="event-cadence">${event.cadence || "Refresh when this window produces a real candidate signal."}</span>
             </article>
           `).join("")}
@@ -2567,10 +2592,16 @@
         const d = series.points.map((point, i) => `${i ? "L" : "M"}${x(point.snapIndex)},${y(point.value)}`).join(" ");
         const dots = series.points.map(point => `<circle class="chart-dot" cx="${x(point.snapIndex)}" cy="${y(point.value)}" r="4" fill="${series.color}"><title>${series.row.entity}: ${fmtValue(point.value)}</title></circle>`).join("");
         const last = series.points[series.points.length - 1];
-        return `<path class="chart-line" d="${d}" stroke="${series.color}"></path>${dots}<text class="chart-label" x="${Math.min(width - 120, x(last.snapIndex) + 8)}" y="${y(last.value) - 6}">${series.row.entity}</text>`;
+        const first = series.points[0];
+        const delta = series.points.length === 2 ? last.value - first.value : null;
+        const deltaLabel = delta == null ? "" : ` ${delta >= 0 ? "+" : ""}${delta.toFixed(delta % 1 ? 1 : 0)}${chartMetric === "vibes_score" ? "" : "pp"}`;
+        return `<path class="chart-line" d="${d}" stroke="${series.color}"></path>${dots}<text class="chart-label" x="${Math.min(width - 165, x(last.snapIndex) + 8)}" y="${y(last.value) - 6}">${series.row.entity}${deltaLabel}</text>`;
       }).join("");
       const dates = history.map((snap, i) => `<text class="chart-axis" x="${x(i) - 32}" y="${height - 10}">${new Date(snap.captured_at).toLocaleDateString("en-US", { month: "short", day: "numeric" })}</text>`).join("");
       const legend = pointsByEntity.map(series => `<span class="legend-chip"><i style="background:${series.color}"></i>${series.row.entity}</span>`).join("");
+      const twoPointNote = history.length === 2
+        ? `<p class="small">Two captures show movement, not momentum.${chartMetric === "market_midpoint" ? " May values are recorded ranges while July values are spot prices, so the percentage-point labels are directional." : chartMetric === "poll_midpoint" ? " Poll points come from different single-survey snapshots; stale or missing values are omitted." : ""}</p>`
+        : "";
       document.getElementById("historyChart").innerHTML = `
         <svg class="chart" viewBox="0 0 ${width} ${height}" role="img" aria-label="Historical ${chartMetric.replace("_", " ")} line chart">
           ${grid}
@@ -2578,6 +2609,7 @@
           ${dates}
         </svg>
         <div class="chart-legend">${legend}</div>
+        ${twoPointNote}
       `;
     }
 
@@ -2610,7 +2642,7 @@
         const response = await fetch("snapshots.json", { cache: "no-store" });
         if (!response.ok) return;
         const data = await response.json();
-        const loaded = (Array.isArray(data) ? data : [data])
+        const loaded = (Array.isArray(data) ? data : [...(data.history || []), data])
           .map(normalizeSnapshot)
           .filter(item => item.rows.length);
         if (!loaded.length) return;

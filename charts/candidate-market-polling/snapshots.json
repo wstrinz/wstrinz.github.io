@@ -23,6 +23,49 @@
   },
   "topic": "2028 Democratic nominee candidate poll and market watch",
   "source_note": "Seed snapshot transcribed from the image text shared in Discord #the-tide-pool. Corrected after audit: the source columns are Candidate / Markets / Polling / Read. V2 stores vibes ingredients and derives the displayed bar from weighted component scores. Catalyst notes added 2026-05-13 from Tide Pool discussion; they are qualitative watchpoints, not probability updates. V3 adds a manual mention-signal capture shape: good/bad/neutral/unclear counts, previous-week comparison, source mix, and example refs. Twitter/X is intentionally excluded unless a usable source is explicitly provided. V4 presents catalysts as a calendar/timeline surface with manual refresh cadence; scheduled automation is intentionally not wired yet. V5 adds a separate Republican tab with seeded GOP rows from current public polling/market references; GOP fields are intentionally marked lower-confidence where markets and polls disagree. V6 adds a Republican-only Trump endorsement chance field. V7 shifts that field away from polling weight and toward Trump relationship, loyalty, vindictiveness, surrogate behavior, and permission-structure evidence. V8 adds Democratic early-state calendar tracking for the live Midwest/South applicant pool with candidate boost/downgrade reads. V9 adds Stephen A. Smith as a Democratic long-shot media-celebrity row. V10 records the active Vibes weight profile and formula version so future snapshots can distinguish hope-cycle and referendum-cycle views. V11 refreshes every listed market value against the Polymarket API on 2026-07-15; the fresh Quantus ballot updates polling only for Harris, Newsom, Buttigieg, AOC, Shapiro, Vance, Rubio, and DeSantis. Other polling fields retain their prior stated observation rather than being presented as a new poll.",
+  "history": [
+    {
+      "captured_at": "2026-05-20T16:05:00-05:00",
+      "market_source": "Pre-July tracker baseline; ranges/values as recorded May 20, 2026.",
+      "poll_source": "Pre-July tracker baseline; polling observations as recorded May 20, 2026.",
+      "rows": [
+        {"entity":"Newsom","market_display":"24-34%","market_low":24,"market_high":34,"poll_display":"21%","poll_low":21,"poll_high":21},
+        {"entity":"Harris","market_display":"5-7%","market_low":5,"market_high":7,"poll_display":"39%","poll_low":39,"poll_high":39},
+        {"entity":"AOC","market_display":"8-9%","market_low":8,"market_high":9,"poll_display":"10%","poll_low":10,"poll_high":10},
+        {"entity":"Shapiro","market_display":"4-7%","market_low":4,"market_high":7,"poll_display":"7%","poll_low":7,"poll_high":7},
+        {"entity":"Buttigieg","market_display":"3-5%","market_low":3,"market_high":5,"poll_display":"7% (+75 NH)","poll_low":7,"poll_high":7},
+        {"entity":"Pritzker","market_display":"3-6%","market_low":3,"market_high":6,"poll_display":"3%","poll_low":3,"poll_high":3},
+        {"entity":"Ossoff","market_display":"5-7%","market_low":5,"market_high":7,"poll_display":"1%","poll_low":1,"poll_high":1},
+        {"entity":"Moore","market_display":"4%","market_low":4,"market_high":4,"poll_display":"unknown","poll_low":null,"poll_high":null},
+        {"entity":"Beshear","market_display":"2.5-5%","market_low":2.5,"market_high":5,"poll_display":"1%","poll_low":1,"poll_high":1},
+        {"entity":"Gallego","market_display":"<1%","market_low":0,"market_high":1,"poll_display":"unknown","poll_low":null,"poll_high":null},
+        {"entity":"Stein","market_display":"<1%","market_low":0,"market_high":1,"poll_display":"unknown","poll_low":null,"poll_high":null},
+        {"entity":"Kelly","market_display":"<1%","market_low":0,"market_high":1,"poll_display":"6%","poll_low":6,"poll_high":6},
+        {"entity":"Warnock","market_display":"<1%","market_low":0,"market_high":1,"poll_display":"unknown","poll_low":null,"poll_high":null},
+        {"entity":"Whitmer","market_display":"1.5-4%","market_low":1.5,"market_high":4,"poll_display":"4%","poll_low":4,"poll_high":4},
+        {"entity":"Slotkin","market_display":"<1%","market_low":0,"market_high":1,"poll_display":"unknown","poll_low":null,"poll_high":null},
+        {"entity":"Murphy","market_display":"<1%","market_low":0,"market_high":1,"poll_display":"unknown","poll_low":null,"poll_high":null},
+        {"entity":"Polis","market_display":"<1%","market_low":0,"market_high":1,"poll_display":"unknown","poll_low":null,"poll_high":null},
+        {"entity":"Schatz","market_display":"<1%","market_low":0,"market_high":1,"poll_display":"unknown","poll_low":null,"poll_high":null},
+        {"entity":"Booker","market_display":"~1%","market_low":1,"market_high":1,"poll_display":"unknown","poll_low":null,"poll_high":null},
+        {"entity":"Walz","market_display":"~1%","market_low":1,"market_high":1,"poll_display":"unknown","poll_low":null,"poll_high":null},
+        {"entity":"Cooper","market_display":"<1%","market_low":0,"market_high":1,"poll_display":"unknown","poll_low":null,"poll_high":null},
+        {"entity":"Cuban","market_display":"<1%","market_low":0,"market_high":1,"poll_display":"unknown","poll_low":null,"poll_high":null},
+        {"entity":"Emanuel","market_display":"<1%","market_low":0,"market_high":1,"poll_display":"unknown","poll_low":null,"poll_high":null},
+        {"entity":"Stephen A. Smith","market_display":"<1%","market_low":0,"market_high":1,"poll_display":"unknown","poll_low":null,"poll_high":null},
+        {"entity":"Vance","party":"Republican","market_display":"34%","market_low":34,"market_high":34,"poll_display":"29.6-44.8%","poll_low":29.6,"poll_high":44.8},
+        {"entity":"Rubio","party":"Republican","market_display":"27-31%","market_low":27,"market_high":31,"poll_display":"14.1-45.4%","poll_low":14.1,"poll_high":45.4},
+        {"entity":"DeSantis","party":"Republican","market_display":"4-8%","market_low":4,"market_high":8,"poll_display":"8-11.2%","poll_low":8,"poll_high":11.2},
+        {"entity":"Trump Jr.","party":"Republican","market_display":"low single digits","market_low":1,"market_high":4,"poll_display":"14-15%","poll_low":14,"poll_high":15},
+        {"entity":"Kennedy Jr.","party":"Republican","market_display":"watch","market_low":null,"market_high":null,"poll_display":"3-4%","poll_low":3,"poll_high":4},
+        {"entity":"Cruz","party":"Republican","market_display":"watch","market_low":null,"market_high":null,"poll_display":"2-3%","poll_low":2,"poll_high":3},
+        {"entity":"Haley","party":"Republican","market_display":"watch","market_low":null,"market_high":null,"poll_display":"3-6%","poll_low":3,"poll_high":6},
+        {"entity":"Ramaswamy","party":"Republican","market_display":"watch","market_low":null,"market_high":null,"poll_display":"2-3%","poll_low":2,"poll_high":3},
+        {"entity":"Tucker Carlson","party":"Republican","market_display":"3-6%","market_low":3,"market_high":6,"poll_display":"2%","poll_low":2,"poll_high":2},
+        {"entity":"Youngkin","party":"Republican","market_display":"watch","market_low":null,"market_high":null,"poll_display":"1%","poll_low":1,"poll_high":1}
+      ]
+    }
+  ],
   "rows": [
     {
       "tier": "Tier 1: Frontrunners",
@@ -292,7 +335,7 @@
       "confidence": "medium",
       "evidence_notes": "Georgia Senate record; calm media presence; incumbent swing-state story.",
       "liability_notes": "Must win reelection; national story thin; limited unscripted emotional texture.",
-      "catalyst_note": "Georgia Senate path: May 19, 2026 primary, Nov 3, 2026 general. Win keeps him live; loss probably ends the 2028 case.",
+      "catalyst_note": "Ossoff was unopposed in the May primary; Mike Collins won the June 16 GOP runoff. The Nov. 3 general-election result is now the decisive 2028 gate: win keeps him live, loss probably ends the case.",
       "mention_signal": {
         "current": {
           "good": null,
@@ -1515,8 +1558,10 @@
         "horizon": "Near",
         "className": "near",
         "title": "GA / PA primary gate",
-        "detail": "Georgia and Pennsylvania federal primaries make ambition and ballot-path constraints more legible for Ossoff, Shapiro, and adjacent lanes.",
-        "cadence": "Refresh after results; watch Georgia runoff path if needed."
+        "detail": "The primary gate is settled: Shapiro was uncontested in Pennsylvania, Ossoff was unopposed in Georgia, and Mike Collins won the June 16 GOP runoff to face Ossoff. November is the consequential test now.",
+        "status": "Retrospective",
+        "status_note": "Logged Jul. 15: this tracker missed a standalone post-primary capture. Carry the resolved ballot path forward to the Nov. 3 incumbent tests rather than backfilling a faux event read.",
+        "cadence": "Watch the Collins-Ossoff general-election path and Pennsylvania reelection case; refresh after results if either candidate is nationally repriced."
       },
       {
         "date": "Sep-Nov 2026",
@@ -1606,6 +1651,8 @@
           "className": "near",
           "title": "Earned-media and staff tells",
           "detail": "Big speeches, viral interviews, donor/consultant leaks, PAC or staff moves, and early-state travel. Markets usually move before polls here.",
+          "status": "In progress",
+          "status_note": "July 15 baseline captured. The next scheduled pre-fall baseline is Aug. 18; refresh earlier only for a clear launch/pass, senior hire, or a material market break.",
           "cadence": "Sample when a candidate gets an obvious breakout or pass signal."
         },
         {
@@ -1613,8 +1660,10 @@
           "horizon": "Near",
           "className": "near",
           "title": "GA / PA primary gate",
-          "detail": "Georgia and Pennsylvania federal primaries make ambition and ballot-path constraints more legible for Ossoff, Shapiro, and adjacent lanes.",
-          "cadence": "Refresh after results; watch Georgia runoff path if needed."
+          "detail": "The primary gate is settled: Shapiro was uncontested in Pennsylvania, Ossoff was unopposed in Georgia, and Mike Collins won the June 16 GOP runoff to face Ossoff. November is the consequential test now.",
+          "status": "Retrospective",
+          "status_note": "Logged Jul. 15: this tracker missed a standalone post-primary capture. Carry the resolved ballot path forward to the Nov. 3 incumbent tests rather than backfilling a faux event read.",
+          "cadence": "Watch the Collins-Ossoff general-election path and Pennsylvania reelection case; refresh after results if either candidate is nationally repriced."
         },
         {
           "date": "Sep-Nov 2026",
@@ -1622,6 +1671,8 @@
           "className": "mid",
           "title": "Fall campaign stress test",
           "detail": "Live-cycle governors and senators get tested on message discipline, fundraising, TV performance, and whether their lane looks exportable.",
+          "status": "Scheduled",
+          "status_note": "Aug. 18 at 10:00 CT: full market/poll/mention baseline ahead of the fall window. Earlier unscheduled reads require a genuine repricing signal.",
           "cadence": "Snapshot on major debates, polling breaks, or high-salience ads."
         },
         {
@@ -1630,6 +1681,8 @@
           "className": "mid",
           "title": "Midterm reset",
           "detail": "The biggest repricing window. Winners, losers, and overperformers shape what the party thinks the post-2024 lesson should be.",
+          "status": "Queued",
+          "status_note": "Planned event-read window: Nov. 4–10, once results and the immediate interpretation cycle settle.",
           "cadence": "Refresh market, poll, and mention baselines within the first week after election night."
         },
         {
