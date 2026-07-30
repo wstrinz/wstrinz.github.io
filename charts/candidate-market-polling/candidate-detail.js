@@ -169,10 +169,10 @@ function renderCandidateImpact(snapshot, row) {
   if (!item) return "";
   return `
     <div class="calendar-impact">
-      <span class="section-kicker">Early calendar boost / downgrade</span>
+      <span class="section-kicker">Early calendar impact</span>
       <ul>
-        <li><b>Best:</b> ${escapeHtml(item.best)}</li>
-        <li><b>Worst:</b> ${escapeHtml(item.worst)}</li>
+        <li><b>Tailwind:</b> ${escapeHtml(item.best)}</li>
+        <li><b>Headwind:</b> ${escapeHtml(item.worst)}</li>
         <li><b>Read:</b> ${escapeHtml(item.read)}</li>
       </ul>
     </div>
