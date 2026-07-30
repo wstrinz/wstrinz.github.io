@@ -2285,6 +2285,12 @@
     }
 
     const earlyStateSignals = {
+      "New Mexico": {
+        code: "NM",
+        signal: "Latino and Native voters, a Western organizing test, and a smaller media market than the coastal megastates.",
+        boosts: ["Gallego", "AOC", "Harris", "Schatz"],
+        downgrades: []
+      },
       "New Hampshire": {
         code: "NH",
         signal: "Retail politics, high-information liberals, electability auditions.",
@@ -2368,10 +2374,10 @@
       if (!item) return "";
       return `
         <div class="candidate-calendar-impact">
-          <span class="impact-title">Early calendar boost / downgrade</span>
+          <span class="impact-title">Early calendar impact</span>
           <ul class="impact-list">
-            <li><b>Best:</b> ${item.best}</li>
-            <li><b>Worst:</b> ${item.worst}</li>
+            <li><b>Tailwind:</b> ${item.best}</li>
+            <li><b>Headwind:</b> ${item.worst}</li>
             <li><b>Read:</b> ${item.read}</li>
           </ul>
         </div>
@@ -2384,12 +2390,12 @@
       return `
         <article class="state-tile">
           <div class="state-date">
-            <b>${String(index + 1).padStart(2, "0")}</b>
+            <b>${state.date || String(index + 1).padStart(2, "0")}</b>
             <span>${code}</span>
-            <em>${slotLabel}</em>
+            <em>${state.label || slotLabel}</em>
           </div>
           <div class="state-content">
-            <h3>${state.state}<span>Open slot</span></h3>
+            <h3>${state.state}<span>${state.status || "Early window"}</span></h3>
             <p class="state-signal">${meta.signal || state.effect}</p>
             ${renderCandidateChips("Boosts", meta.boosts, "up")}
             ${renderCandidateChips("Downgrades", meta.downgrades, "down")}
@@ -2407,41 +2413,34 @@
         return;
       }
       section.hidden = false;
-      const fixedStates = model.fixed_states || [];
-      const fixed = fixedStates.length ? fixedStates.join(" + ") : "pending";
-      const regions = model.regions || [];
+      const calendar = model.calendar || [];
+      const regions = calendar.length ? [
+        { name: "Opening three", read: "South Carolina sets the coalition test before Nevada and New Hampshire can reward a different kind of campaign.", states: calendar.slice(0, 3) },
+        { name: "Second half", read: "New Mexico, Michigan, and Virginia extend the test across Latino/Native, industrial-Midwest, and suburban-federal terrain.", states: calendar.slice(3, 6) }
+      ] : (model.regions || []);
       const combos = model.combinations || [];
       const links = (model.source_links || []).map(item => Array.isArray(item) ? { label: item[0], url: item[1] } : item);
       const regionSlots = regions.slice(0, 2);
       section.innerHTML = `
         <div class="catalyst-head">
           <h2>${model.title || "Dem Early Calendar"}</h2>
-          <span class="stamp">Fixed: ${fixed}</span>
+          <span class="stamp">${model.status || "Calendar pending"}</span>
         </div>
         <p class="small">${model.summary || ""}</p>
         <div class="early-calendar-board" aria-label="Democratic early state calendar board">
           <article class="calendar-slot locked">
             <div class="slot-head">
-              <span class="slot-kicker">Locked</span>
-              <span class="slot-title">Baseline</span>
+              <span class="slot-kicker">Status</span>
+              <span class="slot-title">What changed</span>
             </div>
             <div class="slot-body">
-              ${(model.fixed_states || []).map(state => {
-                const meta = earlyStateSignals[state] || {};
-                return `
-                  <div class="locked-state">
-                    <b>${state}</b>
-                    <span>${meta.signal || "Already assumed early in this model."}</span>
-                    ${renderCandidateChips("Natural edge", meta.boosts, "up")}
-                  </div>
-                `;
-              }).join("")}
+              <p class="small">${model.status_detail || "The calendar has not been finalized."}</p>
             </div>
           </article>
           ${regionSlots.map(region => `
             <article class="calendar-slot">
               <div class="slot-head">
-                <span class="slot-kicker">Open</span>
+                <span class="slot-kicker">Proposed</span>
                 <span class="slot-title">${region.name}</span>
               </div>
               <div class="slot-body">
@@ -2451,8 +2450,8 @@
             </article>
           `).join("")}
         </div>
-        <p class="calendar-ruling">Fast read: Michigan vs Illinois is mostly Whitmer/Slotkin vs Pritzker/Emanuel. Georgia vs South Carolina is Warnock/Ossoff Atlanta-growth coalition vs Harris/Booker/Moore older Black-establishment coalition. Iowa or Tennessee would signal a return to retail/rural/white-working-class testing.</p>
-        <h3 class="calendar-subhead">Calendar Pair Triggers</h3>
+        <p class="calendar-ruling">${model.takeaway || "Read calendar changes as coalition and campaign-organization shifts, not standalone probability updates."}</p>
+        <h3 class="calendar-subhead">Calendar implications</h3>
         <div class="combo-grid">
           ${combos.map(combo => `
             <article class="combo-card">
